@@ -43,19 +43,16 @@ After finishing your writing, please push into your branch, and @WinstonCHEN1 or
 
 ### Install
 
-```python
-virtualenv venv
-source venv/bin/activate
-pip install -r requirements-dev.txt
+```bash
+uv sync --group dev
 ```
 
 ### Develop in localhost
 
 ```bash
-bash run_dev.sh
+uv run sphinx-autobuild source build --port 11111 --host 0
 ```
 
 Open [http://localhost:11111/drafts/xxx.html](http://localhost:11111/drafts/xxx.html), you will have your writing
-
 
 

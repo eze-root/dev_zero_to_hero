@@ -1,0 +1,23 @@
+[project]
+name = "dev-zero-to-hero"
+version = "0.1.0"
+description = "Sphinx docs for Develop from Zero to Hero"
+requires-python = ">=3.10"
+dependencies = [
+    "ablog",
+    "aiohttp",
+    "myst-parser[linkify]",
+    "shibuya",
+    "sphinx",
+    "sphinx-comments",
+    "sphinx-copybutton",
+    "sphinx-tabs",
+    "sphinx_design",
+    "sphinxcontrib-mermaid",
+    "sphinxemoji",
+]
+
+[dependency-groups]
+dev = [
+    "sphinx-autobuild",
+]
