@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="zh" data-accent-color="tomato" data-content_root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>第一讲：课程概览与 Shell 入门 - Develop from Zero to Hero</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="7 Days for beginner" href="../2024-summer/readme.html" /><link rel="prev" title="计算机教育中缺失的一课" href="index.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=44020203" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/source-sans@3.52.0/source-sans-3VF.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/course.css?v=13f04083" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="第一讲：课程概览与 Shell 入门"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../index.html">
+      
+      
+      <strong>Develop from Zero to Hero</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="搜索" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials">
+  <a href="https://github.com/eze-root/dev_zero_to_hero" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="切换到亮色模式"
+data-aria-light="切换到暗色模式"
+data-aria-dark="切换到自动模式">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="1"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Tutorial:</span></p>
+<ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../tutorial/git.html">Git for Teams</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../tutorial/os_mp_celery_scrapy.html">Scrapy + Celery + Multiprocessing</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Project:</span></p>
+<ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../engineer/sphinx_design.html">Sphinx_design</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">&#35745;&#31639;&#26426;&#25945;&#32946;&#20013;&#32570;&#22833;&#30340;&#19968;&#35838;:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">&#35745;&#31639;&#26426;&#25945;&#32946;&#20013;&#32570;&#22833;&#30340;&#19968;&#35838;</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">&#31532;&#19968;&#35762;&#65306;&#35838;&#31243;&#27010;&#35272;&#19982; Shell &#20837;&#38376;</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Articles:</span></p>
+<ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../2024-summer/readme.html">7 Days for beginner</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day0.html">Day0 Markdown</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day1.html">Day1 Linux&#12289;VScode&#19982;Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day2.html">Day2 The Missing Semester of Your CS Education</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day3.html">Day3 Python &#24320;&#21457;&#29615;&#22659;&#25645;&#36733;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day4.html">Day4 SSH&#19982;Django</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day5.html">Day5 Docker&#19982;Scrapy&#29228;&#34411;&#39033;&#30446;</a></li>
+</ul>
+</li>
+</ul>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>该页内容</h3><ul>
+<li><a class="reference internal" href="#id1">&#35838;&#31243;&#20026;&#20160;&#20040;&#23384;&#22312;</a></li>
+<li><a class="reference internal" href="#id2">&#20160;&#20040;&#26159; Shell</a><ul>
+<li><a class="reference internal" href="#id3">&#25171;&#24320;&#32456;&#31471;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id4">&#20026;&#20160;&#20040;&#35201;&#23398;&#20064; Shell</a></li>
+<li><a class="reference internal" href="#id5">&#22312; Shell &#20013;&#31227;&#21160;</a><ul>
+<li><a class="reference internal" href="#id6">&#26597;&#38405;&#24110;&#21161;</a></li>
+<li><a class="reference internal" href="#id7">&#24403;&#21069;&#30446;&#24405;&#19982;&#36335;&#24452;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id8">Shell &#20013;&#26377;&#21738;&#20123;&#31243;&#24207;</a><ul>
+<li><a class="reference internal" href="#id9">&#24120;&#29992;&#25991;&#26412;&#24037;&#20855;</a></li>
+<li><a class="reference internal" href="#sed"><code class="docutils literal notranslate"><span class="pre">sed</span></code>&#65306;&#25209;&#37327;&#32534;&#36753;&#25991;&#26412;</a></li>
+<li><a class="reference internal" href="#find"><code class="docutils literal notranslate"><span class="pre">find</span></code>&#65306;&#25353;&#26465;&#20214;&#26597;&#25214;&#25991;&#20214;</a></li>
+<li><a class="reference internal" href="#awk"><code class="docutils literal notranslate"><span class="pre">awk</span></code>&#65306;&#25353;&#23383;&#27573;&#35299;&#26512;&#25991;&#26412;</a></li>
+<li><a class="reference internal" href="#id10">&#29992;&#31649;&#36947;&#32452;&#21512;&#31243;&#24207;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id11">Shell &#20063;&#26159;&#19968;&#38376;&#35821;&#35328;</a><ul>
+<li><a class="reference internal" href="#tee">&#37325;&#23450;&#21521;&#19982; <code class="docutils literal notranslate"><span class="pre">tee</span></code></a></li>
+<li><a class="reference internal" href="#id12">&#26465;&#20214;&#21028;&#26029;</a></li>
+<li><a class="reference internal" href="#id13">&#24490;&#29615;&#19982;&#21629;&#20196;&#26367;&#25442;</a></li>
+<li><a class="reference internal" href="#id14">&#32534;&#20889;&#33050;&#26412;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id15">&#19979;&#19968;&#27493;</a></li>
+<li><a class="reference internal" href="#exercises">Exercises</a></li>
+<li><a class="reference internal" href="#id16">&#35768;&#21487;&#19982;&#32626;&#21517;</a></li>
+</ul>
+</div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/eze-root/dev_zero_to_hero"
+  data-type="github" data-user="eze-root" data-repo="dev_zero_to_hero">
+  <span class="w-8 flex items-center justify-around shrink-0 text-3xl">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </span>
+  <span class="flex-grow px-2 break-all">
+    
+    
+      <span>dev_zero_to_hero</span>
+    
+    <span class="flex text-sm repo-stats-count">
+      <span class="flex items-center pr-3">
+        <iconify-icon icon="lucide:star"></iconify-icon>
+        <strong class="js-repo-stars ml-1">0</strong>
+      </span>
+      <span class="flex items-center">
+        <iconify-icon icon="lucide:git-fork"></iconify-icon>
+        <strong class="js-repo-forks ml-1">0</strong>
+      </span>
+    </span>
+  </span>
+</a><div class="edit-this-page">
+  <a href="https://github.com/eze-root/dev_zero_to_hero/blob/main/source/missing-semester/course-shell.md">编辑此页面</a>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">Develop from Zero to Hero</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">计算机教育中缺失的一课</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">第一讲：课程概览与 Shell 入门</strong>
+        <meta itemprop="position" content="3" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue dark-code" role="main">
+          <section class="tex2jax_ignore mathjax_ignore" id="shell">
+<h1>第一讲：课程概览与 Shell 入门<a class="headerlink" href="#shell" title="Link to this heading">¶</a></h1>
+<blockquote>
+<div><p>官方 notes：<a class="reference external" href="https://missing.csail.mit.edu/2026/course-shell/">Course Overview + Introduction to the Shell</a><br />
+课程主页：<a class="reference external" href="https://missing.csail.mit.edu/">The Missing Semester of Your CS Education</a><br />
+视频：<a class="reference external" href="https://www.youtube.com/&#64;MissingSemester">YouTube 课程录像</a></p>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>本文依据 2026 年第一讲官方 notes 整理。命令、章节顺序和扩展阅读以官方页面为准；建议一边阅读，一边在自己的终端中实际运行示例。</p>
+</div>
+<section id="id1">
+<h2>课程为什么存在<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<p>计算机很擅长处理重复工作，但我们有时只想到让程序自动计算，却忘了也可以让计算机自动完成自己的日常操作。很多人只记住了少数可以勉强工作的命令；遇到问题时，再从网上复制一段并不真正理解的命令。</p>
+<p>这门课希望帮助学习者更充分地使用已经知道的工具，认识可以加入工具箱的新工具，并逐渐形成主动探索、组合乃至开发工具的习惯。这正是许多计算机培养方案中缺少的“一学期”。</p>
+<p>2026 年课程由 9 次、每次约 1 小时的课程组成。各讲大体独立，但后续课程会默认读者已经掌握前面介绍的概念。课程节奏较快，因此每一讲都配有官方 notes、录像和练习。</p>
+</section>
+<section id="id2">
+<h2>什么是 Shell<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>今天的计算机提供图形界面、语音、AR/VR 和 LLM 等多种交互方式。它们适合许多场景，但能做什么通常受界面中已有按钮或预先实现的能力限制。要更完整地调用计算机提供的工具，仍然需要文本接口——<strong>Shell</strong>。</p>
+<p>几乎所有平台都提供一种或多种 Shell。不同 Shell 的细节有所区别，但核心能力相近：</p>
+<ul class="simple">
+<li><p>运行程序；</p></li>
+<li><p>向程序提供输入；</p></li>
+<li><p>读取并组合程序的输出；</p></li>
+<li><p>把重复操作写成可以再次执行的程序。</p></li>
+</ul>
+<p>**Terminal（终端）**是用来显示并操作 Shell 的图形界面；<strong>Shell</strong>则是解释命令并启动程序的环境。二者相关，但并不是同一个东西。</p>
+<section id="id3">
+<h3>打开终端<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Linux：通常可以按 <code class="docutils literal notranslate"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">Alt</span> <span class="pre">+</span> <span class="pre">T</span></code>，或在应用菜单中搜索 Terminal。</p></li>
+<li><p>macOS：按 <code class="docutils literal notranslate"><span class="pre">Cmd</span> <span class="pre">+</span> <span class="pre">Space</span></code>，搜索 Terminal；也可以在“应用程序 → 实用工具”中打开。</p></li>
+<li><p>Windows：课程使用 Unix 风格的 Shell。建议安装 <a class="reference external" href="https://learn.microsoft.com/windows/wsl/">Windows Subsystem for Linux</a> 或使用 Linux 虚拟机，而不是直接使用 <code class="docutils literal notranslate"><span class="pre">cmd.exe</span></code> 或 PowerShell 完成本讲练习。</p></li>
+</ul>
+<p>Linux 和 macOS 上常见的是 Bash。Fish、Zsh 等 Shell 在交互体验上有不少改进，但 Bash 更普遍，相关概念也能够迁移到其他 Shell，因此本讲以 Bash 为主。</p>
+</section>
+</section>
+<section id="id4">
+<h2>为什么要学习 Shell<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
+<p>Shell 不仅通常比反复点击图形界面更快，还具有很强的组合能力。多个功能单一的程序可以通过输入、输出和管道连接起来，形成新的自动化流程。</p>
+<p>熟悉 Shell 也有助于：</p>
+<ul class="simple">
+<li><p>安装和使用开源软件；</p></li>
+<li><p>编写持续集成与自动化任务；</p></li>
+<li><p>管理远程服务器；</p></li>
+<li><p>在图形程序失效时定位错误；</p></li>
+<li><p>把一次性的操作沉淀为可重复执行的脚本。</p></li>
+</ul>
+</section>
+<section id="id5">
+<h2>在 Shell 中移动<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
+<p>打开终端后，会看到类似下面的提示符：</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">missing:~$</span>
+</span></pre></div>
+</div>
+<p>这里的 <code class="docutils literal notranslate"><span class="pre">missing</span></code> 是主机名，<code class="docutils literal notranslate"><span class="pre">~</span></code> 表示当前位于用户的家目录，<code class="docutils literal notranslate"><span class="pre">$</span></code> 通常意味着当前不是 root 用户。提示符之后可以输入要执行的程序：</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">missing:~$ </span>date
+</span><span data-line="2"><span class="go">Fri 10 Jan 2020 11:49:31 AM EST</span>
+</span><span data-line="3">
+</span><span data-line="4"><span class="gp">missing:~$ </span><span class="nb">echo</span><span class="w"> </span>hello
+</span><span data-line="5"><span class="go">hello</span>
+</span></pre></div>
+</div>
+<p>Shell 通常按空白拆分命令：第一个词是程序，其余部分是传给程序的参数。参数中如果包含空格或特殊字符，可以使用单引号、双引号，或者使用反斜杠转义：</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="go">echo &quot;My Photos&quot;</span>
+</span><span data-line="2"><span class="go">echo &#39;My Photos&#39;</span>
+</span><span data-line="3"><span class="go">echo My\ Photos</span>
+</span></pre></div>
+</div>
+<section id="id6">
+<h3>查阅帮助<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">man</span></code> 是 manual 的缩写，用于阅读系统中的命令手册：</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="go">man date</span>
+</span></pre></div>
+</div>
+<p>许多程序也支持较短的 <code class="docutils literal notranslate"><span class="pre">--help</span></code> 帮助。官方 notes 还建议配合 <a class="reference external" href="https://tldr.sh/"><code class="docutils literal notranslate"><span class="pre">tldr</span></code></a> 查看常用示例；LLM 也适合用来解释命令，但执行前仍应理解命令会读写哪些文件、是否需要权限，以及是否具有破坏性。</p>
+</section>
+<section id="id7">
+<h3>当前目录与路径<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">cd</span></code> 用于切换当前目录。它是 Shell 的内建命令，而不是一个独立程序：</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">missing:~$ </span><span class="nb">cd</span><span class="w"> </span>/bin
+</span><span data-line="2"><span class="gp">missing:/bin$ </span><span class="nb">cd</span><span class="w"> </span>/
+</span><span data-line="3"><span class="gp">missing:/$ </span><span class="nb">cd</span><span class="w"> </span>~
+</span><span data-line="4"><span class="gp">missing:~$</span>
+</span></pre></div>
+</div>
+<p>输入路径时可以按 <code class="docutils literal notranslate"><span class="pre">Tab</span></code> 自动补全。<code class="docutils literal notranslate"><span class="pre">pwd</span></code> 或 <code class="docutils literal notranslate"><span class="pre">echo</span> <span class="pre">$PWD</span></code> 可以显示当前工作目录。</p>
+<p>以 <code class="docutils literal notranslate"><span class="pre">/</span></code> 开头的是绝对路径；不以 <code class="docutils literal notranslate"><span class="pre">/</span></code> 开头的是相对于当前目录解释的相对路径。每个目录中还可以使用两个特殊路径：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.</span></code>：当前目录；</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">..</span></code>：父目录。</p></li>
+</ul>
+<p>如果经常在多个深层目录之间移动，可以尝试官方 notes 推荐的 <a class="reference external" href="https://github.com/ajeetdsouza/zoxide"><code class="docutils literal notranslate"><span class="pre">zoxide</span></code></a>。它会记录常用路径，并通过 <code class="docutils literal notranslate"><span class="pre">z</span></code> 减少输入。</p>
+</section>
+</section>
+<section id="id8">
+<h2>Shell 中有哪些程序<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h2>
+<p>当输入 <code class="docutils literal notranslate"><span class="pre">date</span></code> 或 <code class="docutils literal notranslate"><span class="pre">echo</span></code> 时，Shell 会在环境变量 <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> 列出的目录中依次查找同名的可执行文件：</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">missing:~$ echo $</span>PATH
+</span><span data-line="2"><span class="go">/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</span>
+</span><span data-line="3">
+</span><span data-line="4"><span class="gp">missing:~$ </span>which<span class="w"> </span><span class="nb">echo</span>
+</span><span data-line="5"><span class="go">/bin/echo</span>
+</span></pre></div>
+</div>
+<p>也可以直接给出程序路径，例如 <code class="docutils literal notranslate"><span class="pre">/bin/echo</span></code>，从而绕过 <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> 查找。</p>
+<section id="id9">
+<h3>常用文本工具<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cat</span> <span class="pre">file</span></code>：输出文件内容；官方 notes 推荐功能更丰富的 <a class="reference external" href="https://github.com/sharkdp/bat"><code class="docutils literal notranslate"><span class="pre">bat</span></code></a>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sort</span> <span class="pre">file</span></code>：对文件中的行排序。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">uniq</span> <span class="pre">file</span></code>：合并相邻的重复行。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">head</span> <span class="pre">file</span></code>、<code class="docutils literal notranslate"><span class="pre">tail</span> <span class="pre">file</span></code>：查看文件开头或结尾的若干行。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">grep</span> <span class="pre">pattern</span> <span class="pre">file</span></code>：查找匹配模式的行；<a class="reference external" href="https://github.com/BurntSushi/ripgrep"><code class="docutils literal notranslate"><span class="pre">ripgrep</span></code></a> 通常更快，也更适合日常递归搜索。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">path</span></code>：列出目录内容；<a class="reference external" href="https://eza.rocks/"><code class="docutils literal notranslate"><span class="pre">eza</span></code></a> 提供了更友好的显示效果。</p></li>
+</ul>
+</section>
+<section id="sed">
+<h3><code class="docutils literal notranslate"><span class="pre">sed</span></code>：批量编辑文本<a class="headerlink" href="#sed" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">sed</span></code> 有自己的文本处理语言。一个常见用法是在文件内进行全局替换：</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="go">sed -i &#39;s/pattern/replacement/g&#39; file</span>
+</span></pre></div>
+</div>
+<p>其中 <code class="docutils literal notranslate"><span class="pre">-i</span></code> 表示直接修改文件，<code class="docutils literal notranslate"><span class="pre">s</span></code> 表示替换，结尾的 <code class="docutils literal notranslate"><span class="pre">g</span></code> 表示替换一行中的所有匹配，而不只是第一个。正式执行前，可以先去掉 <code class="docutils literal notranslate"><span class="pre">-i</span></code> 查看输出，避免误改文件。</p>
+</section>
+<section id="find">
+<h3><code class="docutils literal notranslate"><span class="pre">find</span></code>：按条件查找文件<a class="headerlink" href="#find" title="Link to this heading">¶</a></h3>
+<p>查找下载目录中超过 30 天的 ZIP 文件：</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="go">find ~/Downloads -type f -name &quot;*.zip&quot; -mtime +30</span>
+</span></pre></div>
+</div>
+<p>查找家目录中大于 100 MB 的文件并显示详细信息：</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="go">find ~ -type f -size +100M -exec ls -lh {} \;</span>
+</span></pre></div>
+</div>
+<p>查找包含 <code class="docutils literal notranslate"><span class="pre">TODO</span></code> 的 Python 文件：</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="go">find . -name &quot;*.py&quot; -exec grep -l &quot;TODO&quot; {} \;</span>
+</span></pre></div>
+</div>
+<p>如果觉得 <code class="docutils literal notranslate"><span class="pre">find</span></code> 语法难记，可以尝试官方 notes 推荐的 <a class="reference external" href="https://github.com/sharkdp/fd"><code class="docutils literal notranslate"><span class="pre">fd</span></code></a>。</p>
+</section>
+<section id="awk">
+<h3><code class="docutils literal notranslate"><span class="pre">awk</span></code>：按字段解析文本<a class="headerlink" href="#awk" title="Link to this heading">¶</a></h3>
+<p>下面的命令打印每一行按空白分隔后的第二列：</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="go">awk &#39;{print $2}&#39; file</span>
+</span></pre></div>
+</div>
+<p>加入 <code class="docutils literal notranslate"><span class="pre">-F,</span></code> 后可以按逗号分隔字段。除了选取列，<code class="docutils literal notranslate"><span class="pre">awk</span></code> 还能筛选记录、修改字段并计算聚合结果。</p>
+</section>
+<section id="id10">
+<h3>用管道组合程序<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h3>
+<p>管道符 <code class="docutils literal notranslate"><span class="pre">|</span></code> 会把左侧程序的标准输出接到右侧程序的标准输入。官方 notes 给出了一个组合示例：从远程服务器取得 SSH 日志，筛选断开连接记录，提取用户名，再统计最常见的用户名。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="go">ssh myserver &#39;journalctl -u sshd -b-1 | grep &quot;Disconnected from&quot;&#39; \</span>
+</span><span data-line="2"><span class="go">  | sed -E &#39;s/.*Disconnected from .* user (.*) [^ ]+ port.*/\1/&#39; \</span>
+</span><span data-line="3"><span class="go">  | sort | uniq -c \</span>
+</span><span data-line="4"><span class="go">  | sort -nk1,1 | tail -n10 \</span>
+</span><span data-line="5"><span class="go">  | awk &#39;{print $2}&#39; | paste -sd,</span>
+</span></pre></div>
+</div>
+<p>这个例子体现了 Unix 工具的重要思想：让每个程序做好一件事，再通过统一的文本流把它们组合起来。</p>
+</section>
+</section>
+<section id="id11">
+<h2>Shell 也是一门语言<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h2>
+<p>Bash 和 Python、Ruby 一样具有变量、条件、循环和函数。终端里输入的每条命令，本质上都是交给 Shell 解释的一小段程序。</p>
+<section id="tee">
+<h3>重定向与 <code class="docutils literal notranslate"><span class="pre">tee</span></code><a class="headerlink" href="#tee" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&gt;</span> <span class="pre">file</span></code>：把标准输出写入文件，并覆盖原内容。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&gt;&gt;</span> <span class="pre">file</span></code>：把标准输出追加到文件末尾。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;</span> <span class="pre">file</span></code>：让程序从文件读取标准输入。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2&gt;</span> <span class="pre">file</span></code>：把标准错误写入文件。</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">tee</span></code> 可以一边把输入写入文件，一边继续输出给下一个程序：</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="go">verbose_cmd | tee verbose.log | grep CRITICAL</span>
+</span></pre></div>
+</div>
+</section>
+<section id="id12">
+<h3>条件判断<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">if</span><span class="w"> </span>command1<span class="p">;</span><span class="w"> </span><span class="k">then</span>
+</span><span data-line="2"><span class="w">  </span>command2
+</span><span data-line="3"><span class="w">  </span>command3
+</span><span data-line="4"><span class="k">fi</span>
+</span></pre></div>
+</div>
+<p>只有当 <code class="docutils literal notranslate"><span class="pre">command1</span></code> 成功退出时，后面的命令才会执行。常见的判断工具是 <code class="docutils literal notranslate"><span class="pre">test</span></code>，也经常写成 <code class="docutils literal notranslate"><span class="pre">[</span></code>：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+</span><span data-line="2"><span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;file exists&quot;</span>
+</span><span data-line="3"><span class="k">fi</span>
+</span></pre></div>
+</div>
+<p>Bash 还提供 <code class="docutils literal notranslate"><span class="pre">[[</span> <span class="pre">...</span> <span class="pre">]]</span></code>，在字符串比较和模式匹配中通常比传统的 <code class="docutils literal notranslate"><span class="pre">[</span></code> 更安全易用。</p>
+</section>
+<section id="id13">
+<h3>循环与命令替换<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>seq<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">10</span><span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+</span><span data-line="2"><span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$i</span><span class="s2">&quot;</span>
+</span><span data-line="3"><span class="k">done</span>
+</span></pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">$(...)</span></code> 会先运行括号中的命令，再把输出替换到当前位置。旧脚本中可能使用反引号实现命令替换，但 <code class="docutils literal notranslate"><span class="pre">$()</span></code> 更容易嵌套，应该优先使用。</p>
+</section>
+<section id="id14">
+<h3>编写脚本<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h3>
+<p>较长的命令应写入 <code class="docutils literal notranslate"><span class="pre">.sh</span></code> 文件。脚本首行的 shebang 指定解释器：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="ch">#!/bin/bash</span>
+</span><span data-line="2"><span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
+</span></pre></div>
+</div>
+<p>第二行让 Bash 以更严格的方式执行脚本：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-e</span></code>：命令失败后尽早退出；</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-u</span></code>：使用未定义变量时立即报错；</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-o</span> <span class="pre">pipefail</span></code>：管道中任一程序失败时，使整个管道返回失败。</p></li>
+</ul>
+<p>这些选项能减少常见错误，但不能替代测试。Shell 编程有很多边界情况，官方 notes 强烈建议用 <a class="reference external" href="https://www.shellcheck.net/">ShellCheck</a> 检查脚本。LLM 适合辅助解释、编写和调试脚本；当脚本增长到难以维护时，也可以让它协助迁移到 Python 等更合适的语言。</p>
+</section>
+</section>
+<section id="id15">
+<h2>下一步<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h2>
+<p>完成本讲后，你应当能够在目录之间移动、理解绝对路径与相对路径、查阅程序帮助，并把基础命令通过管道和重定向连接起来。下一讲将继续介绍命令行环境及其自动化能力。</p>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">¶</a></h2>
+<p>完整练习与最新链接请以<a class="reference external" href="https://missing.csail.mit.edu/2026/course-shell/#exercises">官方练习列表</a>为准。练习的价值在于调查和推理的过程：先阅读手册、缩小问题并观察中间输出，再把问题和已经尝试过的方法交给同学、论坛或 LLM 讨论。</p>
+<div class="exercise admonition" id="exercise-shell-environment">
+
+<p class="admonition-title"><span class="caption-number">练习 1 </span> (确认 Unix Shell 环境)</p>
+<section id="exercise-content">
+<p>本课程需要使用 Bash 或 Zsh 等 Unix Shell。Linux 和 macOS 通常无须额外配置；Windows 用户应使用 WSL 或 Linux 虚拟机，而不是 <code class="docutils literal notranslate"><span class="pre">cmd.exe</span></code> 或 PowerShell。</p>
+<p>运行 <code class="docutils literal notranslate"><span class="pre">echo</span> <span class="pre">$SHELL</span></code>。如果输出类似 <code class="docutils literal notranslate"><span class="pre">/bin/bash</span></code> 或 <code class="docutils literal notranslate"><span class="pre">/usr/bin/zsh</span></code>，说明当前环境符合要求。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-ls-long-format">
+
+<p class="admonition-title"><span class="caption-number">练习 2 </span> (阅读 ls -l 的输出)</p>
+<section id="exercise-content">
+<p>运行 <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-l</span> <span class="pre">/</span></code> 并观察输出。每一行开头的 10 个字符分别表示什么？请结合 <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">ls</span></code> 调查文件类型和权限位的含义。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-shell-globs">
+
+<p class="admonition-title"><span class="caption-number">练习 3 </span> (练习 glob 模式)</p>
+<section id="exercise-content">
+<p>在 <code class="docutils literal notranslate"><span class="pre">find</span> <span class="pre">~/Downloads</span> <span class="pre">-type</span> <span class="pre">f</span> <span class="pre">-name</span> <span class="pre">&quot;*.zip&quot;</span> <span class="pre">-mtime</span> <span class="pre">+30</span></code> 中，<code class="docutils literal notranslate"><span class="pre">*.zip</span></code> 是一个 glob。创建一个测试目录和若干文件，分别尝试 <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">*.txt</span></code>、<code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">file?.txt</span></code> 和 <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">{a,b,c}.txt</span></code>，解释每个模式匹配了哪些文件。</p>
+<p>参考：<a class="reference external" href="https://www.gnu.org/software/bash/manual/html_node/Pattern-Matching.html">Bash Pattern Matching</a>。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-shell-quoting">
+
+<p class="admonition-title"><span class="caption-number">练习 4 </span> (比较不同引号)</p>
+<section id="exercise-content">
+<p>比较 <code class="docutils literal notranslate"><span class="pre">'single</span> <span class="pre">quotes'</span></code>、<code class="docutils literal notranslate"><span class="pre">&quot;double</span> <span class="pre">quotes&quot;</span></code> 和 <code class="docutils literal notranslate"><span class="pre">$'ANSI</span> <span class="pre">quotes'</span></code> 的区别。编写一条命令，使它输出包含字面量 <code class="docutils literal notranslate"><span class="pre">$</span></code>、<code class="docutils literal notranslate"><span class="pre">!</span></code> 和换行符的字符串。</p>
+<p>参考：<a class="reference external" href="https://www.gnu.org/software/bash/manual/html_node/Quoting.html">Bash Quoting</a>。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-standard-streams">
+
+<p class="admonition-title"><span class="caption-number">练习 5 </span> (重定向标准流)</p>
+<section id="exercise-content">
+<p>Shell 有三个标准流：stdin（0）、stdout（1）和 stderr（2）。运行 <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">/nonexistent</span> <span class="pre">/tmp</span></code>，把 stdout 与 stderr 分别重定向到不同文件；然后尝试把二者重定向到同一个文件。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-exit-status">
+
+<p class="admonition-title"><span class="caption-number">练习 6 </span> (退出状态与条件执行)</p>
+<section id="exercise-content">
+<p><code class="docutils literal notranslate"><span class="pre">$?</span></code> 保存上一条命令的退出状态，其中 0 表示成功。<code class="docutils literal notranslate"><span class="pre">&amp;&amp;</span></code> 只在前一条命令成功时执行下一条命令，<code class="docutils literal notranslate"><span class="pre">||</span></code> 只在前一条命令失败时执行下一条命令。</p>
+<p>编写一条单行命令：仅当 <code class="docutils literal notranslate"><span class="pre">/tmp/mydir</span></code> 不存在时创建它。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-cd-builtin">
+
+<p class="admonition-title"><span class="caption-number">练习 7 </span> (为什么 cd 是内建命令)</p>
+<section id="exercise-content">
+<p>解释为什么 <code class="docutils literal notranslate"><span class="pre">cd</span></code> 必须由 Shell 自身实现，而不能只是一个独立程序。思考子进程能够修改哪些状态，以及它是否能改变父进程的当前工作目录。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-file-test">
+
+<p class="admonition-title"><span class="caption-number">练习 8 </span> (判断文件是否存在)</p>
+<section id="exercise-content">
+<p>编写一个 Shell 脚本，接收文件名参数 <code class="docutils literal notranslate"><span class="pre">$1</span></code>，并使用 <code class="docutils literal notranslate"><span class="pre">test</span> <span class="pre">-f</span></code> 或 <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">-f</span> <span class="pre">...</span> <span class="pre">]</span></code> 判断文件是否存在。根据判断结果输出不同信息。</p>
+<p>参考：<a class="reference external" href="https://www.gnu.org/software/bash/manual/html_node/Bash-Conditional-Expressions.html">Bash Conditional Expressions</a>。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-executable-bit">
+
+<p class="admonition-title"><span class="caption-number">练习 9 </span> (理解可执行权限)</p>
+<section id="exercise-content">
+<p>把上一题的脚本保存为 <code class="docutils literal notranslate"><span class="pre">check.sh</span></code>，尝试运行 <code class="docutils literal notranslate"><span class="pre">./check.sh</span> <span class="pre">somefile</span></code>。随后执行 <code class="docutils literal notranslate"><span class="pre">chmod</span> <span class="pre">+x</span> <span class="pre">check.sh</span></code> 并再次运行。比较修改前后的 <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-l</span> <span class="pre">check.sh</span></code> 输出，并解释为什么需要这一步。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-set-x">
+
+<p class="admonition-title"><span class="caption-number">练习 10 </span> (使用 set -x 调试)</p>
+<section id="exercise-content">
+<p>在一个简单脚本中把 <code class="docutils literal notranslate"><span class="pre">-x</span></code> 加入 <code class="docutils literal notranslate"><span class="pre">set</span></code> 的选项，运行脚本并观察输出。解释这些额外信息如何帮助调试命令展开与执行顺序。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-dated-backup">
+
+<p class="admonition-title"><span class="caption-number">练习 11 </span> (创建带日期的备份)</p>
+<section id="exercise-content">
+<p>编写一条命令，把文件复制为文件名中包含当天日期的备份。例如，把 <code class="docutils literal notranslate"><span class="pre">notes.txt</span></code> 复制为 <code class="docutils literal notranslate"><span class="pre">notes_2026-01-12.txt</span></code>。</p>
+<p>提示：使用 <code class="docutils literal notranslate"><span class="pre">$(date</span> <span class="pre">+%Y-%m-%d)</span></code> 完成命令替换。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-parameterize-script">
+
+<p class="admonition-title"><span class="caption-number">练习 12 </span> (参数化测试脚本)</p>
+<section id="exercise-content">
+<p>修改本讲用于复现偶发失败的测试脚本，使测试命令通过参数传入，而不是固定写成 <code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">test</span> <span class="pre">my_test</span></code>。调查 <code class="docutils literal notranslate"><span class="pre">$1</span></code> 与 <code class="docutils literal notranslate"><span class="pre">$&#64;</span></code> 的差别，并选择合适的形式。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-common-extensions">
+
+<p class="admonition-title"><span class="caption-number">练习 13 </span> (统计常见文件扩展名)</p>
+<section id="exercise-content">
+<p>使用管道找出家目录中最常见的 5 种文件扩展名。可以组合 <code class="docutils literal notranslate"><span class="pre">find</span></code>、<code class="docutils literal notranslate"><span class="pre">grep</span></code>、<code class="docutils literal notranslate"><span class="pre">sed</span></code> 或 <code class="docutils literal notranslate"><span class="pre">awk</span></code>、<code class="docutils literal notranslate"><span class="pre">sort</span></code>、<code class="docutils literal notranslate"><span class="pre">uniq</span> <span class="pre">-c</span></code> 与 <code class="docutils literal notranslate"><span class="pre">head</span></code>。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-find-xargs">
+
+<p class="admonition-title"><span class="caption-number">练习 14 </span> (使用 find 与 xargs)</p>
+<section id="exercise-content">
+<p>不要使用 <code class="docutils literal notranslate"><span class="pre">find</span> <span class="pre">-exec</span></code>，而是组合 <code class="docutils literal notranslate"><span class="pre">find</span></code> 与 <code class="docutils literal notranslate"><span class="pre">xargs</span></code>：查找目录中的所有 <code class="docutils literal notranslate"><span class="pre">.sh</span></code> 文件，并用 <code class="docutils literal notranslate"><span class="pre">wc</span> <span class="pre">-l</span></code> 统计每个文件的行数。</p>
+<p>加分项：使用 <code class="docutils literal notranslate"><span class="pre">-print0</span></code> 和 <code class="docutils literal notranslate"><span class="pre">-0</span></code> 正确处理文件名中的空格。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-curl-grep">
+
+<p class="admonition-title"><span class="caption-number">练习 15 </span> (用 curl 与 grep 检查课程网站)</p>
+<section id="exercise-content">
+<p>使用 <code class="docutils literal notranslate"><span class="pre">curl</span></code> 获取 <code class="docutils literal notranslate"><span class="pre">https://missing.csail.mit.edu/</span></code> 的 HTML，再通过管道交给 <code class="docutils literal notranslate"><span class="pre">grep</span></code>，统计页面列出了多少讲课程。可以用 <code class="docutils literal notranslate"><span class="pre">curl</span> <span class="pre">-s</span></code> 隐藏进度输出。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-jq-json">
+
+<p class="admonition-title"><span class="caption-number">练习 16 </span> (使用 jq 处理 JSON)</p>
+<section id="exercise-content">
+<p>使用 <code class="docutils literal notranslate"><span class="pre">curl</span></code> 获取 <code class="docutils literal notranslate"><span class="pre">https://microsoftedge.github.io/Demos/json-dummy-data/64KB.json</span></code>，然后用 <a class="reference external" href="https://jqlang.github.io/jq/"><code class="docutils literal notranslate"><span class="pre">jq</span></code></a> 只输出 <code class="docutils literal notranslate"><span class="pre">version</span></code> 大于 6 的人员姓名。</p>
+<p>先把数据传给 <code class="docutils literal notranslate"><span class="pre">jq</span> <span class="pre">.</span></code> 观察结构，再尝试使用 <code class="docutils literal notranslate"><span class="pre">.[]</span> <span class="pre">|</span> <span class="pre">select(...)</span> <span class="pre">|</span> <span class="pre">.name</span></code>。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-awk-columns">
+
+<p class="admonition-title"><span class="caption-number">练习 17 </span> (用 awk 筛选并交换列)</p>
+<section id="exercise-content">
+<p>编写一个 <code class="docutils literal notranslate"><span class="pre">awk</span></code> 命令：仅输出第二列大于 100 的行，同时交换第一列和第三列。使用下面的数据测试：</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="go">printf &#39;a 50 x\nb 150 y\nc 200 z\n&#39;</span>
+</span></pre></div>
+</div>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-shell-pipeline">
+
+<p class="admonition-title"><span class="caption-number">练习 18 </span> (拆解并重组日志管道)</p>
+<section id="exercise-content">
+<p>逐步解释本讲 SSH 日志管道中每个程序的输入、输出和作用。随后参考它的组合方式，从 <code class="docutils literal notranslate"><span class="pre">~/.bash_history</span></code> 或 <code class="docutils literal notranslate"><span class="pre">~/.zsh_history</span></code> 中统计自己最常使用的命令。</p>
+</section>
+</div>
+</section>
+<section id="id16">
+<h2>许可与署名<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h2>
+<p>本页依据 MIT Missing Semester 2026 第一讲<a class="reference external" href="https://missing.csail.mit.edu/2026/course-shell/">官方 notes</a>整理。原课程由 Anish Athalye、Jon Gjengset 和 Jose Javier Gonzalez Ortiz 共同讲授，材料采用 <a class="reference external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA</a> 许可。</p>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>回到顶部</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="index.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>上一章</span><div class="title">计算机教育中缺失的一课</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="../2024-summer/readme.html">
+      <div class="page-info">
+        <span>下一章</span>
+        <div class="title">7 Days for beginner</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2024, ezelab</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+<a href="https://github.com/eze-root/dev_zero_to_hero" aria-label="GitHub">
+  <iconify-icon icon="simple-icons:github"></iconify-icon>
+</a></div>
+    </div>
+  </div>
+</footer>
+      <script src="../_static/documentation_options.js?v=a1b8b494"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "eze-root/dev_zero_to_hero");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="../_static/shibuya.js?v=cac61aee"></script></body>
+</html>

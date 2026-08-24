@@ -2,7 +2,7 @@
 <html lang="zh" data-accent-color="tomato" data-content_root="../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>解决在没有root权限时，安装CUDA - Develop from Zero to Hero</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>计算机教育中缺失的一课 - Develop from Zero to Hero</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="第一讲：课程概览与 Shell 入门" href="course-shell.html" /><link rel="prev" title="Sphinx_design" href="../engineer/sphinx_design.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
@@ -23,7 +23,7 @@
   --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
 }
 </style>
-    <meta property="og:type" content="website"/><meta property="og:title" content="解决在没有root权限时，安装CUDA"/>
+    <meta property="og:type" content="website"/><meta property="og:title" content="计算机教育中缺失的一课"/>
     <meta name="twitter:card" content="summary"/>
   </head>
 <body><div class="sy-head">
@@ -65,17 +65,17 @@ data-aria-dark="切换到自动模式">
       <div class="sy-scrollbar p-6">
         <div class="globaltoc" data-expand-depth="1"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Tutorial:</span></p>
 <ul>
-<li class="toctree-l1 _expand"><a class="reference internal" href="git.html">Git for Teams</a></li>
-<li class="toctree-l1 _expand"><a class="reference internal" href="os_mp_celery_scrapy.html">Scrapy + Celery + Multiprocessing</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../tutorial/git.html">Git for Teams</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../tutorial/os_mp_celery_scrapy.html">Scrapy + Celery + Multiprocessing</a></li>
 </ul>
 <p class="caption" role="heading" aria-level="3"><span class="caption-text">Project:</span></p>
 <ul>
 <li class="toctree-l1 _expand"><a class="reference internal" href="../engineer/sphinx_design.html">Sphinx_design</a></li>
 </ul>
 <p class="caption" role="heading" aria-level="3"><span class="caption-text">&#35745;&#31639;&#26426;&#25945;&#32946;&#20013;&#32570;&#22833;&#30340;&#19968;&#35838;:</span></p>
-<ul>
-<li class="toctree-l1 _expand"><a class="reference internal" href="../missing-semester/index.html">&#35745;&#31639;&#26426;&#25945;&#32946;&#20013;&#32570;&#22833;&#30340;&#19968;&#35838;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../missing-semester/course-shell.html">&#31532;&#19968;&#35762;&#65306;&#35838;&#31243;&#27010;&#35272;&#19982; Shell &#20837;&#38376;</a></li>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">&#35745;&#31639;&#26426;&#25945;&#32946;&#20013;&#32570;&#22833;&#30340;&#19968;&#35838;</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="course-shell.html">&#31532;&#19968;&#35762;&#65306;&#35838;&#31243;&#27010;&#35272;&#19982; Shell &#20837;&#38376;</a></li>
 </ul>
 </li>
 </ul>
@@ -101,8 +101,8 @@ data-aria-dark="切换到自动模式">
       <i class="i-lucide close"></i>
     </button>
     <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>该页内容</h3><ul>
-<li><a class="reference internal" href="#id1">&#21069;&#35328;</a></li>
-<li><a class="reference internal" href="#id2">&#35299;&#20915;&#26041;&#27861;</a></li>
+<li><a class="reference internal" href="#id2">&#26469;&#28304;&#19982;&#35768;&#21487;</a></li>
+<li><a class="reference internal" href="#id3">&#35838;&#31243;&#30446;&#24405;</a></li>
 </ul>
 </div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/eze-root/dev_zero_to_hero"
   data-type="github" data-user="eze-root" data-repo="dev_zero_to_hero">
@@ -126,7 +126,7 @@ data-aria-dark="切换到自动模式">
     </span>
   </span>
 </a><div class="edit-this-page">
-  <a href="https://github.com/eze-root/dev_zero_to_hero/blob/main/source/tutorial/nvcc_without_root.md">编辑此页面</a>
+  <a href="https://github.com/eze-root/dev_zero_to_hero/blob/main/source/missing-semester/index.md">编辑此页面</a>
 </div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
   </aside>
   <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
@@ -143,7 +143,7 @@ data-aria-dark="切换到自动模式">
         <span>/</span>
         <meta itemprop="position" content="1" />
       </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <strong itemprop="name">解决在没有root权限时，安装CUDA</strong>
+        <strong itemprop="name">计算机教育中缺失的一课</strong>
         <meta itemprop="position" content="2" />
       </li></ol>
     <div class="xl:hidden ml-1">
@@ -156,35 +156,31 @@ data-aria-dark="切换到自动模式">
 </div><div class="flex flex-col break-words justify-between">
       <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
   <article class="yue dark-code" role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="root-cuda">
-<h1>解决在没有root权限时，安装CUDA<a class="headerlink" href="#root-cuda" title="Link to this heading">¶</a></h1>
-<section id="id1">
-<h2>前言<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
-<p>cuda是我们经常用到的工具，在没有root权限时，我们是无法使用sudo apt install nvidia-cuda-toolkit进行安装的。
-<img alt="problem" src="../_images/nvcc1.jpg" /></p>
-</section>
+          <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>计算机教育中缺失的一课<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<p>本系列整理并介绍 MIT 课程 <a class="reference external" href="https://missing.csail.mit.edu/">The Missing Semester of Your CS Education</a>，中文可译为 <strong>“计算机教育中缺失的一课”</strong>。</p>
+<p>计算机专业课程通常会讲授操作系统、机器学习和算法等重要主题，却很少系统介绍每天都要使用的开发工具。The Missing Semester 正是为了补上这一部分：命令行、编辑器、版本控制、调试与性能分析、软件打包、代码质量，以及正在进入开发流程的 AI 工具。</p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>本系列以 <a class="reference external" href="https://missing.csail.mit.edu/">MIT Missing Semester 2026 官方网站</a>和每一讲的官方 notes 为内容依据。中文页面保留官方课程的知识结构、命令示例和扩展资料入口，同时根据中文阅读习惯进行整理。</p>
+</div>
 <section id="id2">
-<h2>解决方法<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
-<p>首先，进入<a class="reference external" href="https://developer.nvidia.com/cuda-downloads">Nvidia官网</a>,找到对应的操作系统，架构(一般都为x86)，版本号等，Installer Type选择runfile。
-<img alt="version" src="../_images/nvcc2.png" /></p>
-<p>选择好之后，在该页面的下方会有一个wget命令，这是用于下载文件的(例如：wget <a class="reference external" href="https://developer.download.nvidia.com/compute/cuda/12.6.3/local_installers/cuda_12.6.3_560.35.05_linux.run">https://developer.download.nvidia.com/compute/cuda/12.6.3/local_installers/cuda_12.6.3_560.35.05_linux.run</a>)。在终端运行该命令即可下载。</p>
-<p><strong>注意</strong>：文件很容易损坏，尽可能的使用wget命令下载</p>
-<p>下载好之后，在终端中使用命令安装：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">mkdir</span> <span class="n">cuda12</span> <span class="c1">#用于存放安装时产生的文件</span>
-</span><span data-line="2">
-</span><span data-line="3"><span class="n">bash</span> <span class="n">cuda_12</span><span class="mf">.6.3_560.35.05</span><span class="n">_linux</span><span class="o">.</span><span class="n">run</span> <span class="o">--</span><span class="n">silent</span> <span class="o">--</span><span class="n">override</span> <span class="o">--</span><span class="n">toolkit</span> <span class="o">--</span><span class="n">toolkitpath</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">houyikang</span><span class="o">/</span><span class="n">cuda12</span> 
-</span></pre></div>
+<h2>来源与许可<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>原课程： <a class="reference external" href="https://missing.csail.mit.edu/">The Missing Semester of Your CS Education</a></p></li>
+<li><p>2026 年课程：共 9 讲，每讲约 1 小时</p></li>
+<li><p>授课教师：Anish Athalye、Jon Gjengset、Jose Javier Gonzalez Ortiz</p></li>
+<li><p>原始材料与本系列的衍生整理遵循 <a class="reference external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA</a> 许可</p></li>
+</ul>
+<p>阅读中文页面时，建议同时打开对应的官方 notes；官方页面始终是内容更新和勘误的权威来源。</p>
+</section>
+<section id="id3">
+<h2>课程目录<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="course-shell.html">第一讲：课程概览与 Shell 入门</a></li>
+</ul>
 </div>
-<p>安装好之后，刷新一下目录，有时候不刷新显示不出来。接下来需要设置环境变量，安装产生的文件都存放在cuda12文件夹中。获取该文件夹的位置，环境变量设置如下：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">echo</span> <span class="s2">&quot;export PATH=/home/houyikang/cuda12/bin:$PATH&quot;</span> <span class="o">&gt;&gt;</span> <span class="o">~/.</span><span class="n">bashrc</span>
-</span><span data-line="2"><span class="n">echo</span> <span class="s2">&quot;export CPATH=/home/houyikang/cuda12/include:$CPATH&quot;</span> <span class="o">&gt;&gt;</span> <span class="o">~/.</span><span class="n">bashrc</span>
-</span><span data-line="3"><span class="n">echo</span> <span class="s2">&quot;export LD_LIBRARY_PATH=/home/houyikang/cuda12/lib64:$LD_LIBRARY_PATH&quot;</span><span class="o">&gt;&gt;</span> <span class="o">~/.</span><span class="n">bashrc</span>
-</span><span data-line="4">
-</span><span data-line="5">
-</span></pre></div>
-</div>
-<p>使用nvcc --version 查看是否安装成功,安装成功会显示类似下图的结果
-<img alt="success" src="../_images/nvcc3.png" /></p>
 </section>
 </section>
 
@@ -193,7 +189,21 @@ data-aria-dark="切换到自动模式">
     <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
   </svg>
   <span>回到顶部</span>
-</button><div class="navigation flex print:hidden"></div></div>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="../engineer/sphinx_design.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>上一章</span><div class="title">Sphinx_design</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="course-shell.html">
+      <div class="page-info">
+        <span>下一章</span>
+        <div class="title">第一讲：课程概览与 Shell 入门</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
     </div>
   </main>
 </div>
