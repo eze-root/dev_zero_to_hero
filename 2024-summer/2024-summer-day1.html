@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="zh" data-accent-color="blue" data-content_root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Day1 Linux、VScode与Git - Develop from Zero to Hero</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="Day2 The Missing Semester of Your CS Education" href="2024-summer-day2.html" /><link rel="prev" title="Day0 Markdown" href="2024-summer-day0.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=44020203" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/source-sans@3.52.0/source-sans-3VF.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/course.css?v=cadc60c4" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="Day1 Linux、VScode与Git"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../index.html">
+      
+      
+      <strong>Develop from Zero to Hero</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="搜索" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials">
+  <a href="https://github.com/eze-root/dev_zero_to_hero" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="切换到亮色模式"
+data-aria-light="切换到暗色模式"
+data-aria-dark="切换到自动模式">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="1"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Tutorial:</span></p>
+<ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../tutorial/git.html">Git for Teams</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../tutorial/os_mp_celery_scrapy.html">Scrapy + Celery + Multiprocessing</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Project:</span></p>
+<ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../engineer/sphinx_design.html">Sphinx_design</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Articles:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="readme.html">7 Days for beginner</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="2024-summer-day0.html">Day0 Markdown</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Day1 Linux&#12289;VScode&#19982;Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2024-summer-day2.html">Day2 The Missing Semester of Your CS Education</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2024-summer-day3.html">Day3 Python &#24320;&#21457;&#29615;&#22659;&#25645;&#36733;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2024-summer-day4.html">Day4 SSH&#19982;Django</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2024-summer-day5.html">Day5 Docker&#19982;Scrapy&#29228;&#34411;&#39033;&#30446;</a></li>
+</ul>
+</li>
+</ul>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>该页内容</h3><ul>
+<li><a class="reference internal" href="#basic-linux">&#19968;&#12289;Basic Linux</a><ul>
+<li><a class="reference internal" href="#id1">1. &#25991;&#20214;&#21644;&#30446;&#24405;&#31649;&#29702;</a></li>
+<li><a class="reference internal" href="#id2">2. &#31995;&#32479;&#30417;&#25511;&#21644;&#20219;&#21153;&#31649;&#29702;</a></li>
+<li><a class="reference internal" href="#id3">3. &#28165;&#29702;&#23631;&#24149;</a></li>
+<li><a class="reference internal" href="#id4">4. &#32593;&#32476;&#21644;&#31995;&#32479;&#20449;&#24687;</a></li>
+<li><a class="reference internal" href="#id5">5. &#25991;&#20214;&#20256;&#36755;&#21644;&#23433;&#35013;</a></li>
+<li><a class="reference internal" href="#vim">6. VIM&#24555;&#25463;&#38190;</a></li>
+<li><a class="reference internal" href="#python">7. Python&#21644;&#34394;&#25311;&#29615;&#22659;&#31649;&#29702;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#vscode">&#20108;&#12289;VScode</a><ul>
+<li><a class="reference internal" href="#extension">Extension</a><ul>
+<li><a class="reference internal" href="#remote">1.Remote</a></li>
+<li><a class="reference internal" href="#id6">2.&#31616;&#20307;&#20013;&#25991;</a></li>
+<li><a class="reference internal" href="#id7">3.Python</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id8">VSCode&#36830;&#25509;&#26381;&#21153;&#22120;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#git">&#19977;&#12289;Git</a><ul>
+<li><a class="reference internal" href="#id9">&#21629;&#20196;&#34892;&#25805;&#20316;</a><ul>
+<li><a class="reference internal" href="#repo">&#19968;&#12289;repo&#26159;&#20320;&#33258;&#24049;&#21019;&#24314;&#30340;/&#20320;&#21442;&#19982;&#21327;&#20316;&#19988;&#25317;&#26377;&#35775;&#38382;&#26435;&#38480;</a></li>
+<li><a class="reference internal" href="#id10">&#20108;&#12289;repo&#26159;&#21035;&#20154;&#30340;&#65292;&#20320;&#24819;&#25644;&#36816;&#26469;&#29992;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id11">VSCode&#20013;&#28304;&#20195;&#30721;&#31649;&#29702;</a></li>
+<li><a class="reference internal" href="#id12">&#20195;&#30721;&#25552;&#20132;&#25805;&#20316;&#27493;&#39588;</a></li>
+</ul>
+</li>
+</ul>
+</div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/eze-root/dev_zero_to_hero"
+  data-type="github" data-user="eze-root" data-repo="dev_zero_to_hero">
+  <span class="w-8 flex items-center justify-around shrink-0 text-3xl">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </span>
+  <span class="flex-grow px-2 break-all">
+    
+    
+      <span>dev_zero_to_hero</span>
+    
+    <span class="flex text-sm repo-stats-count">
+      <span class="flex items-center pr-3">
+        <iconify-icon icon="lucide:star"></iconify-icon>
+        <strong class="js-repo-stars ml-1">0</strong>
+      </span>
+      <span class="flex items-center">
+        <iconify-icon icon="lucide:git-fork"></iconify-icon>
+        <strong class="js-repo-forks ml-1">0</strong>
+      </span>
+    </span>
+  </span>
+</a><div class="edit-this-page">
+  <a href="https://github.com/eze-root/dev_zero_to_hero/blob/main/source/2024-summer/2024-summer-day1.md">编辑此页面</a>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">Develop from Zero to Hero</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="readme.html"><span itemprop="name">7 Days for beginner</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Day1 Linux、VScode与Git</strong>
+        <meta itemprop="position" content="3" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue dark-code" role="main">
+          <section class="tex2jax_ignore mathjax_ignore" id="day1-linuxvscodegit">
+<h1>Day1 Linux、VScode与Git<a class="headerlink" href="#day1-linuxvscodegit" title="Link to this heading">¶</a></h1>
+<div class="sd-container-fluid sd-sphinx-override sd-p-0 sd-mt-2 sd-mb-4 sd-p-2 sd-outline-muted sd-rounded-1 docutils">
+<div class="sd-row sd-row-cols-2 sd-gx-2 sd-gy-1 docutils">
+<div class="sd-col sd-col-auto sd-d-flex-row sd-align-minor-center docutils">
+<a class="reference external image-reference" href="https://github.com/WinstonCHEN1/"><img alt="" class="sd-avatar-sm sd-outline-muted" src="https://avatars.githubusercontent.com/u/163944337" />
+</a>
+</div>
+<div class="sd-col sd-d-flex-row sd-align-minor-center docutils">
+<div class="sd-container-fluid sd-sphinx-override docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-3 sd-row-cols-md-3 sd-row-cols-lg-3 sd-gx-3 sd-gy-1 docutils">
+<div class="sd-col sd-col-auto sd-d-flex-row sd-align-minor-center docutils">
+<p class="sd-p-0 sd-m-0"><a class="reference external" href="https://github.com/WinstonCHEN1/">&#64;WinstonCHEN1</a></p>
+</div>
+<div class="sd-col sd-col-auto sd-d-flex-row sd-align-minor-center docutils">
+<p class="sd-p-0 sd-m-0"><span class="sd-pr-2"><svg version="1.1" width="16.0px" height="16.0px" class="sd-octicon sd-octicon-calendar" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.75 0a.75.75 0 0 1 .75.75V2h5V.75a.75.75 0 0 1 1.5 0V2h1.25c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25V3.75C1 2.784 1.784 2 2.75 2H4V.75A.75.75 0 0 1 4.75 0ZM2.5 7.5v6.75c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V7.5Zm10.75-4H2.75a.25.25 0 0 0-.25.25V6h11V3.75a.25.25 0 0 0-.25-.25Z"></path></svg></span>June, 30, 2024</p>
+</div>
+<div class="sd-col sd-col-auto sd-d-flex-row sd-align-minor-center docutils">
+<p class="sd-p-0 sd-m-0"><span class="sd-pr-2"><svg version="1.1" width="16.0px" height="16.0px" class="sd-octicon sd-octicon-clock" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Zm7-3.25v2.992l2.028.812a.75.75 0 0 1-.557 1.392l-2.5-1A.751.751 0 0 1 7 8.25v-3.5a.75.75 0 0 1 1.5 0Z"></path></svg></span>10 min read</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section id="basic-linux">
+<h2>一、Basic Linux<a class="headerlink" href="#basic-linux" title="Link to this heading">¶</a></h2>
+<section id="id1">
+<h3>1. 文件和目录管理<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<p>列出当前目录下的文件列表</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">ls</span>
+</span></pre></div>
+</div>
+<p>显示当前工作目录的路径</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">pwd</span>
+</span></pre></div>
+</div>
+<p>进入目录</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1">cd /path/to/directory（请替换需要进入的路径）
+</span></pre></div>
+</div>
+<p>显示磁盘结构，包括各个磁盘的挂载点</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">lsblk</span>
+</span></pre></div>
+</div>
+</section>
+<section id="id2">
+<h3>2. 系统监控和任务管理<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<p>显示任务管理器，监控系统进程</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">top</span>
+</span></pre></div>
+</div>
+<p>美化版的top，提供更直观的任务管理界面</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">btop</span>
+</span></pre></div>
+</div>
+</section>
+<section id="id3">
+<h3>3. 清理屏幕<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<p>清空当前终端页面</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">clear</span>
+</span></pre></div>
+</div>
+</section>
+<section id="id4">
+<h3>4. 网络和系统信息<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<p>查看curl命令的文档</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">man</span> <span class="n">curl</span>
+</span></pre></div>
+</div>
+<p>查看当前IP地址</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">curl</span> <span class="n">ip</span><span class="o">.</span><span class="n">sb</span>
+</span></pre></div>
+</div>
+<p>使用curl测试网络连接，使用谷歌可查看是否能访问外网</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">curl</span> <span class="n">baidu</span><span class="o">.</span><span class="n">com</span>
+</span><span data-line="2"><span class="n">curl</span> <span class="n">google</span><span class="o">.</span><span class="n">com</span>
+</span></pre></div>
+</div>
+<p>显示每个接口的详细信息</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">ip</span> <span class="n">a</span>
+</span></pre></div>
+</div>
+</section>
+<section id="id5">
+<h3>5. 文件传输和安装<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<p>使用scp命令进行文件传输</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">scp</span> <span class="n">file</span><span class="o">.</span><span class="n">txt</span> <span class="n">username</span><span class="nd">@remotehost</span><span class="p">:</span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">destination</span><span class="o">/</span>
+</span></pre></div>
+</div>
+</section>
+<section id="vim">
+<h3>6. VIM快捷键<a class="headerlink" href="#vim" title="Link to this heading">¶</a></h3>
+<p>向下移动</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">J</span>
+</span></pre></div>
+</div>
+<p>向上移动</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">K</span>
+</span></pre></div>
+</div>
+<p>退出VIM（组合键）</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">esc</span>
+</span><span data-line="2"><span class="p">:</span><span class="n">q</span>
+</span></pre></div>
+</div>
+</section>
+<section id="python">
+<h3>7. Python和虚拟环境管理<a class="headerlink" href="#python" title="Link to this heading">¶</a></h3>
+<p>创建Python虚拟环境，用于隔离项目的依赖环境</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">virtualenv</span> <span class="n">venv</span>
+</span><span data-line="2"><span class="n">source</span> <span class="n">activate</span> <span class="n">venv</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
+</span><span data-line="3">
+</span></pre></div>
+</div>
+</section>
+</section>
+<section id="vscode">
+<h2>二、VScode<a class="headerlink" href="#vscode" title="Link to this heading">¶</a></h2>
+<section id="extension">
+<h3>Extension<a class="headerlink" href="#extension" title="Link to this heading">¶</a></h3>
+<section id="remote">
+<h4>1.Remote<a class="headerlink" href="#remote" title="Link to this heading">¶</a></h4>
+<p>安装Remote插件, 然后进行服务器的登录操作
+<img alt="image-1.png" src="../_images/image-1.png" /></p>
+</section>
+<section id="id6">
+<h4>2.简体中文<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h4>
+<p>如果不习惯看英文，可以安装简体中文的插件
+<img alt="image.png" src="../_images/image-3.png" /></p>
+</section>
+<section id="id7">
+<h4>3.Python<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h4>
+<p>VSCode中Python开发环境支持的插件
+<img alt="image.png" src="../_images/image-4.png" /></p>
+</section>
+</section>
+<section id="id8">
+<h3>VSCode连接服务器<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
+<p>在安装好remote插件后，就可以连接到服务器了。</p>
+<p>点击这个按钮：
+<img alt="image.png" src="../_images/image-5.png" /></p>
+<p>左边栏空空如也，点击这个加号按钮：
+<img alt="image.png" src="../_images/image-6.png" /></p>
+<p>输入ssh连接命令：
+<img alt="image.png" src="../_images/image-7.png" /></p>
+<p>现在假设已经添加好了，点击刷新，左边就可以进行连接了。</p>
+<p>这里用挂在校园网上的服务器举例：
+<img alt="image.png" src="../_images/image-8.png" /></p>
+<p>点击箭头，顶端搜索栏中会要求输入密码，输入正确后即可连接。</p>
+<p>此时点击左边的资源管理器，画面如下：
+<img alt="image.png" src="../_images/image-9.png" /></p>
+<p>点击打开文件夹，就可以进入服务器中的文件夹了。</p>
+<p>在你有权限的文件夹中，你可以进行文件的增删改等操作，请根据服务器不同位置的具体权限自行使用。</p>
+</section>
+</section>
+<section id="git">
+<h2>三、Git<a class="headerlink" href="#git" title="Link to this heading">¶</a></h2>
+<p>首先请确保你的电脑已经安装了Git！</p>
+<p>Git的安装网址如下：
+<a class="reference external" href="https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git">git-scm</a></p>
+<p>如果你是MacOS系统，可以使用brew进行安装。</p>
+<p>首次使用需要在命令行对个人信息进行初始化：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span> <span class="n">你的用户名</span>
+</span><span data-line="2"><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span> <span class="n">你的邮箱</span>
+</span></pre></div>
+</div>
+<p>这里的邮箱需要与你注册github的邮箱对应。为了方便，用户名和邮箱都使用Github的注册信息即可。</p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>如果你不想要重复输入密码，可以考虑使用:</p>
+<p>cache 10800秒，之后失效, 默认15分钟</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>credential.helper<span class="w"> </span><span class="s1">&#39;cache --timeout=10800&#39;</span>
+</span></pre></div>
+</div>
+<p>store, 永久有效，安全性欠佳</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>credential.helper<span class="w"> </span>store
+</span></pre></div>
+</div>
+</div>
+<section id="id9">
+<h3>命令行操作<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
+<p>如果你要把Github上的项目克隆到本地，分两种情况，操作都大同小异。</p>
+<p>在后文，项目统一用repo代替，与github的repositories对应。</p>
+<section id="repo">
+<h4>一、repo是你自己创建的/你参与协作且拥有访问权限<a class="headerlink" href="#repo" title="Link to this heading">¶</a></h4>
+<p>进入自己的repo，点击绿色的Code按钮，会找到一个https网址，把它复制下来。用这行代码克隆到你初始化的仓库，url即复制的网址。访问Github可以使用科学上网。</p>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">复制的url</span></code></p>
+<p>命令行会反馈是否成功，如果不成功可能是网络问题。</p>
+</section>
+<section id="id10">
+<h4>二、repo是别人的，你想搬运来用<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h4>
+<p>点击Fork按钮，将项目fork到你自己的repo中，随后在自己的repo中查看url并使用相同的命令。网址后的ID是你自己的才是正确的。</p>
+<p>举例：<img alt="image.png" src="../_images/image-10.png" /></p>
+<p>现在，你可以在本地对这个项目进行操作。</p>
+<p>这里需要注意项目的法律条款协议。</p>
+<p>当操作完成后，需要将项目推送到GitHub时,命令行进入工作文件夹。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">git</span> <span class="n">add</span> <span class="o">.</span>
+</span></pre></div>
+</div>
+<p>将文件夹中的所有文件添加到工作区</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">git</span> <span class="n">status</span>
+</span></pre></div>
+</div>
+<p>查看当前工作区状态，可以查看经过修改的文件</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;your message&quot;</span>
+</span></pre></div>
+</div>
+<p>将修改好的内容提交到工作区，your message部分是你的提交信息，日志会更新在这里<img alt="image.png" src="../_images/image-11.png" /></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">git</span> <span class="n">push</span>
+</span></pre></div>
+</div>
+<p>将代码推送到GitHub，如果失败是网络问题。如果你要将你修改的代码提交到别人的repo中，第一次，要用到</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">git</span> <span class="n">push</span> <span class="o">--</span><span class="nb">set</span><span class="o">-</span><span class="n">upstream</span> <span class="n">origin</span>
+</span></pre></div>
+</div>
+<p>推送远程仓库，第一次可能需要登录。如果GitHub的仓库更新了，比如和别人共同协作一个repo，他提交了代码，你要同步</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">git</span> <span class="n">pull</span>
+</span></pre></div>
+</div>
+<p>拉取最新的代码
+如果在repo中有不同的分支
+<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">分支名</span></code>
+创建本地分支</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">git</span> <span class="n">checkout</span> <span class="o">-</span><span class="n">a</span>
+</span></pre></div>
+</div>
+<p>查看本地的所有分支</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">git</span> <span class="n">checkout</span> <span class="n">分支名</span>
+</span></pre></div>
+</div>
+<p>切换到某分支</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">git</span> <span class="n">branch</span> <span class="o">-</span> <span class="n">D</span> <span class="n">分支名</span>
+</span></pre></div>
+</div>
+<p>删除本地分支</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">origin</span> <span class="n">url</span>
+</span></pre></div>
+</div>
+<p>将本地分支同步到远程分支</p>
+</section>
+</section>
+<section id="id11">
+<h3>VSCode中源代码管理<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h3>
+<p><img alt="image.png" src="../_images/image-12.png" /></p>
+<p>页面的左侧工具栏自上往下第三个是源代码管理，在这里可以对你代码的修改提交进行管理。</p>
+<p>例如我对我的代码进行了修改，在源代码管理处就能看到我进行的修改。</p>
+<p><img alt="image.png" src="../_images/image-13.png" /></p>
+<p>点击修改文件右边的加号，把修改提交到暂存区。</p>
+<p><img alt="image.png" src="../_images/image-14.png" /></p>
+<p>在将所有需要提交的文件提交到暂存区后，请输入修改信息，例如：</p>
+<p><img alt="image.png" src="../_images/image-15.png" /></p>
+<p>这里的修改信息请遵守规范。</p>
+<p>编辑好信息后确认无误，请点击提交。</p>
+<p><img alt="image.png" src="../_images/image-16.png" /></p>
+<p>点击同步更改，即可将提交的更改进行推送。</p>
+<p>界面的最上面，会有这个图标，请善用：</p>
+<p><img alt="image.png" src="../_images/image-17.png" /></p>
+<p><img alt="image.png" src="../_images/image-18.png" /></p>
+<p>这里简单进行一下解释，可以参考上文的命令行操作进行比对。</p>
+<ul class="simple">
+<li><p>拉取（pull）：如果你的代码版本和main分支下的代码不同，或者是有新的更新要从代码仓库拉取，请使用<strong>拉取</strong></p></li>
+<li><p>推送（push）：在提交了更改后，使用<strong>推送</strong>将代码推送到所在的分支</p></li>
+<li><p>克隆（clone）：从URL<strong>克隆</strong>整个代码仓库到本地</p></li>
+<li><p>签出到（branch）：<strong>切换</strong>分支</p></li>
+<li><p>抓取（fetch）：与pull不同之处在于，fetch会下载远程分支的所有更新，但不会自动合并到本地分支</p></li>
+</ul>
+</section>
+<section id="id12">
+<h3>代码提交操作步骤<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p>将仓库克隆到本地目录</p></li>
+<li><p>切换到正确的分支，对代码进行修改</p></li>
+<li><p>将所有要提交的修改添加到暂存区</p></li>
+<li><p>确认无误后，提交修改，编辑符合规范的提交信息</p></li>
+<li><p>将已提交的修改推送到远程仓库。如果分支需要合并，请在GitHub提交合并请求，由项目负责人检查代码后进行操作。如果推送到自己的分支，自己进行确认即可。</p></li>
+</ol>
+</section>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>回到顶部</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="2024-summer-day0.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>上一章</span><div class="title">Day0 Markdown</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="2024-summer-day2.html">
+      <div class="page-info">
+        <span>下一章</span>
+        <div class="title">Day2 The Missing Semester of Your CS Education</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2024, ezelab</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+<a href="https://github.com/eze-root/dev_zero_to_hero" aria-label="GitHub">
+  <iconify-icon icon="simple-icons:github"></iconify-icon>
+</a></div>
+    </div>
+  </div>
+</footer>
+      <script src="../_static/documentation_options.js?v=a1b8b494"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "eze-root/dev_zero_to_hero");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="../_static/shibuya.js?v=cac61aee"></script></body>
+</html>

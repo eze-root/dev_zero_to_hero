@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="zh" data-accent-color="blue" data-content_root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Git for Teams - Develop from Zero to Hero</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="Scrapy + Celery + Multiprocessing" href="os_mp_celery_scrapy.html" /><link rel="prev" title="Welcome to Develop Zero to Hero" href="../index.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=44020203" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/source-sans@3.52.0/source-sans-3VF.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/course.css?v=cadc60c4" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="Git for Teams"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../index.html">
+      
+      
+      <strong>Develop from Zero to Hero</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="搜索" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials">
+  <a href="https://github.com/eze-root/dev_zero_to_hero" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="切换到亮色模式"
+data-aria-light="切换到暗色模式"
+data-aria-dark="切换到自动模式">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="1"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Tutorial:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Git for Teams</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="os_mp_celery_scrapy.html">Scrapy + Celery + Multiprocessing</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Project:</span></p>
+<ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../engineer/sphinx_design.html">Sphinx_design</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Articles:</span></p>
+<ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../2024-summer/readme.html">7 Days for beginner</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day0.html">Day0 Markdown</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day1.html">Day1 Linux&#12289;VScode&#19982;Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day2.html">Day2 The Missing Semester of Your CS Education</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day3.html">Day3 Python &#24320;&#21457;&#29615;&#22659;&#25645;&#36733;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day4.html">Day4 SSH&#19982;Django</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day5.html">Day5 Docker&#19982;Scrapy&#29228;&#34411;&#39033;&#30446;</a></li>
+</ul>
+</li>
+</ul>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>该页内容</h3><ul>
+<li><a class="reference internal" href="#resources">Resources</a><ul>
+<li><a class="reference internal" href="#github">Github</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#notes-for-git-for-teams-by-emma-jane-hogbin-westby">Notes for Git for Teams by Emma Jane Hogbin Westby</a><ul>
+<li><a class="reference internal" href="#id1">&#31532;1&#31456;-&#22242;&#38431;&#20316;&#25112;</a></li>
+<li><a class="reference internal" href="#id2">&#31532;2&#31456;-&#21629;&#20196;&#19982;&#25511;&#21046;</a><ul>
+<li><a class="reference internal" href="#git">&#26085;&#24120;&#30340;Git&#25991;&#20214;&#25805;&#20316;</a></li>
+<li><a class="reference internal" href="#id3">&#31038;&#21306;&#39537;&#21160;&#30340;Git</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id4">&#31532;3&#31456;-&#20998;&#25903;&#31574;&#30053;</a></li>
+<li><a class="reference internal" href="#id5">&#31532;4&#31456;-&#24037;&#20316;&#27969;</a></li>
+<li><a class="reference internal" href="#important-for-beginner">&#31532;5&#31456;-&#21333;&#20154;&#22242;&#38431; (Important for beginner)</a></li>
+<li><a class="reference internal" href="#id6">&#31532;6&#31456;-&#22238;&#28378;&#12289;&#36824;&#21407;&#12289;&#37325;&#32622;&#21644;&#21464;&#22522;</a><ul>
+<li><a class="reference internal" href="#rebase">rebase</a><ul>
+<li><a class="reference internal" href="#id7">&#20363;&#23376;1: &#25991;&#20214;&#21024;&#38500;&#36896;&#25104;&#30340;&#21464;&#22522;&#20914;&#31361;</a></li>
+<li><a class="reference internal" href="#id8">&#20363;&#23376;2&#65306;&#20132;&#20114;&#24335;&#21464;&#22522;&#20462;&#25913;&#25552;&#20132;</a></li>
+<li><a class="reference internal" href="#id9">&#20363;&#23376;&#65306;&#31227;&#38500;&#38169;&#35823;&#30340;&#21382;&#21490;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id10">&#21629;&#20196;&#25351;&#21335;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id11">&#20854;&#20182;&#21442;&#32771;&#36164;&#26009;</a></li>
+</ul>
+</li>
+</ul>
+</div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/eze-root/dev_zero_to_hero"
+  data-type="github" data-user="eze-root" data-repo="dev_zero_to_hero">
+  <span class="w-8 flex items-center justify-around shrink-0 text-3xl">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </span>
+  <span class="flex-grow px-2 break-all">
+    
+    
+      <span>dev_zero_to_hero</span>
+    
+    <span class="flex text-sm repo-stats-count">
+      <span class="flex items-center pr-3">
+        <iconify-icon icon="lucide:star"></iconify-icon>
+        <strong class="js-repo-stars ml-1">0</strong>
+      </span>
+      <span class="flex items-center">
+        <iconify-icon icon="lucide:git-fork"></iconify-icon>
+        <strong class="js-repo-forks ml-1">0</strong>
+      </span>
+    </span>
+  </span>
+</a><div class="edit-this-page">
+  <a href="https://github.com/eze-root/dev_zero_to_hero/blob/main/source/tutorial/git.md">编辑此页面</a>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">Develop from Zero to Hero</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Git for Teams</strong>
+        <meta itemprop="position" content="2" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue dark-code" role="main">
+          <section class="tex2jax_ignore mathjax_ignore" id="git-for-teams">
+<h1>Git for Teams<a class="headerlink" href="#git-for-teams" title="Link to this heading">¶</a></h1>
+<div class="sd-container-fluid sd-sphinx-override sd-p-0 sd-mt-2 sd-mb-4 sd-p-2 sd-outline-muted sd-rounded-1 docutils">
+<div class="sd-row sd-row-cols-2 sd-gx-2 sd-gy-1 docutils">
+<div class="sd-col sd-col-auto sd-d-flex-row sd-align-minor-center docutils">
+<a class="reference external image-reference" href="https://github.com/eze-root"><img alt="" class="sd-avatar-sm sd-outline-muted" src="https://avatars.githubusercontent.com/u/154419224" />
+</a>
+</div>
+<div class="sd-col sd-d-flex-row sd-align-minor-center docutils">
+<div class="sd-container-fluid sd-sphinx-override docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-3 sd-row-cols-md-3 sd-row-cols-lg-3 sd-gx-3 sd-gy-1 docutils">
+<div class="sd-col sd-col-auto sd-d-flex-row sd-align-minor-center docutils">
+<p class="sd-p-0 sd-m-0"><a class="reference external" href="https://github.com/eze-root">&#64;eze-root</a></p>
+</div>
+<div class="sd-col sd-col-auto sd-d-flex-row sd-align-minor-center docutils">
+<p class="sd-p-0 sd-m-0"><span class="sd-pr-2"><svg version="1.1" width="16.0px" height="16.0px" class="sd-octicon sd-octicon-calendar" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.75 0a.75.75 0 0 1 .75.75V2h5V.75a.75.75 0 0 1 1.5 0V2h1.25c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25V3.75C1 2.784 1.784 2 2.75 2H4V.75A.75.75 0 0 1 4.75 0ZM2.5 7.5v6.75c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V7.5Zm10.75-4H2.75a.25.25 0 0 0-.25.25V6h11V3.75a.25.25 0 0 0-.25-.25Z"></path></svg></span>2024-11-27</p>
+</div>
+<div class="sd-col sd-col-auto sd-d-flex-row sd-align-minor-center docutils">
+<p class="sd-p-0 sd-m-0"><span class="sd-pr-2"><svg version="1.1" width="16.0px" height="16.0px" class="sd-octicon sd-octicon-clock" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Zm7-3.25v2.992l2.028.812a.75.75 0 0 1-.557 1.392l-2.5-1A.751.751 0 0 1 7 8.25v-3.5a.75.75 0 0 1 1.5 0Z"></path></svg></span>36 min read</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<blockquote>
+<div><p>版本控制的重要性怎么强调都不为过。 我认为它的重要性不亚于黑板和书本的发明，因为它将众人的力量聚集在一起，从而创造了更大的价值。</p>
+</div></blockquote>
+<p>This notes is extract from <a class="reference external" href="https://www.oreilly.com/library/view/git-for-teams/9781491911204/">Git for Teams by Emma Jane Hogbin Westby</a>, 更多详情请参看原文。</p>
+</div>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Link to this heading">¶</a></h2>
+<section id="github">
+<h3>Github<a class="headerlink" href="#github" title="Link to this heading">¶</a></h3>
+<p>如果想要参与Github社区，非常建议阅读一下的资料，过一遍 <a class="reference external" href="https://docs.github.com/zh/get-started">GitHub 入门文档</a></p>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <a class="reference external" href="https://docs.github.com/zh/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax">基本撰写和格式语法</a></p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <a class="reference external" href="https://docs.github.com/zh/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/quickstart-for-writing-on-github">有关在 GitHub 上编写的快速入门</a></p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> <a class="reference external" href="https://docs.github.com/zh/get-started/writing-on-github/working-with-advanced-formatting">使用高级格式</a></p></li>
+</ul>
+</section>
+</section>
+<section id="notes-for-git-for-teams-by-emma-jane-hogbin-westby">
+<h2>Notes for <a class="reference external" href="https://www.oreilly.com/library/view/git-for-teams/9781491911204/">Git for Teams by Emma Jane Hogbin Westby</a><a class="headerlink" href="#notes-for-git-for-teams-by-emma-jane-hogbin-westby" title="Link to this heading">¶</a></h2>
+<section id="id1">
+<h3>第1章-团队作战<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<p>本章主要强调了在当代，软件工程的开发已经是团队作战，而非个人英雄主义。</p>
+<blockquote>
+<div><p>在开始前，你必须理解你的团队以及软件需求。如果一开始团队就充满了信任和彼此关爱，当你计划用 Git 命令来达成目标时，将会发现自己一身轻松。</p>
+</div></blockquote>
+<blockquote>
+<div><p>在充满信任的团队里， 当有人遇到困难时，你们可以互相帮助，人们在需要帮助时也会更加坦诚。当人们感受到支持，并理解为什么要用这些 Git 命令时，他们会更可能让 Git 为他们所用，而不是死记硬背几个命令，祈祷自己用对了.</p>
+</div></blockquote>
+<p>安排一个会议, 在脑中熟记这个规律: <strong>开场、参与、总结</strong>。</p>
+<blockquote>
+<div><p>项目开始后，你会希望定期与团队开个会。当你在分布式团队中工作时，逃避问题是非常容易的事。跟不上进度是一件很令人难堪的事，而且通常是一个复杂的问题。</p>
+</div></blockquote>
+<blockquote>
+<div><p>保持沟通是 一个处理此类问题的好习惯，但这并不意味着要将所有时间浪费在开会上。成功的团队总是有着明确的目标。我喜欢一周一次的、非常短小的冲刺周期。在这么短的时间内很难隐藏什么问题。</p>
+</div></blockquote>
+<p>当然，这些需要做更多的项目，并且自己是主导者而非参与者才能体会其中的奥妙。</p>
+<p>关于Git，作者的描述也很有道理：</p>
+<blockquote>
+<div><p>如果你尚未接触过分布式版本控制，会看到一些术语贯穿了本书剩下的部分。这些术语在简单的开发者工作流中最容易理解。
+每个开发者都有一个本地的仓库副本，即项目中的更改历史的独立副本。为了共享更改， 开发者一般会将一份仓库的副本发布到一个集中式的代码托管系统，如 GitHub。
+尽管如此，正如你将在本章剩下的部分中了解到的那样，会有很多种分享代码的方法。 在仓库的中央副本中，开发者将会创建一个他们可以更改的仓库副本。在 Git 的用语中， 这个过程称为克隆副本，尽管这个过程也可以称为派生（forking）。
+在克隆仓库时，软件开发者可以选择将他们的项目副本设置为私有的或公开的。一个私有 仓库默认不希望别人直接查看这个副本，而只通过查看主项目来获得被官方接受的更改。
+另一方面，任何人都可以直接向开发者的仓库的公开副本提交贡献。对于软件开发来说， 这是一个更加开放的策略，但可能会让人对哪个副本才是项目的起点感到困惑。</p>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>当然，正确的区分Glossary：Git是一个软件，用来进行版本控制。Github只是一个托管平台，除了Github，还有GitLab，Gitee等。</p>
+</div>
+</section>
+<section id="id2">
+<h3>第2章-命令与控制<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<blockquote>
+<div><p>版权是在使用和分发作品时排他且可转让的法律权利。世界各地的版权法律的细节不尽相 同，但一般来说作者有权复制和分发自己的作品。在开源软件中，版权所有者同意将他 们的作品授权给更多人</p>
+</div></blockquote>
+<blockquote>
+<div><p>一旦你决定如何处置你项目的版权，接下来要做的便是创建一个分发许可.</p>
+</div></blockquote>
+<p>版权和分发许可是分开的，版权一般和雇佣者和组织相关, 分发许可则是如何允许别人来分发你的项目。</p>
+<p>项目运作有很多种方式：</p>
+<ol class="arabic simple">
+<li><p>仁慈的独裁者（BDFL）： 代码库中任何地方的任何决定都由项目领导者说了算.DFL 类型的领 导者或许不会活跃于每次代码评审中，但最终保留了驳回或撤销某个决定的权力。例如 Linux</p></li>
+<li><p>共识驱动、主管批准： 共识模型鼓励社区在自己熟悉的领域中寻找合适的解决方案。当社 区对解决方案感到满意时，他们将这个 issue 标记为 RTBC［Reviewed and Tested by the Community，通过社区审核与测试，与 Ready to be Committed（即将提交）的英文缩 写相同］</p></li>
+<li><p>技术评审委员会或项目管理委员: 这种一般是那种比较大的项目，并且有funding支持的，例如Rust</p></li>
+</ol>
+<section id="git">
+<h4>日常的Git文件操作<a class="headerlink" href="#git" title="Link to this heading">¶</a></h4>
+<p><img alt="" src="../_images/2024-07-16-11.15.1721128546.jpg" /></p>
+</section>
+<section id="id3">
+<h4>社区驱动的Git<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h4>
+<p><img alt="" src="../_images/2024-07-16-11.15.1721128520.jpg" /></p>
+</section>
+</section>
+<section id="id4">
+<h3>第3章-分支策略<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<blockquote>
+<div><p>在版本控制中，分支用于隔离一块代码上产生的不同想法。分支总是起源于代码库中的某 个特定节点。在第 2 章中我们谈到了派生和克隆仓库。分支类似于新工作开始时仓库内部 的分隔。创建分支时你可能想要将工作贡献回去，也可能想要隔离不同的工作。分支本身 并不关心跟踪的是什么更改！它们的职责仅仅是跟踪更改。 使用什么分支策略取决于你的发布管理流程。</p>
+</div></blockquote>
+<p>开分支是多人开发的基础，不建议直接在main或者production等这些关键分支上进行提交。</p>
+<blockquote>
+<div><p>分支允许你更改项目工作目录中可见的文件， 并且一次只会有一个分支活跃。大多数分支策略是根据粗粒度的想法分隔项目中的工作。 这个想法可以是软件的版本，比如，版本 1、版本 2、版本 3。这些软件版本或许能使你联 想到分支上正在进行的工作。根据它们代表的功能名称，这些想法被分隔在不同分支。这 些想法可能是一个 bug 修复或是一个新的功能，但它们也可以表示一个完整的小想法。</p>
+</div></blockquote>
+<p>关于分支，就是从一个点切出去，然后开发自己的代码或者想法，甚至快速进行bug修复等。</p>
+<blockquote>
+<div><p>约定是大家认同如何做一件事的标准
+一种约定包含了两类分支：</p>
+</div></blockquote>
+<ul class="simple">
+<li><p><strong>长期活跃的公开分支</strong>： 长期活跃的分支扮演了代码中介的角色，并入大量开发者的贡献。</p></li>
+<li><p><strong>短暂的私有分支</strong>: 短暂的分支的 作用是隔离一个新想法的开发过程。这些新想法可以是一个 bug 修复、新增功能或实验性的重构。</p></li>
+</ul>
+<p>几种约定:</p>
+<ol class="arabic simple">
+<li><p>主线分支开发</p></li>
+<li><p>功能分支部署</p></li>
+<li><p>状态分支</p></li>
+<li><p>计划部署</p></li>
+</ol>
+<blockquote>
+<div><p>在分布式版本控制系统 中，整合外部工作的方法与你选择的分支策略无关。更新分支时，你可以选择其中一种策 略：合并（merge）或变基（rebase）</p>
+</div></blockquote>
+<blockquote>
+<div><p>通过远程引用更新跟踪分支的过程通常借助 pull 命令实现。然而，pull 是两个无关步骤 的组合：fetch 和 merge，或者 fetch 和 rebase。pull 命令默认使用 merge 策略来更新本地 分支，但是，通过添加 --rebase 参数</p>
+</div></blockquote>
+<p>这里其实也和你自己的<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code>的config有关。</p>
+</section>
+<section id="id5">
+<h3>第4章-工作流<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<blockquote>
+<div><p>在这个过程中，可能会 有一些争吵和妥协，但最终大家能在最基本的流程上达成一致。每个人回到自己的桌前， 思考自己要做的方向，并迅速发问“我应该怎么开始呢”。你给团队更多的提示来开始工 作，他们就能将更多的精力花在攻克难题上。版本控制永远不应该是一个难题。</p>
+</div></blockquote>
+<p>这个非常认同，项目的推进本来就需要每个人花费在攻克难题上，而不是与人协同，相互等待。。。</p>
+</section>
+<section id="important-for-beginner">
+<h3>第5章-单人团队 (Important for beginner)<a class="headerlink" href="#important-for-beginner" title="Link to this heading">¶</a></h3>
+<p>基于issue的版本控制， 无论你是在开发一个新功能，修复一个bug，重构旧的代码，还是在尝试新的想法，都应该记录如下的一些问题</p>
+<p>例如我有一个bug,</p>
+<ol class="arabic simple">
+<li><p>问题: 我这个bug是什么？我怎么才能重现bug</p></li>
+<li><p>原因: 我感觉原因是什么？</p></li>
+<li><p>质量保证测试： 怎么保证我已经修复了这个bug？</p></li>
+</ol>
+<p>开发的过程中，按照工程化 思维：</p>
+<ol class="arabic simple">
+<li><p>创建工单 issue_number-description</p></li>
+<li><p>完成工作描述</p></li>
+<li><p>测试工作</p></li>
+<li><p>添加修改文件到仓库</p></li>
+<li><p>推送到远程备用服务器</p></li>
+<li><p>测试满意，并入到主分支</p></li>
+<li><p>将工单标记为完成，关闭</p></li>
+</ol>
+<p><img alt="" src="../_images/Snipaste_2024-11-19_19-45-41.png" /></p>
+<ul class="simple">
+<li><p>克隆分支: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">xxx</span></code></p></li>
+<li><p>初始化: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code></p></li>
+<li><p>检查状态: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code></p></li>
+<li><p>添加所有文件至暂存区: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">--all</span></code></p></li>
+<li><p>将所有暂存文件提交到仓库: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">'xxx'</span></code></p></li>
+<li><p>查看仓库历史记录: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code></p></li>
+<li><p>列出分支: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">--list</span></code></p></li>
+<li><p>列出所有分支: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">--all</span></code></p></li>
+<li><p>获取更新的列表和所有远程分支的内容: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span></code></p></li>
+<li><p>使用  checkout  命令切换分支: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">--track</span> </code></p></li>
+<li><p>添加已更改文件到仓库: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">xx</span> </code></p></li>
+<li><p>将选中的修改交互式的添加到仓库中: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">--patch</span> <span class="pre">filename</span></code></p></li>
+<li><p>将文件移除暂存区: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reset</span> <span class="pre">HEAD</span> <span class="pre">xxx</span></code></p></li>
+<li><p>提交更完整的说明: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">--amend</span></code></p></li>
+<li><p>使用 show 命令显示单个提交的日志消息和文本 diff: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">&amp;&amp;</span> <span class="pre">git</span> <span class="pre">show</span> <span class="pre">xxx</span></code></p></li>
+<li><p>为某个提交对象添加一个新的标签import: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">tag</span> <span class="pre">import</span> <span class="pre">xxx</span></code></p></li>
+<li><p>列出所有标签: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">tag</span></code></p></li>
+<li><p>添加远程分支: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">add</span> <span class="pre">origin</span> <span class="pre">xxx</span></code></p></li>
+<li><p>使用push命令上传分支: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code></p></li>
+<li><p>将工单分支并入主分支: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">main</span> <span class="pre">&amp;&amp;</span> <span class="pre">git</span> <span class="pre">merge</span> <span class="pre">1-process_notes</span></code></p></li>
+<li><p>删除分支副本: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">--delete</span> <span class="pre">1-process_notes</span></code></p></li>
+<li><p>删除远程分支：<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">--delete</span> <span class="pre">xxx</span> <span class="pre">1-porcess_notes</span></code></p></li>
+</ul>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>命令</p></th>
+<th class="head"><p>用途</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>git clone URL</p></td>
+<td><p>下载一份远程仓库的副本</p></td>
+</tr>
+<tr class="row-odd"><td><p>git init</p></td>
+<td><p>将当前目录转换成一个新的 Git 仓库</p></td>
+</tr>
+<tr class="row-even"><td><p>git status</p></td>
+<td><p>获取仓库状态报告</p></td>
+</tr>
+<tr class="row-odd"><td><p>git add --all</p></td>
+<td><p>将所有修改过的文件和新文件添加至仓库的暂存区</p></td>
+</tr>
+<tr class="row-even"><td><p>git commit -m “message”</p></td>
+<td><p>将所有暂存的文件提交至仓库</p></td>
+</tr>
+<tr class="row-odd"><td><p>git log</p></td>
+<td><p>查看项目历史</p></td>
+</tr>
+<tr class="row-even"><td><p>git log --oneline</p></td>
+<td><p>查看压缩过的项目历史</p></td>
+</tr>
+<tr class="row-odd"><td><p>git branch --list</p></td>
+<td><p>列出所有本地分支</p></td>
+</tr>
+<tr class="row-even"><td><p>git branch --all</p></td>
+<td><p>列出本地和远程分支</p></td>
+</tr>
+<tr class="row-odd"><td><p>git branch --remotes</p></td>
+<td><p>列出所有远程分支</p></td>
+</tr>
+<tr class="row-even"><td><p>git checkout --track remote_name/branch</p></td>
+<td><p>创建远程分支的副本，在本地使用</p></td>
+</tr>
+<tr class="row-odd"><td><p>git checkout branch</p></td>
+<td><p>切换到另一个本地分支</p></td>
+</tr>
+<tr class="row-even"><td><p>git checkout -b branch branch_parent</p></td>
+<td><p>从某个父分支创建一个新分支</p></td>
+</tr>
+<tr class="row-odd"><td><p>git add filename(s)</p></td>
+<td><p>仅保存并准备提交指定文件</p></td>
+</tr>
+<tr class="row-even"><td><p>git add --patch filename</p></td>
+<td><p>仅保存并准备提交某文件的一部分</p></td>
+</tr>
+<tr class="row-odd"><td><p>git reset HEAD filename</p></td>
+<td><p>从暂存区移除提交出的文件修改</p></td>
+</tr>
+<tr class="row-even"><td><p>git commit --amend</p></td>
+<td><p>使用当前暂存区的修改更新前一次的提交，并提供一个新的提交消息</p></td>
+</tr>
+<tr class="row-odd"><td><p>git show commit</p></td>
+<td><p>查看提交的详细信息</p></td>
+</tr>
+<tr class="row-even"><td><p>git tag tag commit</p></td>
+<td><p>为某个提交对象打上标签</p></td>
+</tr>
+<tr class="row-odd"><td><p>git tag</p></td>
+<td><p>列出所有标签</p></td>
+</tr>
+<tr class="row-even"><td><p>git show tag</p></td>
+<td><p>输出所有带标签提交的详细信息</p></td>
+</tr>
+<tr class="row-odd"><td><p>git remote add remote_name URL</p></td>
+<td><p>创建一个指向远程仓库的引用</p></td>
+</tr>
+<tr class="row-even"><td><p>git push</p></td>
+<td><p>将当前分支上的修改上传至远程仓库</p></td>
+</tr>
+<tr class="row-odd"><td><p>git remote --verbose</p></td>
+<td><p>列出所有可用远程连接中 <code class="docutils literal notranslate"><span class="pre">fetch</span></code> 和 <code class="docutils literal notranslate"><span class="pre">push</span></code> 命令使用的 URL</p></td>
+</tr>
+<tr class="row-even"><td><p>git push --set-upstream remote_name branch_local</p></td>
+<td><p>将本地分支的副本推送至远程服务器</p></td>
+</tr>
+<tr class="row-odd"><td><p>git merge branch</p></td>
+<td><p>将当前存储在另一分支的提交并入当前分支</p></td>
+</tr>
+<tr class="row-even"><td><p>git push --delete remote_name branch_remote</p></td>
+<td><p>在远程服务器中移除指定名称的分支</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id6">
+<h3>第6章-回滚、还原、重置和变基<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>这章其实有点难， 但是掌握这一章节，将会真正的理解Git的使用。
+然后再也不会害怕出现代码丢失的情况了。并且在那之后，代码的编写也不再会是 xxx_v1.py 的方式了。</p>
+</div>
+<p><img alt="" src="../_images/Snipaste_2024-11-19_19-59-53.png" /></p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>你想要……</p></th>
+<th class="head"><p>备注</p></th>
+<th class="head"><p>解决方案</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>舍弃工作目录中对一个文件的修改</p></td>
+<td><p>修改的文件未被暂存或提交</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">checkout</span> <span class="pre">--</span> <span class="pre">filename</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>舍弃工作目录中所有未保存的变更</p></td>
+<td><p>文件已暂存，但未被提交</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">reset</span> <span class="pre">--hard</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>合并与某个特定提交（但不含）之间的多个提交</p></td>
+<td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">reset</span> <span class="pre">commit</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>移除所有未保存的变更，包含未跟踪的文件</p></td>
+<td><p>修改的文件未被提交</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">clean</span> <span class="pre">-fd</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>移除所有已暂存的变更和在某个提交之前提交的工作，但不移除工作目录中的新文件</p></td>
+<td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">reset</span> <span class="pre">--hard</span> <span class="pre">commit</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>移除之前的工作，但完整保留提交历史记录（“前进式回滚”）</p></td>
+<td><p>分支已经被发布，工作目录是干净的</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">revert</span> <span class="pre">commit</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>从分支历史记录中移除一个单独的提交</p></td>
+<td><p>修改的文件已经被提交，工作目录是干净的，分支尚未进行发布</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rebase</span> <span class="pre">--interactive</span> <span class="pre">commit</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>保留之前的工作，但与另一提交合并</p></td>
+<td><p>选择 squash（压缩）选项</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rebase</span> <span class="pre">--interactive</span> <span class="pre">commit</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="rebase">
+<h4>rebase<a class="headerlink" href="#rebase" title="Link to this heading">¶</a></h4>
+<section id="id7">
+<h5>例子1: 文件删除造成的变基冲突<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h5>
+<p>假设文件ch10.asciidoc在源分支master中被删除了，但我们在feature上继续对它进行修改，如果这个时候rebase便会报错。</p>
+<p>处理方式：</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">mergetool</span> <span class="pre">ch10.asciidoc</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span> <span class="pre">--continue</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reset</span> <span class="pre">HEAD</span> <span class="pre">ch10.asciidoc</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">ch10.asciidoc</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span> <span class="pre">--continue</span></code></p></li>
+</ol>
+<p>这个过程中，如果报错了，可以使用<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span> <span class="pre">--abort</span></code> 退回到前面。当然，也可以考虑看看message信息进行修订。</p>
+</section>
+<section id="id8">
+<h5>例子2：交互式变基修改提交<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h5>
+<p>假设最近的历史提交如下：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1">d1dc647 Revert &quot;Adding office hours reminder.&quot; 
+</span><span data-line="2">50605a1 Correcting joke about horses and baths. 
+</span><span data-line="3">eed5023 Joke: What goes &#39;ha ha bonk&#39;? 
+</span><span data-line="4">77c00e2 Adding an Easter egg of bad jokes. 
+</span><span data-line="5">0f187d8 Added information about additional people to be thanked. 
+</span><span data-line="6">c546720 Adding office hours reminder. 
+</span><span data-line="7">3184b5d Switching back to BADCamp version of the deck. 
+</span><span data-line="8">bd5c178 Added feedback request; formatting updates to pro-con lists 
+</span><span data-line="9">876e951 Removing feedback request; added Twitter handle.
+</span></pre></div>
+</div>
+<p>现在需要将3个Joke相关的提交压缩成一个单独的提交。</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span> <span class="pre">--interactive</span> <span class="pre">0f187d8</span></code></p></li>
+<li><p>编辑我们是需要pick还是squash，然后对合并后的消息进行编辑。</p></li>
+</ol>
+</section>
+<section id="id9">
+<h5>例子：移除错误的历史<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h5>
+<p>如果运气不好，将一些重要的信息（例如包含密码的文件）提交到了远程分支。</p>
+<p>需要使用 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">filter-branch</span></code> 操作对历史进行重写。例如，希望删除文件 <a class="reference external" href="http://SECRET.md">SECRET.md</a>, 那么命令如下：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">git</span> <span class="nb">filter</span><span class="o">-</span><span class="n">brach</span> <span class="o">--</span><span class="n">index</span><span class="o">-</span><span class="nb">filter</span> \
+</span><span data-line="2">  <span class="s1">&#39;git rm --cache --ignore-unmatch SECRET.md&#39;</span> <span class="n">HEAD</span>
+</span></pre></div>
+</div>
+<p>此外，为了保证能永久地从仓库中删除这些内容（目前仍然可能会通过 git reflog找到），这是需要通过清除本地历史，并且执行一次垃圾回收（GC）将这些提交从系统中丢弃。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">git</span> <span class="n">reflog</span> <span class="n">expire</span> <span class="o">--</span><span class="n">expire</span><span class="o">=</span><span class="n">now</span> <span class="o">--</span><span class="nb">all</span>
+</span><span data-line="2"><span class="n">git</span> <span class="n">gc</span> <span class="o">--</span><span class="n">prune</span><span class="o">=</span><span class="n">now</span>
+</span></pre></div>
+</div>
+<p>这个时候已经清理完成了，可以通过force操作完成强制的推送。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="o">--</span><span class="n">force</span> <span class="o">--</span><span class="nb">all</span> <span class="o">--</span><span class="n">tags</span>
+</span></pre></div>
+</div>
+<p>此时，其他的合作者可以通过</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">git</span> <span class="n">pull</span> <span class="o">--</span><span class="n">rebase</span><span class="o">=</span><span class="n">preserve</span>
+</span></pre></div>
+</div>
+</section>
+</section>
+<section id="id10">
+<h4>命令指南<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h4>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>命令</p></th>
+<th class="head"><p>用途</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>git checkout -b branch</p></td>
+<td><p>创建一个名为 branch 的分支</p></td>
+</tr>
+<tr class="row-odd"><td><p>git add filename(s)</p></td>
+<td><p>暂存文件，准备提交至仓库</p></td>
+</tr>
+<tr class="row-even"><td><p>git commit</p></td>
+<td><p>将暂存的变更保存至仓库</p></td>
+</tr>
+<tr class="row-odd"><td><p>git checkout branch</p></td>
+<td><p>切换到指定分支</p></td>
+</tr>
+<tr class="row-even"><td><p>git merge branch</p></td>
+<td><p>将 branch 中的提交并入当前分支</p></td>
+</tr>
+<tr class="row-odd"><td><p>git branch --delete</p></td>
+<td><p>移除本地分支</p></td>
+</tr>
+<tr class="row-even"><td><p>git branch -D</p></td>
+<td><p>移除不包含并入其他分支的本地分支</p></td>
+</tr>
+<tr class="row-odd"><td><p>git clone URL</p></td>
+<td><p>下载一份远程仓库的副本</p></td>
+</tr>
+<tr class="row-even"><td><p>git log</p></td>
+<td><p>查看项目历史记录</p></td>
+</tr>
+<tr class="row-odd"><td><p>git reflog</p></td>
+<td><p>查看分支的详细历史记录</p></td>
+</tr>
+<tr class="row-even"><td><p>git checkout commit</p></td>
+<td><p>切换到另一个本地分支</p></td>
+</tr>
+<tr class="row-odd"><td><p>git cherry-pick commit</p></td>
+<td><p>将提交从一个分支复制到另一个分支</p></td>
+</tr>
+<tr class="row-even"><td><p>git reset --merge ORIG_HEAD</p></td>
+<td><p>移除当前分支中所有在最近一次合并中引入的提交</p></td>
+</tr>
+<tr class="row-odd"><td><p>git checkout --filename</p></td>
+<td><p>还原已更改但尚未提交的文件</p></td>
+</tr>
+<tr class="row-even"><td><p>git reset HEAD filename</p></td>
+<td><p>从暂存区移除指定的文件修改</p></td>
+</tr>
+<tr class="row-odd"><td><p>git reset --hard HEAD</p></td>
+<td><p>将所有已变更的文件还原到之前保存的状态</p></td>
+</tr>
+<tr class="row-even"><td><p>git reset commit</p></td>
+<td><p>取消暂存在这个提交之前的所有相关的更改</p></td>
+</tr>
+<tr class="row-odd"><td><p>git rebase --interactive commit</p></td>
+<td><p>编辑、或压缩指定所有的提交</p></td>
+</tr>
+<tr class="row-even"><td><p>git rebase --continue</p></td>
+<td><p>在解决合并冲突后，继续变基过程</p></td>
+</tr>
+<tr class="row-odd"><td><p>git revert commit</p></td>
+<td><p>取消应用指定提交的变更，创建一个共享友好的历史记录还原</p></td>
+</tr>
+<tr class="row-even"><td><p>git log --oneline --graph</p></td>
+<td><p>显示分支的图形化历史记录</p></td>
+</tr>
+<tr class="row-odd"><td><p>git revert --mainline 1 commit</p></td>
+<td><p>反转一个合并提交</p></td>
+</tr>
+<tr class="row-even"><td><p>git branch --contains commit</p></td>
+<td><p>列出所有包含指定提交的分支</p></td>
+</tr>
+<tr class="row-odd"><td><p>git revert --no-commit last_commit_to_keep…</p></td>
+<td><p>使用一个提交交替“组提交”，而不是为每个撤销的提交创建单独的对象</p></td>
+</tr>
+<tr class="row-even"><td><p>git filter-branch</p></td>
+<td><p>从仓库中永久移除文件</p></td>
+</tr>
+<tr class="row-odd"><td><p>git reflog expire</p></td>
+<td><p>忽略详细历史记录，仅使用存储的提交消息</p></td>
+</tr>
+<tr class="row-even"><td><p>git gc --prune=now</p></td>
+<td><p>运行垃圾回收器并确保所有未提交的变更从本地内存中移除</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="id11">
+<h3>其他参考资料<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://waynerv.com/posts/git-rebase-intro/">git rebase 用法详解与工作原理</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>回到顶部</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="../index.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>上一章</span><div class="title">首页</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="os_mp_celery_scrapy.html">
+      <div class="page-info">
+        <span>下一章</span>
+        <div class="title">Scrapy + Celery + Multiprocessing</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2024, ezelab</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+<a href="https://github.com/eze-root/dev_zero_to_hero" aria-label="GitHub">
+  <iconify-icon icon="simple-icons:github"></iconify-icon>
+</a></div>
+    </div>
+  </div>
+</footer>
+      <script src="../_static/documentation_options.js?v=a1b8b494"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "eze-root/dev_zero_to_hero");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="../_static/shibuya.js?v=cac61aee"></script></body>
+</html>

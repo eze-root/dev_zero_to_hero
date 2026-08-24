@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh" data-accent-color="blue" data-content_root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Day5 Docker与Scrapy爬虫项目 - Develop from Zero to Hero</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="prev" title="Day4 SSH与Django" href="2024-summer-day4.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=44020203" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/source-sans@3.52.0/source-sans-3VF.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/course.css?v=cadc60c4" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="Day5 Docker与Scrapy爬虫项目"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../index.html">
+      
+      
+      <strong>Develop from Zero to Hero</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="搜索" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials">
+  <a href="https://github.com/eze-root/dev_zero_to_hero" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="切换到亮色模式"
+data-aria-light="切换到暗色模式"
+data-aria-dark="切换到自动模式">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="1"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Tutorial:</span></p>
+<ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../tutorial/git.html">Git for Teams</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../tutorial/os_mp_celery_scrapy.html">Scrapy + Celery + Multiprocessing</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Project:</span></p>
+<ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../engineer/sphinx_design.html">Sphinx_design</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Articles:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="readme.html">7 Days for beginner</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="2024-summer-day0.html">Day0 Markdown</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2024-summer-day1.html">Day1 Linux&#12289;VScode&#19982;Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2024-summer-day2.html">Day2 The Missing Semester of Your CS Education</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2024-summer-day3.html">Day3 Python &#24320;&#21457;&#29615;&#22659;&#25645;&#36733;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2024-summer-day4.html">Day4 SSH&#19982;Django</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Day5 Docker&#19982;Scrapy&#29228;&#34411;&#39033;&#30446;</a></li>
+</ul>
+</li>
+</ul>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>该页内容</h3><ul>
+<li><a class="reference internal" href="#docker">Docker</a></li>
+<li><a class="reference internal" href="#docker-compose">Docker compose</a></li>
+<li><a class="reference internal" href="#scrapy">Scrapy&#29228;&#34411;</a></li>
+</ul>
+</div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/eze-root/dev_zero_to_hero"
+  data-type="github" data-user="eze-root" data-repo="dev_zero_to_hero">
+  <span class="w-8 flex items-center justify-around shrink-0 text-3xl">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </span>
+  <span class="flex-grow px-2 break-all">
+    
+    
+      <span>dev_zero_to_hero</span>
+    
+    <span class="flex text-sm repo-stats-count">
+      <span class="flex items-center pr-3">
+        <iconify-icon icon="lucide:star"></iconify-icon>
+        <strong class="js-repo-stars ml-1">0</strong>
+      </span>
+      <span class="flex items-center">
+        <iconify-icon icon="lucide:git-fork"></iconify-icon>
+        <strong class="js-repo-forks ml-1">0</strong>
+      </span>
+    </span>
+  </span>
+</a><div class="edit-this-page">
+  <a href="https://github.com/eze-root/dev_zero_to_hero/blob/main/source/2024-summer/2024-summer-day5.md">编辑此页面</a>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">Develop from Zero to Hero</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="readme.html"><span itemprop="name">7 Days for beginner</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Day5 Docker与Scrapy爬虫项目</strong>
+        <meta itemprop="position" content="3" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue dark-code" role="main">
+          <section class="tex2jax_ignore mathjax_ignore" id="day5-dockerscrapy">
+<h1>Day5 Docker与Scrapy爬虫项目<a class="headerlink" href="#day5-dockerscrapy" title="Link to this heading">¶</a></h1>
+<div class="sd-container-fluid sd-sphinx-override sd-p-0 sd-mt-2 sd-mb-4 sd-p-2 sd-outline-muted sd-rounded-1 docutils">
+<div class="sd-row sd-row-cols-2 sd-gx-2 sd-gy-1 docutils">
+<div class="sd-col sd-col-auto sd-d-flex-row sd-align-minor-center docutils">
+<a class="reference external image-reference" href="https://github.com/WinstonCHEN1/"><img alt="" class="sd-avatar-sm sd-outline-muted" src="https://avatars.githubusercontent.com/u/163944337" />
+</a>
+</div>
+<div class="sd-col sd-d-flex-row sd-align-minor-center docutils">
+<div class="sd-container-fluid sd-sphinx-override docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-3 sd-row-cols-md-3 sd-row-cols-lg-3 sd-gx-3 sd-gy-1 docutils">
+<div class="sd-col sd-col-auto sd-d-flex-row sd-align-minor-center docutils">
+<p class="sd-p-0 sd-m-0"><a class="reference external" href="https://github.com/WinstonCHEN1/">&#64;WinstonCHEN1</a></p>
+</div>
+<div class="sd-col sd-col-auto sd-d-flex-row sd-align-minor-center docutils">
+<p class="sd-p-0 sd-m-0"><span class="sd-pr-2"><svg version="1.1" width="16.0px" height="16.0px" class="sd-octicon sd-octicon-calendar" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.75 0a.75.75 0 0 1 .75.75V2h5V.75a.75.75 0 0 1 1.5 0V2h1.25c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25V3.75C1 2.784 1.784 2 2.75 2H4V.75A.75.75 0 0 1 4.75 0ZM2.5 7.5v6.75c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V7.5Zm10.75-4H2.75a.25.25 0 0 0-.25.25V6h11V3.75a.25.25 0 0 0-.25-.25Z"></path></svg></span>June, 30, 2024</p>
+</div>
+<div class="sd-col sd-col-auto sd-d-flex-row sd-align-minor-center docutils">
+<p class="sd-p-0 sd-m-0"><span class="sd-pr-2"><svg version="1.1" width="16.0px" height="16.0px" class="sd-octicon sd-octicon-clock" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Zm7-3.25v2.992l2.028.812a.75.75 0 0 1-.557 1.392l-2.5-1A.751.751 0 0 1 7 8.25v-3.5a.75.75 0 0 1 1.5 0Z"></path></svg></span>10 min read</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section id="docker">
+<h2>Docker<a class="headerlink" href="#docker" title="Link to this heading">¶</a></h2>
+<p>为了避免换了不同的设备你仍然需要配置相同的开发环境，程序员们集思广益开发了<strong>Docker</strong>，这是一种轻量级的虚拟化技术，主要为了实现一个目标：无论你是什么系统、什么设备，我们都能在虚拟层面上获得一个相同的开发环境，而且能很好的实现扩容迁移。此外，Docker比较安全，即使Docker崩了也不影响你本身的操作系统。</p>
+<p>当我们在服务器上遨游的时候，我们常常会遇到装一个东西需要<code class="docutils literal notranslate"><span class="pre">sudo</span></code>权限，这时候老师会说，root不能给，对于泛用的东西可以帮你装，但你自己的，差不多得了。Docker同样可以解决这个问题，使用虚拟环境。</p>
+<p>Docker默认装在<code class="docutils literal notranslate"><span class="pre">root</span></code>上，可以参考网上Docker的官方文档中Docker rootless有关的部分。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">dockerd</span><span class="o">-</span><span class="n">rootless</span><span class="o">-</span><span class="n">setuptool</span><span class="o">.</span><span class="n">sh</span> <span class="n">install</span>
+</span></pre></div>
+</div>
+<p>这时候，我们可以用最简单的一串代码感受以下Docker的工作流程：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">docker</span> <span class="n">run</span> <span class="n">hello</span><span class="o">-</span><span class="n">world</span>
+</span></pre></div>
+</div>
+<p>然后，Docker开始工作，从镜像库里拉取镜像，创造了一个新的容器，执行了一些操作，把这些输出推到了你现在看到的终端，大概是这样的：</p>
+<p><img alt="" src="https://files.mdnice.com/user/58281/2d5c6c50-6a6e-4e8d-94a3-3880a36c62b4.png" /></p>
+<p>使用<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span> <span class="pre">-it</span> <span class="pre">ubuntu</span> <span class="pre">bash</span></code>之后启动了容器，会发现你变成了<code class="docutils literal notranslate"><span class="pre">root</span></code>，因为你已经进入了这个容器了。</p>
+<ul class="simple">
+<li><p>查看当前正在运行的容器：<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">ps</span></code></p></li>
+<li><p>查看已安装的镜像:<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">image</span> <span class="pre">&lt;command&gt;</span></code>可以查看各种方法</p></li>
+</ul>
+<p>这里以mongoDB为例，docker安装MongoDB有两种办法：</p>
+<ul class="simple">
+<li><p>第一种 命令行直接安装</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">docker</span> <span class="n">pull</span> <span class="n">mongo</span><span class="p">:</span><span class="n">latest</span>
+</span></pre></div>
+</div>
+<ul class="simple">
+<li><p>第二种 docker desktop中搜索安装</p></li>
+</ul>
+<p><img alt="" src="https://files.mdnice.com/user/58281/d211480f-7e9d-4b65-a8b8-6d4b9bb9f135.png" /></p>
+<p>点pull安装。</p>
+<p>安装好之后，用以下命令启动mongo</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">d</span> <span class="o">-</span><span class="n">p</span> <span class="mi">27017</span><span class="p">:</span><span class="mi">27017</span> <span class="o">--</span><span class="n">name</span> <span class="n">my</span><span class="o">-</span><span class="n">mongo</span><span class="o">-</span><span class="n">container</span> <span class="n">mongo</span>
+</span></pre></div>
+</div>
+<ul class="simple">
+<li><p>-d: 后台运行容器。</p></li>
+<li><p>-p 27017:27017: 将主机的27017端口映射到容器的27017端口。</p></li>
+<li><p>–name my-mongo-container: 为容器指定一个名字，这里是my-mongo-container，你可以根据需要更改。</p></li>
+</ul>
+<p>用以下命令进入mongoDB容器的bash</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">docker</span> <span class="n">exec</span> <span class="o">-</span><span class="n">it</span> <span class="n">my</span><span class="o">-</span><span class="n">mongo</span><span class="o">-</span><span class="n">container</span> <span class="n">bash</span>
+</span></pre></div>
+</div>
+<p>进入bash之后，可以用这个命令连接mongodb</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">mongosh</span> <span class="o">--</span><span class="n">host</span> <span class="mf">127.0.0.1</span> <span class="o">--</span><span class="n">port</span> <span class="mi">27017</span>
+</span></pre></div>
+</div>
+<ul class="simple">
+<li><p>停止容器:<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">stop</span> <span class="pre">my-mongo-container</span></code></p></li>
+<li><p>删除容器:<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">rm</span> <span class="pre">my-mongo-container</span></code></p></li>
+</ul>
+</section>
+<section id="docker-compose">
+<h2>Docker compose<a class="headerlink" href="#docker-compose" title="Link to this heading">¶</a></h2>
+<p>我们可以通过docker compose很轻松的管理容器。</p>
+<p>比如，这是一个docker-compose.yml的示例程序</p>
+<p><img alt="" src="../_images/3c6a86aa-a990-4c10-88c2-9c0b1cca1e80.png" /></p>
+<p>这里注明了很多信息，比如容器的镜像服务，服务的细则。这里我拉取的是postgresql数据库的镜像，所以有管理员用户、密码等等。</p>
+<p>里面比较重要的是：</p>
+<ul class="simple">
+<li><p>port：映射关系，如5432：5432，将本地的5432端口映射到服务器的5432端口</p></li>
+<li><p>volumns：磁盘的映射，存到啥地方</p></li>
+</ul>
+<p>那么，现在写好了这个程序（<s>不会写也没关系，有AI和万能的搜索引擎嘛</s>），你就可以开始体验这个工具了。</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">compose</span> <span class="pre">up</span></code>让你的容器跑起来，当然，跑的是<code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code>的那个容器。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">compose</span> <span class="pre">up</span> <span class="pre">-d</span></code>可以让容器跑在后台。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">compose</span> <span class="pre">down</span></code>关闭容器。</p></li>
+</ul>
+<p>同样的，现在你可以使用<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">ps</span></code>看看这个新容器有没有成功运行起来了。</p>
+</section>
+<section id="scrapy">
+<h2>Scrapy爬虫<a class="headerlink" href="#scrapy" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p>从零开始，新建一个repo。</p></li>
+<li><p>克隆repo到本地，django初始化一下，要利用django进行储存。</p></li>
+<li><p>分析一下网页，比如说小红书就有很多的card。我们分析卡片内容大概是包在一个id叫做noteContainer的盒子里面。项目包括几个部分，note，用户，以及用户发的东西。用户对应profile，小红书号，IP地址，简介。</p></li>
+<li><p>设计数据库储存信息：</p>
+<ul class="simple">
+<li><p>用户url，CharField。对于url，让它做主键（唯一）,而且主键不能为空！！所以这里不需要设置为空，下面的要。</p></li>
+<li><p>用户ID，先观察下是不是所有的ID都是数字？这里关系到要设计成纯数字还是字符串。根据观察发现，可能也有字符，所以要设计成字符串。这里对于一般的爬虫信息来说设置两个属性，blank（允许数据为空）和null（允许数据库为空）都为True，防止报错。</p></li>
+<li><p>用户IP归属地，字符串。</p></li>
+<li><p>用户简介的描述，这里可以把Field属性设置成TextField。</p></li>
+<li><p>头像，储存成URLField。</p></li>
+<li><p>用户的名字。</p></li>
+<li><p>上次更新时间，可以设置成DateTimeField。这是一个好习惯，此外，顺便最好要取一个TextField的content保存整个网页。</p></li>
+</ul>
+</li>
+<li><p>做好了4这一步，记得django里面的settings设置一下用户等信息。然后<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">migrate</span></code>，然后创建超级用户管理员。这些在昨天的note中都有提到。到这一步为止，数据库就建好了，可以直接通过web端的admin往里塞数据，当然这样很蠢，所以要写爬虫抓数据了。</p></li>
+<li><p>装playwright：<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pytest-playwright</span></code></p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1">安装playwright，可以使用镜像，我这里全局都是清华镜像，下得很快。
+</span><span data-line="2">pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+</span><span data-line="3">python3 -m playwright codegen --help
+</span><span data-line="4">有反馈，说明playwright安装成功
+</span><span data-line="5">python3 -m playwright install
+</span></pre></div>
+</div>
+<p>装好了内核之后就可以codegen,启动这个内核，比如<code class="docutils literal notranslate"><span class="pre">playwright</span> <span class="pre">codegen</span> <span class="pre">https://www.baidu.com/</span></code></p>
+<ol class="arabic simple" start="7">
+<li><p>接下来可以愉快的开始编写爬虫了，可以去playwright的官网copy一份模板。分析网页，编写代码。工程化一点的话，可以用虚拟环境，可以写<code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>里面放所需依赖，以后就可以直接<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">requirements.txt</span></code>了。记得写版本！我们常用的库有<code class="docutils literal notranslate"><span class="pre">lxml,bs4,ipdb</span></code>（前提是同步）</p></li>
+</ol>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>回到顶部</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="2024-summer-day4.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>上一章</span><div class="title">Day4 SSH与Django</div></div>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2024, ezelab</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+<a href="https://github.com/eze-root/dev_zero_to_hero" aria-label="GitHub">
+  <iconify-icon icon="simple-icons:github"></iconify-icon>
+</a></div>
+    </div>
+  </div>
+</footer>
+      <script src="../_static/documentation_options.js?v=a1b8b494"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "eze-root/dev_zero_to_hero");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="../_static/shibuya.js?v=cac61aee"></script></body>
+</html>

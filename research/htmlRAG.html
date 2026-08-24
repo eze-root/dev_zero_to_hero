@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh" data-accent-color="blue" data-content_root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>HtmlRAG: HTML is Better Than Plain Text for Modeling Retrieved Knowledge in RAG Systems - Develop from Zero to Hero</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=44020203" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/source-sans@3.52.0/source-sans-3VF.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/course.css?v=cadc60c4" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="HtmlRAG: HTML is Better Than Plain Text for Modeling Retrieved Knowledge in RAG Systems"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../index.html">
+      
+      
+      <strong>Develop from Zero to Hero</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="搜索" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials">
+  <a href="https://github.com/eze-root/dev_zero_to_hero" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="切换到亮色模式"
+data-aria-light="切换到暗色模式"
+data-aria-dark="切换到自动模式">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="1"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Tutorial:</span></p>
+<ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../tutorial/git.html">Git for Teams</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../tutorial/os_mp_celery_scrapy.html">Scrapy + Celery + Multiprocessing</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Project:</span></p>
+<ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../engineer/sphinx_design.html">Sphinx_design</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Articles:</span></p>
+<ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../2024-summer/readme.html">7 Days for beginner</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day0.html">Day0 Markdown</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day1.html">Day1 Linux&#12289;VScode&#19982;Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day2.html">Day2 The Missing Semester of Your CS Education</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day3.html">Day3 Python &#24320;&#21457;&#29615;&#22659;&#25645;&#36733;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day4.html">Day4 SSH&#19982;Django</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day5.html">Day5 Docker&#19982;Scrapy&#29228;&#34411;&#39033;&#30446;</a></li>
+</ul>
+</li>
+</ul>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>该页内容</h3><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#methodology">Methodology</a></li>
+<li><a class="reference internal" href="#experiments-and-results">Experiments and Results</a></li>
+<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
+<li><a class="reference internal" href="#future-works">Future Works</a></li>
+</ul>
+</div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/eze-root/dev_zero_to_hero"
+  data-type="github" data-user="eze-root" data-repo="dev_zero_to_hero">
+  <span class="w-8 flex items-center justify-around shrink-0 text-3xl">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </span>
+  <span class="flex-grow px-2 break-all">
+    
+    
+      <span>dev_zero_to_hero</span>
+    
+    <span class="flex text-sm repo-stats-count">
+      <span class="flex items-center pr-3">
+        <iconify-icon icon="lucide:star"></iconify-icon>
+        <strong class="js-repo-stars ml-1">0</strong>
+      </span>
+      <span class="flex items-center">
+        <iconify-icon icon="lucide:git-fork"></iconify-icon>
+        <strong class="js-repo-forks ml-1">0</strong>
+      </span>
+    </span>
+  </span>
+</a><div class="edit-this-page">
+  <a href="https://github.com/eze-root/dev_zero_to_hero/blob/main/source/research/htmlRAG.md">编辑此页面</a>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">Develop from Zero to Hero</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">HtmlRAG: HTML is Better Than Plain Text for Modeling Retrieved Knowledge in RAG Systems</strong>
+        <meta itemprop="position" content="2" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue dark-code" role="main">
+          <section class="tex2jax_ignore mathjax_ignore" id="htmlrag-html-is-better-than-plain-text-for-modeling-retrieved-knowledge-in-rag-systems">
+<h1>HtmlRAG: HTML is Better Than Plain Text for Modeling Retrieved Knowledge in RAG Systems<a class="headerlink" href="#htmlrag-html-is-better-than-plain-text-for-modeling-retrieved-knowledge-in-rag-systems" title="Link to this heading">¶</a></h1>
+<p><a class="reference external" href="https://scholar.google.com/citations?user=qHzX-cMAAAAJ&amp;amp;hl=en&amp;amp;oi=sra">Jiejun Tan</a>, <a class="reference external" href="http://playbigdata.ruc.edu.cn/dou/">Zhicheng Dou</a>, Wen Wang, Mang Wang, Weipeng Chen, Ji-Rong We<br />
+<a class="reference external" href="https://arxiv.org/pdf/2411.02959">https://arxiv.org/pdf/2411.02959</a></p>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h2>
+<p>LLMs have demonstrated remarkable capabilities in natural language processing tasks. However, they often struggle with forgetting long-tailed knowledge, providing outdated information, and hallucination.</p>
+<div style="text-align:center">
+<img src="./imgs/HTMLRAG-2.png" width="500" style="text-align:center"/>  
+</div>
+RAG systems address these issues by incorporating external knowledge. Traditionally, RAG systems convert HTML to plain text, losing crucial structural and semantic information. This paper introduces HtmlRAG, a novel approach that utilizes HTML as the format for retrieved knowledge, preserving more information and improving RAG system performance.
+</section>
+<section id="methodology">
+<h2>Methodology<a class="headerlink" href="#methodology" title="Link to this heading">¶</a></h2>
+<p><img alt="HTML for RAG pipeline overview" src="research/imgs/HTMLRAG-1.png" />
+HtmlRAG tackles the challenge of excessive input length and noisy context in HTML documents. The methodology involves two main steps:</p>
+<p><strong>1. HTML Cleaning</strong></p>
+<p><img alt="" src="research/imgs/HTMLRAG-4.png" /></p>
+<ul class="simple">
+<li><p>Removes irrelevant content like CSS, JavaScript, and comments.</p></li>
+<li><p>Merges redundant HTML structures without losing semantic information.</p></li>
+</ul>
+<p>For example, simplify the following</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;&lt;</span><span class="nt">div</span><span class="p">&gt;&lt;</span><span class="nt">p</span><span class="p">&gt;</span>some  text<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></pre></div>
+</div>
+<p>as</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>some text<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></pre></div>
+</div>
+<p><strong>2. HTML Pruning</strong></p>
+<ul class="simple">
+<li><p><strong>Building a Block Tree</strong>: Transforms the DOM tree into a block tree for efficient pruning.</p></li>
+</ul>
+<div style="text-align:center">
+<img src="./imgs/HTMLRAG-5.png" width="400" style="text-align:center"/>  
+</div>
+Suppose we have the following documents:  
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span><span data-line="2"><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+</span><span data-line="3"><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+</span><span data-line="4">  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span data-line="5">    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Title<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+</span><span data-line="6">    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>This is a paragraph.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span><span data-line="7">    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>This is another paragraph.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span><span data-line="8">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span data-line="9">  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span data-line="10">    <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Subtitle<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+</span><span data-line="11">    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>This is a subparagraph.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span><span data-line="12">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span data-line="13"><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</span><span data-line="14"><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></pre></div>
+</div>
+<p>After the block tree is constructed, the block tree structure is as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">Block</span> <span class="mi">1</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">div</span><span class="o">&gt;&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">Title</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">paragraph</span><span class="o">.&lt;/</span><span class="n">p</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">This</span> <span class="ow">is</span> <span class="n">another</span> <span class="n">paragraph</span><span class="o">.&lt;/</span><span class="n">p</span><span class="o">&gt;&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+</span><span data-line="2"><span class="n">Block</span> <span class="mi">2</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">div</span><span class="o">&gt;&lt;</span><span class="n">h2</span><span class="o">&gt;</span><span class="n">Subtitle</span><span class="o">&lt;/</span><span class="n">h2</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">subparagraph</span><span class="o">.&lt;/</span><span class="n">p</span><span class="o">&gt;&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+</span></pre></div>
+</div>
+<p>The detailed pruning algorithm is as follows:</p>
+<a class="reference internal image-reference" href="research/imgs/HTMLRAG-3.png"><img alt="research/imgs/HTMLRAG-3.png" src="research/imgs/HTMLRAG-3.png" style="width: 380px;" />
+</a>
+<ul class="simple">
+<li><p><strong>Pruning Blocks based on Text Embedding</strong>: Removes blocks with low similarity to the user’s query.</p></li>
+</ul>
+<div style="text-align:center">
+<img src="./imgs/HTMLRAG-6.png" width="380" style="text-align:center"/>  
+</div>  
+<p>The approach involves extracting plain text from HTML blocks and calculating similarity scores with the user’s query using text embeddings. A greedy algorithm is applied to prune the block tree by removing low-similarity blocks, while preserving higher ones. The pruning continues until the total length of the HTML documents fits within the set context window. Afterward, redundant HTML structures are removed, and nested tags are merged and empty tags are eliminated.</p>
+<ul class="simple">
+<li><p><strong>Generative Fine-Grained Block Pruning</strong>: Further refines the block tree using a generative model.<br />
+<img alt="" src="research/imgs/HTMLRAG-7.png" /><br />
+The prompt for this step using a generative model is as follows:</p></li>
+</ul>
+<div style="text-align:center">
+<img src="./imgs/HTMLRAG-8.png" width="380" style="text-align:center"/>  
+</div>  
+To achieve finer granularity in block pruning, this paper expands the leaf nodes of the pruned block tree to obtain a finer-grained block tree. Given the limitations of embedding-based pruning, the paper proposes using a ** generative model **, as it can handle the entire block tree and is not limited to modeling one block at a time. However, directly processing the cleaned HTML (averaging 60K) with the generative model is impractical due to high computational costs. Inspired by CFIC, the paper uses a sequence of tags to identify a block, where the sequence starts from the root tag and ends at the block's tag, referred to as the "block path." During inference, the generative model calculates block scores based on the structure of the block tree.  
+</section>
+<section id="experiments-and-results">
+<h2>Experiments and Results<a class="headerlink" href="#experiments-and-results" title="Link to this heading">¶</a></h2>
+<p>HtmlRAG was tested on six QA datasets, including:</p>
+<ul class="simple">
+<li><p><strong>ASQA</strong>: a QA dataset consists of ambiguous questions that can be answered by multiple  answers supported by different knowledge sources;</p></li>
+<li><p><strong>HotpotQA</strong>: a QA dataset consists of multi-hop questions;</p></li>
+<li><p><strong>NQ</strong>:  A QA dataset containing real user’s queries collected by Google;</p></li>
+<li><p><strong>Trivia-QA</strong>: a QA dataset containing real user’s questions;</p></li>
+<li><p><strong>MuSiQue</strong>: A synthetic multi-hop QA dataset;</p></li>
+<li><p><strong>ELI5</strong>: A  long-form QA dataset with questions collected from Reddit forum.</p></li>
+</ul>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">¶</a></h2>
+<p>HtmlRAG demonstrates that using HTML as the format for retrieved knowledge in RAG systems is more effective than plain text. It retains richer semantics and structure, leading to improved performance. This work opens a new direction for research and provides a simple yet effective solution for processing HTML in RAG systems.</p>
+</section>
+<section id="future-works">
+<h2>Future Works<a class="headerlink" href="#future-works" title="Link to this heading">¶</a></h2>
+<p>As LLMs continue to evolve, HTML’s suitability as the format for external knowledge is expected to grow. Future work may develop better solutions for processing HTML in RAG systems, further enhancing the capabilities of LLMs.</p>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>回到顶部</span>
+</button><div class="navigation flex print:hidden"></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2024, ezelab</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+<a href="https://github.com/eze-root/dev_zero_to_hero" aria-label="GitHub">
+  <iconify-icon icon="simple-icons:github"></iconify-icon>
+</a></div>
+    </div>
+  </div>
+</footer>
+      <script src="../_static/documentation_options.js?v=a1b8b494"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "eze-root/dev_zero_to_hero");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="../_static/shibuya.js?v=cac61aee"></script></body>
+</html>
