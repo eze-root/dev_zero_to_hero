@@ -383,6 +383,191 @@ printf 'a 50 x\nb 150 y\nc 200 z\n'
 逐步解释本讲 SSH 日志管道中每个程序的输入、输出和作用。随后参考它的组合方式，从 `~/.bash_history` 或 `~/.zsh_history` 中统计自己最常使用的命令。
 ```
 
+## 参考解答
+
+```{solution} exercise-shell-environment
+:class: dropdown
+
+`echo "$SHELL"` 显示登录 Shell；`ps -p $$ -o comm=` 显示当前正在运行的 Shell。前者可能仍是 Bash，即使你当前临时进入了 Zsh，因此最好同时检查两条命令。
+```
+
+```{solution} exercise-ls-long-format
+:class: dropdown
+
+第一位表示类型：`-` 是普通文件，`d` 是目录，`l` 是符号链接。后九位每三位一组，依次是所有者、用户组和其他用户的 `rwx` 权限。随后通常是硬链接数、所有者、用户组、大小、修改时间和名称。
+```
+
+```{solution} exercise-shell-globs
+:class: dropdown
+
+`*.txt` 匹配任意长度前缀；`file?.txt` 中的 `?` 恰好匹配一个字符；`{a,b,c}.txt` 是 Shell 的花括号展开，先生成三个参数 `a.txt b.txt c.txt`，它本身不是路径匹配。
+```
+
+````{solution} exercise-shell-quoting
+:class: dropdown
+
+单引号中的内容完全按字面处理；双引号允许变量与命令替换；ANSI-C 引号 `$'...'` 还会解释 `\n` 等转义。示例：
+
+```bash
+printf '%s\n' $'$ !\n第二行'
+```
+````
+
+````{solution} exercise-standard-streams
+:class: dropdown
+
+```bash
+ls /nonexistent /tmp >out.txt 2>err.txt
+ls /nonexistent /tmp >all.txt 2>&1
+# Bash 也可写成：ls /nonexistent /tmp &>all.txt
+```
+
+`2>&1` 必须放在 `>all.txt` 之后，含义是让 stderr 指向“此刻 stdout 指向的位置”。
+````
+
+````{solution} exercise-exit-status
+:class: dropdown
+
+```bash
+[ -d /tmp/mydir ] || mkdir /tmp/mydir
+```
+
+实际脚本中通常直接使用可重复执行的 `mkdir -p /tmp/mydir`，还能避免检查与创建之间的竞态条件。
+````
+
+```{solution} exercise-cd-builtin
+:class: dropdown
+
+独立程序在子进程中运行，只能改变自己的工作目录；进程退出后父 Shell 的目录不会变化。`cd` 必须在 Shell 进程内执行，才能修改 Shell 后续命令所使用的工作目录。
+```
+
+````{solution} exercise-file-test
+:class: dropdown
+
+```bash
+#!/usr/bin/env bash
+set -u
+if [[ $# -ne 1 ]]; then
+  echo "用法：$0 FILE" >&2
+  exit 2
+elif [[ -f $1 ]]; then
+  echo "$1 是普通文件"
+else
+  echo "$1 不存在或不是普通文件" >&2
+  exit 1
+fi
+```
+````
+
+```{solution} exercise-executable-bit
+:class: dropdown
+
+`chmod +x check.sh` 为相应用户增加执行位。之后内核才允许通过 `./check.sh` 直接执行它，并依据 shebang 选择解释器。即使没有执行位，`bash check.sh` 仍可运行，因为被执行的是 `bash`，脚本只是它读取的数据文件。
+```
+
+```{solution} exercise-set-x
+:class: dropdown
+
+`set -x` 会在执行前把完成变量展开、命令替换后的命令写到 stderr，默认以 `+` 开头。它适合追踪分支与参数，但可能泄露口令、令牌等敏感值，不应在含秘密信息的日志中长期启用。
+```
+
+````{solution} exercise-dated-backup
+:class: dropdown
+
+```bash
+cp -- notes.txt "notes_$(date +%F).txt"
+```
+
+`--` 阻止以连字符开头的文件名被当作选项，双引号避免命令替换结果被再次分词。
+````
+
+````{solution} exercise-parameterize-script
+:class: dropdown
+
+把固定测试命令替换成 `"$@"`：
+
+```bash
+[[ $# -gt 0 ]] || { echo "用法：$0 COMMAND [ARG ...]" >&2; exit 2; }
+while "$@" >stdout.log 2>stderr.log; do
+  ((runs += 1))
+done
+```
+
+`$1` 只代表第一个参数；`"$@"` 会保留所有参数各自的边界，适合转发一整条命令。
+````
+
+````{solution} exercise-common-extensions
+:class: dropdown
+
+一种近似统计方法如下；没有扩展名的文件会被忽略：
+
+```bash
+find "$HOME" -type f -printf '%f\n' 2>/dev/null \
+  | awk -F. 'NF>1 {print "." $NF}' \
+  | sort | uniq -c | sort -nr | head -5
+```
+
+macOS 的 BSD `find` 没有 `-printf`，可改用 `find ... -print` 后再由 `awk` 去掉目录部分。
+````
+
+````{solution} exercise-find-xargs
+:class: dropdown
+
+```bash
+find . -type f -name '*.sh' -print0 | xargs -0 -r wc -l
+```
+
+NUL 字符是 Unix 文件名中不能出现的字符，所以 `-print0`/`-0` 比按换行拆分更可靠。BSD `xargs` 没有 `-r`，可省略它。
+````
+
+````{solution} exercise-curl-grep
+:class: dropdown
+
+```bash
+curl -fsSL https://missing.csail.mit.edu/ \
+  | grep -oE '/2026/[^"/]+' | sort -u | wc -l
+```
+
+HTML 结构会变化，因此结果应与课程主页人工核对；2026 年课程目录共有 9 讲。更稳妥的抓取应使用 HTML 解析器，而不是把正则表达式当作通用 HTML 解析器。
+````
+
+````{solution} exercise-jq-json
+:class: dropdown
+
+```bash
+curl -fsSL https://microsoftedge.github.io/Demos/json-dummy-data/64KB.json \
+  | jq -r '.[] | select(.version > 6) | .name'
+```
+
+`-r` 输出未加 JSON 引号的原始字符串。
+````
+
+````{solution} exercise-awk-columns
+:class: dropdown
+
+```bash
+printf 'a 50 x\nb 150 y\nc 200 z\n' \
+  | awk '$2 > 100 {tmp=$1; $1=$3; $3=tmp; print}'
+```
+
+输出为 `y 150 b` 和 `z 200 c`。
+````
+
+````{solution} exercise-shell-pipeline
+:class: dropdown
+
+远端 `journalctl` 读取上一轮启动的 SSH 日志，`grep` 保留断开连接行；本地 `sed` 提取用户名，第一次 `sort | uniq -c` 计数，第二次 `sort` 按次数排序，`tail` 取最高的十项，`awk` 取用户名，`paste` 合并为逗号分隔的一行。
+
+Bash 的历史统计可以写成：
+
+```bash
+history | awk '{$1=""; print substr($0,2)}' \
+  | sort | uniq -c | sort -nr | head -10
+```
+
+Zsh 使用 `history 1`，且历史文件的具体格式可能受配置影响。
+````
+
 ## 许可与署名
 
 本页依据 MIT Missing Semester 2026 第一讲[官方 notes](https://missing.csail.mit.edu/2026/course-shell/)整理。原课程由 Anish Athalye、Jon Gjengset 和 Jose Javier Gonzalez Ortiz 共同讲授，材料采用 [CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可。
