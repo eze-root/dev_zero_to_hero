@@ -35,3 +35,12 @@ Tutorial
    :caption: Tutorial:
 
    tutorial/git.md
+
+有趣的项目
+----------
+
+.. toctree::
+   :maxdepth: 2
+   :caption: 有趣的项目:
+
+   engineer/sphinx_design

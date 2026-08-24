@@ -11,3 +11,4 @@
    2024-summer-day3
    2024-summer-day4
    2024-summer-day5
+   ../tutorial/os_mp_celery_scrapy
