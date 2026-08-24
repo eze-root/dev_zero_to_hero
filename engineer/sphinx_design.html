@@ -2,7 +2,7 @@
 <html lang="zh" data-accent-color="tomato" data-content_root="../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Github使用指南 - Develop from Zero to Hero</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Sphinx_design - Develop from Zero to Hero</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="prev" title="Git for Teams" href="../tutorial/git.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
@@ -23,7 +23,7 @@
   --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
 }
 </style>
-    <meta property="og:type" content="website"/><meta property="og:title" content="Github使用指南"/>
+    <meta property="og:type" content="website"/><meta property="og:title" content="Sphinx_design"/>
     <meta name="twitter:card" content="summary"/>
   </head>
 <body><div class="sy-head">
@@ -87,17 +87,17 @@ data-aria-dark="切换到自动模式">
 <li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day3.html">Day3 Python &#24320;&#21457;&#29615;&#22659;&#25645;&#36733;</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day4.html">Day4 SSH&#19982;Django</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day5.html">Day5 Docker&#19982;Scrapy&#29228;&#34411;&#39033;&#30446;</a></li>
-<li class="toctree-l2"><a class="reference internal" href="os_mp_celery_scrapy.html">Scrapy + Celery + Multiprocessing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/os_mp_celery_scrapy.html">Scrapy + Celery + Multiprocessing</a></li>
 </ul>
 </li>
 </ul>
 <p class="caption" role="heading" aria-level="3"><span class="caption-text">Tutorial:</span></p>
 <ul>
-<li class="toctree-l1 _expand"><a class="reference internal" href="git.html">Git for Teams</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../tutorial/git.html">Git for Teams</a></li>
 </ul>
 <p class="caption" role="heading" aria-level="3"><span class="caption-text">&#26377;&#36259;&#30340;&#39033;&#30446;:</span></p>
-<ul>
-<li class="toctree-l1 _expand"><a class="reference internal" href="../engineer/sphinx_design.html">Sphinx_design</a></li>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Sphinx_design</a></li>
 </ul>
         </div>
       </div>
@@ -109,8 +109,10 @@ data-aria-dark="切换到自动模式">
       <i class="i-lucide close"></i>
     </button>
     <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>该页内容</h3><ul>
-<li><a class="reference internal" href="#id1">&#36134;&#21495;&#19982;&#39564;&#35777;</a><ul>
-<li><a class="reference internal" href="#api">&#35774;&#32622;API</a></li>
+<li><a class="reference internal" href="#information">Information</a></li>
+<li><a class="reference internal" href="#my-recommendation">My Recommendation</a><ul>
+<li><a class="reference internal" href="#reason">Reason</a></li>
+<li><a class="reference internal" href="#inspiration">Inspiration</a></li>
 </ul>
 </li>
 </ul>
@@ -136,7 +138,7 @@ data-aria-dark="切换到自动模式">
     </span>
   </span>
 </a><div class="edit-this-page">
-  <a href="https://github.com/eze-root/dev_zero_to_hero/blob/main/source/tutorial/github.md">编辑此页面</a>
+  <a href="https://github.com/eze-root/dev_zero_to_hero/blob/main/source/engineer/sphinx_design.md">编辑此页面</a>
 </div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
   </aside>
   <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
@@ -153,7 +155,7 @@ data-aria-dark="切换到自动模式">
         <span>/</span>
         <meta itemprop="position" content="1" />
       </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <strong itemprop="name">Github使用指南</strong>
+        <strong itemprop="name">Sphinx_design</strong>
         <meta itemprop="position" content="2" />
       </li></ol>
     <div class="xl:hidden ml-1">
@@ -166,17 +168,29 @@ data-aria-dark="切换到自动模式">
 </div><div class="flex flex-col break-words justify-between">
       <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
   <article class="yue dark-code" role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="github">
-<h1>Github使用指南<a class="headerlink" href="#github" title="Link to this heading">¶</a></h1>
-<section id="id1">
-<h2>账号与验证<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
-<section id="api">
-<h3>设置API<a class="headerlink" href="#api" title="Link to this heading">¶</a></h3>
-<p>在使用了一段时间后，使用账号和密码进行git操作可能会出现一下的错误。</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">remote</span><span class="p">:</span> <span class="n">Support</span> <span class="k">for</span> <span class="n">password</span> <span class="n">authentication</span> <span class="n">was</span> <span class="n">removed</span> <span class="n">on</span> <span class="n">August</span> <span class="mi">13</span><span class="p">,</span> <span class="mf">2021.</span>
-</span><span data-line="2"><span class="n">remote</span><span class="p">:</span> <span class="n">Please</span> <span class="n">see</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">get</span><span class="o">-</span><span class="n">started</span><span class="o">/</span><span class="n">getting</span><span class="o">-</span><span class="n">started</span><span class="o">-</span><span class="k">with</span><span class="o">-</span><span class="n">git</span><span class="o">/</span><span class="n">about</span><span class="o">-</span><span class="n">remote</span><span class="o">-</span><span class="n">repositories</span><span class="c1">#cloning-with-https-urls for information on currently recommended modes of authentication.</span>
-</span></pre></div>
-</div>
+          <section class="tex2jax_ignore mathjax_ignore" id="sphinx-design">
+<h1>Sphinx_design<a class="headerlink" href="#sphinx-design" title="Link to this heading">¶</a></h1>
+<section id="information">
+<h2>Information<a class="headerlink" href="#information" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Link: <a class="reference external" href="https://github.com/executablebooks/sphinx-design">Github</a></p></li>
+<li><p>Language: Python</p></li>
+<li><p>LICENSE: MIT License</p></li>
+<li><p>Documentation: <a class="reference external" href="https://sphinx-design.readthedocs.io/en/furo-theme/">https://sphinx-design.readthedocs.io/en/furo-theme/</a></p></li>
+<li><p>Test: <a class="reference external" href="https://github.com/executablebooks/sphinx-design/tree/main/tests">https://github.com/executablebooks/sphinx-design/tree/main/tests</a></p></li>
+</ul>
+</section>
+<section id="my-recommendation">
+<h2>My Recommendation<a class="headerlink" href="#my-recommendation" title="Link to this heading">¶</a></h2>
+<section id="reason">
+<h3>Reason<a class="headerlink" href="#reason" title="Link to this heading">¶</a></h3>
+<p>First, I am widely using this project to build my markdown (and reStructureText) documentation/blog.</p>
+</section>
+<section id="inspiration">
+<h3>Inspiration<a class="headerlink" href="#inspiration" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Try to use emoji 🚀 in git commit message</p></li>
+</ol>
 </section>
 </section>
 </section>
@@ -186,7 +200,13 @@ data-aria-dark="切换到自动模式">
     <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
   </svg>
   <span>回到顶部</span>
-</button><div class="navigation flex print:hidden"></div></div>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="../tutorial/git.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>上一章</span><div class="title">Git for Teams</div></div>
+    </a>
+  </div></div></div>
     </div>
   </main>
 </div>

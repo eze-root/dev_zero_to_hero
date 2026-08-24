@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh" data-accent-color="tomato" data-content_root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Scrapy + Celery + Multiprocessing - Develop from Zero to Hero</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="Git for Teams" href="git.html" /><link rel="prev" title="Day5 Docker与Scrapy爬虫项目" href="../2024-summer/2024-summer-day5.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=44020203" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/source-sans@3.52.0/source-sans-3VF.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/course.css?v=1bccc19b" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="Scrapy + Celery + Multiprocessing"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../index.html">
+      
+      
+      <strong>Develop from Zero to Hero</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="搜索" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials">
+  <a href="https://github.com/eze-root/dev_zero_to_hero" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="切换到亮色模式"
+data-aria-light="切换到暗色模式"
+data-aria-dark="切换到自动模式">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="1"><p class="caption" role="heading" aria-level="3"><span class="caption-text">&#35745;&#31639;&#26426;&#25945;&#32946;&#20013;&#32570;&#22833;&#30340;&#19968;&#35838;:</span></p>
+<ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../missing-semester/index.html">&#35745;&#31639;&#26426;&#25945;&#32946;&#20013;&#32570;&#22833;&#30340;&#19968;&#35838;</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../missing-semester/course-shell.html">&#31532;&#19968;&#35762;&#65306;&#35838;&#31243;&#27010;&#35272;&#19982; Shell &#20837;&#38376;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../missing-semester/command-line-environment.html">&#31532;&#20108;&#35762;&#65306;&#21629;&#20196;&#34892;&#29615;&#22659;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../missing-semester/development-environment.html">&#31532;&#19977;&#35762;&#65306;&#24320;&#21457;&#29615;&#22659;&#19982;&#24037;&#20855;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../missing-semester/debugging-profiling.html">&#31532;&#22235;&#35762;&#65306;&#35843;&#35797;&#19982;&#24615;&#33021;&#20998;&#26512;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../missing-semester/version-control.html">&#31532;&#20116;&#35762;&#65306;&#29256;&#26412;&#25511;&#21046;&#19982; Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../missing-semester/shipping-code.html">&#31532;&#20845;&#35762;&#65306;&#25171;&#21253;&#19982;&#20132;&#20184;&#20195;&#30721;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../missing-semester/agentic-coding.html">&#31532;&#19971;&#35762;&#65306;&#26234;&#33021;&#20307;&#32534;&#31243;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../missing-semester/beyond-code.html">&#31532;&#20843;&#35762;&#65306;&#20195;&#30721;&#20043;&#22806;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../missing-semester/code-quality.html">&#31532;&#20061;&#35762;&#65306;&#20195;&#30721;&#36136;&#37327;</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">2024 &#22799;&#22825;&#30340; 7 &#22825;&#22521;&#35757;:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../2024-summer/readme.html">2024 &#22799;&#22825;&#30340; 7 &#22825;&#22521;&#35757;</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day0.html">Day0 Markdown</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day1.html">Day1 Linux&#12289;VScode&#19982;Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day2.html">Day2 The Missing Semester of Your CS Education</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day3.html">Day3 Python &#24320;&#21457;&#29615;&#22659;&#25645;&#36733;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day4.html">Day4 SSH&#19982;Django</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day5.html">Day5 Docker&#19982;Scrapy&#29228;&#34411;&#39033;&#30446;</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Scrapy + Celery + Multiprocessing</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Tutorial:</span></p>
+<ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="git.html">Git for Teams</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">&#26377;&#36259;&#30340;&#39033;&#30446;:</span></p>
+<ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../engineer/sphinx_design.html">Sphinx_design</a></li>
+</ul>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>该页内容</h3><ul>
+<li><a class="reference internal" href="#backgrounds">Backgrounds</a></li>
+<li><a class="reference internal" href="#scrapy-run-spider">Scrapy Run Spider</a></li>
+<li><a class="reference internal" href="#celery">Celery</a></li>
+<li><a class="reference internal" href="#celery-multiprocessing">Celery + Multiprocessing</a><ul>
+<li><a class="reference internal" href="#multiprocessing">1. &#20351;&#29992; <cite>multiprocessing</cite></a></li>
+<li><a class="reference internal" href="#billiard">2. &#20351;&#29992; <cite>billiard</cite></a></li>
+<li><a class="reference internal" href="#subprocess">3. &#20351;&#29992; <cite>subprocess</cite></a></li>
+<li><a class="reference internal" href="#spawn">4. &#20351;&#29992; <cite>spawn</cite></a></li>
+<li><a class="reference internal" href="#processexecutor">5. &#20351;&#29992; <cite>ProcessExecutor</cite></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id5">&#24635;&#32467;</a></li>
+</ul>
+</div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/eze-root/dev_zero_to_hero"
+  data-type="github" data-user="eze-root" data-repo="dev_zero_to_hero">
+  <span class="w-8 flex items-center justify-around shrink-0 text-3xl">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </span>
+  <span class="flex-grow px-2 break-all">
+    
+    
+      <span>dev_zero_to_hero</span>
+    
+    <span class="flex text-sm repo-stats-count">
+      <span class="flex items-center pr-3">
+        <iconify-icon icon="lucide:star"></iconify-icon>
+        <strong class="js-repo-stars ml-1">0</strong>
+      </span>
+      <span class="flex items-center">
+        <iconify-icon icon="lucide:git-fork"></iconify-icon>
+        <strong class="js-repo-forks ml-1">0</strong>
+      </span>
+    </span>
+  </span>
+</a><div class="edit-this-page">
+  <a href="https://github.com/eze-root/dev_zero_to_hero/blob/main/source/tutorial/os_mp_celery_scrapy.rst">编辑此页面</a>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">Develop from Zero to Hero</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../2024-summer/readme.html"><span itemprop="name">2024 夏天的 7 天培训</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Scrapy + Celery + Multiprocessing</strong>
+        <meta itemprop="position" content="3" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue dark-code" role="main">
+          <section id="scrapy-celery-multiprocessing">
+<h1>Scrapy + Celery + Multiprocessing<a class="headerlink" href="#scrapy-celery-multiprocessing" title="Link to this heading">¶</a></h1>
+<div class="sd-container-fluid sd-sphinx-override sd-p-0 sd-mt-2 sd-mb-4 sd-p-2 sd-outline-muted sd-rounded-1 docutils">
+<div class="sd-row sd-row-cols-2 sd-gx-2 sd-gy-1 docutils">
+<div class="sd-col sd-col-auto sd-d-flex-row sd-align-minor-center docutils">
+<a class="reference external image-reference" href="https://github.com/eze-root"><img alt="" class="sd-avatar-sm sd-outline-muted" src="https://avatars.githubusercontent.com/u/154419224" />
+</a>
+</div>
+<div class="sd-col sd-d-flex-row sd-align-minor-center docutils">
+<div class="sd-container-fluid sd-sphinx-override docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-3 sd-row-cols-md-3 sd-row-cols-lg-3 sd-gx-3 sd-gy-1 docutils">
+<div class="sd-col sd-col-auto sd-d-flex-row sd-align-minor-center docutils">
+<p class="sd-p-0 sd-m-0"><a class="reference external" href="https://github.com/eze-root">&#64;eze-root</a></p>
+</div>
+<div class="sd-col sd-col-auto sd-d-flex-row sd-align-minor-center docutils">
+<p class="sd-p-0 sd-m-0"><span class="sd-pr-2"><svg version="1.1" width="16.0px" height="16.0px" class="sd-octicon sd-octicon-calendar" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.75 0a.75.75 0 0 1 .75.75V2h5V.75a.75.75 0 0 1 1.5 0V2h1.25c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25V3.75C1 2.784 1.784 2 2.75 2H4V.75A.75.75 0 0 1 4.75 0ZM2.5 7.5v6.75c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V7.5Zm10.75-4H2.75a.25.25 0 0 0-.25.25V6h11V3.75a.25.25 0 0 0-.25-.25Z"></path></svg></span>2024-11-27</p>
+</div>
+<div class="sd-col sd-col-auto sd-d-flex-row sd-align-minor-center docutils">
+<p class="sd-p-0 sd-m-0"><span class="sd-pr-2"><svg version="1.1" width="16.0px" height="16.0px" class="sd-octicon sd-octicon-clock" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Zm7-3.25v2.992l2.028.812a.75.75 0 0 1-.557 1.392l-2.5-1A.751.751 0 0 1 7 8.25v-3.5a.75.75 0 0 1 1.5 0Z"></path></svg></span>25 min read</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section id="backgrounds">
+<h2>Backgrounds<a class="headerlink" href="#backgrounds" title="Link to this heading">¶</a></h2>
+<p>首先说明一下本博文需要解决问题，要使用scrapy + celery 来实现定期对多个爬虫的运行问题。</p>
+<p>当然，上述的运行，通过 <a class="reference external" href="https://github.com/celery/django-celery-beat">django-celery-beat</a> 和 <a class="reference external" href="https://django-celery-results.readthedocs.io/en/latest/">django-celery-results</a> 可以用 django的web页面进行管理，比较方便。</p>
+<p>假设现在有spider1, spider2 两个爬虫，可以通过</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">scrapy<span class="w"> </span>crawl<span class="w"> </span>spider1
+</span><span data-line="2">scrapy<span class="w"> </span>crawl<span class="w"> </span>spider2
+</span></pre></div>
+</div>
+<p>实现调用，并且成功运行，接下来需要解决的问题是将上述的调用嵌入celery中。</p>
+<p>需要完成函数</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nd">@shared_task</span>
+</span><span data-line="2"><span class="k">def</span><span class="w"> </span><span class="nf">run_my_spider</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span><span data-line="3">    <span class="n">name</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;spider_name&#39;</span><span class="p">]</span>
+</span><span data-line="4">
+</span><span data-line="5">    <span class="c1"># Here, we need to implement calling a process for crawling</span>
+</span></pre></div>
+</div>
+</section>
+<section id="scrapy-run-spider">
+<h2>Scrapy Run Spider<a class="headerlink" href="#scrapy-run-spider" title="Link to this heading">¶</a></h2>
+<p>关于 <code class="docutils literal notranslate"><span class="pre">Scrapy</span></code>, 启动一个爬虫的方式通常包括:</p>
+<ol class="arabic simple">
+<li><p>使用命令行 <code class="code docutils literal notranslate"><span class="pre">scrapy</span> <span class="pre">crawl</span> <span class="pre">xxx</span></code>, 其中 <code class="code docutils literal notranslate"><span class="pre">xxx</span></code>是爬虫的名字。</p></li>
+<li><p>使用 <code class="code docutils literal notranslate"><span class="pre">CrawlerProcess</span></code>或者 <code class="code docutils literal notranslate"><span class="pre">CrawlerRunner</span></code>, 详细的代码请查看 <a class="reference internal" href="#common-practices-in-scrapy" id="id1"><span>[Common-Practices-in-Scrapy]</span></a></p></li>
+</ol>
+<p>特别的，如果想要更多的了解 <a class="reference external" href="https://docs.scrapy.org/en/latest/topics/api.html#scrapy.crawler.CrawlerRunner">CrawlerRunner</a> 和 <a class="reference external" href="https://docs.scrapy.org/en/2.11/topics/api.html#scrapy.crawler.CrawlerProcess">CrawlerProcess</a> , 请阅读 <a class="reference external" href="https://docs.scrapy.org/en/latest/topics/api.html">CoreAPI</a> ，值得一提的是，正如文档说的, <em>Scrapy is built on top of the Twisted asynchronous networking library, so you need to run it inside the Twisted reactor</em>。 这意味着在进行多个爬虫的并发过程中，可能出现各种关于 <code class="code docutils literal notranslate"><span class="pre">ReactorNotRestartable</span></code>、 <code class="code docutils literal notranslate"><span class="pre">ReactorAlreadyInstalledError</span></code>等问题。</p>
+<p>网上有许多的讨论关于最终使用什么样的方案来处理, 有的帖子提到最好在一个线程里面用单个的reactor来进行，有的认为使用多进程处理。
+虽然官方也给出了日常中的 <a class="reference internal" href="#common-practices-in-scrapy" id="id2"><span>[Common-Practices-in-Scrapy]</span></a> 来给出解决方案，例如 <a class="reference external" href="https://docs.scrapy.org/en/2.11/topics/practices.html#running-multiple-spiders-in-the-same-process">Running multiple spiders in the same proces</a> 。
+但是当在Scrapy引入 Celery后，这个方案失效。</p>
+<p>此外，在Celery中使用多进程仍然可能出现问题, <a class="reference external" href="https://github.com/celery/celery/issues/4525">daemonic processes are not allowed to have children</a> 。
+其中，有开发者提到，<cite>The default pool option of Celery is &quot;prefork&quot;, which doesn't support multiprocessing</cite>。因此在这一方面处理需要更多的注意, 需要将Celery切换到 <cite>thread</cite> 。所以本次博文想要描述一下问题和解决过程。</p>
+</section>
+<section id="celery">
+<h2>Celery<a class="headerlink" href="#celery" title="Link to this heading">¶</a></h2>
+<p>使用Django配合Celery，配合 <code class="code docutils literal notranslate"><span class="pre">django-celery-beat</span></code>和 <code class="code docutils literal notranslate"><span class="pre">django-celery-results</span></code>, 可以很好的实现爬虫任务的周期运行。</p>
+<p>具体的配置包括:</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-0">
+Python Install</label><div class="sd-tab-content docutils">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">pip<span class="w"> </span>install<span class="w"> </span>redis<span class="w"> </span>django-celery-beat<span class="w"> </span>django-celery-results
+</span></pre></div>
+</div>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-1">
+docker-compose.yml</label><div class="sd-tab-content docutils">
+<div class="highlight-docker-compose.yml notranslate"><div class="highlight"><pre><span></span><span data-line="1">services:
+</span><span data-line="2">  redis:
+</span><span data-line="3">      image: redis:alpine
+</span><span data-line="4">      restart: always
+</span><span data-line="5">
+</span><span data-line="6">  web:
+</span><span data-line="7">    build:
+</span><span data-line="8">      context: .
+</span><span data-line="9">      dockerfile: Dockerfile
+</span><span data-line="10">    image: xxx_system
+</span><span data-line="11">    command: python3 run_aiohttp.py
+</span><span data-line="12">    volumes:
+</span><span data-line="13">      - ./:/code
+</span><span data-line="14">      - ./logs:/logs
+</span><span data-line="15">    working_dir: /code
+</span><span data-line="16">    tty: true
+</span><span data-line="17">
+</span><span data-line="18">  celery_worker:
+</span><span data-line="19">    image: xxx_system
+</span><span data-line="20">    command: &#39;celery -A xxx_system worker -l info&#39;
+</span><span data-line="21">    volumes:
+</span><span data-line="22">      - ./:/code
+</span><span data-line="23">      - ./logs:/logs
+</span><span data-line="24">    working_dir: /code
+</span><span data-line="25">    depends_on:
+</span><span data-line="26">      - redis
+</span><span data-line="27">      - web
+</span><span data-line="28">
+</span><span data-line="29">  celery_beat:
+</span><span data-line="30">    image: xxx_system
+</span><span data-line="31">    command: &#39;celery -A xxx_system beat -l info&#39;
+</span><span data-line="32">    volumes:
+</span><span data-line="33">      - ./:/code
+</span><span data-line="34">      - ./logs:/logs
+</span><span data-line="35">    working_dir: /code
+</span><span data-line="36">    depends_on:
+</span><span data-line="37">      - redis
+</span><span data-line="38">      - web
+</span></pre></div>
+</div>
+</div>
+<input id="sd-tab-item-2" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-2">
+celery.py</label><div class="sd-tab-content docutils">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">import<span class="w"> </span>os
+</span><span data-line="2">
+</span><span data-line="3">from<span class="w"> </span>celery<span class="w"> </span>import<span class="w"> </span>Celery
+</span><span data-line="4">
+</span><span data-line="5"><span class="c1"># set the default Django settings module for the &#39;celery&#39; program.</span>
+</span><span data-line="6">os.environ.setdefault<span class="o">(</span><span class="s2">&quot;DJANGO_SETTINGS_MODULE&quot;</span>,<span class="w"> </span><span class="s2">&quot;xxx_system.settings&quot;</span><span class="o">)</span>
+</span><span data-line="7">
+</span><span data-line="8"><span class="nv">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Celery<span class="o">(</span><span class="s2">&quot;xxx_system&quot;</span><span class="o">)</span>
+</span><span data-line="9">
+</span><span data-line="10"><span class="c1"># Using a string here means the worker doesn&#39;t have to serialize</span>
+</span><span data-line="11"><span class="c1"># the configuration object to child processes.</span>
+</span><span data-line="12"><span class="c1"># - namespace=&#39;CELERY&#39; means all celery-related configuration keys</span>
+</span><span data-line="13"><span class="c1">#   should have a `CELERY_` prefix.</span>
+</span><span data-line="14">app.config_from_object<span class="o">(</span><span class="s2">&quot;django.conf:settings&quot;</span>,<span class="w"> </span><span class="nv">namespace</span><span class="o">=</span><span class="s2">&quot;CELERY&quot;</span><span class="o">)</span>
+</span><span data-line="15">
+</span><span data-line="16"><span class="c1"># Load task modules from all registered Django app configs.</span>
+</span><span data-line="17">app.autodiscover_tasks<span class="o">()</span>
+</span></pre></div>
+</div>
+</div>
+</div>
+<p>然后编写 <code class="code docutils literal notranslate"><span class="pre">tasks.py</span></code>即可得到 celery 的运行函数，但是如果同时运行多个爬虫，很容易报错。</p>
+<p>相关的解决方案使用 crochet 参考资料如下：</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.cnblogs.com/WalkOnMars/p/11934535.html">解决django或者其他线程中调用scrapy报ReactorNotRestartable的错误</a></p></li>
+<li><p><a class="reference external" href="https://stackoverflow.com/questions/50140887/django-celery-scrappy-error-twisted-internet-error-reactornotrestartable">Django Celery Scrappy ERROR: twisted.internet.error.ReactorNotRestartable</a></p></li>
+</ul>
+<p>这里提到的核心solutions是:</p>
+<ol class="arabic simple">
+<li><p>pip install crochet</p></li>
+<li><p>import from crochet import setup</p></li>
+<li><p>setup() - at the top of the file</p></li>
+<li><p>remove 2 lines:</p></li>
+</ol>
+<blockquote>
+<div><p>d.addBoth(lambda _: reactor.stop())</p>
+<p>reactor.run()</p>
+</div></blockquote>
+<p>原理是：因为CrawlerProcess自带reactor的启动关闭过程，而这个过程是在其他线程中发生的，</p>
+<p>所以重复运行会报 <code class="code docutils literal notranslate"><span class="pre">ReactorNotRestartable、ReactorNotRestartable、ReactorNotRunning</span></code> 等一系列问题。使用 <cite>crochet</cite> 可以嵌套使用 <cite>twisted</cite> 线程。</p>
+<p>但是这个方案，需要配合将celery变为基于 <cite>threads</cite>, 即</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">celery</span> <span class="o">-</span><span class="n">A</span> <span class="n">xxx_system</span> <span class="n">worker</span> <span class="o">-</span><span class="n">P</span> <span class="n">threads</span> <span class="o">-</span><span class="n">l</span> <span class="n">info</span>
+</span></pre></div>
+</div>
+<p>另外一个方法也是一些资料提到的使用多进程的方式。在尝试了多个操作后，目前得到了相对较有的方案。记录自己的尝试如下：</p>
+</section>
+<section id="celery-multiprocessing">
+<h2>Celery + Multiprocessing<a class="headerlink" href="#celery-multiprocessing" title="Link to this heading">¶</a></h2>
+<section id="multiprocessing">
+<h3>1. 使用 <cite>multiprocessing</cite><a class="headerlink" href="#multiprocessing" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">multiprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Process</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="k">def</span><span class="w"> </span><span class="nf">run_spider_process</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+</span><span data-line="4">    <span class="n">settings</span> <span class="o">=</span> <span class="n">get_project_settings</span><span class="p">()</span>
+</span><span data-line="5">    <span class="n">process</span> <span class="o">=</span> <span class="n">CrawlerProcess</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
+</span><span data-line="6">    <span class="n">crawler</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">create_crawler</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</span><span data-line="7">    <span class="n">process</span><span class="o">.</span><span class="n">crawl</span><span class="p">(</span><span class="n">crawler</span><span class="p">)</span>
+</span><span data-line="8">    <span class="n">process</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</span><span data-line="9">    <span class="n">stats_dict</span> <span class="o">=</span> <span class="n">crawler</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">get_stats</span><span class="p">()</span>
+</span><span data-line="10">    <span class="k">return</span> <span class="n">stats_dict</span>
+</span><span data-line="11">
+</span><span data-line="12"><span class="nd">@shared_task</span>
+</span><span data-line="13"><span class="k">def</span><span class="w"> </span><span class="nf">run_my_spider</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span><span data-line="14">    <span class="n">name</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;spider_name&#39;</span><span class="p">]</span>
+</span><span data-line="15">    <span class="n">process</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">run_spider_process</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="p">))</span>
+</span><span data-line="16">    <span class="n">process</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</span><span data-line="17">    <span class="n">process</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</span></pre></div>
+</div>
+<p>但是这个还是会报错，<cite>twisted.internet.error.ReactorAlreadyRunning</cite>。
+询问了ChatGPT, 结论是：</p>
+<blockquote>
+<div><p>您遇到的 twisted.internet.error.ReactorAlreadyRunning 错误是由于 Twisted 的 Reactor 已经在主进程中运行，而在子进程中尝试再次启动它导致的。Twisted 的 Reactor 设计为每个进程中只能有一个实例运行，因此在使用 multiprocessing 时需要特别注意。
+确保将 multiprocessing.set_start_method('spawn') 放在 if __name__ == '__main__': 块内，以避免在子进程中重复设置启动方式。</p>
+</div></blockquote>
+<p>然后文章提到多个解决方案，特别是使用multiprocessing的情况下，需要修改默认的启动方式：</p>
+<blockquote>
+<div><p>默认情况下，multiprocessing 在某些操作系统（如 Unix）上使用 'fork' 启动方式，这会导致子进程继承父进程的资源，包括 Reactor 的状态。通过将启动方式更改为 'spawn'，可以确保子进程从一个全新的状态开始，不会继承 Reactor 的状态。</p>
+</div></blockquote>
+<p>关于 <cite>spawn</cite> 和 <cite>fork</cite> 的详细说明，请查看 <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#contexts-and-start-methods">contexts-and-start-methods</a> 这里面的文档涉及到很多操作系统的知识。</p>
+</section>
+<section id="billiard">
+<h3>2. 使用 <cite>billiard</cite><a class="headerlink" href="#billiard" title="Link to this heading">¶</a></h3>
+<p>根据 <a class="reference external" href="https://github.com/celery/billiard">billiard</a> 的文档说明，其使用一个fork版本的多进程进行的开发。(billiard is a fork of the Python 2.7 multiprocessing package. The multiprocessing package itself is a renamed and updated version of R Oudkerk's pyprocessing package)</p>
+<p>因此尝试将上述的multiprocessing修改为billiard, 出现了新的报错 <cite>daemonic processes are not allowed to have children</cite></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="o">...</span>
+</span><span data-line="2"><span class="kn">from</span><span class="w"> </span><span class="nn">billiard</span><span class="w"> </span><span class="kn">import</span> <span class="n">Process</span>
+</span></pre></div>
+</div>
+<p>更多的魔改方法参见， <a class="reference external" href="https://stackoverflow.com/questions/22116493/run-a-scrapy-spider-in-a-celery-task/22202877#22202877">Run a Scrapy spider in a Celery Task</a> ，包括 use <a class="reference external" href="https://docs.scrapy.org/en/2.11/topics/api.html#scrapy.crawler.Crawler">Crawler</a> instead <a class="reference external" href="https://docs.scrapy.org/en/2.11/topics/api.html#scrapy.crawler.CrawlerProcess">CrawlerProcess</a> 。</p>
+</section>
+<section id="subprocess">
+<h3>3. 使用 <cite>subprocess</cite><a class="headerlink" href="#subprocess" title="Link to this heading">¶</a></h3>
+<p>使用subprocess是比较简单的方式，</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">def</span><span class="w"> </span><span class="nf">run_spider_subprocess</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+</span><span data-line="2">    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;scrapy crawl </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p>这个代码本身可以正常运行，但是问题就是不能返回结果，不是很好的能捕获输出的stats_dict 到 <a class="reference external" href="https://django-celery-results.readthedocs.io/en/latest/">django-celery-results</a> 中。</p>
+</section>
+<section id="spawn">
+<h3>4. 使用 <cite>spawn</cite><a class="headerlink" href="#spawn" title="Link to this heading">¶</a></h3>
+<p>在前文提到的报错的情况下，ChatGPT建议将启动方式改为 <cite>spawn</cite> 。
+需要在 <cite>__main__</cite> 位置进行，显然是不适合这个场景的。</p>
+</section>
+<section id="processexecutor">
+<h3>5. 使用 <cite>ProcessExecutor</cite><a class="headerlink" href="#processexecutor" title="Link to this heading">¶</a></h3>
+<p>最终，在进行多次分析后，得到了使用 <a class="reference external" href="https://docs.python.org/3/library/concurrent.futures.html#processpoolexecutor">ProcessExecutor</a> 的建议，并且同样需要设置启动方式为 <cite>spawn</cite></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">mp_context</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
+</span><span data-line="2"><span class="k">with</span> <span class="n">ProcessPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">mp_context</span><span class="o">=</span><span class="n">mp_context</span><span class="p">)</span> <span class="k">as</span> <span class="n">excutor</span><span class="p">:</span>
+</span><span data-line="3">    <span class="n">future</span> <span class="o">=</span> <span class="n">excutor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">run_spider_process</span><span class="p">,</span> <span class="s1">&#39;xxx&#39;</span><span class="p">)</span>
+</span><span data-line="4">    <span class="k">return</span> <span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</span></pre></div>
+</div>
+<p>这部分的代码便能很好的完成本文的需求。</p>
+</section>
+</section>
+<section id="id5">
+<h2>总结<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
+<p>在本文中，我们尝试了很多的方案实现 Celery + Django + Scrapy ， 并且爬虫需要定期多个同时并发执行。
+最终的解决solution是使用 <a class="reference external" href="https://docs.python.org/3/library/concurrent.futures.html#processpoolexecutor">ProcessExecutor</a> , 配合使用 <cite>spawn</cite> 实现的。</p>
+<div role="list" class="citation-list">
+<div class="citation" id="common-practices-in-scrapy" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Common-Practices-in-Scrapy<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id2">2</a>)</span>
+<p><a class="reference external" href="https://docs.scrapy.org/en/latest/topics/practices.html">Common Practices in Scrapy</a></p>
+</div>
+</div>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>回到顶部</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="../2024-summer/2024-summer-day5.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>上一章</span><div class="title">Day5 Docker与Scrapy爬虫项目</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="git.html">
+      <div class="page-info">
+        <span>下一章</span>
+        <div class="title">Git for Teams</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2024, ezelab</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+<a href="https://github.com/eze-root/dev_zero_to_hero" aria-label="GitHub">
+  <iconify-icon icon="simple-icons:github"></iconify-icon>
+</a></div>
+    </div>
+  </div>
+</footer>
+      <script src="../_static/documentation_options.js?v=a1b8b494"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "eze-root/dev_zero_to_hero");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="../_static/shibuya.js?v=cac61aee"></script></body>
+</html>
