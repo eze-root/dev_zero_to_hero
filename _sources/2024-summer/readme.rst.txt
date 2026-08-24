@@ -1,12 +1,9 @@
-
-7 Days for beginner
--------------------
-
-
+2024 夏天的 7 天培训
+--------------------
 
 .. toctree::
    :maxdepth: 1
-   :caption: Contents:
+   :caption: 培训内容:
 
    2024-summer-day0
    2024-summer-day1

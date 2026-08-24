@@ -7,30 +7,8 @@ Welcome to Develop Zero to Hero
 ===============================
 
 
-Tutorial with thoughts
+计算机教育中缺失的一课
 ----------------------
-
-
-.. toctree::
-   :maxdepth: 1
-   :caption: Tutorial:
-
-   tutorial/git.md
-   tutorial/os_mp_celery_scrapy.rst
-
-
-Learning others project
------------------------
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Project:
-   
-   engineer/sphinx_design
-
-
-The Missing Semester
---------------------
 
 .. toctree::
    :maxdepth: 2
@@ -38,16 +16,22 @@ The Missing Semester
 
    missing-semester/index
 
-   
 
-
-Writing from beginner
----------------------
+2024 夏天的 7 天培训
+--------------------
 
 .. toctree::
    :maxdepth: 1
-   :caption: Articles:
+   :caption: 2024 夏天的 7 天培训:
 
-   2024-summer/readme.rst
+   2024-summer/readme
 
-   
+
+Tutorial
+--------
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Tutorial:
+
+   tutorial/git.md
