@@ -79,7 +79,7 @@ html_static_path = ['_static']
 html_title = 'Develop from Zero to Hero'
 
 html_theme_options = {
-    'accent_color': 'blue',
+    'accent_color': 'tomato',
     'color_mode': 'auto',
     'dark_code': True,
     'globaltoc_expand_depth': 1,
