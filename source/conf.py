@@ -50,7 +50,7 @@ myst_words_per_minute = 10
 
 comments_config = {
    "utterances": {
-      "repo": "EZEORG/dev_zero_to_hero",
+      "repo": "eze-root/dev_zero_to_hero",
       "optional": "config",
    }
 }
@@ -58,7 +58,7 @@ comments_config = {
 
 html_context = {
     "source_type": "github",
-    "source_user": "EZEORG",
+    "source_user": "eze-root",
     "source_repo": "dev_zero_to_hero",
     "source_version": "main",
     "source_docs_path": "/source/",
@@ -84,7 +84,7 @@ html_theme_options = {
     'dark_code': True,
     'globaltoc_expand_depth': 1,
     'toctree_maxdepth': 3,
-    'github_url': 'https://github.com/EZEORG/dev_zero_to_hero',
+    'github_url': 'https://github.com/eze-root/dev_zero_to_hero',
     'show_ai_links': False,
 }
 

@@ -1,6 +1,6 @@
 # Develop from Zero to Hero Tutorial by EZELAB
 
-See the [website](https://EZEORG.github.io/dev_zero_to_hero/)
+See the [website](https://eze-root.github.io/dev_zero_to_hero/)
 
 
 ## How to contribute
@@ -54,4 +54,3 @@ uv run --no-sync sphinx-autobuild source build --port 11111 --host 0
 ```
 
 Open [http://localhost:11111/drafts/xxx.html](http://localhost:11111/drafts/xxx.html), you will have your writing
-
