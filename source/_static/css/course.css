@@ -321,6 +321,12 @@ body {
 }
 
 /* Notes, quotes and metadata */
+/* Keep Shibuya's native admonition layout, but omit its decorative marker. */
+.yue .admonition::before,
+.yue .admonition::after {
+  display: none;
+}
+
 .yue blockquote {
   margin-block: 1.75rem;
   padding: 1.1rem 1.35rem;
