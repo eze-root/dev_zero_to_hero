@@ -28,11 +28,21 @@ Learning others project
    
    engineer/sphinx_design
 
+
+The Missing Semester
+--------------------
+
+.. toctree::
+   :maxdepth: 2
+   :caption: 计算机教育中缺失的一课:
+
+   missing-semester/index
+
    
 
 
 Writing from beginner
---------------------
+---------------------
 
 .. toctree::
    :maxdepth: 1
@@ -41,4 +51,3 @@ Writing from beginner
    2024-summer/readme.rst
 
    
-

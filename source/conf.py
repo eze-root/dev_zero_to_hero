@@ -25,6 +25,7 @@ extensions = [
   "sphinxemoji.sphinxemoji",
   "sphinx_copybutton",
   "sphinx_design",
+  "sphinx_exercise",
   "sphinx_comments"
 ]
 

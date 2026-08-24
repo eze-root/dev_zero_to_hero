@@ -10,6 +10,7 @@ dependencies = [
     "sphinx",
     "sphinx-comments",
     "sphinx-copybutton",
+    "sphinx-exercise>=1.2.1",
     "sphinx-tabs",
     "sphinx_design",
     "sphinxcontrib-mermaid",
