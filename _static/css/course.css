@@ -321,35 +321,6 @@ body {
 }
 
 /* Notes, quotes and metadata */
-.yue .admonition {
-  margin: 1.75rem 0;
-  padding: 1rem 1.1rem;
-  border: 1px solid color-mix(in srgb, var(--color-3) 24%, var(--sy-c-border));
-  border-radius: var(--course-radius-md);
-  background: var(--color-1);
-  box-shadow: var(--course-shadow-sm);
-}
-
-/* Shibuya's default marker sits outside the left border. It clashes with a
- * rounded card and gets clipped, so the custom card deliberately omits it. */
-.yue .admonition::before,
-.yue .admonition::after {
-  display: none;
-}
-
-.yue .admonition > p.admonition-title {
-  margin: -1rem -1.1rem 0.9rem;
-  padding: 0.55rem 1.1rem;
-  border-bottom: 1px solid color-mix(in srgb, var(--color-3) 16%, transparent);
-  border-radius: calc(var(--course-radius-md) - 1px)
-    calc(var(--course-radius-md) - 1px) 0 0;
-  background: var(--color-2);
-  font-family: var(--sy-f-heading);
-  font-size: 0.9rem;
-  font-weight: 700;
-  line-height: 1.5;
-}
-
 .yue blockquote {
   margin-block: 1.75rem;
   padding: 1.1rem 1.35rem;
@@ -463,7 +434,6 @@ body {
 
   .yue .highlight,
   .yue .toctree-wrapper.compound,
-  .yue .admonition,
   .yue .table-wrapper {
     box-shadow: none;
   }
