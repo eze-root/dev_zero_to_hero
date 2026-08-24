@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh" data-accent-color="tomato" data-content_root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>第七讲：智能体编程 - Develop from Zero to Hero</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="第八讲：代码之外" href="beyond-code.html" /><link rel="prev" title="第六讲：打包与交付代码" href="shipping-code.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=44020203" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/source-sans@3.52.0/source-sans-3VF.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/course.css?v=1bccc19b" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="第七讲：智能体编程"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../index.html">
+      
+      
+      <strong>Develop from Zero to Hero</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="搜索" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials">
+  <a href="https://github.com/eze-root/dev_zero_to_hero" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="切换到亮色模式"
+data-aria-light="切换到暗色模式"
+data-aria-dark="切换到自动模式">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="1"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Tutorial:</span></p>
+<ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../tutorial/git.html">Git for Teams</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../tutorial/os_mp_celery_scrapy.html">Scrapy + Celery + Multiprocessing</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Project:</span></p>
+<ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../engineer/sphinx_design.html">Sphinx_design</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">&#35745;&#31639;&#26426;&#25945;&#32946;&#20013;&#32570;&#22833;&#30340;&#19968;&#35838;:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">&#35745;&#31639;&#26426;&#25945;&#32946;&#20013;&#32570;&#22833;&#30340;&#19968;&#35838;</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="course-shell.html">&#31532;&#19968;&#35762;&#65306;&#35838;&#31243;&#27010;&#35272;&#19982; Shell &#20837;&#38376;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command-line-environment.html">&#31532;&#20108;&#35762;&#65306;&#21629;&#20196;&#34892;&#29615;&#22659;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development-environment.html">&#31532;&#19977;&#35762;&#65306;&#24320;&#21457;&#29615;&#22659;&#19982;&#24037;&#20855;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging-profiling.html">&#31532;&#22235;&#35762;&#65306;&#35843;&#35797;&#19982;&#24615;&#33021;&#20998;&#26512;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="version-control.html">&#31532;&#20116;&#35762;&#65306;&#29256;&#26412;&#25511;&#21046;&#19982; Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shipping-code.html">&#31532;&#20845;&#35762;&#65306;&#25171;&#21253;&#19982;&#20132;&#20184;&#20195;&#30721;</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">&#31532;&#19971;&#35762;&#65306;&#26234;&#33021;&#20307;&#32534;&#31243;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="beyond-code.html">&#31532;&#20843;&#35762;&#65306;&#20195;&#30721;&#20043;&#22806;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-quality.html">&#31532;&#20061;&#35762;&#65306;&#20195;&#30721;&#36136;&#37327;</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Articles:</span></p>
+<ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../2024-summer/readme.html">7 Days for beginner</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day0.html">Day0 Markdown</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day1.html">Day1 Linux&#12289;VScode&#19982;Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day2.html">Day2 The Missing Semester of Your CS Education</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day3.html">Day3 Python &#24320;&#21457;&#29615;&#22659;&#25645;&#36733;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day4.html">Day4 SSH&#19982;Django</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day5.html">Day5 Docker&#19982;Scrapy&#29228;&#34411;&#39033;&#30446;</a></li>
+</ul>
+</li>
+</ul>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>该页内容</h3><ul>
+<li><a class="reference internal" href="#id2">&#27169;&#22411;&#12289;&#19978;&#19979;&#25991;&#19982;&#24037;&#20855;&#24490;&#29615;</a></li>
+<li><a class="reference internal" href="#id3">&#36866;&#21512;&#30340;&#24037;&#20316;&#31867;&#22411;</a></li>
+<li><a class="reference internal" href="#id4">&#39640;&#32423;&#29992;&#27861;&#19982;&#19978;&#19979;&#25991;&#31649;&#29702;</a></li>
+<li><a class="reference internal" href="#id5">&#39118;&#38505;&#19982;&#36131;&#20219;</a></li>
+<li><a class="reference internal" href="#exercises">Exercises</a></li>
+<li><a class="reference internal" href="#id6">&#35768;&#21487;&#19982;&#32626;&#21517;</a></li>
+</ul>
+</div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/eze-root/dev_zero_to_hero"
+  data-type="github" data-user="eze-root" data-repo="dev_zero_to_hero">
+  <span class="w-8 flex items-center justify-around shrink-0 text-3xl">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </span>
+  <span class="flex-grow px-2 break-all">
+    
+    
+      <span>dev_zero_to_hero</span>
+    
+    <span class="flex text-sm repo-stats-count">
+      <span class="flex items-center pr-3">
+        <iconify-icon icon="lucide:star"></iconify-icon>
+        <strong class="js-repo-stars ml-1">0</strong>
+      </span>
+      <span class="flex items-center">
+        <iconify-icon icon="lucide:git-fork"></iconify-icon>
+        <strong class="js-repo-forks ml-1">0</strong>
+      </span>
+    </span>
+  </span>
+</a><div class="edit-this-page">
+  <a href="https://github.com/eze-root/dev_zero_to_hero/blob/main/source/missing-semester/agentic-coding.md">编辑此页面</a>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">Develop from Zero to Hero</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">计算机教育中缺失的一课</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">第七讲：智能体编程</strong>
+        <meta itemprop="position" content="3" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue dark-code" role="main">
+          <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>第七讲：智能体编程<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<blockquote>
+<div><p>官方 notes：<a class="reference external" href="https://missing.csail.mit.edu/2026/agentic-coding/">Agentic Coding</a><br />
+视频：<a class="reference external" href="https://www.youtube.com/watch?v=sTdz6PZoAnw">YouTube</a></p>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>编码智能体是在语言模型外增加文件、终端、搜索等工具的系统。它能自主完成多步工作，也因此拥有造成真实损害的能力；授权范围、验证方式和隐私边界必须先于便利性。</p>
+</div>
+<section id="id2">
+<h2>模型、上下文与工具循环<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>语言模型根据输入上下文对后续 token 的概率分布采样，输出并不是事实数据库的确定查询。上下文窗口有限；多轮对话通常会把历史再次送入模型。智能体框架把某些模型输出解释为工具调用，执行后把结果加入上下文，模型据此继续推理，直到交付结果或停止。</p>
+<p>因此，智能体的能力不仅取决于模型，还取决于工具、权限、上下文和反馈回路。给它可直接运行的测试、类型检查或 linter，通常比只说“看起来修好”可靠得多。模型走偏时应立即中断、缩小任务或补充证据，就像管理一位速度很快但需要指导的实习生。</p>
+<p>大多数云端工具会发送代码、提示和工具输出。使用前检查数据保留、训练选项、组织政策与第三方 MCP 权限；私有代码、个人信息和秘密不应因“只是让 AI 看一下”而越过授权边界。本地开源模型能改善部分隐私问题，但仍要考虑硬件、模型质量和插件行为。</p>
+</section>
+<section id="id3">
+<h2>适合的工作类型<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>实现有清晰验收条件的小功能，尤其是测试先行；</p></li>
+<li><p>读取编译器、类型检查、lint 和测试失败，反复修改直到通过；</p></li>
+<li><p>机械或跨文件重构；</p></li>
+<li><p>代码审查与风险清单，但不能替代负责人审查；</p></li>
+<li><p>探索陌生仓库，回答“如何运行”“某功能在哪里”；</p></li>
+<li><p>把自然语言转成明确的 Shell 工具操作；</p></li>
+<li><p>从零快速原型，即 vibe coding。</p></li>
+</ul>
+<p>提示应给出目标、范围、约束、禁止事项和完成定义。例如“修复 mypy”不如“只修改 <code class="docutils literal notranslate"><span class="pre">src/</span></code>，不降低类型检查级别；运行 <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">run</span> <span class="pre">mypy</span> <span class="pre">src</span></code> 和测试，说明根因与残余风险”。让智能体先检查仓库再改，要求保留用户已有改动，并审查 diff。</p>
+</section>
+<section id="id4">
+<h2>高级用法与上下文管理<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
+<p>可复用 prompt 把重复流程标准化。<code class="docutils literal notranslate"><span class="pre">AGENTS.md</span></code>/<code class="docutils literal notranslate"><span class="pre">CLAUDE.md</span></code> 等文件适合始终加载的项目事实：构建命令、目录边界和必须运行的检查。skill 按需加载更长的专门流程，避免每次占用上下文；subagent 用独立上下文完成边界明确的子任务，再返回摘要。</p>
+<p>多个智能体可以在不同 Git worktree 中处理互不重叠的任务，或对同一问题独立尝试后择优。并行会增加审查和合并成本，不能把共享文件交给多个写入者而不协调。</p>
+<p>MCP（Model Context Protocol）把外部工具接入智能体。连接 Notion、GitHub 或数据库会扩展能力，也扩展攻击面：只安装可信服务，授予最小权限，并防范外部内容中的提示注入。</p>
+<p>上下文过长会稀释关键信息。无关任务应开新会话；走错方向时优先回退而非继续堆叠纠正；长任务通过 compaction 保存目标、已完成工作、验证结果和下一步。<code class="docutils literal notranslate"><span class="pre">llms.txt</span></code> 可提供密度更高、面向模型的文档入口，但仍需核对来源和时效。</p>
+</section>
+<section id="id5">
+<h2>风险与责任<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
+<p>AI 会产生错误和安全漏洞，也可能在调试循环中不断为错误假设辩护。验证代码有时比亲自编写更难，关键路径应由能承担责任的人理解和审查。不要为了自动化而关闭确认、扩大权限或把生产秘密放进上下文；生成速度不能转移最终责任。</p>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">¶</a></h2>
+<div class="exercise admonition" id="exercise-agent-four-modes">
+
+<p class="admonition-title"><span class="caption-number">练习 71 </span> (比较四种编程方式)</p>
+<section id="exercise-content">
+<p>对同一个小任务分别手写、使用 AI 补全、行内对话和编码智能体，比较体验与结果。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/agentic-coding-solution-1">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-agent-four-modes"> 练习 71 (比较四种编程方式)</a></p>
+<section id="solution-content">
+<p>固定相同需求与测试，记录完成时间、人工输入、修改轮次、测试通过率、代码复杂度、安全问题和自己对实现的理解。不要只比较“第一次产出速度”；把审查与返工计入成本。结果应说明哪种方式适合什么规模和风险等级。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-agent-unfamiliar-repo">
+
+<p class="admonition-title"><span class="caption-number">练习 72 </span> (探索陌生代码库)</p>
+<section id="exercise-content">
+<p>让智能体在你关心的陌生仓库中定位一个 bug 或功能；也可调查 opencode 的安全相关机制。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/agentic-coding-solution-3">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-agent-unfamiliar-repo"> 练习 72 (探索陌生代码库)</a></p>
+<section id="solution-content">
+<p>先要求只读调查：入口、关键模块、数据流、测试和安全边界，并为每个结论给出文件路径/符号。然后手工抽查并运行相关测试。一个合格答案应区分源码事实与推断，指出仍未确认的问题，而不是只给架构概述。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-agent-vibe-app">
+
+<p class="admonition-title"><span class="caption-number">练习 73 </span> (完全 vibe code 一个小应用)</p>
+<section id="exercise-content">
+<p>从空目录开始，不手写一行代码，由智能体完成一个小应用。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/agentic-coding-solution-5">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-agent-vibe-app"> 练习 73 (完全 vibe code 一个小应用)</a></p>
+<section id="solution-content">
+<p>仍要由你定义范围、用户故事和验收测试。要求智能体初始化版本库、分小提交、运行检查、写 README；最后在干净环境按 README 重建并进行安全/依赖审查。若你无法解释关键数据流或回滚失败修改，说明原型尚不适合真实用户。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-agent-instructions">
+
+<p class="admonition-title"><span class="caption-number">练习 74 </span> (对比 <a class="reference external" href="http://AGENTS.md">AGENTS.md</a>、skill 与 subagent)</p>
+<section id="exercise-content">
+<p>在支持的智能体中创建并测试项目说明文件、一个 skill 和一个 subagent，比较使用时机。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/agentic-coding-solution-7">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-agent-instructions"> 练习 74 (对比 <a class="reference external" href="http://AGENTS.md">AGENTS.md</a>、skill 与 subagent)</a></p>
+<section id="solution-content">
+<p><code class="docutils literal notranslate"><span class="pre">AGENTS.md</span></code> 放每次都必须知道的短规则；skill 放描述明确、按需读取的专业流程和资料；subagent 放可独立交付、需要隔离上下文或工具探索的任务。设计同一小改动做 A/B 测试，检查触发是否正确、上下文是否减少、结果能否复现。工具不支持的能力可跳过，不应伪装实现。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-agent-regex-tool">
+
+<p class="admonition-title"><span class="caption-number">练习 75 </span> (强制智能体使用命令行变换)</p>
+<section id="exercise-content">
+<p>完成代码质量讲中的 Markdown 列表标记替换。先观察智能体是否逐文件直接编辑，再提示它使用第一讲的命令行工具完成可复用变换。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/agentic-coding-solution-9">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-agent-regex-tool"> 练习 75 (强制智能体使用命令行变换)</a></p>
+<section id="solution-content">
+<p>直接编辑能完成单个文件，却难以审计、复用和扩展到大量文件。可提示：“不要直接调用文件编辑工具；先用 <code class="docutils literal notranslate"><span class="pre">rg</span></code> 定位仅位于行首、允许缩进的 <code class="docutils literal notranslate"><span class="pre">-</span> </code> 列表项，再用 <code class="docutils literal notranslate"><span class="pre">sed</span></code>/<code class="docutils literal notranslate"><span class="pre">perl</span></code> 生成变换，先输出 diff，确认后应用。”最终用 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span> <span class="pre">--check</span></code> 和 Markdown 构建验证，确保没有替换分隔符或正文连字符。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-agent-sandbox">
+
+<p class="admonition-title"><span class="caption-number">练习 76 </span> (在隔离环境测试自主模式)</p>
+<section id="exercise-content">
+<p>把智能体放进 VM 或容器后测试跳过逐次权限确认的自主模式。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/agentic-coding-solution-11">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-agent-sandbox"> 练习 76 (在隔离环境测试自主模式)</a></p>
+<section id="solution-content">
+<p>安全基线：一次性 VM/容器、非特权用户、只挂载测试副本、无宿主 Docker socket、无 SSH/云凭据、默认断网或域名白名单、限制 CPU/内存/时间，执行后销毁环境并只导出审查过的 patch。容器共享宿主内核，处理真正不可信代码时 VM 边界更强。“隔离”不是运行危险模式的免责理由。</p>
+</section>
+</div>
+</section>
+<section id="id6">
+<h2>许可与署名<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
+<p>本页依据 MIT Missing Semester 2026 第七讲<a class="reference external" href="https://missing.csail.mit.edu/2026/agentic-coding/">官方 notes</a>整理，原材料采用 <a class="reference external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA</a> 许可。</p>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>回到顶部</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="shipping-code.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>上一章</span><div class="title">第六讲：打包与交付代码</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="beyond-code.html">
+      <div class="page-info">
+        <span>下一章</span>
+        <div class="title">第八讲：代码之外</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2024, ezelab</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+<a href="https://github.com/eze-root/dev_zero_to_hero" aria-label="GitHub">
+  <iconify-icon icon="simple-icons:github"></iconify-icon>
+</a></div>
+    </div>
+  </div>
+</footer>
+      <script src="../_static/documentation_options.js?v=a1b8b494"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "eze-root/dev_zero_to_hero");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="../_static/shibuya.js?v=cac61aee"></script></body>
+</html>

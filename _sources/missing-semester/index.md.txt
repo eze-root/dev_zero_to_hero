@@ -23,5 +23,12 @@
 :maxdepth: 1
 
 course-shell
+command-line-environment
+development-environment
+debugging-profiling
+version-control
+shipping-code
+agentic-coding
+beyond-code
+code-quality
 ```
-

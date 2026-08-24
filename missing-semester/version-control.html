@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh" data-accent-color="tomato" data-content_root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>第五讲：版本控制与 Git - Develop from Zero to Hero</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="第六讲：打包与交付代码" href="shipping-code.html" /><link rel="prev" title="第四讲：调试与性能分析" href="debugging-profiling.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=44020203" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/source-sans@3.52.0/source-sans-3VF.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/course.css?v=1bccc19b" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="第五讲：版本控制与 Git"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../index.html">
+      
+      
+      <strong>Develop from Zero to Hero</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="搜索" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials">
+  <a href="https://github.com/eze-root/dev_zero_to_hero" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="切换到亮色模式"
+data-aria-light="切换到暗色模式"
+data-aria-dark="切换到自动模式">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="1"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Tutorial:</span></p>
+<ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../tutorial/git.html">Git for Teams</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../tutorial/os_mp_celery_scrapy.html">Scrapy + Celery + Multiprocessing</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Project:</span></p>
+<ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../engineer/sphinx_design.html">Sphinx_design</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">&#35745;&#31639;&#26426;&#25945;&#32946;&#20013;&#32570;&#22833;&#30340;&#19968;&#35838;:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">&#35745;&#31639;&#26426;&#25945;&#32946;&#20013;&#32570;&#22833;&#30340;&#19968;&#35838;</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="course-shell.html">&#31532;&#19968;&#35762;&#65306;&#35838;&#31243;&#27010;&#35272;&#19982; Shell &#20837;&#38376;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command-line-environment.html">&#31532;&#20108;&#35762;&#65306;&#21629;&#20196;&#34892;&#29615;&#22659;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development-environment.html">&#31532;&#19977;&#35762;&#65306;&#24320;&#21457;&#29615;&#22659;&#19982;&#24037;&#20855;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging-profiling.html">&#31532;&#22235;&#35762;&#65306;&#35843;&#35797;&#19982;&#24615;&#33021;&#20998;&#26512;</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">&#31532;&#20116;&#35762;&#65306;&#29256;&#26412;&#25511;&#21046;&#19982; Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shipping-code.html">&#31532;&#20845;&#35762;&#65306;&#25171;&#21253;&#19982;&#20132;&#20184;&#20195;&#30721;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agentic-coding.html">&#31532;&#19971;&#35762;&#65306;&#26234;&#33021;&#20307;&#32534;&#31243;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="beyond-code.html">&#31532;&#20843;&#35762;&#65306;&#20195;&#30721;&#20043;&#22806;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-quality.html">&#31532;&#20061;&#35762;&#65306;&#20195;&#30721;&#36136;&#37327;</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Articles:</span></p>
+<ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../2024-summer/readme.html">7 Days for beginner</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day0.html">Day0 Markdown</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day1.html">Day1 Linux&#12289;VScode&#19982;Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day2.html">Day2 The Missing Semester of Your CS Education</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day3.html">Day3 Python &#24320;&#21457;&#29615;&#22659;&#25645;&#36733;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day4.html">Day4 SSH&#19982;Django</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day5.html">Day5 Docker&#19982;Scrapy&#29228;&#34411;&#39033;&#30446;</a></li>
+</ul>
+</li>
+</ul>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>该页内容</h3><ul>
+<li><a class="reference internal" href="#id1">&#20026;&#20160;&#20040;&#20351;&#29992;&#29256;&#26412;&#25511;&#21046;</a></li>
+<li><a class="reference internal" href="#id2">Git &#30340;&#25968;&#25454;&#27169;&#22411;</a></li>
+<li><a class="reference internal" href="#id3">&#24037;&#20316;&#21306;&#12289;&#26242;&#23384;&#21306;&#19982;&#25552;&#20132;</a></li>
+<li><a class="reference internal" href="#id4">&#20998;&#25903;&#12289;&#36828;&#31471;&#19982;&#25764;&#38144;</a></li>
+<li><a class="reference internal" href="#exercises">Exercises</a></li>
+<li><a class="reference internal" href="#id5">&#35768;&#21487;&#19982;&#32626;&#21517;</a></li>
+</ul>
+</div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/eze-root/dev_zero_to_hero"
+  data-type="github" data-user="eze-root" data-repo="dev_zero_to_hero">
+  <span class="w-8 flex items-center justify-around shrink-0 text-3xl">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </span>
+  <span class="flex-grow px-2 break-all">
+    
+    
+      <span>dev_zero_to_hero</span>
+    
+    <span class="flex text-sm repo-stats-count">
+      <span class="flex items-center pr-3">
+        <iconify-icon icon="lucide:star"></iconify-icon>
+        <strong class="js-repo-stars ml-1">0</strong>
+      </span>
+      <span class="flex items-center">
+        <iconify-icon icon="lucide:git-fork"></iconify-icon>
+        <strong class="js-repo-forks ml-1">0</strong>
+      </span>
+    </span>
+  </span>
+</a><div class="edit-this-page">
+  <a href="https://github.com/eze-root/dev_zero_to_hero/blob/main/source/missing-semester/version-control.md">编辑此页面</a>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">Develop from Zero to Hero</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">计算机教育中缺失的一课</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">第五讲：版本控制与 Git</strong>
+        <meta itemprop="position" content="3" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue dark-code" role="main">
+          <section class="tex2jax_ignore mathjax_ignore" id="git">
+<h1>第五讲：版本控制与 Git<a class="headerlink" href="#git" title="Link to this heading">¶</a></h1>
+<blockquote>
+<div><p>官方 notes：<a class="reference external" href="https://missing.csail.mit.edu/2026/version-control/">Version Control and Git</a><br />
+视频：<a class="reference external" href="https://www.youtube.com/watch?v=9K8lB61dl3Y">YouTube</a></p>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>Git 的命令行界面并不总是直观。与其背“咒语”，不如先理解对象、提交图、引用和暂存区；命令只是对这些结构的操作。</p>
+</div>
+<section id="id1">
+<h2>为什么使用版本控制<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<p>版本控制系统记录目录的一系列快照和作者、时间、说明等元数据。即使独自开发，也能回答“某行是谁、何时、为什么修改的”“哪个提交引入了回归”，并支持并行试验与可靠回退；多人开发时，它还是交换修改和解决冲突的基础。</p>
+<div class="admonition important">
+<p class="admonition-title">重要</p>
+<p>Git 是版本控制软件；GitHub 是 Git 仓库托管与协作平台。GitLab、Gitee、Bitbucket 等也能托管 Git 仓库，二者不要混为一谈。</p>
+</div>
+</section>
+<section id="id2">
+<h2>Git 的数据模型<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>文件内容是 blob，目录是“名称到 blob/tree”的 tree；一个提交包含顶层 tree、父提交、作者和说明。提交之间形成有向无环图（DAG）：普通提交通常有一个父，合并提交可有多个父。提交对象不可变；所谓“改历史”其实是创建新对象，再移动引用。</p>
+<p>Git 对对象内容计算哈希并以哈希寻址。相同内容对应相同对象；tree 保存子对象哈希，commit 保存 tree 与父 commit 哈希。可用 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">cat-file</span> <span class="pre">-p</span> <span class="pre">HASH</span></code> 观察底层对象。</p>
+<p>40 位哈希不便记忆，因此分支、标签等 reference 提供可移动的人类名称；<code class="docutils literal notranslate"><span class="pre">HEAD</span></code> 表示当前所在位置，通常符号指向当前分支。粗略地说，仓库就是对象数据库加引用集合。</p>
+</section>
+<section id="id3">
+<h2>工作区、暂存区与提交<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<p>Git 没有强制把工作目录的全部状态一次提交。<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> 把选中的版本写入暂存区（index），<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code> 再从暂存区生成快照。因此同一工作区的两项修改可以用 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">-p</span></code> 拆成两个清晰提交，调试打印也不必混入修复。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">git<span class="w"> </span>status
+</span><span data-line="2">git<span class="w"> </span>diff<span class="w">                 </span><span class="c1"># 工作区与暂存区</span>
+</span><span data-line="3">git<span class="w"> </span>diff<span class="w"> </span>--cached<span class="w">        </span><span class="c1"># 暂存区与 HEAD</span>
+</span><span data-line="4">git<span class="w"> </span>add<span class="w"> </span>-p
+</span><span data-line="5">git<span class="w"> </span>commit
+</span><span data-line="6">git<span class="w"> </span>log<span class="w"> </span>--all<span class="w"> </span>--graph<span class="w"> </span>--decorate<span class="w"> </span>--oneline
+</span></pre></div>
+</div>
+</section>
+<section id="id4">
+<h2>分支、远端与撤销<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
+<p>分支只是指向提交的可移动引用，创建成本很低。<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">switch</span> <span class="pre">-c</span> <span class="pre">feature</span></code> 创建并切换，<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code> 把另一条历史并入当前分支；<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span></code> 在新基底上重放提交，会生成新提交，不应随意重写他人已经基于其工作的共享历史。</p>
+<p>远端是另一组对象和引用。<code class="docutils literal notranslate"><span class="pre">fetch</span></code> 只取回数据并更新远端跟踪引用；<code class="docutils literal notranslate"><span class="pre">pull</span></code> 通常相当于 fetch 后 merge/rebase；<code class="docutils literal notranslate"><span class="pre">push</span></code> 发送对象并请求移动远端引用。</p>
+<p>撤销前先问“改动在哪一层、是否已经共享”：</p>
+<ul class="simple">
+<li><p>工作区误改：<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span> <span class="pre">PATH</span></code>；</p></li>
+<li><p>误暂存：<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span> <span class="pre">--staged</span> <span class="pre">PATH</span></code>；</p></li>
+<li><p>本地最近提交：<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">--amend</span></code>；</p></li>
+<li><p>已共享提交：优先 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">revert</span> <span class="pre">COMMIT</span></code> 创建反向提交；</p></li>
+<li><p>临时收起工作区：<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">stash</span></code>；</p></li>
+<li><p>查回归：<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">bisect</span></code>；</p></li>
+<li><p>同时检出多个分支：<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">worktree</span></code>。</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">reset</span> <span class="pre">--hard</span></code>、历史过滤和强制推送会丢失或改写可达历史，执行前必须明确目标、备份引用并协调协作者。</p>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">¶</a></h2>
+<div class="exercise admonition" id="exercise-git-model-tutorial">
+
+<p class="admonition-title"><span class="caption-number">练习 57 </span> (用数据模型学习基础 Git)</p>
+<section id="exercise-content">
+<p>阅读 Pro Git 前几章或完成 Learn Git Branching；对每条命令说明它创建了什么对象、移动了什么引用。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/version-control-solution-1">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-git-model-tutorial"> 练习 57 (用数据模型学习基础 Git)</a></p>
+<section id="solution-content">
+<p>最低验收：能解释 <code class="docutils literal notranslate"><span class="pre">add</span></code> 更新 index，<code class="docutils literal notranslate"><span class="pre">commit</span></code> 创建 tree/commit 并移动当前分支，<code class="docutils literal notranslate"><span class="pre">branch</span></code> 创建引用，<code class="docutils literal notranslate"><span class="pre">switch</span></code> 改变 HEAD/工作区，<code class="docutils literal notranslate"><span class="pre">merge</span></code> 可能快进或创建双亲提交。用 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">--graph</span></code> 对照自己的解释。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-git-investigate">
+
+<p class="admonition-title"><span class="caption-number">练习 58 </span> (调查课程仓库历史)</p>
+<section id="exercise-content">
+<p>克隆课程仓库，画出历史图；找出最后修改 <code class="docutils literal notranslate"><span class="pre">README.md</span></code> 的人，以及 <code class="docutils literal notranslate"><span class="pre">_config.yml</span></code> 中 <code class="docutils literal notranslate"><span class="pre">collections:</span></code> 行最后一次修改对应的提交说明。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/version-control-solution-3">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-git-investigate"> 练习 58 (调查课程仓库历史)</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">git<span class="w"> </span>clone<span class="w"> </span>https://github.com/missing-semester/missing-semester.git
+</span><span data-line="2"><span class="nb">cd</span><span class="w"> </span>missing-semester
+</span><span data-line="3">git<span class="w"> </span>log<span class="w"> </span>--all<span class="w"> </span>--graph<span class="w"> </span>--decorate<span class="w"> </span>--oneline
+</span><span data-line="4">git<span class="w"> </span>log<span class="w"> </span>-1<span class="w"> </span>--format<span class="o">=</span><span class="s1">&#39;%an &lt;%ae&gt;&#39;</span><span class="w"> </span>--<span class="w"> </span>README.md
+</span><span data-line="5">git<span class="w"> </span>blame<span class="w"> </span>-L<span class="w"> </span><span class="s1">&#39;/collections:/,+1&#39;</span><span class="w"> </span>_config.yml
+</span><span data-line="6">git<span class="w"> </span>show<span class="w"> </span>--no-patch<span class="w"> </span>--format<span class="o">=</span><span class="s1">&#39;%H%n%s&#39;</span><span class="w"> </span>COMMIT
+</span></pre></div>
+</div>
+<p>仓库会继续变化，所以答案应以运行时输出为准，而不是写死姓名与提交。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-git-rewrite-secret">
+
+<p class="admonition-title"><span class="caption-number">练习 59 </span> (从历史中删除大文件或秘密)</p>
+<section id="exercise-content">
+<p>在测试仓库提交一个文件若干次，再把它从整个历史中删除，而不仅是最新快照。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/version-control-solution-5">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-git-rewrite-secret"> 练习 59 (从历史中删除大文件或秘密)</a></p>
+<section id="solution-content">
+<p>在隔离测试仓库使用 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">filter-repo</span> <span class="pre">--path</span> <span class="pre">secret.bin</span> <span class="pre">--invert-paths</span></code>，检查 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">--all</span> <span class="pre">--</span> <span class="pre">secret.bin</span></code> 与仓库大小，再决定是否强推。真实秘密还必须立即撤销/轮换；改写历史无法让已克隆的副本失效，并会要求所有协作者重新同步。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-git-stash">
+
+<p class="admonition-title"><span class="caption-number">练习 60 </span> (使用 stash)</p>
+<section id="exercise-content">
+<p>修改已跟踪文件，运行 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">stash</span></code>、<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">--all</span> <span class="pre">--oneline</span></code> 与 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">stash</span> <span class="pre">pop</span></code>，解释适用场景。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/version-control-solution-7">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-git-stash"> 练习 60 (使用 stash)</a></p>
+<section id="solution-content">
+<p><code class="docutils literal notranslate"><span class="pre">stash</span></code> 把工作区/暂存区状态保存为特殊引用可达的提交，并恢复干净工作区；<code class="docutils literal notranslate"><span class="pre">--all</span></code> 的图中可看到相关对象。<code class="docutils literal notranslate"><span class="pre">pop</span></code> 应用后成功则删除 stash，冲突时保留。它适合短暂切换上下文，不应代替有说明的长期分支提交。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-git-graph-alias">
+
+<p class="admonition-title"><span class="caption-number">练习 61 </span> (创建 git graph 别名)</p>
+<section id="exercise-content">
+<p>配置 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">graph</span></code> 输出 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">--all</span> <span class="pre">--graph</span> <span class="pre">--decorate</span> <span class="pre">--oneline</span></code>。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/version-control-solution-9">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-git-graph-alias"> 练习 61 (创建 git graph 别名)</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>alias.graph<span class="w"> </span><span class="s1">&#39;log --all --graph --decorate --oneline&#39;</span>
+</span><span data-line="2">git<span class="w"> </span>graph
+</span></pre></div>
+</div>
+<p>可用 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span> <span class="pre">--get</span> <span class="pre">alias.graph</span></code> 检查；别名值不应再带开头的 <code class="docutils literal notranslate"><span class="pre">git</span></code>。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-git-global-ignore">
+
+<p class="admonition-title"><span class="caption-number">练习 62 </span> (全局忽略文件)</p>
+<section id="exercise-content">
+<p>配置 <code class="docutils literal notranslate"><span class="pre">~/.gitignore_global</span></code>，忽略 <code class="docutils literal notranslate"><span class="pre">.DS_Store</span></code> 等操作系统或编辑器临时文件。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/version-control-solution-11">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-git-global-ignore"> 练习 62 (全局忽略文件)</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>core.excludesFile<span class="w"> </span>~/.gitignore_global
+</span><span data-line="2"><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;.DS_Store\n*~\n&#39;</span><span class="w"> </span>&gt;&gt;~/.gitignore_global
+</span><span data-line="3">git<span class="w"> </span>check-ignore<span class="w"> </span>-v<span class="w"> </span>.DS_Store
+</span></pre></div>
+</div>
+<p>只把跨项目、只属于个人环境的噪声放到全局文件；项目共同产生的构建产物应写入仓库的 <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code>。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-git-pr">
+
+<p class="admonition-title"><span class="caption-number">练习 63 </span> (提交一个有价值的 PR)</p>
+<section id="exercise-content">
+<p>若确实找到课程仓库中的错字或改进，fork 后提交 pull request；找不到就跳过，不要制造无意义修改。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/version-control-solution-13">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-git-pr"> 练习 63 (提交一个有价值的 PR)</a></p>
+<section id="solution-content">
+<p>流程：先搜索已有 issue/PR；建小分支；只做一项可验证改动；运行本地检查；写清问题、修改与验证；遵循贡献指南。维护者不欠合并，反馈应及时响应。练习目标是协作质量，不是“获得一个 PR 计数”。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-git-conflict">
+
+<p class="admonition-title"><span class="caption-number">练习 64 </span> (制造并解决合并冲突)</p>
+<section id="exercise-content">
+<p>按官方步骤创建 <code class="docutils literal notranslate"><span class="pre">recipe.txt</span></code>，让 <code class="docutils literal notranslate"><span class="pre">salty</span></code> 和 <code class="docutils literal notranslate"><span class="pre">sweet</span></code> 修改同一行，依次合并并解决冲突，最后画出提交图。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/version-control-solution-15">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-git-conflict"> 练习 64 (制造并解决合并冲突)</a></p>
+<section id="solution-content">
+<p>第一次合并通常快进；第二次在同一行出现 <code class="docutils literal notranslate"><span class="pre">&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span> <span class="pre">HEAD</span></code>、<code class="docutils literal notranslate"><span class="pre">=======</span></code>、<code class="docutils literal notranslate"><span class="pre">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> <span class="pre">sweet</span></code>，分别界定当前版本、分隔线和传入版本。编辑成最终内容并删除标记，运行 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">recipe.txt</span> <span class="pre">&amp;&amp;</span> <span class="pre">git</span> <span class="pre">merge</span> <span class="pre">--continue</span></code>，再用 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">--graph</span> <span class="pre">--oneline</span> <span class="pre">--all</span></code> 验证合并提交有两条父边。</p>
+</section>
+</div>
+</section>
+<section id="id5">
+<h2>许可与署名<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
+<p>本页依据 MIT Missing Semester 2026 第五讲<a class="reference external" href="https://missing.csail.mit.edu/2026/version-control/">官方 notes</a>整理，原材料采用 <a class="reference external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA</a> 许可。</p>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>回到顶部</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="debugging-profiling.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>上一章</span><div class="title">第四讲：调试与性能分析</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="shipping-code.html">
+      <div class="page-info">
+        <span>下一章</span>
+        <div class="title">第六讲：打包与交付代码</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2024, ezelab</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+<a href="https://github.com/eze-root/dev_zero_to_hero" aria-label="GitHub">
+  <iconify-icon icon="simple-icons:github"></iconify-icon>
+</a></div>
+    </div>
+  </div>
+</footer>
+      <script src="../_static/documentation_options.js?v=a1b8b494"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "eze-root/dev_zero_to_hero");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="../_static/shibuya.js?v=cac61aee"></script></body>
+</html>

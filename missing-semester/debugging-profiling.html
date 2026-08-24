@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh" data-accent-color="tomato" data-content_root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>第四讲：调试与性能分析 - Develop from Zero to Hero</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="第五讲：版本控制与 Git" href="version-control.html" /><link rel="prev" title="第三讲：开发环境与工具" href="development-environment.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=44020203" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/source-sans@3.52.0/source-sans-3VF.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/course.css?v=1bccc19b" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="第四讲：调试与性能分析"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../index.html">
+      
+      
+      <strong>Develop from Zero to Hero</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="搜索" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials">
+  <a href="https://github.com/eze-root/dev_zero_to_hero" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="切换到亮色模式"
+data-aria-light="切换到暗色模式"
+data-aria-dark="切换到自动模式">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="1"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Tutorial:</span></p>
+<ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../tutorial/git.html">Git for Teams</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../tutorial/os_mp_celery_scrapy.html">Scrapy + Celery + Multiprocessing</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Project:</span></p>
+<ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../engineer/sphinx_design.html">Sphinx_design</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">&#35745;&#31639;&#26426;&#25945;&#32946;&#20013;&#32570;&#22833;&#30340;&#19968;&#35838;:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">&#35745;&#31639;&#26426;&#25945;&#32946;&#20013;&#32570;&#22833;&#30340;&#19968;&#35838;</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="course-shell.html">&#31532;&#19968;&#35762;&#65306;&#35838;&#31243;&#27010;&#35272;&#19982; Shell &#20837;&#38376;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command-line-environment.html">&#31532;&#20108;&#35762;&#65306;&#21629;&#20196;&#34892;&#29615;&#22659;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development-environment.html">&#31532;&#19977;&#35762;&#65306;&#24320;&#21457;&#29615;&#22659;&#19982;&#24037;&#20855;</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">&#31532;&#22235;&#35762;&#65306;&#35843;&#35797;&#19982;&#24615;&#33021;&#20998;&#26512;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="version-control.html">&#31532;&#20116;&#35762;&#65306;&#29256;&#26412;&#25511;&#21046;&#19982; Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shipping-code.html">&#31532;&#20845;&#35762;&#65306;&#25171;&#21253;&#19982;&#20132;&#20184;&#20195;&#30721;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agentic-coding.html">&#31532;&#19971;&#35762;&#65306;&#26234;&#33021;&#20307;&#32534;&#31243;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="beyond-code.html">&#31532;&#20843;&#35762;&#65306;&#20195;&#30721;&#20043;&#22806;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-quality.html">&#31532;&#20061;&#35762;&#65306;&#20195;&#30721;&#36136;&#37327;</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Articles:</span></p>
+<ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../2024-summer/readme.html">7 Days for beginner</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day0.html">Day0 Markdown</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day1.html">Day1 Linux&#12289;VScode&#19982;Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day2.html">Day2 The Missing Semester of Your CS Education</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day3.html">Day3 Python &#24320;&#21457;&#29615;&#22659;&#25645;&#36733;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day4.html">Day4 SSH&#19982;Django</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day5.html">Day5 Docker&#19982;Scrapy&#29228;&#34411;&#39033;&#30446;</a></li>
+</ul>
+</li>
+</ul>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>该页内容</h3><ul>
+<li><a class="reference internal" href="#id2">&#20174;&#26085;&#24535;&#21040;&#35843;&#35797;&#22120;</a></li>
+<li><a class="reference internal" href="#id3">&#20174;&#31243;&#24207;&#36861;&#21040;&#31995;&#32479;</a></li>
+<li><a class="reference internal" href="#id4">&#20808;&#27979;&#37327;&#65292;&#20877;&#20248;&#21270;</a></li>
+<li><a class="reference internal" href="#exercises">Exercises</a></li>
+<li><a class="reference internal" href="#id5">&#35768;&#21487;&#19982;&#32626;&#21517;</a></li>
+</ul>
+</div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/eze-root/dev_zero_to_hero"
+  data-type="github" data-user="eze-root" data-repo="dev_zero_to_hero">
+  <span class="w-8 flex items-center justify-around shrink-0 text-3xl">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </span>
+  <span class="flex-grow px-2 break-all">
+    
+    
+      <span>dev_zero_to_hero</span>
+    
+    <span class="flex text-sm repo-stats-count">
+      <span class="flex items-center pr-3">
+        <iconify-icon icon="lucide:star"></iconify-icon>
+        <strong class="js-repo-stars ml-1">0</strong>
+      </span>
+      <span class="flex items-center">
+        <iconify-icon icon="lucide:git-fork"></iconify-icon>
+        <strong class="js-repo-forks ml-1">0</strong>
+      </span>
+    </span>
+  </span>
+</a><div class="edit-this-page">
+  <a href="https://github.com/eze-root/dev_zero_to_hero/blob/main/source/missing-semester/debugging-profiling.md">编辑此页面</a>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">Develop from Zero to Hero</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">计算机教育中缺失的一课</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">第四讲：调试与性能分析</strong>
+        <meta itemprop="position" content="3" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue dark-code" role="main">
+          <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>第四讲：调试与性能分析<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<blockquote>
+<div><p>官方 notes：<a class="reference external" href="https://missing.csail.mit.edu/2026/debugging-profiling/">Debugging and Profiling</a><br />
+视频：<a class="reference external" href="https://www.youtube.com/watch?v=8VYT9TcUmKs">YouTube</a></p>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>代码执行的是你告诉它做的事，而不是你以为自己告诉它做的事。调试缩小“预期与事实”的差距；性能分析则先测量，再把优化精力放在真正的热点上。</p>
+</div>
+<section id="id2">
+<h2>从日志到调试器<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>有节制的打印是有效的第一步；长期代码应使用日志框架，获得级别、目标、时间与结构化字段。复现问题时也要检查第三方程序的 <code class="docutils literal notranslate"><span class="pre">-v/--verbose</span></code>、<code class="docutils literal notranslate"><span class="pre">journalctl</span> <span class="pre">-u</span> <span class="pre">SERVICE</span></code> 和系统日志。修复问题后，可把关键临时打印改成 DEBUG 日志，而不是全部删除。</p>
+<p>当不知道该打印什么、状态难以重建，或重启代价高时，应使用调试器。GDB/LLDB 的基本动作是：断点 <code class="docutils literal notranslate"><span class="pre">break</span></code>、运行 <code class="docutils literal notranslate"><span class="pre">run</span></code>、继续 <code class="docutils literal notranslate"><span class="pre">continue</span></code>、单步进入/越过/退出 <code class="docutils literal notranslate"><span class="pre">step/next/finish</span></code>、打印 <code class="docutils literal notranslate"><span class="pre">print</span></code>、调用栈 <code class="docutils literal notranslate"><span class="pre">backtrace</span></code>、监视表达式 <code class="docutils literal notranslate"><span class="pre">watch</span></code>。原生程序应带 <code class="docutils literal notranslate"><span class="pre">-g</span></code> 调试符号；<code class="docutils literal notranslate"><span class="pre">-fno-omit-frame-pointer</span></code> 还能改善栈追踪。</p>
+<p><a class="reference external" href="https://rr-project.org/"><code class="docutils literal notranslate"><span class="pre">rr</span></code></a> 在 Linux 记录一次执行并确定性重放，支持 <code class="docutils literal notranslate"><span class="pre">reverse-continue</span></code> 等反向调试。典型流程是：运行到损坏状态，给损坏变量设 watchpoint，再反向继续找到首次写坏它的位置。它依赖硬件性能计数器，并不适用于所有 VM 或 GPU 工作负载。</p>
+</section>
+<section id="id3">
+<h2>从程序追到系统<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">strace</span></code> 观察 Linux 系统调用：<code class="docutils literal notranslate"><span class="pre">-e</span> <span class="pre">trace=file</span></code> 聚焦文件，<code class="docutils literal notranslate"><span class="pre">-f</span></code> 跟踪子进程，<code class="docutils literal notranslate"><span class="pre">-p</span> <span class="pre">PID</span></code> 附加，<code class="docutils literal notranslate"><span class="pre">-T</span></code> 显示耗时。macOS 可用 <code class="docutils literal notranslate"><span class="pre">dtruss</span></code>。需要更低开销、内核探针和聚合时，可使用 eBPF / <code class="docutils literal notranslate"><span class="pre">bpftrace</span></code>；它通常需要 root，过滤范围必须谨慎。</p>
+<p>网络问题可用 <code class="docutils literal notranslate"><span class="pre">tcpdump</span></code>/Wireshark 查看包，浏览器 Network 面板查看已解密的 Web 请求。HTTPS 抓包涉及敏感信息与证书信任，使用中间人代理前必须明确授权。</p>
+<p>原生内存错误优先使用编译器 Sanitizer：ASan 检测越界与 use-after-free，TSan 检测数据竞争，MSan 检测未初始化读取，UBSan 检测未定义行为。无法重编译时可尝试 Valgrind，但通常更慢。</p>
+<p>LLM 适合解释编译器错误、跨语言边界和栈追踪，也会生成看似合理但错误的根因。把它当作提出假设的助手，再用复现、断点、trace 或 sanitizer 验证。</p>
+</section>
+<section id="id4">
+<h2>先测量，再优化<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">time</span></code> 区分 real（墙钟）、user（用户态 CPU）与 sys（内核态 CPU）。real 很大而 user+sys 较小，通常意味着等待网络、磁盘或锁。</p>
+<p>资源总览可用 <code class="docutils literal notranslate"><span class="pre">htop</span></code>/<code class="docutils literal notranslate"><span class="pre">btop</span></code>，I/O 用 <code class="docutils literal notranslate"><span class="pre">iotop</span></code>，内存用 <code class="docutils literal notranslate"><span class="pre">free</span></code>，打开文件用 <code class="docutils literal notranslate"><span class="pre">lsof</span></code>，端口与连接用 <code class="docutils literal notranslate"><span class="pre">ss</span></code>，网络流量用 <code class="docutils literal notranslate"><span class="pre">nethogs</span></code>/<code class="docutils literal notranslate"><span class="pre">iftop</span></code>。记录数据时采用 CSV 或结构化 JSON，便于用 gnuplot、matplotlib 或 ggplot2 观察周期、尖峰和分组差异。</p>
+<p>CPU profiler 分两类：tracing 记录每次调用，信息精确但开销高；sampling 周期采样调用栈，通常更适合真实工作负载。Linux 的 <code class="docutils literal notranslate"><span class="pre">perf</span> <span class="pre">stat</span></code> 给出计数器，<code class="docutils literal notranslate"><span class="pre">perf</span> <span class="pre">record</span> <span class="pre">-g</span></code> 记录采样，火焰图用横向宽度表示累计时间。Valgrind Callgrind 提供精确调用计数，Massif 记录堆随时间的变化。比较实现应使用 <a class="reference external" href="https://github.com/sharkdp/hyperfine"><code class="docutils literal notranslate"><span class="pre">hyperfine</span></code></a> 做预热、多次运行和统计，而不是只跑一次。</p>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">¶</a></h2>
+<div class="exercise admonition" id="exercise-debug-merge-sort">
+
+<p class="admonition-title"><span class="caption-number">练习 47 </span> (用调试器修复归并排序)</p>
+<section id="exercise-content">
+<p>实现官方练习中的归并排序伪代码，用调试器单步进入 <code class="docutils literal notranslate"><span class="pre">merge</span></code>，使测试输入 <code class="docutils literal notranslate"><span class="pre">[3,1,4,1,5,9,2,6]</span></code> 得到正确结果。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/debugging-profiling-solution-1">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-debug-merge-sort"> 练习 47 (用调试器修复归并排序)</a></p>
+<section id="solution-content">
+<p>错误位于右侧较小时的分支：追加的是 <code class="docutils literal notranslate"><span class="pre">right[i]</span></code>，应为 <code class="docutils literal notranslate"><span class="pre">right[j]</span></code>。给 <code class="docutils literal notranslate"><span class="pre">i</span></code>、<code class="docutils literal notranslate"><span class="pre">j</span></code>、<code class="docutils literal notranslate"><span class="pre">left[i]</span></code>、<code class="docutils literal notranslate"><span class="pre">right[j]</span></code> 加观察，第一次进入 <code class="docutils literal notranslate"><span class="pre">else</span></code> 就能看到索引不一致。修复后再加入空数组、重复值、已排序与逆序测试。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-debug-rr-corruption">
+
+<p class="admonition-title"><span class="caption-number">练习 48 </span> (用 rr 反向定位越界写)</p>
+<section id="exercise-content">
+<p>保存官方 <code class="docutils literal notranslate"><span class="pre">corruption.c</span></code>，用 <code class="docutils literal notranslate"><span class="pre">gcc</span> <span class="pre">-g</span></code> 编译，<code class="docutils literal notranslate"><span class="pre">rr</span> <span class="pre">record</span></code> 后 <code class="docutils literal notranslate"><span class="pre">rr</span> <span class="pre">replay</span></code>；监视 <code class="docutils literal notranslate"><span class="pre">students[1].id</span></code> 并反向定位覆盖它的语句。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/debugging-profiling-solution-3">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-debug-rr-corruption"> 练习 48 (用 rr 反向定位越界写)</a></p>
+<section id="solution-content">
+<p><code class="docutils literal notranslate"><span class="pre">Student.scores</span></code> 只有 3 项，但 <code class="docutils literal notranslate"><span class="pre">curve_scores</span></code> 循环条件是 <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">&lt;</span> <span class="pre">4</span></code>。<code class="docutils literal notranslate"><span class="pre">students[0].scores[3]</span></code> 与紧随其后的 <code class="docutils literal notranslate"><span class="pre">students[1].id</span></code> 重叠。修复为 <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">&lt;</span> <span class="pre">3</span></code>，更稳妥地写成 <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">&lt;</span> <span class="pre">sizeof</span> <span class="pre">students[student_idx].scores</span> <span class="pre">/</span> <span class="pre">sizeof</span> <span class="pre">students[student_idx].scores[0]</span></code>。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-debug-asan-uaf">
+
+<p class="admonition-title"><span class="caption-number">练习 49 </span> (用 ASan 检测 use-after-free)</p>
+<section id="exercise-content">
+<p>运行官方 <code class="docutils literal notranslate"><span class="pre">uaf.c</span></code>，先普通编译，再用 <code class="docutils literal notranslate"><span class="pre">gcc</span> <span class="pre">-fsanitize=address</span> <span class="pre">-g</span></code> 编译，阅读报告并修复。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/debugging-profiling-solution-5">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-debug-asan-uaf"> 练习 49 (用 ASan 检测 use-after-free)</a></p>
+<section id="solution-content">
+<p><code class="docutils literal notranslate"><span class="pre">free(greeting)</span></code> 后仍执行 <code class="docutils literal notranslate"><span class="pre">greeting[0]</span> <span class="pre">=</span> <span class="pre">'J'</span></code> 和 <code class="docutils literal notranslate"><span class="pre">printf</span></code>，属于 heap-use-after-free。若仍需修改和打印，应把 <code class="docutils literal notranslate"><span class="pre">free</span></code> 移到最后一次使用之后；释放后把指针设为 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> 能减少误用，但不能替代正确生命周期设计。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-debug-strace">
+
+<p class="admonition-title"><span class="caption-number">练习 50 </span> (跟踪系统调用)</p>
+<section id="exercise-content">
+<p>用 <code class="docutils literal notranslate"><span class="pre">strace</span></code>（Linux）或 <code class="docutils literal notranslate"><span class="pre">dtruss</span></code>（macOS）跟踪 <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-l</span></code>，再观察一个更复杂程序打开了哪些文件。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/debugging-profiling-solution-7">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-debug-strace"> 练习 50 (跟踪系统调用)</a></p>
+<section id="solution-content">
+<p>Linux 可运行 <code class="docutils literal notranslate"><span class="pre">strace</span> <span class="pre">-f</span> <span class="pre">-e</span> <span class="pre">trace=file</span> <span class="pre">ls</span> <span class="pre">-l</span> <span class="pre">2&gt;trace.log</span></code>。常见调用包括 <code class="docutils literal notranslate"><span class="pre">execve</span></code>、动态库相关的 <code class="docutils literal notranslate"><span class="pre">openat</span></code>/<code class="docutils literal notranslate"><span class="pre">mmap</span></code>、读取目录的 <code class="docutils literal notranslate"><span class="pre">getdents64</span></code>、查询元数据的 <code class="docutils literal notranslate"><span class="pre">statx/newfstatat</span></code> 和输出的 <code class="docutils literal notranslate"><span class="pre">write</span></code>。实际名称随系统、libc 与版本变化。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-debug-llm">
+
+<p class="admonition-title"><span class="caption-number">练习 51 </span> (让 LLM 解释诊断)</p>
+<section id="exercise-content">
+<p>选择一条难懂的编译错误、strace 片段或 ASan 报告，请 LLM 解释并提出修复，再验证结论。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/debugging-profiling-solution-9">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-debug-llm"> 练习 51 (让 LLM 解释诊断)</a></p>
+<section id="solution-content">
+<p>高质量提问应包含最小代码、完整错误、编译命令、环境和已尝试步骤，并先移除秘密。验收不是“模型给出回答”，而是最小复现从失败变成功、回归测试通过，并能用工具证据说明根因，而非仅掩盖症状。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-profile-perf-stat">
+
+<p class="admonition-title"><span class="caption-number">练习 52 </span> (阅读 perf stat)</p>
+<section id="exercise-content">
+<p>对一个程序运行 <code class="docutils literal notranslate"><span class="pre">perf</span> <span class="pre">stat</span></code>，解释主要计数器。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/debugging-profiling-solution-11">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-profile-perf-stat"> 练习 52 (阅读 perf stat)</a></p>
+<section id="solution-content">
+<p><code class="docutils literal notranslate"><span class="pre">task-clock</span></code> 是获得 CPU 的时间；context-switches 是调度切换；page-faults 是页错误；cycles 是周期；instructions 是退休指令；IPC = instructions/cycles，需结合工作负载解释；branch-misses 是分支预测失败。虚拟机或内核权限可能限制硬件计数器。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-profile-perf-record">
+
+<p class="admonition-title"><span class="caption-number">练习 53 </span> (perf record 与火焰图)</p>
+<section id="exercise-content">
+<p>编译官方 <code class="docutils literal notranslate"><span class="pre">slow.c</span></code>：<code class="docutils literal notranslate"><span class="pre">gcc</span> <span class="pre">-g</span> <span class="pre">-O2</span> <span class="pre">slow.c</span> <span class="pre">-o</span> <span class="pre">slow</span> <span class="pre">-lm</span></code>，运行 <code class="docutils literal notranslate"><span class="pre">perf</span> <span class="pre">record</span> <span class="pre">-g</span> <span class="pre">./slow</span></code> 和 <code class="docutils literal notranslate"><span class="pre">perf</span> <span class="pre">report</span></code>，再尝试生成火焰图。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/debugging-profiling-solution-13">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-profile-perf-record"> 练习 53 (perf record 与火焰图)</a></p>
+<section id="solution-content">
+<p>热点应集中在 <code class="docutils literal notranslate"><span class="pre">slow_computation</span></code> 及数学库的 <code class="docutils literal notranslate"><span class="pre">sin</span></code>/<code class="docutils literal notranslate"><span class="pre">cos</span></code> 路径。宽的栈框代表样本累计较多，不等于单次调用最慢。保留优化级别以测真实代码，同时保留符号和 frame pointer；修改后用同一输入重新测量。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-profile-hyperfine">
+
+<p class="admonition-title"><span class="caption-number">练习 54 </span> (用 hyperfine 比较实现)</p>
+<section id="exercise-content">
+<p>比较 <code class="docutils literal notranslate"><span class="pre">find</span></code> 与 <code class="docutils literal notranslate"><span class="pre">fd</span></code>、<code class="docutils literal notranslate"><span class="pre">grep</span></code> 与 <code class="docutils literal notranslate"><span class="pre">rg</span></code>，或自己的两个实现。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/debugging-profiling-solution-15">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-profile-hyperfine"> 练习 54 (用 hyperfine 比较实现)</a></p>
+<section id="solution-content">
+<p>示例：<code class="docutils literal notranslate"><span class="pre">hyperfine</span> <span class="pre">--warmup</span> <span class="pre">3</span> <span class="pre">'find</span> <span class="pre">.</span> <span class="pre">-name</span> <span class="pre">&quot;*.md&quot;'</span> <span class="pre">'fd</span> <span class="pre">-e</span> <span class="pre">md'</span></code>。先确认两条命令语义和输出集合相同；报告均值、标准差和范围，并注意文件系统缓存、后台负载与样本规模。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-profile-taskset">
+
+<p class="admonition-title"><span class="caption-number">练习 55 </span> (CPU 亲和性)</p>
+<section id="exercise-content">
+<p>在 htop 中观察 <code class="docutils literal notranslate"><span class="pre">taskset</span> <span class="pre">--cpu-list</span> <span class="pre">0,2</span> <span class="pre">stress</span> <span class="pre">-c</span> <span class="pre">3</span></code>。为什么三个 worker 没有使用三个 CPU？</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/debugging-profiling-solution-17">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-profile-taskset"> 练习 55 (CPU 亲和性)</a></p>
+<section id="solution-content">
+<p>亲和性集合只允许 CPU 0 和 2，共两个逻辑 CPU。三个忙循环都能运行，但必须在两个 CPU 上竞争时间片，因此不可能同时占满三个 CPU。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-debug-port">
+
+<p class="admonition-title"><span class="caption-number">练习 56 </span> (查找占用端口的进程)</p>
+<section id="exercise-content">
+<p>运行 <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">http.server</span> <span class="pre">4444</span></code>，在另一终端找出监听进程并终止它。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/debugging-profiling-solution-19">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-debug-port"> 练习 56 (查找占用端口的进程)</a></p>
+<section id="solution-content">
+<p><code class="docutils literal notranslate"><span class="pre">ss</span> <span class="pre">-tlnp</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">':4444'</span></code> 显示 PID/程序（查看其他用户进程可能需要 sudo）；也可用 <code class="docutils literal notranslate"><span class="pre">lsof</span> <span class="pre">-nP</span> <span class="pre">-iTCP:4444</span> <span class="pre">-sTCP:LISTEN</span></code>。先发送 <code class="docutils literal notranslate"><span class="pre">kill</span> <span class="pre">PID</span></code>（SIGTERM）并确认端口释放，只有进程拒绝退出时才考虑 <code class="docutils literal notranslate"><span class="pre">kill</span> <span class="pre">-KILL</span></code>。</p>
+</section>
+</div>
+</section>
+<section id="id5">
+<h2>许可与署名<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
+<p>本页依据 MIT Missing Semester 2026 第四讲<a class="reference external" href="https://missing.csail.mit.edu/2026/debugging-profiling/">官方 notes</a>整理，原材料采用 <a class="reference external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA</a> 许可。</p>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>回到顶部</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="development-environment.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>上一章</span><div class="title">第三讲：开发环境与工具</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="version-control.html">
+      <div class="page-info">
+        <span>下一章</span>
+        <div class="title">第五讲：版本控制与 Git</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2024, ezelab</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+<a href="https://github.com/eze-root/dev_zero_to_hero" aria-label="GitHub">
+  <iconify-icon icon="simple-icons:github"></iconify-icon>
+</a></div>
+    </div>
+  </div>
+</footer>
+      <script src="../_static/documentation_options.js?v=a1b8b494"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "eze-root/dev_zero_to_hero");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="../_static/shibuya.js?v=cac61aee"></script></body>
+</html>

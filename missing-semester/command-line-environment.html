@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="zh" data-accent-color="tomato" data-content_root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>第二讲：命令行环境 - Develop from Zero to Hero</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="第三讲：开发环境与工具" href="development-environment.html" /><link rel="prev" title="第一讲：课程概览与 Shell 入门" href="course-shell.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=44020203" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/source-sans@3.52.0/source-sans-3VF.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/course.css?v=1bccc19b" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="第二讲：命令行环境"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../index.html">
+      
+      
+      <strong>Develop from Zero to Hero</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="搜索" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials">
+  <a href="https://github.com/eze-root/dev_zero_to_hero" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="切换到亮色模式"
+data-aria-light="切换到暗色模式"
+data-aria-dark="切换到自动模式">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="1"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Tutorial:</span></p>
+<ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../tutorial/git.html">Git for Teams</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../tutorial/os_mp_celery_scrapy.html">Scrapy + Celery + Multiprocessing</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Project:</span></p>
+<ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../engineer/sphinx_design.html">Sphinx_design</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">&#35745;&#31639;&#26426;&#25945;&#32946;&#20013;&#32570;&#22833;&#30340;&#19968;&#35838;:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">&#35745;&#31639;&#26426;&#25945;&#32946;&#20013;&#32570;&#22833;&#30340;&#19968;&#35838;</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="course-shell.html">&#31532;&#19968;&#35762;&#65306;&#35838;&#31243;&#27010;&#35272;&#19982; Shell &#20837;&#38376;</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">&#31532;&#20108;&#35762;&#65306;&#21629;&#20196;&#34892;&#29615;&#22659;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development-environment.html">&#31532;&#19977;&#35762;&#65306;&#24320;&#21457;&#29615;&#22659;&#19982;&#24037;&#20855;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging-profiling.html">&#31532;&#22235;&#35762;&#65306;&#35843;&#35797;&#19982;&#24615;&#33021;&#20998;&#26512;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="version-control.html">&#31532;&#20116;&#35762;&#65306;&#29256;&#26412;&#25511;&#21046;&#19982; Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shipping-code.html">&#31532;&#20845;&#35762;&#65306;&#25171;&#21253;&#19982;&#20132;&#20184;&#20195;&#30721;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agentic-coding.html">&#31532;&#19971;&#35762;&#65306;&#26234;&#33021;&#20307;&#32534;&#31243;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="beyond-code.html">&#31532;&#20843;&#35762;&#65306;&#20195;&#30721;&#20043;&#22806;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-quality.html">&#31532;&#20061;&#35762;&#65306;&#20195;&#30721;&#36136;&#37327;</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Articles:</span></p>
+<ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../2024-summer/readme.html">7 Days for beginner</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day0.html">Day0 Markdown</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day1.html">Day1 Linux&#12289;VScode&#19982;Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day2.html">Day2 The Missing Semester of Your CS Education</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day3.html">Day3 Python &#24320;&#21457;&#29615;&#22659;&#25645;&#36733;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day4.html">Day4 SSH&#19982;Django</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day5.html">Day5 Docker&#19982;Scrapy&#29228;&#34411;&#39033;&#30446;</a></li>
+</ul>
+</li>
+</ul>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>该页内容</h3><ul>
+<li><a class="reference internal" href="#id2">&#21629;&#20196;&#34892;&#25509;&#21475;&#30340;&#20116;&#20010;&#36890;&#36947;</a><ul>
+<li><a class="reference internal" href="#glob">&#21442;&#25968;&#19982; glob</a></li>
+<li><a class="reference internal" href="#stdinstdout-stderr">stdin&#12289;stdout &#19982; stderr</a></li>
+<li><a class="reference internal" href="#id3">&#21464;&#37327;&#12289;&#29615;&#22659;&#19982;&#26367;&#25442;</a></li>
+<li><a class="reference internal" href="#id4">&#36864;&#20986;&#30721;&#19982;&#20449;&#21495;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ssh">&#36828;&#31243;&#26426;&#22120;&#19982; SSH</a></li>
+<li><a class="reference internal" href="#tmuxdotfiles">tmux&#12289;dotfiles &#19982;&#32456;&#31471;</a></li>
+<li><a class="reference internal" href="#ai">AI &#22312;&#21629;&#20196;&#34892;&#20013;&#30340;&#20301;&#32622;</a></li>
+<li><a class="reference internal" href="#exercises">Exercises</a></li>
+<li><a class="reference internal" href="#id5">&#35768;&#21487;&#19982;&#32626;&#21517;</a></li>
+</ul>
+</div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/eze-root/dev_zero_to_hero"
+  data-type="github" data-user="eze-root" data-repo="dev_zero_to_hero">
+  <span class="w-8 flex items-center justify-around shrink-0 text-3xl">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </span>
+  <span class="flex-grow px-2 break-all">
+    
+    
+      <span>dev_zero_to_hero</span>
+    
+    <span class="flex text-sm repo-stats-count">
+      <span class="flex items-center pr-3">
+        <iconify-icon icon="lucide:star"></iconify-icon>
+        <strong class="js-repo-stars ml-1">0</strong>
+      </span>
+      <span class="flex items-center">
+        <iconify-icon icon="lucide:git-fork"></iconify-icon>
+        <strong class="js-repo-forks ml-1">0</strong>
+      </span>
+    </span>
+  </span>
+</a><div class="edit-this-page">
+  <a href="https://github.com/eze-root/dev_zero_to_hero/blob/main/source/missing-semester/command-line-environment.md">编辑此页面</a>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">Develop from Zero to Hero</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">计算机教育中缺失的一课</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">第二讲：命令行环境</strong>
+        <meta itemprop="position" content="3" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue dark-code" role="main">
+          <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>第二讲：命令行环境<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<blockquote>
+<div><p>官方 notes：<a class="reference external" href="https://missing.csail.mit.edu/2026/command-line-environment/">Command-line Environment</a><br />
+视频：<a class="reference external" href="https://www.youtube.com/watch?v=ccBGsPedE9Q">YouTube</a></p>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>本文依据 2026 年第二讲官方 notes 整理。Shell 脚本围绕“启动程序并让程序高效通信”设计；理解约定，比背诵命令更重要。</p>
+</div>
+<section id="id2">
+<h2>命令行接口的五个通道<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>命令行程序之间主要通过五类机制协作：参数、数据流、环境变量、退出码与信号。它们共同构成了 CLI 的“函数签名”。</p>
+<section id="glob">
+<h3>参数与 glob<a class="headerlink" href="#glob" title="Link to this heading">¶</a></h3>
+<p>Shell 把命令拆成字符串参数。脚本中 <code class="docutils literal notranslate"><span class="pre">$0</span></code> 是程序名，<code class="docutils literal notranslate"><span class="pre">$1</span></code> 到 <code class="docutils literal notranslate"><span class="pre">$9</span></code> 是位置参数，<code class="docutils literal notranslate"><span class="pre">$#</span></code> 是参数数量，<code class="docutils literal notranslate"><span class="pre">&quot;$&#64;&quot;</span></code> 保留所有参数的边界。常见约定包括短选项 <code class="docutils literal notranslate"><span class="pre">-a</span></code>、长选项 <code class="docutils literal notranslate"><span class="pre">--all</span></code>、组合短选项 <code class="docutils literal notranslate"><span class="pre">-la</span></code>，以及用 <code class="docutils literal notranslate"><span class="pre">--</span></code> 标记选项结束。</p>
+<p>glob 在程序启动前由 Shell 展开：<code class="docutils literal notranslate"><span class="pre">*</span></code> 匹配零个或多个字符，<code class="docutils literal notranslate"><span class="pre">?</span></code> 匹配一个字符，<code class="docutils literal notranslate"><span class="pre">{a,b}</span></code> 生成多个候选参数。例如 <code class="docutils literal notranslate"><span class="pre">mv</span> <span class="pre">*{.py,.sh}</span> <span class="pre">src/</span></code> 会把当前目录中的 Python 与 Shell 文件一起传给 <code class="docutils literal notranslate"><span class="pre">mv</span></code>。给变量加双引号仍是默认安全做法：<code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">--</span> <span class="pre">&quot;$file&quot;</span></code>。</p>
+</section>
+<section id="stdinstdout-stderr">
+<h3>stdin、stdout 与 stderr<a class="headerlink" href="#stdinstdout-stderr" title="Link to this heading">¶</a></h3>
+<p>每个进程默认拥有标准输入 0、标准输出 1 和标准错误 2。管道 <code class="docutils literal notranslate"><span class="pre">|</span></code> 只连接 stdout；流水线中的程序并发运行，而不是等待上一条命令完整结束后才依次启动。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nb">echo</span><span class="w"> </span>hello<span class="w"> </span>&gt;output.txt<span class="w">       </span><span class="c1"># 覆盖 stdout</span>
+</span><span data-line="2"><span class="nb">echo</span><span class="w"> </span>world<span class="w"> </span>&gt;&gt;output.txt<span class="w">      </span><span class="c1"># 追加 stdout</span>
+</span><span data-line="3">cmd<span class="w"> </span><span class="m">2</span>&gt;errors.txt<span class="w">             </span><span class="c1"># 单独保存 stderr</span>
+</span><span data-line="4">cmd<span class="w"> </span>&gt;all.txt<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w">            </span><span class="c1"># 合并两个输出流</span>
+</span><span data-line="5">grep<span class="w"> </span>pattern<span class="w"> </span>&lt;input.txt<span class="w">      </span><span class="c1"># 从文件提供 stdin</span>
+</span><span data-line="6">cmd<span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w">          </span><span class="c1"># 丢弃输出</span>
+</span></pre></div>
+</div>
+<p><a class="reference external" href="https://github.com/junegunn/fzf"><code class="docutils literal notranslate"><span class="pre">fzf</span></code></a> 是这一接口的典型例子：它从 stdin 读取候选行，交互筛选后把选择写到 stdout，因此可以自然嵌入任意管道。</p>
+</section>
+<section id="id3">
+<h3>变量、环境与替换<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">foo=bar</span></code> 创建 Shell 变量，等号两侧不能有空格。<code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">DEBUG=1</span></code> 把变量加入环境，使后续子进程继承；<code class="docutils literal notranslate"><span class="pre">TZ=Asia/Tokyo</span> <span class="pre">date</span></code> 则只为这一条命令设置环境。<code class="docutils literal notranslate"><span class="pre">$(command)</span></code> 把 stdout 存入字符串，<code class="docutils literal notranslate"><span class="pre">&lt;(command)</span></code> 把输出临时呈现为文件名，适合 <code class="docutils literal notranslate"><span class="pre">diff</span></code> 等要求文件参数的程序。</p>
+</section>
+<section id="id4">
+<h3>退出码与信号<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<p>退出码 0 按约定表示成功，非 0 表示不同失败。<code class="docutils literal notranslate"><span class="pre">&amp;&amp;</span></code> 在前一条成功时继续，<code class="docutils literal notranslate"><span class="pre">||</span></code> 在前一条失败时继续，<code class="docutils literal notranslate"><span class="pre">if</span></code> 和 <code class="docutils literal notranslate"><span class="pre">while</span></code> 也直接依据命令退出码判断。</p>
+<p><code class="docutils literal notranslate"><span class="pre">Ctrl-C</span></code> 通常发送 <code class="docutils literal notranslate"><span class="pre">SIGINT</span></code>，<code class="docutils literal notranslate"><span class="pre">Ctrl-Z</span></code> 发送 <code class="docutils literal notranslate"><span class="pre">SIGTSTP</span></code> 暂停前台任务；<code class="docutils literal notranslate"><span class="pre">fg</span></code>、<code class="docutils literal notranslate"><span class="pre">bg</span></code>、<code class="docutils literal notranslate"><span class="pre">jobs</span></code> 管理 Shell 作业。<code class="docutils literal notranslate"><span class="pre">SIGTERM</span></code> 请求进程优雅退出，<code class="docutils literal notranslate"><span class="pre">SIGKILL</span></code> 无法捕获，只应作为最后手段。脚本可用 <code class="docutils literal notranslate"><span class="pre">trap</span> <span class="pre">cleanup</span> <span class="pre">EXIT</span> <span class="pre">INT</span> <span class="pre">TERM</span></code> 保证清理临时资源。</p>
+</section>
+</section>
+<section id="ssh">
+<h2>远程机器与 SSH<a class="headerlink" href="#ssh" title="Link to this heading">¶</a></h2>
+<p>SSH 在本地与远程机之间建立加密会话：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">ssh<span class="w"> </span>user@server
+</span><span data-line="2">ssh<span class="w"> </span>server<span class="w"> </span><span class="s1">&#39;journalctl -u sshd | tail&#39;</span>
+</span><span data-line="3">scp<span class="w"> </span>local.txt<span class="w"> </span>server:/tmp/
+</span><span data-line="4">rsync<span class="w"> </span>-avP<span class="w"> </span>project/<span class="w"> </span>server:project/
+</span></pre></div>
+</div>
+<p>公钥认证把公钥放到服务器的 <code class="docutils literal notranslate"><span class="pre">~/.ssh/authorized_keys</span></code>，私钥只留在本机并由 <code class="docutils literal notranslate"><span class="pre">ssh-agent</span></code> 缓存解密。常用主机应写入 <code class="docutils literal notranslate"><span class="pre">~/.ssh/config</span></code>，避免反复输入用户、端口和密钥路径。</p>
+<p>端口转发让本地程序安全访问远端服务。<code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">-L</span> <span class="pre">9999:localhost:8888</span> <span class="pre">vm</span></code> 把本机 9999 转到远端 8888；<code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">-R</span></code> 是反向转发。先确认方向与监听地址，避免意外把内部服务暴露到公网。</p>
+</section>
+<section id="tmuxdotfiles">
+<h2>tmux、dotfiles 与终端<a class="headerlink" href="#tmuxdotfiles" title="Link to this heading">¶</a></h2>
+<p><a class="reference external" href="https://github.com/tmux/tmux"><code class="docutils literal notranslate"><span class="pre">tmux</span></code></a> 把会话、窗口、窗格分成三层，并支持断开后重新连接。默认前缀是 <code class="docutils literal notranslate"><span class="pre">Ctrl-b</span></code>：<code class="docutils literal notranslate"><span class="pre">c</span></code> 新建窗口，<code class="docutils literal notranslate"><span class="pre">%</span></code> 和 <code class="docutils literal notranslate"><span class="pre">&quot;</span></code> 分割窗格，<code class="docutils literal notranslate"><span class="pre">d</span></code> 脱离，<code class="docutils literal notranslate"><span class="pre">tmux</span> <span class="pre">attach</span></code> 恢复。</p>
+<p>Shell、Git、Vim、SSH 与 tmux 通常使用纯文本 dotfiles 配置。把它们放入版本库，再用符号链接或安装脚本部署，可以获得可追踪、可同步、可重复的工作环境。不要盲目复制他人的完整配置；逐项理解，尤其不要直接执行未审查的 <code class="docutils literal notranslate"><span class="pre">curl</span> <span class="pre">|</span> <span class="pre">bash</span></code>。</p>
+<p>别忽略终端模拟器本身：字体、配色、快捷键、滚动缓冲与性能会长期影响体验。Shell 插件、别名和提示符应服务于真实的高频操作，而不是堆叠视觉效果。</p>
+</section>
+<section id="ai">
+<h2>AI 在命令行中的位置<a class="headerlink" href="#ai" title="Link to this heading">¶</a></h2>
+<p>AI 可以把自然语言转换为候选命令、处理不规则文本，或作为能执行多步任务的“元 Shell”。执行前仍要检查路径、引号、权限与破坏性参数；处理秘密、生产数据或不可逆操作时尤其不能把确认权交给模型。</p>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">¶</a></h2>
+<p>以下题目对应<a class="reference external" href="https://missing.csail.mit.edu/2026/command-line-environment/#exercises">官方练习</a>。部分开放题的“答案”是验收标准与安全做法，而不是唯一命令。</p>
+<div class="exercise admonition" id="exercise-cli-double-dash">
+
+<p class="admonition-title"><span class="caption-number">练习 19 </span> (参数分隔符)</p>
+<section id="exercise-content">
+<p>运行 <code class="docutils literal notranslate"><span class="pre">touch</span> <span class="pre">--</span> <span class="pre">-myfile</span></code>，再尝试删除它。解释 <code class="docutils literal notranslate"><span class="pre">--</span></code> 为什么有用。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/command-line-environment-solution-1">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-cli-double-dash"> 练习 19 (参数分隔符)</a></p>
+<section id="solution-content">
+<p><code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">-myfile</span></code> 会把文件名误作选项；使用 <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">--</span> <span class="pre">-myfile</span></code>，或明确路径 <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">./-myfile</span></code>。<code class="docutils literal notranslate"><span class="pre">--</span></code> 告诉遵循该约定的程序停止解析选项。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-cli-ls-flags">
+
+<p class="admonition-title"><span class="caption-number">练习 20 </span> (组合 ls 选项)</p>
+<section id="exercise-content">
+<p>列出全部文件，采用长格式和易读大小，按修改时间从新到旧排序，并启用颜色。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/command-line-environment-solution-3">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-cli-ls-flags"> 练习 20 (组合 ls 选项)</a></p>
+<section id="solution-content">
+<p>GNU/Linux 可用 <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-lath</span> <span class="pre">--color=auto</span></code>；macOS 的 BSD <code class="docutils literal notranslate"><span class="pre">ls</span></code> 可用 <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-lathG</span></code>。<code class="docutils literal notranslate"><span class="pre">-a</span> <span class="pre">-l</span> <span class="pre">-t</span> <span class="pre">-h</span></code> 分别对应全部、长格式、按时间、易读大小。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-cli-printenv-export">
+
+<p class="admonition-title"><span class="caption-number">练习 21 </span> (比较环境与导出变量)</p>
+<section id="exercise-content">
+<p>运行 <code class="docutils literal notranslate"><span class="pre">diff</span> <span class="pre">&lt;(printenv</span> <span class="pre">|</span> <span class="pre">sort)</span> <span class="pre">&lt;(export</span> <span class="pre">|</span> <span class="pre">sort)</span></code>，解释差异。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/command-line-environment-solution-5">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-cli-printenv-export"> 练习 21 (比较环境与导出变量)</a></p>
+<section id="solution-content">
+<p><code class="docutils literal notranslate"><span class="pre">printenv</span></code> 只显示当前进程要传给子进程的环境；Bash 的 <code class="docutils literal notranslate"><span class="pre">export</span></code> 还以可重新输入的 Shell 语法显示已导出名称，格式和 quoting 不同。Shell 中未导出的局部变量不会出现在二者的环境值中。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-cli-marco-polo">
+
+<p class="admonition-title"><span class="caption-number">练习 22 </span> (Marco Polo)</p>
+<section id="exercise-content">
+<p>编写 Bash 函数 <code class="docutils literal notranslate"><span class="pre">marco</span></code> 保存当前目录，<code class="docutils literal notranslate"><span class="pre">polo</span></code> 从任意位置返回该目录。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/command-line-environment-solution-7">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-cli-marco-polo"> 练习 22 (Marco Polo)</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">marco<span class="o">()</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nv">MARCO_DIR</span><span class="o">=</span><span class="nv">$PWD</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
+</span><span data-line="2">polo<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+</span><span data-line="3"><span class="w">  </span><span class="o">[[</span><span class="w"> </span>-n<span class="w"> </span><span class="si">${</span><span class="nv">MARCO_DIR</span><span class="k">:-</span><span class="si">}</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;请先运行 marco&#39;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span><span class="p">;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
+</span><span data-line="4"><span class="w">  </span><span class="nb">cd</span><span class="w"> </span>--<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$MARCO_DIR</span><span class="s2">&quot;</span>
+</span><span data-line="5"><span class="o">}</span>
+</span></pre></div>
+</div>
+<p>用 <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">marco.sh</span></code> 加载，函数必须在当前 Shell 中运行，才能让 <code class="docutils literal notranslate"><span class="pre">cd</span></code> 生效。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-cli-rare-failure">
+
+<p class="admonition-title"><span class="caption-number">练习 23 </span> (捕获偶发失败)</p>
+<section id="exercise-content">
+<p>反复运行官方给出的随机失败脚本，分别捕获 stdout、stderr，并在失败时输出日志与运行次数。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/command-line-environment-solution-9">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-cli-rare-failure"> 练习 23 (捕获偶发失败)</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="ch">#!/usr/bin/env bash</span>
+</span><span data-line="2"><span class="nv">count</span><span class="o">=</span><span class="m">0</span>
+</span><span data-line="3"><span class="k">while</span><span class="w"> </span>true<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+</span><span data-line="4"><span class="w">  </span><span class="o">((</span><span class="nv">count</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="m">1</span><span class="o">))</span>
+</span><span data-line="5"><span class="w">  </span><span class="k">if</span><span class="w"> </span>./random.sh<span class="w"> </span>&gt;stdout.log<span class="w"> </span><span class="m">2</span>&gt;stderr.log<span class="p">;</span><span class="w"> </span><span class="k">then</span>
+</span><span data-line="6"><span class="w">    </span><span class="k">continue</span>
+</span><span data-line="7"><span class="w">  </span><span class="k">fi</span>
+</span><span data-line="8"><span class="w">  </span><span class="nv">status</span><span class="o">=</span><span class="nv">$?</span>
+</span><span data-line="9"><span class="w">  </span><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;第 %d 次失败，退出码 %d\n&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$count</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$status</span><span class="s2">&quot;</span>
+</span><span data-line="10"><span class="w">  </span>cat<span class="w"> </span>stdout.log<span class="w"> </span>stderr.log
+</span><span data-line="11"><span class="w">  </span><span class="k">break</span>
+</span><span data-line="12"><span class="k">done</span>
+</span></pre></div>
+</div>
+<p>不要用未初始化的 <code class="docutils literal notranslate"><span class="pre">$?</span></code> 控制第一次循环；应直接把被测命令放进 <code class="docutils literal notranslate"><span class="pre">if</span></code>。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-cli-job-control">
+
+<p class="admonition-title"><span class="caption-number">练习 24 </span> (作业控制)</p>
+<section id="exercise-content">
+<p>启动 <code class="docutils literal notranslate"><span class="pre">sleep</span> <span class="pre">10000</span></code>，用 <code class="docutils literal notranslate"><span class="pre">Ctrl-Z</span></code> 暂停、<code class="docutils literal notranslate"><span class="pre">bg</span></code> 恢复，再用 <code class="docutils literal notranslate"><span class="pre">pgrep</span> <span class="pre">-lf</span></code> 查找并用 <code class="docutils literal notranslate"><span class="pre">pkill</span></code> 终止，全程不要手输 PID。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/command-line-environment-solution-11">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-cli-job-control"> 练习 24 (作业控制)</a></p>
+<section id="solution-content">
+<p>执行 <code class="docutils literal notranslate"><span class="pre">pgrep</span> <span class="pre">-lf</span> <span class="pre">'sleep</span> <span class="pre">10000'</span></code> 核对匹配范围，再运行 <code class="docutils literal notranslate"><span class="pre">pkill</span> <span class="pre">-f</span> <span class="pre">'^sleep</span> <span class="pre">10000$'</span></code>。宽泛的 <code class="docutils literal notranslate"><span class="pre">pkill</span> <span class="pre">sleep</span></code> 可能误杀别人的任务，因此先查后杀并尽量收紧模式。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-cli-pidwait">
+
+<p class="admonition-title"><span class="caption-number">练习 25 </span> (等待任意 PID)</p>
+<section id="exercise-content">
+<p>先用 <code class="docutils literal notranslate"><span class="pre">wait</span></code> 让 <code class="docutils literal notranslate"><span class="pre">ls</span></code> 等待 <code class="docutils literal notranslate"><span class="pre">sleep</span> <span class="pre">60</span> <span class="pre">&amp;</span></code>。再编写 <code class="docutils literal notranslate"><span class="pre">pidwait</span> <span class="pre">PID</span></code>，使用 <code class="docutils literal notranslate"><span class="pre">kill</span> <span class="pre">-0</span></code> 等待非子进程结束，并避免忙等。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/command-line-environment-solution-13">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-cli-pidwait"> 练习 25 (等待任意 PID)</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">sleep<span class="w"> </span><span class="m">60</span><span class="w"> </span><span class="p">&amp;</span><span class="w"> </span><span class="nv">pid</span><span class="o">=</span><span class="nv">$!</span>
+</span><span data-line="2"><span class="nb">wait</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$pid</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>ls
+</span><span data-line="3">
+</span><span data-line="4">pidwait<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+</span><span data-line="5"><span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="nb">kill</span><span class="w"> </span>-0<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>sleep<span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
+</span><span data-line="6"><span class="o">}</span>
+</span></pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">kill</span> <span class="pre">-0</span></code> 只检查进程是否存在/可访问。PID 可能被复用；严谨工具还应核对进程启动时间或使用 pidfd 等平台能力。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-cli-recent-files">
+
+<p class="admonition-title"><span class="caption-number">练习 26 </span> (按修改时间列出文件)</p>
+<section id="exercise-content">
+<p>递归找出目录中最新修改的文件，并推广为按时间排列全部文件。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/command-line-environment-solution-15">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-cli-recent-files"> 练习 26 (按修改时间列出文件)</a></p>
+<section id="solution-content">
+<p>GNU 工具：<code class="docutils literal notranslate"><span class="pre">find</span> <span class="pre">.</span> <span class="pre">-type</span> <span class="pre">f</span> <span class="pre">-printf</span> <span class="pre">'%T&#64;</span> <span class="pre">%p\0'</span> <span class="pre">|</span> <span class="pre">sort</span> <span class="pre">-z</span> <span class="pre">-nr</span> <span class="pre">|</span> <span class="pre">tr</span> <span class="pre">'\0'</span> <span class="pre">'\n'</span></code>，首行最新。若文件名可含换行，不要用最后的 <code class="docutils literal notranslate"><span class="pre">tr</span></code>；交给支持 NUL 的后续程序处理。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-cli-tmux">
+
+<p class="admonition-title"><span class="caption-number">练习 27 </span> (tmux 入门)</p>
+<section id="exercise-content">
+<p>完成官方链接的 tmux 教程，并至少自定义一个按键或状态栏设置。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/command-line-environment-solution-17">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-cli-tmux"> 练习 27 (tmux 入门)</a></p>
+<section id="solution-content">
+<p>验收：能创建命名会话和两个窗格，<code class="docutils literal notranslate"><span class="pre">Ctrl-b</span> <span class="pre">d</span></code> 脱离后用 <code class="docutils literal notranslate"><span class="pre">tmux</span> <span class="pre">attach</span> <span class="pre">-t</span> <span class="pre">NAME</span></code> 恢复；把自定义写入 <code class="docutils literal notranslate"><span class="pre">~/.tmux.conf</span></code>，再用 <code class="docutils literal notranslate"><span class="pre">tmux</span> <span class="pre">source-file</span> <span class="pre">~/.tmux.conf</span></code> 重载。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-cli-alias-dc">
+
+<p class="admonition-title"><span class="caption-number">练习 28 </span> (修正 dc 手误)</p>
+<section id="exercise-content">
+<p>创建别名 <code class="docutils literal notranslate"><span class="pre">dc</span></code>，使其等价于 <code class="docutils literal notranslate"><span class="pre">cd</span></code>。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/command-line-environment-solution-19">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-cli-alias-dc"> 练习 28 (修正 dc 手误)</a></p>
+<section id="solution-content">
+<p>在 <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> 或 <code class="docutils literal notranslate"><span class="pre">~/.zshrc</span></code> 中加入 <code class="docutils literal notranslate"><span class="pre">alias</span> <span class="pre">dc=cd</span></code>，然后重新打开 Shell 或 <code class="docutils literal notranslate"><span class="pre">source</span></code> 对应文件。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-cli-history-alias">
+
+<p class="admonition-title"><span class="caption-number">练习 29 </span> (从历史记录设计别名)</p>
+<section id="exercise-content">
+<p>统计最常使用的十条命令，并为确实高频且不危险的命令设计缩写。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/command-line-environment-solution-21">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-cli-history-alias"> 练习 29 (从历史记录设计别名)</a></p>
+<section id="solution-content">
+<p>Bash 使用官方命令；Zsh 把开头改成 <code class="docutils literal notranslate"><span class="pre">history</span> <span class="pre">1</span></code>。优先缩短只读命令，例如 <code class="docutils literal notranslate"><span class="pre">alias</span> <span class="pre">gs='git</span> <span class="pre">status'</span></code>；不要为 <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">-rf</span></code> 等破坏性组合创建隐蔽别名。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-cli-dotfiles-repo">
+
+<p class="admonition-title"><span class="caption-number">练习 30 </span> (建立 dotfiles 仓库)</p>
+<section id="exercise-content">
+<p>创建 dotfiles 目录并启用版本控制。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/command-line-environment-solution-23">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-cli-dotfiles-repo"> 练习 30 (建立 dotfiles 仓库)</a></p>
+<section id="solution-content">
+<p><code class="docutils literal notranslate"><span class="pre">mkdir</span> <span class="pre">-p</span> <span class="pre">~/dotfiles</span> <span class="pre">&amp;&amp;</span> <span class="pre">git</span> <span class="pre">-C</span> <span class="pre">~/dotfiles</span> <span class="pre">init</span></code>。添加 README，说明支持的平台、安装方式和备份策略；秘密、机器专属缓存与私钥必须放入 <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code>。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-cli-dotfiles-config">
+
+<p class="admonition-title"><span class="caption-number">练习 31 </span> (添加一项配置)</p>
+<section id="exercise-content">
+<p>把至少一个程序的可见自定义加入仓库，例如提示符或 Git 别名。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/command-line-environment-solution-25">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-cli-dotfiles-config"> 练习 31 (添加一项配置)</a></p>
+<section id="solution-content">
+<p>可把 <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">PS1='\u&#64;\h:\w\$</span> <span class="pre">'</span></code> 写入仓库中的 <code class="docutils literal notranslate"><span class="pre">bashrc</span></code>。先在当前会话验证，再由安装脚本链接到 <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code>，不要直接覆盖已有文件。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-cli-dotfiles-install">
+
+<p class="admonition-title"><span class="caption-number">练习 32 </span> (自动安装 dotfiles)</p>
+<section id="exercise-content">
+<p>编写可重复运行的安装方法，用符号链接或专用工具部署配置。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/command-line-environment-solution-27">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-cli-dotfiles-install"> 练习 32 (自动安装 dotfiles)</a></p>
+<section id="solution-content">
+<p>脚本应先备份冲突文件，再用 <code class="docutils literal notranslate"><span class="pre">ln</span> <span class="pre">-sfn</span> <span class="pre">&quot;$repo/bashrc&quot;</span> <span class="pre">&quot;$HOME/.bashrc&quot;</span></code> 等显式映射创建链接；第二次执行不能报错或生成重复内容。可选工具有 GNU Stow、chezmoi 与 yadm。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-cli-dotfiles-clean-test">
+
+<p class="admonition-title"><span class="caption-number">练习 33 </span> (在干净系统测试)</p>
+<section id="exercise-content">
+<p>在新虚拟机或容器中测试安装脚本。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/command-line-environment-solution-29">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-cli-dotfiles-clean-test"> 练习 33 (在干净系统测试)</a></p>
+<section id="solution-content">
+<p>验收至少包括：首次安装成功、重复安装成功、缺少可选程序时给出清晰提示、打开新 Shell 无错误。容器无法完整模拟桌面和 systemd，最终仍应在一次干净 VM 中验证。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-cli-dotfiles-migrate">
+
+<p class="admonition-title"><span class="caption-number">练习 34 </span> (迁移现有配置)</p>
+<section id="exercise-content">
+<p>把当前使用的工具配置逐步迁入仓库。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/command-line-environment-solution-31">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-cli-dotfiles-migrate"> 练习 34 (迁移现有配置)</a></p>
+<section id="solution-content">
+<p>按“一个工具一个提交”迁移，每次先备份、链接并重启工具验证。将主机差异放入未跟踪的 <code class="docutils literal notranslate"><span class="pre">local.*</span></code> 文件，再由公共配置条件加载。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-cli-dotfiles-publish">
+
+<p class="admonition-title"><span class="caption-number">练习 35 </span> (发布 dotfiles)</p>
+<section id="exercise-content">
+<p>把清理后的 dotfiles 发布到 GitHub。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/command-line-environment-solution-33">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-cli-dotfiles-publish"> 练习 35 (发布 dotfiles)</a></p>
+<section id="solution-content">
+<p>发布前运行秘密扫描并人工检查历史，尤其是 <code class="docutils literal notranslate"><span class="pre">.ssh</span></code>、云凭据、Cookie、访问令牌与公司内网地址。秘密一旦进入 Git 历史，仅在最新提交删除并不足够，还必须撤销并轮换凭据。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-cli-ssh-key">
+
+<p class="admonition-title"><span class="caption-number">练习 36 </span> (生成 SSH 密钥)</p>
+<section id="exercise-content">
+<p>检查 <code class="docutils literal notranslate"><span class="pre">~/.ssh/</span></code>；若没有密钥，运行 <code class="docutils literal notranslate"><span class="pre">ssh-keygen</span> <span class="pre">-a</span> <span class="pre">100</span> <span class="pre">-t</span> <span class="pre">ed25519</span></code>，设置口令并使用 <code class="docutils literal notranslate"><span class="pre">ssh-agent</span></code>。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/command-line-environment-solution-35">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-cli-ssh-key"> 练习 36 (生成 SSH 密钥)</a></p>
+<section id="solution-content">
+<p>私钥通常为 <code class="docutils literal notranslate"><span class="pre">~/.ssh/id_ed25519</span></code>，权限应为 600，绝不能复制到服务器或提交仓库；<code class="docutils literal notranslate"><span class="pre">.pub</span></code> 公钥可分发。<code class="docutils literal notranslate"><span class="pre">ssh-add</span> <span class="pre">~/.ssh/id_ed25519</span></code> 把解密后的使用权交给当前 agent 会话。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-cli-ssh-config">
+
+<p class="admonition-title"><span class="caption-number">练习 37 </span> (编写 SSH 配置)</p>
+<section id="exercise-content">
+<p>在 <code class="docutils literal notranslate"><span class="pre">~/.ssh/config</span></code> 中配置别名 <code class="docutils literal notranslate"><span class="pre">vm</span></code>、用户名、地址、密钥，并把本机 9999 转发到远端 8888。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/command-line-environment-solution-37">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-cli-ssh-config"> 练习 37 (编写 SSH 配置)</a></p>
+<section id="solution-content">
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span data-line="1">Host vm
+</span><span data-line="2">    User username_goes_here
+</span><span data-line="3">    HostName ip_goes_here
+</span><span data-line="4">    IdentityFile ~/.ssh/id_ed25519
+</span><span data-line="5">    LocalForward 9999 localhost:8888
+</span></pre></div>
+</div>
+<p>运行 <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">-G</span> <span class="pre">vm</span></code> 可查看合并后的最终配置；<code class="docutils literal notranslate"><span class="pre">chmod</span> <span class="pre">600</span> <span class="pre">~/.ssh/config</span></code>。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-cli-ssh-copy-id">
+
+<p class="admonition-title"><span class="caption-number">练习 38 </span> (安装公钥)</p>
+<section id="exercise-content">
+<p>使用 <code class="docutils literal notranslate"><span class="pre">ssh-copy-id</span> <span class="pre">vm</span></code> 把公钥加入服务器。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/command-line-environment-solution-39">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-cli-ssh-copy-id"> 练习 38 (安装公钥)</a></p>
+<section id="solution-content">
+<p>先保留一个已登录的备用会话，再开新终端运行 <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">vm</span></code> 验证公钥认证。确认成功前不要关闭密码登录，否则可能把自己锁在服务器外。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-cli-ssh-forward">
+
+<p class="admonition-title"><span class="caption-number">练习 39 </span> (测试本地端口转发)</p>
+<section id="exercise-content">
+<p>在 VM 执行 <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">http.server</span> <span class="pre">8888</span></code>，从本机访问 <code class="docutils literal notranslate"><span class="pre">http://localhost:9999</span></code>。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/command-line-environment-solution-41">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-cli-ssh-forward"> 练习 39 (测试本地端口转发)</a></p>
+<section id="solution-content">
+<p>保持 SSH 会话运行，并在本机执行 <code class="docutils literal notranslate"><span class="pre">curl</span> <span class="pre">-I</span> <span class="pre">http://localhost:9999</span></code>。请求经加密隧道到达远端视角的 <code class="docutils literal notranslate"><span class="pre">localhost:8888</span></code>，无需把 8888 暴露给外网。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-cli-ssh-hardening">
+
+<p class="admonition-title"><span class="caption-number">练习 40 </span> (加固 SSH 服务)</p>
+<section id="exercise-content">
+<p>确认密钥登录可用后，禁用密码认证与 root 登录，重启服务并再次连接。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/command-line-environment-solution-43">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-cli-ssh-hardening"> 练习 40 (加固 SSH 服务)</a></p>
+<section id="solution-content">
+<p>先运行 <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">sshd</span> <span class="pre">-t</span></code> 校验配置，再 reload/restart。设置通常是 <code class="docutils literal notranslate"><span class="pre">PasswordAuthentication</span> <span class="pre">no</span></code> 与 <code class="docutils literal notranslate"><span class="pre">PermitRootLogin</span> <span class="pre">no</span></code>；不同发行版服务名可能是 <code class="docutils literal notranslate"><span class="pre">ssh</span></code> 或 <code class="docutils literal notranslate"><span class="pre">sshd</span></code>。始终保留备用会话以便回滚。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-cli-mosh">
+
+<p class="admonition-title"><span class="caption-number">练习 41 </span> (体验 mosh)</p>
+<section id="exercise-content">
+<p>安装 mosh，连接 VM 后短暂断网，观察网络恢复后的会话。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/command-line-environment-solution-45">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-cli-mosh"> 练习 41 (体验 mosh)</a></p>
+<section id="solution-content">
+<p>mosh 会在客户端本地回显并在网络恢复后同步状态，通常能从漫游或断网中恢复；它需要服务器安装 mosh，并允许相应 UDP 端口，且不替代 SSH 的认证与初始连接。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-cli-ssh-background-forward">
+
+<p class="admonition-title"><span class="caption-number">练习 42 </span> (后台端口转发)</p>
+<section id="exercise-content">
+<p>调查 SSH 的 <code class="docutils literal notranslate"><span class="pre">-N</span></code> 与 <code class="docutils literal notranslate"><span class="pre">-f</span></code>，建立后台本地端口转发。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/command-line-environment-solution-47">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-cli-ssh-background-forward"> 练习 42 (后台端口转发)</a></p>
+<section id="solution-content">
+<p><code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">-fN</span> <span class="pre">-L</span> <span class="pre">9999:localhost:8888</span> <span class="pre">vm</span></code>：<code class="docutils literal notranslate"><span class="pre">-N</span></code> 不执行远程命令，<code class="docutils literal notranslate"><span class="pre">-f</span></code> 在认证后进入后台。调试时先去掉 <code class="docutils literal notranslate"><span class="pre">-f</span></code> 并加 <code class="docutils literal notranslate"><span class="pre">-v</span></code>；长期隧道可配 <code class="docutils literal notranslate"><span class="pre">ExitOnForwardFailure</span> <span class="pre">yes</span></code> 并交给服务管理器监督。</p>
+</section>
+</div>
+</section>
+<section id="id5">
+<h2>许可与署名<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
+<p>本页依据 MIT Missing Semester 2026 第二讲<a class="reference external" href="https://missing.csail.mit.edu/2026/command-line-environment/">官方 notes</a>整理，原材料采用 <a class="reference external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA</a> 许可。</p>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>回到顶部</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="course-shell.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>上一章</span><div class="title">第一讲：课程概览与 Shell 入门</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="development-environment.html">
+      <div class="page-info">
+        <span>下一章</span>
+        <div class="title">第三讲：开发环境与工具</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2024, ezelab</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+<a href="https://github.com/eze-root/dev_zero_to_hero" aria-label="GitHub">
+  <iconify-icon icon="simple-icons:github"></iconify-icon>
+</a></div>
+    </div>
+  </div>
+</footer>
+      <script src="../_static/documentation_options.js?v=a1b8b494"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "eze-root/dev_zero_to_hero");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="../_static/shibuya.js?v=cac61aee"></script></body>
+</html>

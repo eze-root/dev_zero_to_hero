@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh" data-accent-color="tomato" data-content_root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>第三讲：开发环境与工具 - Develop from Zero to Hero</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="第四讲：调试与性能分析" href="debugging-profiling.html" /><link rel="prev" title="第二讲：命令行环境" href="command-line-environment.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=44020203" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/source-sans@3.52.0/source-sans-3VF.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/course.css?v=1bccc19b" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="第三讲：开发环境与工具"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../index.html">
+      
+      
+      <strong>Develop from Zero to Hero</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="搜索" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials">
+  <a href="https://github.com/eze-root/dev_zero_to_hero" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="切换到亮色模式"
+data-aria-light="切换到暗色模式"
+data-aria-dark="切换到自动模式">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="1"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Tutorial:</span></p>
+<ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../tutorial/git.html">Git for Teams</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../tutorial/os_mp_celery_scrapy.html">Scrapy + Celery + Multiprocessing</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Project:</span></p>
+<ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../engineer/sphinx_design.html">Sphinx_design</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">&#35745;&#31639;&#26426;&#25945;&#32946;&#20013;&#32570;&#22833;&#30340;&#19968;&#35838;:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">&#35745;&#31639;&#26426;&#25945;&#32946;&#20013;&#32570;&#22833;&#30340;&#19968;&#35838;</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="course-shell.html">&#31532;&#19968;&#35762;&#65306;&#35838;&#31243;&#27010;&#35272;&#19982; Shell &#20837;&#38376;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command-line-environment.html">&#31532;&#20108;&#35762;&#65306;&#21629;&#20196;&#34892;&#29615;&#22659;</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">&#31532;&#19977;&#35762;&#65306;&#24320;&#21457;&#29615;&#22659;&#19982;&#24037;&#20855;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging-profiling.html">&#31532;&#22235;&#35762;&#65306;&#35843;&#35797;&#19982;&#24615;&#33021;&#20998;&#26512;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="version-control.html">&#31532;&#20116;&#35762;&#65306;&#29256;&#26412;&#25511;&#21046;&#19982; Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shipping-code.html">&#31532;&#20845;&#35762;&#65306;&#25171;&#21253;&#19982;&#20132;&#20184;&#20195;&#30721;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agentic-coding.html">&#31532;&#19971;&#35762;&#65306;&#26234;&#33021;&#20307;&#32534;&#31243;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="beyond-code.html">&#31532;&#20843;&#35762;&#65306;&#20195;&#30721;&#20043;&#22806;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-quality.html">&#31532;&#20061;&#35762;&#65306;&#20195;&#30721;&#36136;&#37327;</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Articles:</span></p>
+<ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../2024-summer/readme.html">7 Days for beginner</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day0.html">Day0 Markdown</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day1.html">Day1 Linux&#12289;VScode&#19982;Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day2.html">Day2 The Missing Semester of Your CS Education</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day3.html">Day3 Python &#24320;&#21457;&#29615;&#22659;&#25645;&#36733;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day4.html">Day4 SSH&#19982;Django</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day5.html">Day5 Docker&#19982;Scrapy&#29228;&#34411;&#39033;&#30446;</a></li>
+</ul>
+</li>
+</ul>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>该页内容</h3><ul>
+<li><a class="reference internal" href="#vim">&#32534;&#36753;&#22120;&#19982; Vim</a></li>
+<li><a class="reference internal" href="#id2">&#20195;&#30721;&#26234;&#33021;&#19982;&#35821;&#35328;&#26381;&#21153;&#22120;</a></li>
+<li><a class="reference internal" href="#ai">AI &#36741;&#21161;&#24320;&#21457;&#30340;&#19977;&#31181;&#24418;&#24577;</a></li>
+<li><a class="reference internal" href="#ide">IDE &#25193;&#23637;&#33021;&#21147;</a></li>
+<li><a class="reference internal" href="#exercises">Exercises</a></li>
+<li><a class="reference internal" href="#id3">&#35768;&#21487;&#19982;&#32626;&#21517;</a></li>
+</ul>
+</div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/eze-root/dev_zero_to_hero"
+  data-type="github" data-user="eze-root" data-repo="dev_zero_to_hero">
+  <span class="w-8 flex items-center justify-around shrink-0 text-3xl">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </span>
+  <span class="flex-grow px-2 break-all">
+    
+    
+      <span>dev_zero_to_hero</span>
+    
+    <span class="flex text-sm repo-stats-count">
+      <span class="flex items-center pr-3">
+        <iconify-icon icon="lucide:star"></iconify-icon>
+        <strong class="js-repo-stars ml-1">0</strong>
+      </span>
+      <span class="flex items-center">
+        <iconify-icon icon="lucide:git-fork"></iconify-icon>
+        <strong class="js-repo-forks ml-1">0</strong>
+      </span>
+    </span>
+  </span>
+</a><div class="edit-this-page">
+  <a href="https://github.com/eze-root/dev_zero_to_hero/blob/main/source/missing-semester/development-environment.md">编辑此页面</a>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">Develop from Zero to Hero</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">计算机教育中缺失的一课</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">第三讲：开发环境与工具</strong>
+        <meta itemprop="position" content="3" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue dark-code" role="main">
+          <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>第三讲：开发环境与工具<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<blockquote>
+<div><p>官方 notes：<a class="reference external" href="https://missing.csail.mit.edu/2026/development-environment/">Development Environment and Tools</a><br />
+视频：<a class="reference external" href="https://www.youtube.com/watch?v=QnM1nVzrkx8">YouTube</a></p>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>开发环境不是某一个编辑器，而是编辑、理解、运行、检查代码的一组工具。应当基本熟悉图形 IDE 与终端工作流，并至少熟练掌握其中一种。</p>
+</div>
+<section id="vim">
+<h2>编辑器与 Vim<a class="headerlink" href="#vim" title="Link to this heading">¶</a></h2>
+<p>图形 IDE 通常易于上手、集成完整；tmux、Vim、Shell 与语言工具组成的终端工作流更轻量，也适合远程或无法安装 GUI 的环境。若尚无偏好，官方建议从 VS Code 开始。</p>
+<p>编程时，大部分时间花在定位、阅读和局部修改，而不是连续输入长段文字。Vim 针对这种分布设计：它是模态编辑器，也把编辑接口设计成一门可组合的语言。</p>
+<ul class="simple">
+<li><p>Normal：移动和执行编辑动作；</p></li>
+<li><p>Insert：插入文本；</p></li>
+<li><p>Replace：覆盖文本；</p></li>
+<li><p>Visual / Visual Line / Visual Block：选择；</p></li>
+<li><p>Command-line：运行 <code class="docutils literal notranslate"><span class="pre">:</span></code> 命令。</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">Esc</span></code> 返回 Normal；<code class="docutils literal notranslate"><span class="pre">i</span></code> 插入，<code class="docutils literal notranslate"><span class="pre">R</span></code> 替换，<code class="docutils literal notranslate"><span class="pre">v</span></code>/<code class="docutils literal notranslate"><span class="pre">V</span></code>/<code class="docutils literal notranslate"><span class="pre">Ctrl-v</span></code> 进入三种选择模式，<code class="docutils literal notranslate"><span class="pre">:</span></code> 进入命令行。Vim 的动作像“动词 + 名词”：<code class="docutils literal notranslate"><span class="pre">d</span></code> 删除，<code class="docutils literal notranslate"><span class="pre">c</span></code> 修改，<code class="docutils literal notranslate"><span class="pre">y</span></code> 复制；<code class="docutils literal notranslate"><span class="pre">w</span></code> 单词，<code class="docutils literal notranslate"><span class="pre">$</span></code> 行尾，<code class="docutils literal notranslate"><span class="pre">i(</span></code> 括号内部。因此 <code class="docutils literal notranslate"><span class="pre">dw</span></code> 删除单词，<code class="docutils literal notranslate"><span class="pre">d$</span></code> 删除到行尾，<code class="docutils literal notranslate"><span class="pre">ci(</span></code> 修改当前括号内部。数量也能组合：<code class="docutils literal notranslate"><span class="pre">3w</span></code>、<code class="docutils literal notranslate"><span class="pre">5j</span></code>、<code class="docutils literal notranslate"><span class="pre">7dw</span></code>。</p>
+<p>常见移动包括 <code class="docutils literal notranslate"><span class="pre">hjkl</span></code>、<code class="docutils literal notranslate"><span class="pre">w/b/e</span></code>、<code class="docutils literal notranslate"><span class="pre">0/^/$</span></code>、<code class="docutils literal notranslate"><span class="pre">gg/G</span></code>、<code class="docutils literal notranslate"><span class="pre">%</span></code>、<code class="docutils literal notranslate"><span class="pre">f{char}</span></code> 与 <code class="docutils literal notranslate"><span class="pre">/regex</span></code>。真正的学习方法不是背完表格，而是先完成 <code class="docutils literal notranslate"><span class="pre">vimtutor</span></code>，再在日常编辑器中启用 Vim 模式；每次发现低效动作，就查找更好的组合。</p>
+</section>
+<section id="id2">
+<h2>代码智能与语言服务器<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>语言服务器通过 <a class="reference external" href="https://microsoft.github.io/language-server-protocol/">Language Server Protocol</a> 把语言语义能力与编辑器解耦。它通常提供：</p>
+<ul class="simple">
+<li><p>补全与悬浮文档；</p></li>
+<li><p>跳转定义和查找引用；</p></li>
+<li><p>自动导入、整理导入；</p></li>
+<li><p>格式化、类型检查和 lint 诊断。</p></li>
+</ul>
+<p>“扩展已经安装”不等于“环境已经正确”。例如 Python 语言服务器必须指向项目实际使用的虚拟环境，才能识别依赖；Go 的 <code class="docutils literal notranslate"><span class="pre">gopls</span></code>、Rust 的 rust-analyzer 也需要在正确的项目根目录和工具链中运行。验收时应跳到第三方依赖定义、查找引用并观察诊断，而不只看语法高亮。</p>
+</section>
+<section id="ai">
+<h2>AI 辅助开发的三种形态<a class="headerlink" href="#ai" title="Link to this heading">¶</a></h2>
+<p>AI 补全在光标处续写，适合样板代码和局部模式；注释、函数名和类型提示都会成为上下文。行内对话对选区提出修改，适合重构一小段已有代码。编码智能体则能搜索仓库、编辑多个文件并运行命令，后续课程会单独讨论。</p>
+<p>无论哪种形态，都要审查边界条件、依赖选择、安全性和测试结果。模型生成“看起来合理”的代码很容易，但它并不知道项目真实约束，除非这些约束存在于上下文并能通过工具验证。</p>
+</section>
+<section id="ide">
+<h2>IDE 扩展能力<a class="headerlink" href="#ide" title="Link to this heading">¶</a></h2>
+<p>开发容器能把工具链放入隔离、可复用的容器；Remote SSH 允许在远端机器编辑运行；协同编辑支持多人同步修改。扩展拥有读取代码、运行命令甚至访问凭据的能力，应核对发布者、权限与维护状态，保持最小安装集合。</p>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">¶</a></h2>
+<div class="exercise admonition" id="exercise-dev-vim-month">
+
+<p class="admonition-title"><span class="caption-number">练习 43 </span> (一个月的 Vim 模式)</p>
+<section id="exercise-content">
+<p>在编辑器、Shell 等支持 Vim 模式的软件中启用它，连续使用一个月；每次发现低效动作时记录问题并查找更好的命令。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/development-environment-solution-1">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-dev-vim-month"> 练习 43 (一个月的 Vim 模式)</a></p>
+<section id="solution-content">
+<p>这是一项习惯训练，没有唯一输出。建议维护日志：日期、原动作、学到的命令、是否形成肌肉记忆。最低验收是熟练切换模式，使用 <code class="docutils literal notranslate"><span class="pre">hjkl</span></code>、词/行移动、搜索、<code class="docutils literal notranslate"><span class="pre">d/c/y/p</span></code>、撤销重做，并能在不依赖鼠标的情况下完成一次真实改动。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-dev-vimgolf">
+
+<p class="admonition-title"><span class="caption-number">练习 44 </span> (完成 VimGolf)</p>
+<section id="exercise-content">
+<p>从 <a class="reference external" href="https://www.vimgolf.com/">VimGolf</a> 选择并完成一道挑战。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/development-environment-solution-3">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-dev-vimgolf"> 练习 44 (完成 VimGolf)</a></p>
+<section id="solution-content">
+<p>先用自己能理解的命令完成，再阅读高分解法。不要只追求最少按键；解释每个动作为什么成立，并挑出一到两个可迁移到日常工作的组合，才算完成学习闭环。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-dev-lsp">
+
+<p class="admonition-title"><span class="caption-number">练习 45 </span> (配置语言服务器)</p>
+<section id="exercise-content">
+<p>为真实项目配置 IDE 扩展和语言服务器，确认包括第三方依赖在内的跳转定义、引用查找、补全与诊断都工作。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/development-environment-solution-5">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-dev-lsp"> 练习 45 (配置语言服务器)</a></p>
+<section id="solution-content">
+<p>检查清单：编辑器识别正确项目根；选择了正确解释器/SDK；语言服务器日志无启动错误；能从调用跳到项目函数和已安装依赖；故意制造类型或语法问题时出现诊断；重命名能更新引用。只出现颜色不代表 LSP 成功。</p>
+</section>
+</div>
+<div class="exercise admonition" id="exercise-dev-extension">
+
+<p class="admonition-title"><span class="caption-number">练习 46 </span> (评估一个扩展)</p>
+<section id="exercise-content">
+<p>浏览编辑器扩展列表，选择并安装一个真正有用的扩展。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/development-environment-solution-7">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-dev-extension"> 练习 46 (评估一个扩展)</a></p>
+<section id="solution-content">
+<p>记录它解决的问题、发布者、所需权限、最近更新时间与替代方案；安装后完成一个具体任务，并比较安装前后的步骤。若收益不明确或索取无关权限，应卸载。扩展越少，启动速度、稳定性与供应链风险通常越容易控制。</p>
+</section>
+</div>
+</section>
+<section id="id3">
+<h2>许可与署名<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<p>本页依据 MIT Missing Semester 2026 第三讲<a class="reference external" href="https://missing.csail.mit.edu/2026/development-environment/">官方 notes</a>整理，原材料采用 <a class="reference external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA</a> 许可。</p>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>回到顶部</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="command-line-environment.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>上一章</span><div class="title">第二讲：命令行环境</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="debugging-profiling.html">
+      <div class="page-info">
+        <span>下一章</span>
+        <div class="title">第四讲：调试与性能分析</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2024, ezelab</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+<a href="https://github.com/eze-root/dev_zero_to_hero" aria-label="GitHub">
+  <iconify-icon icon="simple-icons:github"></iconify-icon>
+</a></div>
+    </div>
+  </div>
+</footer>
+      <script src="../_static/documentation_options.js?v=a1b8b494"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "eze-root/dev_zero_to_hero");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="../_static/shibuya.js?v=cac61aee"></script></body>
+</html>

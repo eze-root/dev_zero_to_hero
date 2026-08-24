@@ -2,7 +2,7 @@
 <html lang="zh" data-accent-color="tomato" data-content_root="../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>第一讲：课程概览与 Shell 入门 - Develop from Zero to Hero</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="7 Days for beginner" href="../2024-summer/readme.html" /><link rel="prev" title="计算机教育中缺失的一课" href="index.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>第一讲：课程概览与 Shell 入门 - Develop from Zero to Hero</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="第二讲：命令行环境" href="command-line-environment.html" /><link rel="prev" title="计算机教育中缺失的一课" href="index.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
@@ -76,6 +76,14 @@ data-aria-dark="切换到自动模式">
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">&#35745;&#31639;&#26426;&#25945;&#32946;&#20013;&#32570;&#22833;&#30340;&#19968;&#35838;</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">&#31532;&#19968;&#35762;&#65306;&#35838;&#31243;&#27010;&#35272;&#19982; Shell &#20837;&#38376;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command-line-environment.html">&#31532;&#20108;&#35762;&#65306;&#21629;&#20196;&#34892;&#29615;&#22659;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development-environment.html">&#31532;&#19977;&#35762;&#65306;&#24320;&#21457;&#29615;&#22659;&#19982;&#24037;&#20855;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging-profiling.html">&#31532;&#22235;&#35762;&#65306;&#35843;&#35797;&#19982;&#24615;&#33021;&#20998;&#26512;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="version-control.html">&#31532;&#20116;&#35762;&#65306;&#29256;&#26412;&#25511;&#21046;&#19982; Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shipping-code.html">&#31532;&#20845;&#35762;&#65306;&#25171;&#21253;&#19982;&#20132;&#20184;&#20195;&#30721;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agentic-coding.html">&#31532;&#19971;&#35762;&#65306;&#26234;&#33021;&#20307;&#32534;&#31243;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="beyond-code.html">&#31532;&#20843;&#35762;&#65306;&#20195;&#30721;&#20043;&#22806;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-quality.html">&#31532;&#20061;&#35762;&#65306;&#20195;&#30721;&#36136;&#37327;</a></li>
 </ul>
 </li>
 </ul>
@@ -129,7 +137,8 @@ data-aria-dark="切换到自动模式">
 </li>
 <li><a class="reference internal" href="#id15">&#19979;&#19968;&#27493;</a></li>
 <li><a class="reference internal" href="#exercises">Exercises</a></li>
-<li><a class="reference internal" href="#id16">&#35768;&#21487;&#19982;&#32626;&#21517;</a></li>
+<li><a class="reference internal" href="#id16">&#21442;&#32771;&#35299;&#31572;</a></li>
+<li><a class="reference internal" href="#id17">&#35768;&#21487;&#19982;&#32626;&#21517;</a></li>
 </ul>
 </div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/eze-root/dev_zero_to_hero"
   data-type="github" data-user="eze-root" data-repo="dev_zero_to_hero">
@@ -553,7 +562,196 @@ data-aria-dark="切换到自动模式">
 </div>
 </section>
 <section id="id16">
-<h2>许可与署名<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h2>
+<h2>参考解答<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h2>
+<div class="solution dropdown admonition" id="missing-semester/course-shell-solution-18">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-shell-environment"> 练习 1 (确认 Unix Shell 环境)</a></p>
+<section id="solution-content">
+<p><code class="docutils literal notranslate"><span class="pre">echo</span> <span class="pre">&quot;$SHELL&quot;</span></code> 显示登录 Shell；<code class="docutils literal notranslate"><span class="pre">ps</span> <span class="pre">-p</span> <span class="pre">$$</span> <span class="pre">-o</span> <span class="pre">comm=</span></code> 显示当前正在运行的 Shell。前者可能仍是 Bash，即使你当前临时进入了 Zsh，因此最好同时检查两条命令。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/course-shell-solution-19">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-ls-long-format"> 练习 2 (阅读 ls -l 的输出)</a></p>
+<section id="solution-content">
+<p>第一位表示类型：<code class="docutils literal notranslate"><span class="pre">-</span></code> 是普通文件，<code class="docutils literal notranslate"><span class="pre">d</span></code> 是目录，<code class="docutils literal notranslate"><span class="pre">l</span></code> 是符号链接。后九位每三位一组，依次是所有者、用户组和其他用户的 <code class="docutils literal notranslate"><span class="pre">rwx</span></code> 权限。随后通常是硬链接数、所有者、用户组、大小、修改时间和名称。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/course-shell-solution-20">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-shell-globs"> 练习 3 (练习 glob 模式)</a></p>
+<section id="solution-content">
+<p><code class="docutils literal notranslate"><span class="pre">*.txt</span></code> 匹配任意长度前缀；<code class="docutils literal notranslate"><span class="pre">file?.txt</span></code> 中的 <code class="docutils literal notranslate"><span class="pre">?</span></code> 恰好匹配一个字符；<code class="docutils literal notranslate"><span class="pre">{a,b,c}.txt</span></code> 是 Shell 的花括号展开，先生成三个参数 <code class="docutils literal notranslate"><span class="pre">a.txt</span> <span class="pre">b.txt</span> <span class="pre">c.txt</span></code>，它本身不是路径匹配。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/course-shell-solution-21">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-shell-quoting"> 练习 4 (比较不同引号)</a></p>
+<section id="solution-content">
+<p>单引号中的内容完全按字面处理；双引号允许变量与命令替换；ANSI-C 引号 <code class="docutils literal notranslate"><span class="pre">$'...'</span></code> 还会解释 <code class="docutils literal notranslate"><span class="pre">\n</span></code> 等转义。示例：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;%s\n&#39;</span><span class="w"> </span><span class="s1">$&#39;$ !\n第二行&#39;</span>
+</span></pre></div>
+</div>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/course-shell-solution-22">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-standard-streams"> 练习 5 (重定向标准流)</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">ls<span class="w"> </span>/nonexistent<span class="w"> </span>/tmp<span class="w"> </span>&gt;out.txt<span class="w"> </span><span class="m">2</span>&gt;err.txt
+</span><span data-line="2">ls<span class="w"> </span>/nonexistent<span class="w"> </span>/tmp<span class="w"> </span>&gt;all.txt<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+</span><span data-line="3"><span class="c1"># Bash 也可写成：ls /nonexistent /tmp &amp;&gt;all.txt</span>
+</span></pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">2&gt;&amp;1</span></code> 必须放在 <code class="docutils literal notranslate"><span class="pre">&gt;all.txt</span></code> 之后，含义是让 stderr 指向“此刻 stdout 指向的位置”。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/course-shell-solution-23">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-exit-status"> 练习 6 (退出状态与条件执行)</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="o">[</span><span class="w"> </span>-d<span class="w"> </span>/tmp/mydir<span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span>mkdir<span class="w"> </span>/tmp/mydir
+</span></pre></div>
+</div>
+<p>实际脚本中通常直接使用可重复执行的 <code class="docutils literal notranslate"><span class="pre">mkdir</span> <span class="pre">-p</span> <span class="pre">/tmp/mydir</span></code>，还能避免检查与创建之间的竞态条件。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/course-shell-solution-24">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-cd-builtin"> 练习 7 (为什么 cd 是内建命令)</a></p>
+<section id="solution-content">
+<p>独立程序在子进程中运行，只能改变自己的工作目录；进程退出后父 Shell 的目录不会变化。<code class="docutils literal notranslate"><span class="pre">cd</span></code> 必须在 Shell 进程内执行，才能修改 Shell 后续命令所使用的工作目录。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/course-shell-solution-25">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-file-test"> 练习 8 (判断文件是否存在)</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="ch">#!/usr/bin/env bash</span>
+</span><span data-line="2"><span class="nb">set</span><span class="w"> </span>-u
+</span><span data-line="3"><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span>-ne<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+</span><span data-line="4"><span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;用法：</span><span class="nv">$0</span><span class="s2"> FILE&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+</span><span data-line="5"><span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">2</span>
+</span><span data-line="6"><span class="k">elif</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-f<span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+</span><span data-line="7"><span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2"> 是普通文件&quot;</span>
+</span><span data-line="8"><span class="k">else</span>
+</span><span data-line="9"><span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2"> 不存在或不是普通文件&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+</span><span data-line="10"><span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+</span><span data-line="11"><span class="k">fi</span>
+</span></pre></div>
+</div>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/course-shell-solution-26">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-executable-bit"> 练习 9 (理解可执行权限)</a></p>
+<section id="solution-content">
+<p><code class="docutils literal notranslate"><span class="pre">chmod</span> <span class="pre">+x</span> <span class="pre">check.sh</span></code> 为相应用户增加执行位。之后内核才允许通过 <code class="docutils literal notranslate"><span class="pre">./check.sh</span></code> 直接执行它，并依据 shebang 选择解释器。即使没有执行位，<code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">check.sh</span></code> 仍可运行，因为被执行的是 <code class="docutils literal notranslate"><span class="pre">bash</span></code>，脚本只是它读取的数据文件。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/course-shell-solution-27">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-set-x"> 练习 10 (使用 set -x 调试)</a></p>
+<section id="solution-content">
+<p><code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">-x</span></code> 会在执行前把完成变量展开、命令替换后的命令写到 stderr，默认以 <code class="docutils literal notranslate"><span class="pre">+</span></code> 开头。它适合追踪分支与参数，但可能泄露口令、令牌等敏感值，不应在含秘密信息的日志中长期启用。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/course-shell-solution-28">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-dated-backup"> 练习 11 (创建带日期的备份)</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">cp<span class="w"> </span>--<span class="w"> </span>notes.txt<span class="w"> </span><span class="s2">&quot;notes_</span><span class="k">$(</span>date<span class="w"> </span>+%F<span class="k">)</span><span class="s2">.txt&quot;</span>
+</span></pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">--</span></code> 阻止以连字符开头的文件名被当作选项，双引号避免命令替换结果被再次分词。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/course-shell-solution-29">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-parameterize-script"> 练习 12 (参数化测试脚本)</a></p>
+<section id="solution-content">
+<p>把固定测试命令替换成 <code class="docutils literal notranslate"><span class="pre">&quot;$&#64;&quot;</span></code>：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="o">[[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span>-gt<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;用法：</span><span class="nv">$0</span><span class="s2"> COMMAND [ARG ...]&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span><span class="p">;</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">2</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
+</span><span data-line="2"><span class="k">while</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span><span class="w"> </span>&gt;stdout.log<span class="w"> </span><span class="m">2</span>&gt;stderr.log<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+</span><span data-line="3"><span class="w">  </span><span class="o">((</span><span class="nv">runs</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="m">1</span><span class="o">))</span>
+</span><span data-line="4"><span class="k">done</span>
+</span></pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">$1</span></code> 只代表第一个参数；<code class="docutils literal notranslate"><span class="pre">&quot;$&#64;&quot;</span></code> 会保留所有参数各自的边界，适合转发一整条命令。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/course-shell-solution-30">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-common-extensions"> 练习 13 (统计常见文件扩展名)</a></p>
+<section id="solution-content">
+<p>一种近似统计方法如下；没有扩展名的文件会被忽略：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">find<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">&quot;</span><span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-printf<span class="w"> </span><span class="s1">&#39;%f\n&#39;</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="se">\</span>
+</span><span data-line="2"><span class="w">  </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span>-F.<span class="w"> </span><span class="s1">&#39;NF&gt;1 {print &quot;.&quot; $NF}&#39;</span><span class="w"> </span><span class="se">\</span>
+</span><span data-line="3"><span class="w">  </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span><span class="p">|</span><span class="w"> </span>uniq<span class="w"> </span>-c<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-nr<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-5
+</span></pre></div>
+</div>
+<p>macOS 的 BSD <code class="docutils literal notranslate"><span class="pre">find</span></code> 没有 <code class="docutils literal notranslate"><span class="pre">-printf</span></code>，可改用 <code class="docutils literal notranslate"><span class="pre">find</span> <span class="pre">...</span> <span class="pre">-print</span></code> 后再由 <code class="docutils literal notranslate"><span class="pre">awk</span></code> 去掉目录部分。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/course-shell-solution-31">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-find-xargs"> 练习 14 (使用 find 与 xargs)</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">find<span class="w"> </span>.<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-name<span class="w"> </span><span class="s1">&#39;*.sh&#39;</span><span class="w"> </span>-print0<span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>-0<span class="w"> </span>-r<span class="w"> </span>wc<span class="w"> </span>-l
+</span></pre></div>
+</div>
+<p>NUL 字符是 Unix 文件名中不能出现的字符，所以 <code class="docutils literal notranslate"><span class="pre">-print0</span></code>/<code class="docutils literal notranslate"><span class="pre">-0</span></code> 比按换行拆分更可靠。BSD <code class="docutils literal notranslate"><span class="pre">xargs</span></code> 没有 <code class="docutils literal notranslate"><span class="pre">-r</span></code>，可省略它。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/course-shell-solution-32">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-curl-grep"> 练习 15 (用 curl 与 grep 检查课程网站)</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">curl<span class="w"> </span>-fsSL<span class="w"> </span>https://missing.csail.mit.edu/<span class="w"> </span><span class="se">\</span>
+</span><span data-line="2"><span class="w">  </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-oE<span class="w"> </span><span class="s1">&#39;/2026/[^&quot;/]+&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-u<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l
+</span></pre></div>
+</div>
+<p>HTML 结构会变化，因此结果应与课程主页人工核对；2026 年课程目录共有 9 讲。更稳妥的抓取应使用 HTML 解析器，而不是把正则表达式当作通用 HTML 解析器。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/course-shell-solution-33">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-jq-json"> 练习 16 (使用 jq 处理 JSON)</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">curl<span class="w"> </span>-fsSL<span class="w"> </span>https://microsoftedge.github.io/Demos/json-dummy-data/64KB.json<span class="w"> </span><span class="se">\</span>
+</span><span data-line="2"><span class="w">  </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.[] | select(.version &gt; 6) | .name&#39;</span>
+</span></pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">-r</span></code> 输出未加 JSON 引号的原始字符串。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/course-shell-solution-34">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-awk-columns"> 练习 17 (用 awk 筛选并交换列)</a></p>
+<section id="solution-content">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;a 50 x\nb 150 y\nc 200 z\n&#39;</span><span class="w"> </span><span class="se">\</span>
+</span><span data-line="2"><span class="w">  </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;$2 &gt; 100 {tmp=$1; $1=$3; $3=tmp; print}&#39;</span>
+</span></pre></div>
+</div>
+<p>输出为 <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">150</span> <span class="pre">b</span></code> 和 <code class="docutils literal notranslate"><span class="pre">z</span> <span class="pre">200</span> <span class="pre">c</span></code>。</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="missing-semester/course-shell-solution-35">
+
+<p class="admonition-title">解答<a class="reference internal" href="#exercise-shell-pipeline"> 练习 18 (拆解并重组日志管道)</a></p>
+<section id="solution-content">
+<p>远端 <code class="docutils literal notranslate"><span class="pre">journalctl</span></code> 读取上一轮启动的 SSH 日志，<code class="docutils literal notranslate"><span class="pre">grep</span></code> 保留断开连接行；本地 <code class="docutils literal notranslate"><span class="pre">sed</span></code> 提取用户名，第一次 <code class="docutils literal notranslate"><span class="pre">sort</span> <span class="pre">|</span> <span class="pre">uniq</span> <span class="pre">-c</span></code> 计数，第二次 <code class="docutils literal notranslate"><span class="pre">sort</span></code> 按次数排序，<code class="docutils literal notranslate"><span class="pre">tail</span></code> 取最高的十项，<code class="docutils literal notranslate"><span class="pre">awk</span></code> 取用户名，<code class="docutils literal notranslate"><span class="pre">paste</span></code> 合并为逗号分隔的一行。</p>
+<p>Bash 的历史统计可以写成：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nb">history</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{$1=&quot;&quot;; print substr($0,2)}&#39;</span><span class="w"> </span><span class="se">\</span>
+</span><span data-line="2"><span class="w">  </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span><span class="p">|</span><span class="w"> </span>uniq<span class="w"> </span>-c<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-nr<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-10
+</span></pre></div>
+</div>
+<p>Zsh 使用 <code class="docutils literal notranslate"><span class="pre">history</span> <span class="pre">1</span></code>，且历史文件的具体格式可能受配置影响。</p>
+</section>
+</div>
+</section>
+<section id="id17">
+<h2>许可与署名<a class="headerlink" href="#id17" title="Link to this heading">¶</a></h2>
 <p>本页依据 MIT Missing Semester 2026 第一讲<a class="reference external" href="https://missing.csail.mit.edu/2026/course-shell/">官方 notes</a>整理。原课程由 Anish Athalye、Jon Gjengset 和 Jose Javier Gonzalez Ortiz 共同讲授，材料采用 <a class="reference external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA</a> 许可。</p>
 </section>
 </section>
@@ -570,10 +768,10 @@ data-aria-dark="切换到自动模式">
         <span>上一章</span><div class="title">计算机教育中缺失的一课</div></div>
     </a>
   </div><div class="navigation-next">
-    <a href="../2024-summer/readme.html">
+    <a href="command-line-environment.html">
       <div class="page-info">
         <span>下一章</span>
-        <div class="title">7 Days for beginner</div>
+        <div class="title">第二讲：命令行环境</div>
       </div>
       <i class="i-lucide chevron-right"></i>
     </a>
