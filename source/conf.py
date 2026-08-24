@@ -6,7 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'Dev_zero_to_hero'
+project = 'Develop from Zero to Hero'
 copyright = '2024, ezelab'
 author = 'ezelab'
 release = '0.0.1'
@@ -15,7 +15,6 @@ release = '0.0.1'
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
-  "ablog",
   "myst_parser",
   "sphinx.ext.autodoc",
   "sphinx.ext.intersphinx",
@@ -61,7 +60,8 @@ html_context = {
     "source_type": "github",
     "source_user": "EZEORG",
     "source_repo": "dev_zero_to_hero",
-    "source_version": "main",  # Optional
+    "source_version": "main",
+    "source_docs_path": "/source/",
 }
 
 
@@ -76,9 +76,23 @@ language = 'zh'
 html_theme = 'shibuya'
 html_static_path = ['_static']
 
+html_title = 'Develop from Zero to Hero'
+
+html_theme_options = {
+    'accent_color': 'blue',
+    'color_mode': 'auto',
+    'dark_code': True,
+    'globaltoc_expand_depth': 1,
+    'toctree_maxdepth': 3,
+    'github_url': 'https://github.com/EZEORG/dev_zero_to_hero',
+    'show_ai_links': False,
+}
+
 
 html_css_files = [
- "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    'https://cdn.jsdelivr.net/npm/source-sans@3.52.0/source-sans-3VF.css',
+    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css',
+    'css/course.css',
 ]
 
 latex_engine = 'xelatex'
@@ -101,4 +115,3 @@ latex_elements = {
     'printindex': r'\footnotesize\raggedright\printindex',
 }
 latex_show_urls = 'footnote'
-

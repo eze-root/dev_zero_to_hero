@@ -3,7 +3,10 @@ name: GitHub Pages
 on:
   push:
     branches:
-      - main  # Set a branch name to trigger deployment
+      - main
+
+permissions:
+  contents: write
 
 jobs:
   publish:
@@ -12,14 +15,19 @@ jobs:
     environment: github-pages
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Install 
-        shell: bash
-        run: |
-          pip install -r requirements.txt
-          sphinx-build -b html source build
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.12.5"
+          enable-cache: true
 
+      - name: Sync dependencies
+        run: uv sync --locked --no-dev
+
+      - name: Build documentation
+        run: uv run --no-sync sphinx-build -b html source build
 
       - name: Deploy Website
         uses: peaceiris/actions-gh-pages@v3

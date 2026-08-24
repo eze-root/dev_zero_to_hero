@@ -1,0 +1,459 @@
+/* Develop from Zero to Hero visual system.
+ * Built on Shibuya's public CSS variables so theme upgrades remain manageable.
+ */
+
+:root {
+  --course-radius-sm: 0.55rem;
+  --course-radius-md: 0.9rem;
+  --course-radius-lg: 1.2rem;
+  --course-content-width: 54rem;
+  --course-shadow-sm: 0 1px 2px rgb(15 23 42 / 5%),
+    0 8px 24px rgb(15 23 42 / 5%);
+  --course-shadow-md: 0 16px 42px rgb(15 23 42 / 10%);
+  --sy-f-heading: "Source Sans 3", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-text: "Source Sans 3", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+
+html[data-accent-color="blue"] {
+  --accent-9: #4f46e5;
+  --accent-a2: rgb(79 70 229 / 9%);
+  --accent-a3: rgb(79 70 229 / 16%);
+  --accent-a9: rgb(79 70 229 / 82%);
+  --accent-a11: rgb(67 56 202 / 96%);
+}
+
+html.light {
+  --sy-c-background: #f8fafc;
+  --sy-c-surface: #eef2ff;
+  --sy-c-divider: #e6eaf2;
+  --sy-c-border: #d9e0eb;
+  --sy-c-text: #344054;
+  --sy-c-light: #667085;
+  --sy-c-bold: #182230;
+  --sy-c-heading: #101828;
+  --sy-c-link: #4f46e5;
+  --sy-c-link-hover: #3730a3;
+  --sy-c-foot-background: #111827;
+  --sy-c-foot-divider: #273449;
+  --sy-c-foot-text: #d0d5dd;
+  --yue-c-text: #344054;
+  --course-panel: rgb(255 255 255 / 88%);
+  --course-panel-solid: #fff;
+  --course-panel-muted: #f4f6fb;
+  --course-grid: rgb(79 70 229 / 6%);
+  --course-code-inline: #eef2ff;
+  --course-code-text: #4338ca;
+  --course-glow-a: rgb(79 70 229 / 12%);
+  --course-glow-b: rgb(14 165 233 / 10%);
+}
+
+html.dark {
+  --sy-c-background: #0b1120;
+  --sy-c-surface: #151c2f;
+  --sy-c-divider: #202a3d;
+  --sy-c-border: #2a354b;
+  --sy-c-text: #cbd5e1;
+  --sy-c-light: #94a3b8;
+  --sy-c-bold: #f8fafc;
+  --sy-c-heading: #f8fafc;
+  --sy-c-link: #a5b4fc;
+  --sy-c-link-hover: #c7d2fe;
+  --sy-c-foot-background: #070b14;
+  --sy-c-foot-divider: #202a3d;
+  --sy-c-foot-text: #94a3b8;
+  --yue-c-text: #cbd5e1;
+  --course-panel: rgb(15 23 42 / 88%);
+  --course-panel-solid: #111827;
+  --course-panel-muted: #151c2f;
+  --course-grid: rgb(129 140 248 / 7%);
+  --course-code-inline: rgb(99 102 241 / 16%);
+  --course-code-text: #c7d2fe;
+  --course-glow-a: rgb(99 102 241 / 17%);
+  --course-glow-b: rgb(14 165 233 / 12%);
+  --course-shadow-sm: 0 1px 2px rgb(0 0 0 / 15%),
+    0 10px 28px rgb(0 0 0 / 18%);
+  --course-shadow-md: 0 18px 48px rgb(0 0 0 / 28%);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--sy-c-background);
+  background-image:
+    radial-gradient(circle at 8% 0%, var(--course-glow-a), transparent 28rem),
+    radial-gradient(circle at 92% 16%, var(--course-glow-b), transparent 24rem),
+    linear-gradient(var(--course-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--course-grid) 1px, transparent 1px);
+  background-size: auto, auto, 32px 32px, 32px 32px;
+  color: var(--sy-c-text);
+  font-family: var(--sy-f-text);
+  font-size: 16px;
+}
+
+::selection {
+  background: rgb(99 102 241 / 26%);
+}
+
+/* Header */
+.sy-head {
+  border-bottom: 1px solid color-mix(in srgb, var(--sy-c-border) 80%, transparent);
+  box-shadow: 0 1px 0 rgb(15 23 42 / 3%);
+}
+
+.sy-head-blur {
+  background: color-mix(in srgb, var(--sy-c-background) 84%, transparent);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  backdrop-filter: blur(18px) saturate(150%);
+}
+
+.sy-head-brand strong {
+  color: var(--sy-c-heading);
+  font-family: var(--sy-f-heading);
+  font-size: 1.08rem;
+  font-weight: 750;
+  letter-spacing: -0.015em;
+}
+
+.sy-head-brand strong::before {
+  display: inline-block;
+  width: 0.62rem;
+  height: 0.62rem;
+  margin-right: 0.55rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #6366f1, #0ea5e9);
+  box-shadow: 0 0 0 0.25rem rgb(99 102 241 / 12%);
+  content: "";
+  vertical-align: 0.04em;
+}
+
+.searchbox input {
+  border-radius: 999px;
+  background: var(--course-panel-muted);
+}
+
+/* Documentation sidebars */
+.sy-lside,
+.sy-rside {
+  color: var(--sy-c-text);
+}
+
+.globaltoc > .caption,
+.localtoc > h3 {
+  color: var(--sy-c-light);
+  font-family: var(--sy-f-heading);
+  font-size: 0.72rem;
+  font-weight: 720;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.globaltoc a,
+.localtoc a {
+  border-radius: 0.45rem;
+  transition: color 150ms ease, background-color 150ms ease;
+}
+
+.globaltoc a:hover,
+.localtoc a:hover {
+  background: var(--course-panel-muted);
+  color: var(--sy-c-link-hover);
+}
+
+.globaltoc .current > a,
+.globaltoc a.current {
+  background: var(--course-code-inline);
+  color: var(--sy-c-link);
+  font-weight: 680;
+}
+
+.localtoc {
+  padding-left: 0.85rem;
+  border-left: 1px solid var(--sy-c-border);
+}
+
+.sy-main {
+  min-width: 0;
+}
+
+/* Reading canvas */
+.sy-content {
+  width: 100%;
+  max-width: 72rem;
+  padding-top: clamp(2.5rem, 6vw, 4.5rem);
+  padding-bottom: 4rem;
+}
+
+.yue {
+  width: 100%;
+  max-width: var(--course-content-width);
+  margin-inline: auto;
+  color: var(--yue-c-text);
+  font-size: 1.0625rem;
+  line-height: 1.82;
+}
+
+.yue > section > h1:first-child,
+.yue > h1:first-child {
+  position: relative;
+  margin-bottom: 2.25rem;
+  padding-bottom: 1.2rem;
+  color: var(--sy-c-heading);
+  font-family: var(--sy-f-heading);
+  font-size: clamp(2.2rem, 6vw, 3.4rem);
+  font-weight: 780;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+}
+
+.yue > section > h1:first-child::after,
+.yue > h1:first-child::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 4.5rem;
+  height: 0.28rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #6366f1, #0ea5e9);
+  content: "";
+}
+
+.yue h2 {
+  margin-top: 3.25rem;
+  margin-bottom: 1.15rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid var(--sy-c-divider);
+  color: var(--sy-c-heading);
+  font-family: var(--sy-f-heading);
+  font-size: clamp(1.5rem, 3vw, 1.85rem);
+  font-weight: 720;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.yue h3 {
+  margin-top: 2.4rem;
+  color: var(--sy-c-heading);
+  font-family: var(--sy-f-heading);
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.yue p,
+.yue li {
+  line-height: 1.82;
+}
+
+.yue a:not(.headerlink) {
+  text-decoration-color: color-mix(in srgb, var(--sy-c-link) 48%, transparent);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
+  transition: color 160ms ease, text-decoration-color 160ms ease;
+}
+
+.yue a:not(.headerlink):hover {
+  text-decoration-color: var(--sy-c-link-hover);
+}
+
+.yue .headerlink {
+  color: var(--sy-c-light);
+  font-size: 0.7em;
+}
+
+/* Homepage and section navigation */
+.yue .toctree-wrapper.compound {
+  margin: 1rem 0 1.75rem;
+  padding: 1.15rem 1.25rem;
+  border: 1px solid var(--sy-c-border);
+  border-radius: var(--course-radius-md);
+  background: linear-gradient(145deg, var(--course-panel), var(--course-panel-muted));
+  box-shadow: var(--course-shadow-sm);
+}
+
+.yue .toctree-wrapper.compound > .caption {
+  margin: 0 0 0.55rem;
+  color: var(--sy-c-light);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.yue .toctree-wrapper.compound ul {
+  margin: 0;
+  padding-left: 1.15rem;
+}
+
+.yue .toctree-wrapper.compound li {
+  margin: 0.32rem 0;
+}
+
+.yue .toctree-wrapper.compound li::marker {
+  color: #6366f1;
+}
+
+/* Code */
+.yue code.literal,
+.yue :not(pre) > code {
+  padding: 0.16em 0.4em;
+  border: 1px solid color-mix(in srgb, var(--sy-c-border) 75%, transparent);
+  border-radius: 0.38rem;
+  background: var(--course-code-inline);
+  color: var(--course-code-text);
+  font-size: 0.9em;
+  font-weight: 520;
+}
+
+.yue .highlight {
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--sy-c-border) 82%, transparent);
+  border-radius: var(--course-radius-md);
+  box-shadow: var(--course-shadow-sm);
+}
+
+.yue .highlight pre {
+  padding: 1.2rem 1.3rem;
+  font-size: 0.91rem;
+  line-height: 1.66;
+}
+
+.yue .copybtn {
+  border-radius: 0.45rem;
+}
+
+/* Notes, quotes and metadata */
+.yue .admonition {
+  overflow: hidden;
+  margin: 1.75rem 0;
+  border: 1px solid var(--sy-c-border);
+  border-left: 0.28rem solid var(--sy-c-link);
+  border-radius: var(--course-radius-md);
+  background: var(--course-panel);
+  box-shadow: var(--course-shadow-sm);
+}
+
+.yue .admonition-title {
+  font-family: var(--sy-f-heading);
+  font-weight: 700;
+}
+
+.yue blockquote {
+  margin-block: 1.75rem;
+  padding: 1.1rem 1.35rem;
+  border: 1px solid var(--sy-c-border);
+  border-left: 0.3rem solid #0ea5e9;
+  border-radius: 0 var(--course-radius-md) var(--course-radius-md) 0;
+  background: var(--course-panel-muted);
+  color: var(--sy-c-text);
+}
+
+.yue .sd-container-fluid.sd-outline-muted {
+  border-color: var(--sy-c-border) !important;
+  border-radius: var(--course-radius-md) !important;
+  background: var(--course-panel);
+  box-shadow: var(--course-shadow-sm);
+}
+
+/* Tables and media */
+.yue .table-wrapper {
+  margin: 1.75rem 0;
+  border: 1px solid var(--sy-c-border);
+  border-radius: var(--course-radius-md);
+  background: var(--course-panel-solid);
+  box-shadow: var(--course-shadow-sm);
+}
+
+.yue table {
+  margin: 0;
+}
+
+.yue table th {
+  color: var(--sy-c-heading);
+  font-family: var(--sy-f-heading);
+  font-weight: 700;
+}
+
+.yue img:not(.sd-avatar-sm) {
+  height: auto;
+  border: 1px solid var(--sy-c-border);
+  border-radius: var(--course-radius-md);
+  box-shadow: var(--course-shadow-md);
+}
+
+.sy-foot {
+  border-top: 1px solid var(--sy-c-foot-divider);
+}
+
+.sy-foot a {
+  color: #c7d2fe;
+}
+
+@media (max-width: 768px) {
+  .sy-content {
+    padding: 2.3rem 1.15rem 3rem;
+  }
+
+  .yue {
+    font-size: 1rem;
+    line-height: 1.76;
+  }
+
+  .yue > section > h1:first-child,
+  .yue > h1:first-child {
+    margin-bottom: 1.75rem;
+    font-size: clamp(2rem, 11vw, 2.65rem);
+  }
+
+  .yue h2 {
+    margin-top: 2.6rem;
+  }
+
+  .yue .highlight {
+    margin-right: -0.35rem;
+    margin-left: -0.35rem;
+    border-radius: var(--course-radius-sm);
+  }
+
+  .yue .highlight pre {
+    padding: 1rem;
+    font-size: 0.85rem;
+  }
+
+  .yue .toctree-wrapper.compound {
+    padding: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  body {
+    background: #fff;
+  }
+
+  .yue {
+    max-width: none;
+    color: #111827;
+    font-size: 11pt;
+  }
+
+  .yue .highlight,
+  .yue .toctree-wrapper.compound,
+  .yue .admonition,
+  .yue .table-wrapper {
+    box-shadow: none;
+  }
+}

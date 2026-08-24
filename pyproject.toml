@@ -4,7 +4,6 @@ version = "0.1.0"
 description = "Sphinx docs for Develop from Zero to Hero"
 requires-python = ">=3.10"
 dependencies = [
-    "ablog",
     "aiohttp",
     "myst-parser[linkify]",
     "shibuya",
