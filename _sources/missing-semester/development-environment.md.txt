@@ -7,8 +7,7 @@
 本文依照 Missing Semester 2026 官方 notes 的原文结构完整翻译；保留标题层级、命令示例、工具链接、引用与提示。练习采用 MyST exercise，并在官方题目之外补充折叠参考答案。
 ```
 
-
-_开发环境_是一组用于开发软件的工具。开发环境的核心是文本编辑功能，以及语法突出显示、类型检查、代码格式化和自动补全等附带功能。 [VS Code][vs-code] 等集成开发环境 (IDE) 将所有这些功能汇集到一个应用程序中。基于终端的开发工作流程结合了 [tmux](https://github.com/tmux/tmux)（终端多路复用器）、[Vim](https://www.vim.org/)（文本编辑器）、[Zsh](https://www.zsh.org/)（shell）等工具和特定于语言的命令行工具，如 [Ruff](https://docs.astral.sh/ruff/)（Python linter 和代码格式化程序）和 [Mypy](https://mypy-lang.org/)（Python 类型检查器）。
+*开发环境* 是一组用于开发软件的工具。开发环境的核心是文本编辑功能，以及语法突出显示、类型检查、代码格式化和自动补全等附带功能。 [VS Code][vs-code] 等集成开发环境 (IDE) 将所有这些功能汇集到一个应用程序中。基于终端的开发工作流程结合了 [tmux](https://github.com/tmux/tmux)（终端多路复用器）、[Vim](https://www.vim.org/)（文本编辑器）、[Zsh](https://www.zsh.org/)（shell）等工具和特定于语言的命令行工具，如 [Ruff](https://docs.astral.sh/ruff/)（Python linter 和代码格式化程序）和 [Mypy](https://mypy-lang.org/)（Python 类型检查器）。
 
 IDE 和基于终端的工作流程各有其优点和缺点。例如，图形 IDE 可以更容易学习，并且当今的 IDE 通常具有更好的开箱即用的 AI 集成，例如 AI 自动补全；另一方面，基于终端的工作流程是轻量级的，在没有 GUI 或无法安装软件的环境中，它们可能是您唯一的选择。我们建议您对两者都有基本的熟悉，并至少掌握其中一种。如果您还没有首选 IDE，我们建议您从 [VS Code][vs-code] 开始。
 
@@ -33,7 +32,7 @@ IDE 和基于终端的工作流程各有其优点和缺点。例如，图形 IDE
 (development-environment-modal-editing)=
 ## 模态编辑
 
-Vim 是一个_模态编辑器_：它针对不同类别的任务有不同的操作模式。
+Vim 是一个 *模态编辑器*：它针对不同类别的任务有不同的操作模式。
 
 - **普通**：用于移动文件并进行编辑
 - **插入**：用于插入文本
@@ -57,7 +56,7 @@ Vim 是一个_模态编辑器_：它针对不同类别的任务有不同的操�
 (development-environment-vims-interface-is-a-programming-language)=
 ## Vim 的界面是一种编程语言
 
-Vim 的界面是一种编程语言。击键（带有助记名称）是命令，这些命令_compose_。这可以实现高效的移动和编辑，尤其是当命令成为肌肉记忆时，就像一旦您学会了键盘布局，打字就会变得超级高效一样。
+Vim 的界面是一种编程语言。击键（带有助记名称）是命令，这些命令 *compose*。这可以实现高效的移动和编辑，尤其是当命令成为肌肉记忆时，就像一旦您学会了键盘布局，打字就会变得超级高效一样。
 
 (development-environment-movement)=
 ### 移动
@@ -153,21 +152,21 @@ def main():
 
 - Main 从未被调用
     - `G` 跳转到文件末尾
-    - `o` **在下面新建一行
+    - `o` **在下面新建一行**
     - 输入 `if __name__ == "__main__": main()`
         - 如果您的编辑器支持 Python 语言，它可能会在插入模式下为您执行一些自动缩进
     - `<ESC>` 返回正常模式
 - 从 0 而不是 1 开始
     - `/` 后跟 `range` 和 `<CR>` 搜索“范围”
-    - `ww` 向前移动两个 **字**字（您也可以使用 `2w`，但实际上，对于少量计数，通常会重复按键而不是使用计数功能）
-    - `i` 切换到**i**插入模式，并添加 `1,`
+    - `ww` 向前移动两个 **字**（您也可以使用 `2w`，但实际上，对于少量计数，通常会重复按键而不是使用计数功能）
+    - 按 `i` 切换到插入模式，并添加 `1,`
     - `<ESC>` 返回正常模式
-    - `e` 跳转到下一个单词的**e**nd
-    - `a` 开始**附加文本，并添加 `+ 1`
+    - `e` 跳转到下一个单词的 **e**nd
+    - `a` 开始 **附加文本**，并添加 `+ 1`
     - `<ESC>` 返回正常模式
 - 打印 5 的倍数“fizz”
     - `:6<CR>` 转到第 6 行
-    - `ci"` 至 **c**hange **i**nside '**"**'，更改为 `"buzz"`
+    - `ci"` 表示 **c**hange **i**nside `"`，更改为 `"buzz"`
     - `<ESC>` 返回正常模式
 
 (development-environment-learning-vim)=
@@ -193,7 +192,7 @@ def main():
 (development-environment-code-intelligence-and-language-servers)=
 # 代码智能和语言服务器
 
-IDE 通常提供特定于语言的支持，需要通过连接到实现 [语言服务器协议](https://microsoft.github.io/language-server-protocol/) 的_语言服务器_的 IDE 扩展来理解代码的语义。例如，[VS Code 的 Python 扩展](https://marketplace.visualstudio.com/items?itemName=ms-python.python) 依赖于 [Pylance](https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance)，[VS Code 的 Go 扩展](https://marketplace.visualstudio.com/items?itemName=golang.go) 依赖于第一方 [gopls](https://go.dev/gopls/)。通过安装适用于您使用的语言的扩展和语言服务器，您可以在 IDE 中启用许多特定于语言的功能，例如：
+IDE 通常提供特定于语言的支持，需要通过连接到实现 [语言服务器协议](https://microsoft.github.io/language-server-protocol/) 的 *语言服务器* 的 IDE 扩展来理解代码的语义。例如，[VS Code 的 Python 扩展](https://marketplace.visualstudio.com/items?itemName=ms-python.python) 依赖于 [Pylance](https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance)，[VS Code 的 Go 扩展](https://marketplace.visualstudio.com/items?itemName=golang.go) 依赖于第一方 [gopls](https://go.dev/gopls/)。通过安装适用于您使用的语言的扩展和语言服务器，您可以在 IDE 中启用许多特定于语言的功能，例如：
 
 - **代码补全。** 更好的自动补全和自动建议，例如在键入 `object.` 后能够查看对象的字段和方法。
 - **内联文档。** 查看有关悬停和自动建议的文档。
@@ -308,7 +307,7 @@ def download_contents(url: str) -> str:
 (development-environment-extensions-and-other-ide-functionality)=
 # 扩展和其他 IDE 功能
 
-IDE 是强大的工具，_扩展_使其变得更加强大。我们无法在一次讲座中涵盖所有这些功能，但在这里我们提供了一些流行扩展的指导。我们鼓励您自己探索这个空间；网上有许多流行的 IDE 扩展列表，例如 Vim 插件的 [Vim Awesome](https://vimawesome.com/) 和 [VS Code 扩展按受欢迎程度排序](https://marketplace.visualstudio.com/search?target=VSCode&category=All%20categories&sortBy=Installs)。
+IDE 是强大的工具，*扩展* 使其变得更加强大。我们无法在一次讲座中涵盖所有这些功能，但在这里我们提供了一些流行扩展的指导。我们鼓励您自己探索这个空间；网上有许多流行的 IDE 扩展列表，例如 Vim 插件的 [Vim Awesome](https://vimawesome.com/) 和 [VS Code 扩展按受欢迎程度排序](https://marketplace.visualstudio.com/search?target=VSCode&category=All%20categories&sortBy=Installs)。
 
 - [开发容器](https://containers.dev/)：受流行的 IDE（例如 [VS 代码支持](https://code.visualstudio.com/docs/devcontainers/containers)）支持，开发容器允许您使用容器来运行开发工具。这对于可移植性或隔离很有帮助。 [打包与交付代码讲座](shipping-code.md) 更深入地涵盖了容器。
 - 远程开发：使用 SSH 在远程计算机上进行开发（例如，使用 [VS Code 的远程 SSH 插件](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)）。例如，如果您想在云中强大的 GPU 机器上开发和运行代码，这会很方便。

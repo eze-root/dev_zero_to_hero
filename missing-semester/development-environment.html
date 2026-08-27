@@ -253,7 +253,7 @@ data-aria-dark="切换到自动模式">
 <p class="admonition-title">备注</p>
 <p>本文依照 Missing Semester 2026 官方 notes 的原文结构完整翻译；保留标题层级、命令示例、工具链接、引用与提示。练习采用 MyST exercise，并在官方题目之外补充折叠参考答案。</p>
 </div>
-<p>_开发环境_是一组用于开发软件的工具。开发环境的核心是文本编辑功能，以及语法突出显示、类型检查、代码格式化和自动补全等附带功能。 <a class="reference external" href="https://code.visualstudio.com/">VS Code</a> 等集成开发环境 (IDE) 将所有这些功能汇集到一个应用程序中。基于终端的开发工作流程结合了 <a class="reference external" href="https://github.com/tmux/tmux">tmux</a>（终端多路复用器）、<a class="reference external" href="https://www.vim.org/">Vim</a>（文本编辑器）、<a class="reference external" href="https://www.zsh.org/">Zsh</a>（shell）等工具和特定于语言的命令行工具，如 <a class="reference external" href="https://docs.astral.sh/ruff/">Ruff</a>（Python linter 和代码格式化程序）和 <a class="reference external" href="https://mypy-lang.org/">Mypy</a>（Python 类型检查器）。</p>
+<p><em>开发环境</em> 是一组用于开发软件的工具。开发环境的核心是文本编辑功能，以及语法突出显示、类型检查、代码格式化和自动补全等附带功能。 <a class="reference external" href="https://code.visualstudio.com/">VS Code</a> 等集成开发环境 (IDE) 将所有这些功能汇集到一个应用程序中。基于终端的开发工作流程结合了 <a class="reference external" href="https://github.com/tmux/tmux">tmux</a>（终端多路复用器）、<a class="reference external" href="https://www.vim.org/">Vim</a>（文本编辑器）、<a class="reference external" href="https://www.zsh.org/">Zsh</a>（shell）等工具和特定于语言的命令行工具，如 <a class="reference external" href="https://docs.astral.sh/ruff/">Ruff</a>（Python linter 和代码格式化程序）和 <a class="reference external" href="https://mypy-lang.org/">Mypy</a>（Python 类型检查器）。</p>
 <p>IDE 和基于终端的工作流程各有其优点和缺点。例如，图形 IDE 可以更容易学习，并且当今的 IDE 通常具有更好的开箱即用的 AI 集成，例如 AI 自动补全；另一方面，基于终端的工作流程是轻量级的，在没有 GUI 或无法安装软件的环境中，它们可能是您唯一的选择。我们建议您对两者都有基本的熟悉，并至少掌握其中一种。如果您还没有首选 IDE，我们建议您从 <a class="reference external" href="https://code.visualstudio.com/">VS Code</a> 开始。</p>
 <p>在本次讲座中，我们将介绍：</p>
 <ul class="simple">
@@ -270,7 +270,7 @@ data-aria-dark="切换到自动模式">
 <p><strong>其他软件中的 Vim 支持。</strong> 您不必使用 <a class="reference external" href="https://www.vim.org/">Vim</a> 本身即可从其核心思想中受益。许多涉及任何类型文本编辑的程序都支持“Vim 模式”，无论是作为内置功能还是作为插件。例如，VS Code 有 <a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=vscodevim.vim">VSCodeVim</a> 插件，Zsh 有用于 Vim 模拟的 <a class="reference external" href="https://zsh.sourceforge.io/Guide/zshguide04.html">内置支持</a>，甚至 Claude Code 有用于 Vim 编辑器模式的 <a class="reference external" href="https://code.claude.com/docs/en/interactive-mode#vim-editor-mode">内置支持</a>。您使用的任何涉及文本编辑的工具很可能都以某种方式支持 Vim 模式。</p>
 <section id="development-environment-modal-editing">
 <span id="id2"></span><h2>模态编辑<a class="headerlink" href="#development-environment-modal-editing" title="Link to this heading">¶</a></h2>
-<p>Vim 是一个_模态编辑器_：它针对不同类别的任务有不同的操作模式。</p>
+<p>Vim 是一个 <em>模态编辑器</em>：它针对不同类别的任务有不同的操作模式。</p>
 <ul class="simple">
 <li><p><strong>普通</strong>：用于移动文件并进行编辑</p></li>
 <li><p><strong>插入</strong>：用于插入文本</p></li>
@@ -289,7 +289,7 @@ data-aria-dark="切换到自动模式">
 </section>
 <section id="development-environment-vims-interface-is-a-programming-language">
 <span id="id4"></span><h2>Vim 的界面是一种编程语言<a class="headerlink" href="#development-environment-vims-interface-is-a-programming-language" title="Link to this heading">¶</a></h2>
-<p>Vim 的界面是一种编程语言。击键（带有助记名称）是命令，这些命令_compose_。这可以实现高效的移动和编辑，尤其是当命令成为肌肉记忆时，就像一旦您学会了键盘布局，打字就会变得超级高效一样。</p>
+<p>Vim 的界面是一种编程语言。击键（带有助记名称）是命令，这些命令 <em>compose</em>。这可以实现高效的移动和编辑，尤其是当命令成为肌肉记忆时，就像一旦您学会了键盘布局，打字就会变得超级高效一样。</p>
 <section id="development-environment-movement">
 <span id="id5"></span><h3>移动<a class="headerlink" href="#development-environment-movement" title="Link to this heading">¶</a></h3>
 <p>您应该将大部分时间花在正常模式下，使用移动命令来导航文件。 Vim 中的动作也称为“名词”，因为它们指的是文本块。</p>
@@ -400,7 +400,7 @@ data-aria-dark="切换到自动模式">
 <li><p>Main 从未被调用</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">G</span></code> 跳转到文件末尾</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">o</span></code> **在下面新建一行</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">o</span></code> <strong>在下面新建一行</strong></p></li>
 <li><p>输入 <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">&quot;__main__&quot;:</span> <span class="pre">main()</span></code></p>
 <ul>
 <li><p>如果您的编辑器支持 Python 语言，它可能会在插入模式下为您执行一些自动缩进</p></li>
@@ -412,18 +412,18 @@ data-aria-dark="切换到自动模式">
 <li><p>从 0 而不是 1 开始</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">/</span></code> 后跟 <code class="docutils literal notranslate"><span class="pre">range</span></code> 和 <code class="docutils literal notranslate"><span class="pre">&lt;CR&gt;</span></code> 搜索“范围”</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ww</span></code> 向前移动两个 <strong>字</strong>字（您也可以使用 <code class="docutils literal notranslate"><span class="pre">2w</span></code>，但实际上，对于少量计数，通常会重复按键而不是使用计数功能）</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">i</span></code> 切换到<strong>i</strong>插入模式，并添加 <code class="docutils literal notranslate"><span class="pre">1,</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ww</span></code> 向前移动两个 <strong>字</strong>（您也可以使用 <code class="docutils literal notranslate"><span class="pre">2w</span></code>，但实际上，对于少量计数，通常会重复按键而不是使用计数功能）</p></li>
+<li><p>按 <code class="docutils literal notranslate"><span class="pre">i</span></code> 切换到插入模式，并添加 <code class="docutils literal notranslate"><span class="pre">1,</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">&lt;ESC&gt;</span></code> 返回正常模式</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">e</span></code> 跳转到下一个单词的<strong>e</strong>nd</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">a</span></code> 开始**附加文本，并添加 <code class="docutils literal notranslate"><span class="pre">+</span> <span class="pre">1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">e</span></code> 跳转到下一个单词的 <strong>e</strong>nd</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">a</span></code> 开始 <strong>附加文本</strong>，并添加 <code class="docutils literal notranslate"><span class="pre">+</span> <span class="pre">1</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">&lt;ESC&gt;</span></code> 返回正常模式</p></li>
 </ul>
 </li>
 <li><p>打印 5 的倍数“fizz”</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">:6&lt;CR&gt;</span></code> 转到第 6 行</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ci&quot;</span></code> 至 <strong>c</strong>hange <strong>i</strong>nside ‘<strong>&quot;</strong>’，更改为 <code class="docutils literal notranslate"><span class="pre">&quot;buzz&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ci&quot;</span></code> 表示 <strong>c</strong>hange <strong>i</strong>nside <code class="docutils literal notranslate"><span class="pre">&quot;</span></code>，更改为 <code class="docutils literal notranslate"><span class="pre">&quot;buzz&quot;</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">&lt;ESC&gt;</span></code> 返回正常模式</p></li>
 </ul>
 </li>
@@ -450,7 +450,7 @@ data-aria-dark="切换到自动模式">
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="development-environment-code-intelligence-and-language-servers">
 <span id="id13"></span><h1>代码智能和语言服务器<a class="headerlink" href="#development-environment-code-intelligence-and-language-servers" title="Link to this heading">¶</a></h1>
-<p>IDE 通常提供特定于语言的支持，需要通过连接到实现 <a class="reference external" href="https://microsoft.github.io/language-server-protocol/">语言服务器协议</a> 的_语言服务器_的 IDE 扩展来理解代码的语义。例如，<a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=ms-python.python">VS Code 的 Python 扩展</a> 依赖于 <a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance">Pylance</a>，<a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=golang.go">VS Code 的 Go 扩展</a> 依赖于第一方 <a class="reference external" href="https://go.dev/gopls/">gopls</a>。通过安装适用于您使用的语言的扩展和语言服务器，您可以在 IDE 中启用许多特定于语言的功能，例如：</p>
+<p>IDE 通常提供特定于语言的支持，需要通过连接到实现 <a class="reference external" href="https://microsoft.github.io/language-server-protocol/">语言服务器协议</a> 的 <em>语言服务器</em> 的 IDE 扩展来理解代码的语义。例如，<a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=ms-python.python">VS Code 的 Python 扩展</a> 依赖于 <a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance">Pylance</a>，<a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=golang.go">VS Code 的 Go 扩展</a> 依赖于第一方 <a class="reference external" href="https://go.dev/gopls/">gopls</a>。通过安装适用于您使用的语言的扩展和语言服务器，您可以在 IDE 中启用许多特定于语言的功能，例如：</p>
 <ul class="simple">
 <li><p><strong>代码补全。</strong> 更好的自动补全和自动建议，例如在键入 <code class="docutils literal notranslate"><span class="pre">object.</span></code> 后能够查看对象的字段和方法。</p></li>
 <li><p><strong>内联文档。</strong> 查看有关悬停和自动建议的文档。</p></li>
@@ -536,7 +536,7 @@ data-aria-dark="切换到自动模式">
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="development-environment-extensions-and-other-ide-functionality">
 <span id="ide"></span><h1>扩展和其他 IDE 功能<a class="headerlink" href="#development-environment-extensions-and-other-ide-functionality" title="Link to this heading">¶</a></h1>
-<p>IDE 是强大的工具，_扩展_使其变得更加强大。我们无法在一次讲座中涵盖所有这些功能，但在这里我们提供了一些流行扩展的指导。我们鼓励您自己探索这个空间；网上有许多流行的 IDE 扩展列表，例如 Vim 插件的 <a class="reference external" href="https://vimawesome.com/">Vim Awesome</a> 和 <a class="reference external" href="https://marketplace.visualstudio.com/search?target=VSCode&amp;amp;category=All%20categories&amp;amp;sortBy=Installs">VS Code 扩展按受欢迎程度排序</a>。</p>
+<p>IDE 是强大的工具，<em>扩展</em> 使其变得更加强大。我们无法在一次讲座中涵盖所有这些功能，但在这里我们提供了一些流行扩展的指导。我们鼓励您自己探索这个空间；网上有许多流行的 IDE 扩展列表，例如 Vim 插件的 <a class="reference external" href="https://vimawesome.com/">Vim Awesome</a> 和 <a class="reference external" href="https://marketplace.visualstudio.com/search?target=VSCode&amp;amp;category=All%20categories&amp;amp;sortBy=Installs">VS Code 扩展按受欢迎程度排序</a>。</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://containers.dev/">开发容器</a>：受流行的 IDE（例如 <a class="reference external" href="https://code.visualstudio.com/docs/devcontainers/containers">VS 代码支持</a>）支持，开发容器允许您使用容器来运行开发工具。这对于可移植性或隔离很有帮助。 <a class="reference internal" href="shipping-code.html"><span class="std std-doc">打包与交付代码讲座</span></a> 更深入地涵盖了容器。</p></li>
 <li><p>远程开发：使用 SSH 在远程计算机上进行开发（例如，使用 <a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh">VS Code 的远程 SSH 插件</a>）。例如，如果您想在云中强大的 GPU 机器上开发和运行代码，这会很方便。</p></li>
