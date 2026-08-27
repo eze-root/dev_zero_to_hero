@@ -1,4 +1,4 @@
-# 计算机教育中缺失的一课
+# 2026 秋天的计算机教育中缺失的一课
 
 本系列整理并介绍 MIT 课程 [The Missing Semester of Your CS Education](https://missing.csail.mit.edu/)，中文可译为 **“计算机教育中缺失的一课”**。
 
