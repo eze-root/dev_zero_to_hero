@@ -94,6 +94,7 @@ html_css_files = [
     'https://cdn.jsdelivr.net/npm/source-sans@3.52.0/source-sans-3VF.css',
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css',
     'css/course.css',
+    'css/admonition-fixes.css',
 ]
 
 latex_engine = 'xelatex'
