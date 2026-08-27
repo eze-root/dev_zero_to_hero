@@ -21,6 +21,7 @@
 
 ```{toctree}
 :maxdepth: 1
+:titlesonly:
 
 course-shell
 command-line-environment
