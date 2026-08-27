@@ -12,6 +12,7 @@ Welcome to Develop Zero to Hero
 
 .. toctree::
    :maxdepth: 2
+   :titlesonly:
    :caption: 2026 秋天的计算机教育中缺失的一课:
 
    missing-semester/index
