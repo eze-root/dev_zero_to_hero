@@ -1,0 +1,16 @@
+/* Remove decorative admonition icons.
+ *
+ * sphinx-exercise historically uses Font Awesome glyph code points for
+ * exercise/solution title icons. These can render as the wrong glyph when
+ * combined with a different Font Awesome version or theme icon styling.
+ * Keep the Shibuya admonition layout, but render titles as plain text.
+ */
+.yue .admonition > .admonition-title::before,
+.yue .admonition > .admonition-title::after,
+.yue .exercise > .admonition-title::before,
+.yue .exercise > .admonition-title::after,
+.yue .solution > .admonition-title::before,
+.yue .solution > .admonition-title::after {
+  display: none !important;
+  content: none !important;
+}
