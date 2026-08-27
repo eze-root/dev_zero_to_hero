@@ -13,7 +13,7 @@
 特别是，shell 脚本受到_约定_的严格约束。为了让命令行界面 (CLI) 程序在更广泛的 shell 环境中良好运行，需要遵循一些常见模式。我们现在将介绍理解命令行程序如何工作所需的许多概念以及如何使用和配置它们的普遍约定。
 
 (command-line-environment-the-command-line-interface)=
-# 命令行界面
+## 命令行界面
 
 在大多数编程语言中编写函数类似于：
 
@@ -49,7 +49,7 @@ fi
 - 信号
 
 (command-line-environment-arguments)=
-## 参数
+### 参数
 
 Shell 程序在执行时会收到一个参数列表。参数在 shell 中是纯字符串，由程序如何解释它们。例如，当我们执行 `ls -l folder/` 时，我们正在执行带有参数 `['-l', 'folder/']` 的程序 `/bin/ls`。
 
@@ -112,7 +112,7 @@ mv *{.py,.sh} folder
 
 
 (command-line-environment-streams)=
-## 流
+### 流
 
 每当我们执行像这样的程序管道时
 
@@ -192,7 +192,7 @@ $ cat ~/.bash_history | fzf
 
 
 (command-line-environment-environment-variables)=
-## 环境变量
+### 环境变量
 
 要在 bash 中分配变量，我们使用语法 `foo=bar`，然后使用 `$foo` 语法访问变量的值。请注意，`foo = bar` 是无效语法，因为 shell 会将其解析为使用参数 `['=', 'bar']` 调用程序 `foo`。在 shell 脚本中，空格字符的作用是执行参数分割。这种行为可能会令人困惑且难以适应，因此请记住这一点。
 
@@ -239,7 +239,7 @@ bash -c 'echo $DEBUG'
 > 环境变量是另一个 shell 约定。它们可用于隐式而不是显式地修改许多程序的行为。例如，shell 将 `$HOME` 环境变量设置为当前用户的主文件夹的路径。然后程序可以访问此变量来获取此信息，而不需要显式的 `--home /home/alice`。另一个常见的示例是 `$TZ`，许多程序使用它根据指定的时区来格式化日期和时间。
 
 (command-line-environment-return-codes)=
-## 返回码
+### 返回码
 
 正如我们之前看到的，shell 程序的主要输出是通过 stdout/stderr 流和文件系统副作用来传达的。
 
@@ -276,7 +276,7 @@ done < file.txt
 ```
 
 (command-line-environment-signals)=
-## 信号
+### 信号
 
 在某些情况下，您需要在程序执行时中断程序，例如，如果命令需要很长时间才能完成。中断程序的最简单方法是按 `Ctrl-C`，命令可能会停止。但这实际上是如何运作的以及为什么它有时无法阻止该过程？
 
@@ -383,7 +383,7 @@ trap cleanup SIGINT SIGTERM  # Also on Ctrl-C or kill
 ```
 
 (command-line-environment-remote-machines)=
-# 远程机器
+## 远程机器
 
 程序员在日常工作中使用远程服务器已经变得越来越普遍。这里最常用的工具是 SSH（安全 Shell），它将帮助我们连接到远程服务器并提供现在熟悉的 shell 界面。我们使用如下命令连接到服务器：
 
@@ -445,7 +445,7 @@ Host *.mit.edu
 
 
 (command-line-environment-terminal-multiplexers)=
-# 终端多路复用器
+## 终端多路复用器
 
 使用命令行界面时，您通常会希望一次运行多个操作。例如，您可能希望并行运行编辑器和程序。尽管这可以通过打开新的终端窗口来实现，但使用终端多路复用器是一种更通用的解决方案。
 
@@ -482,7 +482,7 @@ Host *.mit.edu
 通过工具包中的 tmux 和 SSH，您将希望让您的环境在任何计算机上都感觉像在家一样。这就是 shell 定制的用武之地。
 
 (command-line-environment-customizing-the-shell)=
-# 定制 Shell
+## 定制 Shell
 
 大量命令行程序使用称为 _dotfiles_ 的纯文本文件进行配置（因为文件名以 `.` 开头，例如 `~/.vimrc`，因此默认情况下它们隐藏在列出 `ls` 的目录中）。
 
@@ -622,7 +622,7 @@ alias ll
 
 
 (command-line-environment-ai-in-the-shell)=
-# Shell 中的 AI
+## Shell 中的 AI
 
 将 AI 工具整合到 shell 中的方法有很多。以下是不同集成级别的几个示例：
 
@@ -658,7 +658,7 @@ sarah.connor
 **AI shell**：像 [Claude Code](https://docs.anthropic.com/en/docs/claude-code) 这样的工具充当元 shell，接受英语命令并将其转换为 shell 操作、文件编辑和更复杂的多步骤任务。
 
 (command-line-environment-terminal-emulators)=
-# 终端模拟器
+## 终端模拟器
 
 除了自定义您的 shell 之外，还值得花一些时间来确定您选择的 **终端模拟器** 及其设置。终端模拟器是一个 GUI 程序，它提供运行 shell 的基于文本的界面。有很多终端模拟器。
 
@@ -671,7 +671,7 @@ sarah.connor
 - 回滚配置
 - 性能（一些较新的终端，如 [Alacritty](https://github.com/alacritty/alacritty) 或 [Ghostty](https://ghostty.org/) 提供 GPU 加速）。
 
-## Exercises
+### Exercises
 
 以下题目对应[官方练习](https://missing.csail.mit.edu/2026/command-line-environment/#exercises)。部分开放题的“答案”是验收标准与安全做法，而不是唯一命令。
 
@@ -1003,6 +1003,6 @@ mosh 会在客户端本地回显并在网络恢复后同步状态，通常能从
 `ssh -fN -L 9999:localhost:8888 vm`：`-N` 不执行远程命令，`-f` 在认证后进入后台。调试时先去掉 `-f` 并加 `-v`；长期隧道可配 `ExitOnForwardFailure yes` 并交给服务管理器监督。
 ```
 
-## 许可与署名
+### 许可与署名
 
 本页依据 MIT Missing Semester 2026 第二讲[官方 notes](https://missing.csail.mit.edu/2026/command-line-environment/)整理，原材料采用 [CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可。

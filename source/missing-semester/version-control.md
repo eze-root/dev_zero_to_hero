@@ -29,12 +29,12 @@
 虽然 Git 的界面确实很丑，但它的底层设计和想法却很漂亮。虽然丑陋的界面必须_记住_，但漂亮的设计却可以_理解_。因此，我们对 Git 进行了自下而上的解释，从它的数据模型开始，然后介绍命令行界面。一旦理解了数据模型，就可以更好地理解命令如何操作底层数据模型。
 
 (version-control-gits-data-model)=
-# Git 的数据模型
+## Git 的数据模型
 
 Git 的独创性在于其经过深思熟虑的数据模型，它支持版本控制的所有出色功能，例如维护历史记录、支持分支和实现协作。
 
 (version-control-snapshots)=
-## 快照
+### 快照
 
 Git 将某些顶级目录中的文件和文件夹集合的历史记录建模为一系列快照。在 Git 术语中，文件称为“blob”，它只是一堆字节。目录称为“树”，它将名称映射到 blob 或树（因此目录可以包含其他目录）。快照是正在跟踪的顶级树。例如，我们可能有一棵树，如下所示：
 
@@ -51,7 +51,7 @@ Git 将某些顶级目录中的文件和文件夹集合的历史记录建模为�
 顶级树包含两个元素，一棵树“foo”（它本身包含一个元素，一个 blob“bar.txt”）和一个 blob“baz.txt”。
 
 (version-control-modeling-history-relating-snapshots)=
-## 建模历史：相关快照
+### 建模历史：相关快照
 
 版本控制系统应如何关联快照？一个简单的模型是具有线性历史。历史记录是按时间顺序排列的快照列表。由于多种原因，Git 不使用这样的简单模型。
 
@@ -80,7 +80,7 @@ o <-- o <-- o <-- o <---- <strong>o</strong>
 Git 中的提交是不可变的。然而，这并不意味着错误无法纠正；只是对提交历史记录的“编辑”实际上创建了全新的提交，并且引用（见下文）被更新以指向新的提交。
 
 (version-control-data-model-as-pseudocode)=
-## 数据模型，作为伪代码
+### 数据模型，作为伪代码
 
 看看用伪代码写下的 Git 数据模型可能会很有启发：
 
@@ -103,7 +103,7 @@ type commit = struct {
 这是一个干净、简单的历史模型。
 
 (version-control-objects-and-content-addressing)=
-## 对象和内容寻址
+### 对象和内容寻址
 
 “对象”是一个 blob、树或提交：
 
@@ -140,7 +140,7 @@ git is wonderful
 ```
 
 (version-control-references)=
-## 引用
+### 引用
 
 现在，所有快照都可以通过其 SHA-1 哈希值来识别。这很不方便，因为人类不擅长记住 40 个十六进制字符的字符串。
 
@@ -167,7 +167,7 @@ def load_reference(name_or_id):
 一个细节是，我们经常需要历史记录中“我们当前所在位置”的概念，以便当我们拍摄新快照时，我们知道它相对于什么（我们如何设置提交的 `parents` 字段）。在 Git 中，“我们当前所在的位置”是一个称为“HEAD”的特殊引用。
 
 (version-control-repositories)=
-## 仓库
+### 仓库
 
 最后，我们可以（粗略地）定义什么是 Git 仓库：它是数据 `objects` 和 `references`。
 
@@ -176,7 +176,7 @@ def load_reference(name_or_id):
 每当您输入任何命令时，请考虑该命令对底层图形数据结构进行的操作。相反，如果您尝试对提交 DAG 进行特定类型的更改，例如“放弃未提交的更改并使‘主’引用指向提交 `5d83f9e`”，可能有一个命令可以执行此操作（例如，在本例中为 `git checkout master; git reset --hard 5d83f9e`）。
 
 (version-control-staging-area)=
-# 暂存区
+## 暂存区
 
 这是与数据模型正交的另一个概念，但它是创建提交的界面的一部分。
 
@@ -185,12 +185,12 @@ def load_reference(name_or_id):
 Git 允许您通过称为“暂存区域”的机制指定下一个快照中应包含哪些修改，从而适应这种情况。
 
 (version-control-git-command-line-interface)=
-# Git 命令行界面
+## Git 命令行界面
 
 为了避免重复信息，我们不会在这些讲义中详细解释以下命令。请参阅强烈推荐的 [Pro Git](https://git-scm.com/book/en/v2) 了解更多信息，或观看讲座视频。
 
 (version-control-basics)=
-## 基础知识
+### 基础知识
 
 - `git help <command>`：获取 git 命令的帮助
 - `git init`：创建一个新的 git 仓库，数据存储在 `.git` 目录中
@@ -206,7 +206,7 @@ Git 允许您通过称为“暂存区域”的机制指定下一个快照中应�
 - `git checkout <revision>`：更新 HEAD（如果检出分支则更新当前分支）
 
 (version-control-branching-and-merging)=
-## 分支和合并
+### 分支和合并
 
 - `git branch`：显示分支
 - `git branch <name>`：创建分支
@@ -218,7 +218,7 @@ Git 允许您通过称为“暂存区域”的机制指定下一个快照中应�
 - `git rebase`：将补丁集重新设置到新的基础上
 
 (version-control-remotes)=
-## 远端
+### 远端
 
 - `git remote`：列出远端
 - `git remote add <name> <url>`：添加远程
@@ -229,14 +229,14 @@ Git 允许您通过称为“暂存区域”的机制指定下一个快照中应�
 - `git clone`：从远程下载仓库
 
 (version-control-undo)=
-## 撤消
+### 撤消
 
 - `git commit --amend`：编辑提交的内容/消息
 - `git reset <file>`：取消暂存文件
 - `git restore`：放弃更改
 
 (version-control-advanced-git)=
-# 高级 Git
+## 高级 Git
 
 - `git config`：Git 是 [高度可定制](https://git-scm.com/docs/git-config)
 - `git clone --depth=1`：浅克隆，没有完整的版本历史记录
@@ -250,7 +250,7 @@ Git 允许您通过称为“暂存区域”的机制指定下一个快照中应�
 - `.gitignore`：[指定](https://git-scm.com/docs/gitignore) 有意忽略未跟踪的文件
 
 (version-control-miscellaneous)=
-# 杂项
+## 杂项
 
 - **GUI**：有很多 [图形用户界面客户端](https://git-scm.com/downloads/guis)
 Git 就在那里。我们个人不使用它们，而是使用命令行界面。
@@ -266,7 +266,7 @@ shell 提示符（[zsh](https://github.com/olivierverdier/zsh-git-prompt)、[bas
 主机，例如 [GitLab](https://about.gitlab.com/) 和 [Bitbucket](https://bitbucket.org/)。
 
 (version-control-resources)=
-# 资源
+## 资源
 
 - [Pro Git](https://git-scm.com/book/en/v2) **强烈推荐阅读**。
 现在您已经了解了数据模型，通过第 1--5 章应该可以教会您熟练使用 Git 所需的大部分内容。后面的章节有一些有趣的高级材料。
@@ -281,7 +281,7 @@ shell 提示符（[zsh](https://github.com/olivierverdier/zsh-git-prompt)、[bas
 - [学习 Git 分支](https://learngitbranching.js.org/) 是一个基于浏览器的
 教你 Git 的游戏。
 
-## Exercises
+### Exercises
 
 ```{exercise} 用数据模型学习基础 Git
 :label: exercise-git-model-tutorial
@@ -399,6 +399,6 @@ git check-ignore -v .DS_Store
 第一次合并通常快进；第二次在同一行出现 `<<<<<<< HEAD`、`=======`、`>>>>>>> sweet`，分别界定当前版本、分隔线和传入版本。编辑成最终内容并删除标记，运行 `git add recipe.txt && git merge --continue`，再用 `git log --graph --oneline --all` 验证合并提交有两条父边。
 ```
 
-## 许可与署名
+### 许可与署名
 
 本页依据 MIT Missing Semester 2026 第五讲[官方 notes](https://missing.csail.mit.edu/2026/version-control/)整理，原材料采用 [CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可。

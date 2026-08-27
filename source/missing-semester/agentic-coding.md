@@ -42,7 +42,7 @@ Turn this into a proper command-line program, with argparse for argument parsing
 > 要获得更具说明性的演示，请尝试要求智能体作为后续操作来运行生成的脚本。观察输出，并尝试要求它进行更改（例如，要求它仅包含绝对 URL）。
 
 (agentic-coding-how-ai-models-and-agents-work)=
-# AI 模型与智能体如何工作
+## AI 模型与智能体如何工作
 
 全面解释现代 [大语言模型 (LLM)](https://en.wikipedia.org/wiki/Large_language_model) 的内部工作原理和智能体框架等基础设施超出了本课程的范围。然而，对一些关键思想有一个高层次的理解有助于有效地使用这种前沿技术并理解其局限性。
 
@@ -52,14 +52,14 @@ LLM 可以被视为对给定提示字符串（输入）的完成字符串（输�
 对话式聊天和编码智能体等人工智能工具建立在这个原语之上。对于多回合交互，聊天应用程序和智能体使用回合标记，并在每次出现新用户提示时提供整个对话历史记录作为提示字符串，每个用户提示调用一次 LLM 推理。对于工具调用智能体，智能体框架将某些 LLM 输出解释为调用工具的请求，并且智能体框架将工具调用的结果作为提示字符串的一部分提供给模型（因此每次有工具调用/响应时，LLM 推理都会再次运行）。工具调用智能体的核心概念可以是[用 200 行代码实现](https://www.mihaileric.com/The-Emperor-Has-No-Clothes/)。
 
 (agentic-coding-privacy)=
-## 隐私
+### 隐私
 
 大多数标准配置的人工智能编码工具都会将大量数据发送到云端。有时，智能体框架在本地运行，而 LLM 推理在云中运行，有时更多的软件在云中运行（例如，服务提供商可能会有效地获得整个仓库的副本以及您与 AI 工具的所有交互）。
 
 有一些开源 AI 编码工具和开源 LLM 相当不错（尽管不如专有模型），但目前对于大多数用户来说，由于硬件限制，在本地运行前沿的开放 LLM 是不可行的。
 
 (agentic-coding-use-cases)=
-# 使用场景
+## 使用场景
 
 编码智能体可以帮助完成各种任务。一些例子：
 
@@ -76,7 +76,7 @@ LLM 可以被视为对给定提示字符串（输入）的完成字符串（输�
     > [这是一个例子](https://github.com/cleanlab/office-presence-dashboard) 是一位讲师vibe coding的真实世界项目。
 
 (agentic-coding-advanced-agents)=
-# 高级智能体
+## 高级智能体
 
 在这里，我们简要概述了编码智能体的一些更高级的使用模式和功能。
 
@@ -102,16 +102,16 @@ A Python code checking agent that uses `mypy` and `ruff` to type-check, lint, an
 然后，您可以使用顶层智能体通过诸如“使用代码检查器子智能体”之类的消息显式调用子智能体。您还可以让顶层智能体在适当的时候自动调用子智能体，例如，在修改任何 Python 文件后。
 
 (agentic-coding-what-to-watch-out-for)=
-# 需要注意什么
+## 需要注意什么
 
 人工智能工具可能会犯错误。它们建立在 LLM 的基础上，而 LLM 只是概率式的下一 token 预测模型。它们并不像人类那样“聪明”。检查 AI 输出的正确性和安全漏洞。有时验证代码可能比自己编写代码更困难；对于关键代码，请考虑手动编写。智能体可能钻进无效的兔子洞，甚至坚持错误结论；要警惕调试螺旋。不要把人工智能当作拐杖，警惕过度依赖或理解浅薄。人工智能仍然无法完成大量的编程任务。计算思维仍然有价值。
 
 (agentic-coding-recommended-software)=
-# 推荐软件
+## 推荐软件
 
 许多 IDE / AI 编码扩展都包含编码智能体（请参阅 [开发环境讲座](development-environment.md) 的建议）。其他流行的编码智能体包括 Anthropic 的 [Claude Code](https://www.claude.com/product/claude-code)、OpenAI 的 [Codex](https://openai.com/codex/) 以及 [opencode](https://github.com/anomalyco/opencode) 等开源智能体。
 
-## Exercises
+### Exercises
 
 ```{exercise} 比较四种编程方式
 :label: exercise-agent-four-modes
@@ -185,6 +185,6 @@ A Python code checking agent that uses `mypy` and `ruff` to type-check, lint, an
 安全基线：一次性 VM/容器、非特权用户、只挂载测试副本、无宿主 Docker socket、无 SSH/云凭据、默认断网或域名白名单、限制 CPU/内存/时间，执行后销毁环境并只导出审查过的 patch。容器共享宿主内核，处理真正不可信代码时 VM 边界更强。“隔离”不是运行危险模式的免责理由。
 ```
 
-## 许可与署名
+### 许可与署名
 
 本页依据 MIT Missing Semester 2026 第七讲[官方 notes](https://missing.csail.mit.edu/2026/agentic-coding/)整理，原材料采用 [CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可。
