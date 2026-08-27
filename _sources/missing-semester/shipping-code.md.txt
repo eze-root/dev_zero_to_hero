@@ -26,7 +26,7 @@
 我们将通过Python生态系统中的示例来解释这些概念，因为具体的示例有助于理解。虽然其他编程语言生态系统的工具有所不同，但概念基本上是相同的。
 
 (shipping-code-dependencies--environments)=
-# 依赖与环境
+## 依赖与环境
 
 在现代软件开发中，抽象层无处不在。程序自然地将逻辑卸载到其他库或服务。然而，这在您的程序和它运行所需的库之间引入了_依赖_关系。例如，在 Python 中，要获取网站的内容，我们经常这样做：
 
@@ -150,7 +150,7 @@ Python 3.11.10
 > 在某些编程语言中，每个项目都会自动为其依赖项获取自己的环境，而不是手动创建它，但原理是相同的。如今，大多数语言还具有一种机制，可以在单个系统上管理该语言的多个版本，然后指定各个项目使用哪个版本。
 
 (shipping-code-artifacts--packaging)=
-# 产物与打包
+## 产物与打包
 
 在软件开发中，我们区分源代码和产物。开发人员编写和读取源代码，而产物是从该源代码生成的打包的、可分发的输出——准备安装或部署。产物可以像我们运行的代码文件一样简单，也可以像包含应用程序所有必要部分的整个虚拟机一样复杂。考虑以下示例，当前目录中有一个 Python 文件 `greet.py`：
 
@@ -261,7 +261,7 @@ Hello, Alice!
 
 
 (shipping-code-releases--versioning)=
-# 发布与版本管理
+## 发布与版本管理
 
 代码是在连续的过程中构建的，但在离散的基础上发布。在软件开发中，开发环境和生产环境之间有明显的区别。在交付产品之前，需要证明代码可以在开发环境中运行。发布过程涉及许多步骤，包括测试、依赖管理、版本控制、配置、部署和发布。
 
@@ -299,7 +299,7 @@ dependencies = [
 
 
 (shipping-code-reproducibility)=
-# 可复现性
+## 可复现性
 
 在现代软件开发中，您编写的代码位于大量抽象层之上。这包括编程语言运行时、第三方库、操作系统，甚至硬件本身。这些层之间的任何差异都可能会改变代码的行为，甚至阻止其按预期工作。此外，即使底层硬件的差异也会影响您发布软件的能力。
 
@@ -338,7 +338,7 @@ wheels = [
 即使进行了 CI 测试，升级软件版本时仍然会出现问题，通常是因为开发环境和生产环境之间不可避免地不匹配。在这种情况下，最好的做法是制定_回滚_计划，其中版本升级将被恢复，并重新部署已知的良好版本。
 
 (shipping-code-vms--containers)=
-# 虚拟机和容器
+## 虚拟机和容器
 
 当您开始依赖更复杂的依赖项时，代码的依赖项很可能会超出包管理器可以处理的范围。一个常见的原因是必须与特定的系统库或硬件驱动程序交互。例如，在科学计算和人工智能中，程序通常需要专门的库和驱动程序来利用 GPU 硬件。许多系统级依赖项（GPU 驱动程序、特定编译器版本、OpenSSL 等共享库）仍然需要系统范围内的安装。
 
@@ -396,7 +396,7 @@ Docker 有一些需要注意的重要限制。首先，容器镜像通常是特�
 > 如今，越来越多的项目也利用 nix 通过 [Nix Flakes](https://serokell.io/blog/practical-nix-flakes) 来管理每个项目的“系统范围”库和应用程序。
 
 (shipping-code-configuration)=
-# 配置
+## 配置
 
 软件本质上是可配置的。在 [命令行环境](command-line-environment.md) 讲座中，我们看到程序通过标志、环境变量甚至配置文件（又称为dotfiles）接收选项。即使对于更复杂的应用程序也是如此，并且存在用于大规模管理配置的既定模式。软件配置不应嵌入代码中，而应在运行时提供。一些常见的是环境变量和配置文件。
 
@@ -428,7 +428,7 @@ server:
 
 
 (shipping-code-services--orchestration)=
-# 服务与编排
+## 服务与编排
 
 现代应用程序很少孤立存在。典型的 Web 应用程序可能需要用于持久存储的数据库、用于性能的缓存、用于后台任务的消息队列以及各种其他支持服务。现代架构通常将功能分解为可以独立开发、部署和扩展的单独服务，而不是将所有内容捆绑到单个整体应用程序中。
 
@@ -495,7 +495,7 @@ $ curl https://api.anthropic.com/v1/messages \
 ```
 
 (shipping-code-publishing)=
-# 发布
+## 发布
 
 一旦您证明代码可以工作，您可能有兴趣将其分发给其他人下载和安装。分发有多种形式，并且本质上与您所使用的编程语言和环境相关。
 
@@ -557,13 +557,13 @@ $ uv pip install --index-url https://test.pypi.org/simple/ greeting
 
 <!--
 (shipping-code-documentation)=
-## 文档
+### 文档
 
 到目前为止，我们已经强调可交付的产物作为打包与交付代码的主要输出。除了产物之外，我们还需要为用户记录代码的功能、安装说明和使用示例。
 
 [Sphinx](https://www.sphinx-doc.org/) (Python) 和 [MkDocs](https://www.mkdocs.org/) 等工具可以从文档字符串和 Markdown 文件自动生成可浏览的文档，这些文档通常托管在 [Read the Docs](https://readthedocs.org/) 等服务上。对于基于 HTTP 的 API，[OpenAPI Specification](https://www.openapis.org/)（以前称为 Swagger）提供了用于描述 API 端点的标准格式，工具可使用该格式自动生成交互式文档和客户端库。 -->
 
-## Exercises
+### Exercises
 
 ```{exercise} 观察虚拟环境激活
 :label: exercise-ship-venv-env
@@ -656,6 +656,6 @@ Compose 中定义 `web: {build: ., environment: [REDIS_URL=redis://cache:6379]}`
 在仓库 Settings → Pages 选择分支或 GitHub Actions，确保构建产物含入口 `index.html`，部署后检查 Actions 与公开 URL。自定义域名需配置 `CNAME`/`A` 或 `AAAA`/`ALIAS` 记录、仓库中的 custom domain，并等待证书签发后启用 HTTPS；先按 GitHub 文档验证 DNS，避免域名接管风险。
 ```
 
-## 许可与署名
+### 许可与署名
 
 本页依据 MIT Missing Semester 2026 第六讲[官方 notes](https://missing.csail.mit.edu/2026/shipping-code/)整理，原材料采用 [CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可。

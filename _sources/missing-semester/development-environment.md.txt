@@ -21,7 +21,7 @@ IDE 和基于终端的工作流程各有其优点和缺点。例如，图形 IDE
 [vs-code]: https://code.visualstudio.com/
 
 (development-environment-text-editing-and-vim)=
-# 文本编辑和 Vim
+## 文本编辑和 Vim
 
 编程时，您大部分时间都花在浏览代码、阅读代码片段以及编辑代码上，而不是编写长流或从上到下读取文件。 [Vim] 是一个针对这种任务分配进行了优化的文本编辑器。
 
@@ -30,7 +30,7 @@ IDE 和基于终端的工作流程各有其优点和缺点。例如，图形 IDE
 **其他软件中的 Vim 支持。** 您不必使用 [Vim] 本身即可从其核心思想中受益。许多涉及任何类型文本编辑的程序都支持“Vim 模式”，无论是作为内置功能还是作为插件。例如，VS Code 有 [VSCodeVim](https://marketplace.visualstudio.com/items?itemName=vscodevim.vim) 插件，Zsh 有用于 Vim 模拟的 [内置支持](https://zsh.sourceforge.io/Guide/zshguide04.html)，甚至 Claude Code 有用于 Vim 编辑器模式的 [内置支持](https://code.claude.com/docs/en/interactive-mode#vim-editor-mode)。您使用的任何涉及文本编辑的工具很可能都以某种方式支持 Vim 模式。
 
 (development-environment-modal-editing)=
-## 模态编辑
+### 模态编辑
 
 Vim 是一个 *模态编辑器*：它针对不同类别的任务有不同的操作模式。
 
@@ -49,17 +49,17 @@ Vim 是一个 *模态编辑器*：它针对不同类别的任务有不同的操�
 使用 Vim 时经常使用 `<ESC>` 键：考虑将 Caps Lock 重新映射为 Escape ([macOS 说明](https://vim.fandom.com/wiki/Map_caps_lock_to_escape_in_macOS)) 或使用简单的按键序列为 `<ESC>` 创建 [替代映射](https://vim.fandom.com/wiki/Avoid_the_escape_key#Mappings)。
 
 (development-environment-basics-inserting-text)=
-## 基础知识：插入文本
+### 基础知识：插入文本
 
 在正常模式下，按 `i` 进入插入模式。现在，Vim 的行为就像任何其他文本编辑器一样，直到您按 `<ESC>` 返回正常模式。这与上面解释的基础知识一起，就是开始使用 Vim 编辑文件所需的全部内容（如果您将所有时间都花在插入模式下编辑，则效率不是特别高）。
 
 (development-environment-vims-interface-is-a-programming-language)=
-## Vim 的界面是一种编程语言
+### Vim 的界面是一种编程语言
 
 Vim 的界面是一种编程语言。击键（带有助记名称）是命令，这些命令 *compose*。这可以实现高效的移动和编辑，尤其是当命令成为肌肉记忆时，就像一旦您学会了键盘布局，打字就会变得超级高效一样。
 
 (development-environment-movement)=
-### 移动
+#### 移动
 
 您应该将大部分时间花在正常模式下，使用移动命令来导航文件。 Vim 中的动作也称为“名词”，因为它们指的是文本块。
 
@@ -78,7 +78,7 @@ Vim 的界面是一种编程语言。击键（带有助记名称）是命令，�
 - 搜索：`/{regex}`、`n` / `N` 用于导航匹配
 
 (development-environment-selection)=
-### 选择
+#### 选择
 
 视觉模式：
 
@@ -89,7 +89,7 @@ Vim 的界面是一种编程语言。击键（带有助记名称）是命令，�
 可以使用移动键进行选择。
 
 (development-environment-edits)=
-### 编辑
+#### 编辑
 
 您过去使用鼠标执行的所有操作现在都可以使用键盘使用与移动命令组合的编辑命令来执行。从这里开始，Vim 的界面开始看起来像一种编程语言。 Vim 的编辑命令也称为“动词”，因为动词作用于名词。
 
@@ -111,7 +111,7 @@ Vim 的界面是一种编程语言。击键（带有助记名称）是命令，�
 - 还有更多需要学习的内容：例如，`~` 翻转字符的大小写，`J` 将行连接在一起
 
 (development-environment-counts)=
-### 计数
+#### 计数
 
 您可以将名词和动词与计数结合起来，这将执行给定的操作多次。
 
@@ -120,7 +120,7 @@ Vim 的界面是一种编程语言。击键（带有助记名称）是命令，�
 - `7dw` 删除7个字
 
 (development-environment-modifiers)=
-### 修饰符
+#### 修饰符
 
 您可以使用修饰语来更改名词的含义。一些修饰符是 `i`，意思是“内部”或“内部”，以及 `a`，意思是“周围”。
 
@@ -129,7 +129,7 @@ Vim 的界面是一种编程语言。击键（带有助记名称）是命令，�
 - `da'` 删除单引号字符串，包括周围的单引号
 
 (development-environment-putting-it-all-together)=
-## 组合使用
+### 组合使用
 
 这是一个损坏的 [Fizz Buzz](https://en.wikipedia.org/wiki/Fizz_buzz) 实现：
 
@@ -170,12 +170,12 @@ def main():
     - `<ESC>` 返回正常模式
 
 (development-environment-learning-vim)=
-## 学习 Vim
+### 学习 Vim
 
 学习 Vim 的最佳方法是学习基础知识（到目前为止我们已经介绍过），然后在所有软件中启用 Vim 模式并开始在实践中使用它。避免使用鼠标或箭头键的诱惑；在某些编辑器中，您可以解除方向键的绑定，以强迫自己养成良好的习惯。
 
 (development-environment-additional-resources)=
-### 其他资源
+#### 其他资源
 
 - 此类的上一次迭代中的 [Vim讲座](https://missing.csail.mit.edu/2020/editors/) --- 我们在那里更深入地介绍了 Vim
 - `vimtutor` 是随 Vim 一起安装的教程 --- 如果安装了 Vim，您应该能够从 shell 运行 `vimtutor`
@@ -190,7 +190,7 @@ def main():
 [Vim]: https://www.vim.org/
 
 (development-environment-code-intelligence-and-language-servers)=
-# 代码智能和语言服务器
+## 代码智能和语言服务器
 
 IDE 通常提供特定于语言的支持，需要通过连接到实现 [语言服务器协议](https://microsoft.github.io/language-server-protocol/) 的 *语言服务器* 的 IDE 扩展来理解代码的语义。例如，[VS Code 的 Python 扩展](https://marketplace.visualstudio.com/items?itemName=ms-python.python) 依赖于 [Pylance](https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance)，[VS Code 的 Go 扩展](https://marketplace.visualstudio.com/items?itemName=golang.go) 依赖于第一方 [gopls](https://go.dev/gopls/)。通过安装适用于您使用的语言的扩展和语言服务器，您可以在 IDE 中启用许多特定于语言的功能，例如：
 
@@ -202,21 +202,21 @@ IDE 通常提供特定于语言的支持，需要通过连接到实现 [语言�
 - **代码质量。** 这些工具可以独立使用，但此功能通常也由语言服务器提供。代码格式化自动缩进和自动格式化代码以及类型检查器和 linter 会在您键入时查找代码中的错误。我们将在 [代码质量讲座](code-quality.md) 中更深入地介绍此类功能。
 
 (development-environment-configuring-language-servers)=
-## 配置语言服务器
+### 配置语言服务器
 
 对于某些语言，您所需要做的就是安装扩展程序和语言服务器，然后一切就完成了。对于其他人来说，为了从语言服务器中获得最大的好处，您需要告诉 IDE 您的环境。例如，将 VS Code 指向 [Python环境](https://code.visualstudio.com/docs/python/environments) 将使语言服务器能够查看您安装的软件包。我们的 [打包与交付代码讲座](shipping-code.md) 更深入地介绍了环境。
 
 根据语言的不同，您可能可以为语言服务器配置一些设置。例如，使用 VS Code 中的 Python 支持，您可以对不使用 Python 可选类型注释的项目禁用静态类型检查。
 
 (development-environment-ai-powered-development)=
-# AI 辅助开发
+## AI 辅助开发
 
 自 2021 年中期使用 OpenAI 的 [Codex 模型](https://openai.com/index/openai-codex/) 推出 [GitHub Copilot][github-copilot] 以来，[LLM](https://en.wikipedia.org/wiki/Large_language_model) 已在软件工程中广泛采用。目前正在使用三种主要的形式：自动补全、行内对话和编码智能体。
 
 [github-copilot]: https://github.com/features/copilot/ai-code-editor
 
 (development-environment-autocomplete)=
-## 自动补全
+### 自动补全
 
 AI 支持的自动补全功能与 IDE 中的传统自动补全功能具有相同的交互形式，可在您键入时建议在光标位置进行完成。有时，它被用作“正常工作”的被动功能。除此之外，AI 自动补全通常是使用代码注释的 [提示](https://en.wikipedia.org/wiki/Prompt_engineering)。
 
@@ -274,7 +274,7 @@ print(extract(download_contents("https://raw.githubusercontent.com/missing-semes
 ```
 
 (development-environment-inline-chat)=
-## 行内对话
+### 行内对话
 
 行内对话可让您选择一行或一个代码块，然后直接提示 AI 模型提出编辑建议。在这种交互模式下，模型可以对现有代码进行更改（这与自动补全不同，自动补全仅完成光标之外的代码）。
 
@@ -295,17 +295,17 @@ def download_contents(url: str) -> str:
 ```
 
 (development-environment-coding-agents)=
-## 编码智能体
+### 编码智能体
 
 [智能体编程](agentic-coding.md) 讲座中深入介绍了编码智能体。
 
 (development-environment-recommended-software)=
-## 推荐软件
+### 推荐软件
 
 一些流行的 AI IDE 包括带有 [GitHub Copilot][github-copilot] 扩展和 [光标](https://cursor.com/) 的 [VS Code][vs-code]。 GitHub Copilot 目前可供 [学生免费](https://github.com/education/students)、流行开源项目的教师和维护者使用。这是一个快速发展的空间。许多领先产品具有大致相同的功能。
 
 (development-environment-extensions-and-other-ide-functionality)=
-# 扩展和其他 IDE 功能
+## 扩展和其他 IDE 功能
 
 IDE 是强大的工具，*扩展* 使其变得更加强大。我们无法在一次讲座中涵盖所有这些功能，但在这里我们提供了一些流行扩展的指导。我们鼓励您自己探索这个空间；网上有许多流行的 IDE 扩展列表，例如 Vim 插件的 [Vim Awesome](https://vimawesome.com/) 和 [VS Code 扩展按受欢迎程度排序](https://marketplace.visualstudio.com/search?target=VSCode&category=All%20categories&sortBy=Installs)。
 
@@ -313,7 +313,7 @@ IDE 是强大的工具，*扩展* 使其变得更加强大。我们无法在一�
 - 远程开发：使用 SSH 在远程计算机上进行开发（例如，使用 [VS Code 的远程 SSH 插件](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)）。例如，如果您想在云中强大的 GPU 机器上开发和运行代码，这会很方便。
 - 协作编辑：以 Google Docs 风格编辑同一文件（例如，使用 [VS Code 的 Live Share 插件](https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare)）。
 
-## Exercises
+### Exercises
 
 ```{exercise} 一个月的 Vim 模式
 :label: exercise-dev-vim-month
@@ -363,6 +363,6 @@ IDE 是强大的工具，*扩展* 使其变得更加强大。我们无法在一�
 记录它解决的问题、发布者、所需权限、最近更新时间与替代方案；安装后完成一个具体任务，并比较安装前后的步骤。若收益不明确或索取无关权限，应卸载。扩展越少，启动速度、稳定性与供应链风险通常越容易控制。
 ```
 
-## 许可与署名
+### 许可与署名
 
 本页依据 MIT Missing Semester 2026 第三讲[官方 notes](https://missing.csail.mit.edu/2026/development-environment/)整理，原材料采用 [CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可。

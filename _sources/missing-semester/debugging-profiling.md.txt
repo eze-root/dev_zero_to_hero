@@ -11,10 +11,10 @@
 编程的一条黄金法则是，代码不会做你期望它做的事情，而是做你告诉它做的事情。弥合这一差距有时可能是一项相当困难的壮举。在本次讲座中，我们将介绍处理有错误和资源匮乏的代码的有用技术：调试和分析。
 
 (debugging-profiling-debugging)=
-# 调试
+## 调试
 
 (debugging-profiling-printf-debugging-and-logging)=
-## Printf 调试和日志记录
+### Printf 调试和日志记录
 
 > “最有效的调试工具仍然是仔细的思考，加上明智地放置打印语句”——Brian Kernighan，_Unix for Beginners_。
 
@@ -31,7 +31,7 @@
 > **第三方日志**：许多程序支持 `-v` 或 `--verbose` 标志以在运行时打印更多信息。这对于发现给定命令失败的原因非常有用。有些甚至允许重复该标志以获取更多详细信息。调试服务（数据库、Web 服务器等）问题时，请检查其日志 — 通常在 Linux 上的 `/var/log/` 中。使用 `journalctl -u <service>` 查看 systemd 服务的日志。对于第三方库，检查它们是否支持通过环境变量或配置进行调试日志记录。
 
 (debugging-profiling-debuggers)=
-## 调试器
+### 调试器
 
 当您知道要打印什么并且可以轻松修改和重新运行代码时，打印调试效果很好。当您不确定需要什么信息时，当错误仅在难以重现的情况下出现时，或者当修改和重新启动程序成本高昂（启动时间长、重新创建的状态复杂等）时，调试器就变得很有价值。
 
@@ -60,7 +60,7 @@
 > 考虑使用 GDB 的 TUI 模式（`gdb -tui` 或在 GDB 内按 `Ctrl-x a`）以获得在命令提示符旁边显示源代码的分屏视图。
 
 (debugging-profiling-record-replay-debugging)=
-### 记录重放调试
+#### 记录重放调试
 
 一些最令人沮丧的错误是_Heisenbugs_：当您尝试观察它们时，这些错误似乎会消失或改变行为。竞争条件、与时间相关的错误以及仅在某些系统条件下出现的问题都属于这一类。传统的调试在这里通常是无用的，因为再次运行程序会产生不同的行为（例如，打印语句可能会充分减慢代码速度，从而不再发生竞争）。
 
@@ -103,12 +103,12 @@ rr replay
 > **rr 和并发性**：因为 rr 确定性地记录执行，所以它串行化线程调度。这意味着如果某些竞争条件取决于特定的时间，则它们可能不会在 rr 下显现。 rr 对于调试竞赛仍然有用 - 一旦捕获失败的运行，您就可以可靠地重放它 - 但您可能需要多次记录尝试才能捕获间歇性错误。对于不涉及并发的错误，rr 表现最出色：您始终可以重现确切的执行情况并使用反向调试来查找损坏。
 
 (debugging-profiling-system-call-tracing)=
-## 系统调用追踪
+### 系统调用追踪
 
 有时您需要了解程序如何与操作系统交互。程序使 [系统调用](https://en.wikipedia.org/wiki/System_call) 向内核请求服务——打开文件、分配内存、创建进程等等。跟踪这些调用可以揭示程序挂起的原因、它试图访问哪些文件，或者它在哪里等待。
 
 (debugging-profiling-strace-linux-and-dtruss-macos)=
-### strace (Linux) 和 dtruss (macOS)
+#### strace (Linux) 和 dtruss (macOS)
 
 [`strace`](https://www.man7.org/linux/man-pages/man1/strace.1.html) 可让您观察程序进行的每个系统调用：
 
@@ -134,7 +134,7 @@ strace -T ./my_program
 > 要更深入地了解 `strace`，请查看 Julia Evans 的精彩 [strace 小册子](https://jvns.ca/strace-zine-unfolded.pdf)。
 
 (debugging-profiling-bpftrace-and-ebpf)=
-### bpftrace 和 eBPF
+#### bpftrace 和 eBPF
 
 [eBPF](https://ebpf.io/)（扩展伯克利数据包过滤器）是一项强大的 Linux 技术，允许在内核中运行沙盒程序。 [`bpftrace`](https://github.com/iovisor/bpftrace) 提供了用于编写 eBPF 程序的高级语法。这些是在内核中运行的任意程序，因此具有巨大的表达能力（尽管也是有点笨拙的类似 awk 的语法）。它们最常见的用例是调查正在调用哪些系统调用，包括聚合（如计数或延迟统计）或内省（甚至过滤）系统调用参数。
 
@@ -161,7 +161,7 @@ sudo bpftrace -e 'tracepoint:syscalls:sys_enter_* /pid == cpid/ { @[probe] = cou
 `-c` 标志运行指定的命令并将 `cpid` 设置为其 PID，这对于从程序启动的那一刻起跟踪程序很有用。当跟踪命令退出时，bpftrace 会打印聚合结果。
 
 (debugging-profiling-network-debugging)=
-### 网络调试
+#### 网络调试
 
 对于网络问题，[`tcpdump`](https://www.man7.org/linux/man-pages/man1/tcpdump.1.html) 和 [Wireshark](https://www.wireshark.org/) 可让您捕获和分析网络数据包：
 
@@ -176,12 +176,12 @@ sudo tcpdump -i any -w capture.pcap
 对于 HTTPS 流量，加密会降低 tcpdump 的用处。 [mitmproxy](https://mitmproxy.org/) 等工具可以充当拦截代理来检查加密流量。浏览器开发人员工具（“网络”选项卡）通常是调试来自 Web 应用程序的 HTTPS 请求的最简单方法 - 它们显示解密的请求/响应数据、标头和计时。
 
 (debugging-profiling-memory-debugging)=
-## 内存调试
+### 内存调试
 
 内存错误（缓冲区溢出、释放后使用、内存泄漏）是最危险且最难调试的错误。它们通常不会立即崩溃，但会以稍后导致问题的方式破坏内存。
 
 (debugging-profiling-sanitizers)=
-### Sanitizer
+#### Sanitizer
 
 查找内存错误的一种方法是使用**清理程序**，它们是编译器功能，可在运行时检测代码以检测错误。例如，广泛使用的 **AddressSanitizer (ASan)** 检测：
 - 缓冲区溢出（堆栈、堆和全局）
@@ -204,7 +204,7 @@ gcc -fsanitize=address -g program.c -o program
 Sanitizers 需要重新编译，但速度足够快，可以在 CI 管道和常规开发过程中使用。
 
 (debugging-profiling-valgrind-when-you-cant-recompile)=
-### Valgrind：当你无法重新编译时
+#### Valgrind：当你无法重新编译时
 
 [Valgrind](https://valgrind.org/) 相反，在类似于虚拟机的环境中运行您的程序来检测内存错误。它比Sanitizer慢，但不需要重新编译：
 
@@ -220,7 +220,7 @@ valgrind --leak-check=full ./my_program
 Valgrind 实际上是一个非常强大的受控执行环境，稍后当我们进行分析时我们会看到更多它！
 
 (debugging-profiling-ai-for-debugging)=
-## 人工智能调试
+### 人工智能调试
 
 大型语言模型已成为非常有用的调试助手。他们擅长某些与传统工具相辅相成的调试任务。
 
@@ -245,12 +245,12 @@ Valgrind 实际上是一个非常强大的受控执行环境，稍后当我们�
 > 这与开发环境讲座中介绍的 {ref}`通用AI编码能力 <development-environment-ai-powered-development>` 不同。在这里，我们专门讨论使用LLM作为调试辅助工具。
 
 (debugging-profiling-profiling)=
-# 性能分析
+## 性能分析
 
 即使您的代码在功能上表现符合您的预期，但如果它占用了进程中的所有 CPU 或内存，那么这可能还不够好。算法课程经常教授大_O_符号，但不教授如何在程序中查找热点。从 [过早的优化是万恶之源](https://wiki.c2.com/?PrematureOptimization) 开始，您应该了解分析器和监视工具。它们将帮助您了解程序的哪些部分占用了大部分时间和/或资源，以便您可以专注于优化这些部分。
 
 (debugging-profiling-timing)=
-## 计时
+### 计时
 
 衡量绩效的最简单方法就是计时。在许多情况下，只需打印代码在两点之间花费的时间就足够了。
 
@@ -270,7 +270,7 @@ sys	    0m0.028s
 这里的请求花费了近 300 毫秒（实时），但仅占用了 107 毫秒的 CPU 时间（用户 + 系统）。剩下的就等网络了。
 
 (debugging-profiling-resource-monitoring)=
-## 资源监控
+### 资源监控
 
 有时，分析程序性能的第一步是了解其实际资源消耗是多少。当资源有限时，程序通常运行缓慢。
 
@@ -287,7 +287,7 @@ sys	    0m0.028s
 - **网络使用情况**：[`nethogs`](https://github.com/raboof/nethogs) 和 [`iftop`](https://pdw.ex-parrot.com/iftop/) 是很好的交互式 CLI 工具，用于监视每个进程的网络使用情况。
 
 (debugging-profiling-visualizing-performance-data)=
-## 可视化性能数据
+### 可视化性能数据
 
 人类在图表中发现模式的速度比在数字表格中快得多。在分析性能时，绘制数据通常会揭示原始数据中不可见的趋势、峰值和异常情况。
 
@@ -308,7 +308,7 @@ gnuplot -e "set datafile separator ','; plot 'latency.csv' using 1:2 with lines"
 - 按不同维度（请求类型、用户群体、服务器）划分指标通常会揭示“系统范围”的问题实际上被隔离到一个类别
 
 (debugging-profiling-cpu-profilers)=
-## CPU 分析器
+### CPU 分析器
 
 大多数时候，当人们提到_分析器_时，他们指的是_CPU分析器_。主要有两种类型：
 
@@ -318,7 +318,7 @@ gnuplot -e "set datafile separator ','; plot 'latency.csv' using 1:2 with lines"
 采样分析器的开销较低，通常更适合生产使用。
 
 (debugging-profiling-perf-the-sampling-profiler)=
-### perf：采样分析器
+#### perf：采样分析器
 
 [`perf`](https://www.man7.org/linux/man-pages/man1/perf.1.html) 是标准 Linux 分析器。它可以分析任何程序而无需重新编译：
 
@@ -358,7 +358,7 @@ perf script | stackcollapse-perf.pl | flamegraph.pl > flamegraph.svg
 > 考虑使用 [speedscope](https://www.speedscope.app/) 进行基于 Web 的交互式火焰图查看器，或使用 [Perfetto](https://perfetto.dev/) 进行全面的系统级分析。
 
 (debugging-profiling-valgrinds-callgrind-the-tracing-profiler)=
-### Valgrind 的 Callgrind：跟踪分析器
+#### Valgrind 的 Callgrind：跟踪分析器
 
 [`callgrind`](https://valgrind.org/docs/manual/cl-manual.html) 是一个分析工具，用于记录程序的调用历史记录和指令计数。与采样分析器不同，它提供精确的调用计数，并可以显示调用者和被调用者之间的关系：
 
@@ -376,12 +376,12 @@ Callgrind 比采样分析器慢，但提供精确的调用计数，并且如果�
 > 如果您使用特定语言，可能会有更专业的分析器。例如，Python 有 [`cProfile`](https://docs.python.org/3/library/profile.html) 和 [`py-spy`](https://github.com/benfred/py-spy)，Go 有 [`go tool pprof`](https://pkg.go.dev/cmd/pprof)，Rust 有 [`cargo-flamegraph`](https://github.com/flamegraph-rs/flamegraph)（实际上适用于任何已编译的程序！）。
 
 (debugging-profiling-memory-profilers)=
-## 内存分析器
+### 内存分析器
 
 内存分析器可帮助您了解程序如何随时间使用内存并查找内存泄漏。
 
 (debugging-profiling-valgrinds-massif)=
-### Valgrind 的 Massif
+#### Valgrind 的 Massif
 
 [`massif`](https://valgrind.org/docs/manual/ms-manual.html) 分析堆内存使用情况：
 
@@ -395,7 +395,7 @@ ms_print massif.out.<pid>
 > 对于 Python，[`memory-profiler`](https://pypi.org/project/memory-profiler/) 提供逐行内存使用信息。
 
 (debugging-profiling-benchmarking)=
-## 基准测试
+### 基准测试
 
 当您需要比较不同实现或工具的性能时，[`hyperfine`](https://github.com/sharkdp/hyperfine) 非常适合对命令行程序进行基准测试：
 
@@ -416,7 +416,7 @@ Summary
 
 > 对于 Web 开发，浏览器开发人员工具包括出色的分析器。请参阅 [Firefox Profiler](https://profiler.firefox.com/docs/) 和 [Chrome 开发工具](https://developers.google.com/web/tools/chrome-devtools/rendering-tools) 文档。
 
-## Exercises
+### Exercises
 
 ```{exercise} 用调试器修复归并排序
 :label: exercise-debug-merge-sort
@@ -538,6 +538,6 @@ Linux 可运行 `strace -f -e trace=file ls -l 2>trace.log`。常见调用包括
 `ss -tlnp | grep ':4444'` 显示 PID/程序（查看其他用户进程可能需要 sudo）；也可用 `lsof -nP -iTCP:4444 -sTCP:LISTEN`。先发送 `kill PID`（SIGTERM）并确认端口释放，只有进程拒绝退出时才考虑 `kill -KILL`。
 ```
 
-## 许可与署名
+### 许可与署名
 
 本页依据 MIT Missing Semester 2026 第四讲[官方 notes](https://missing.csail.mit.edu/2026/debugging-profiling/)整理，原材料采用 [CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可。

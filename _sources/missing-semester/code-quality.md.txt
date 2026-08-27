@@ -22,7 +22,7 @@
 其中许多工具都是特定于语言的（例如，Python 的 [Ruff](https://docs.astral.sh/ruff/) linter/formatter）。在某些情况下，工具将支持多种语言（例如，[Prettier](https://prettier.io/) 代码格式化程序）。然而，这些概念几乎是通用的——您可以找到适用于任何编程语言的代码格式化程序、linter、测试库等。
 
 (code-quality-formatting)=
-# 格式化
+## 格式化
 
 代码自动格式化程序会自动美化表面语法。这样，您可以专注于更深入和更具挑战性的问题，而自动格式化工具可以处理日常细节，例如 `'` 与 `"` 字符串语法的一致性、二元运算符周围有空格（`x + y` 而不是 `x+y`）、按排序顺序排列 `import` 语句以及避免超长行。代码格式化程序的一大好处是它们可以标准化所有开发代码库的开发人员的代码风格。
 
@@ -31,7 +31,7 @@
 您可以使用代码格式化程序设置 {ref}`IDE集成 <development-environment-code-intelligence-and-language-servers>`，以便在您键入或保存文件时自动格式化您的代码。您还可以将 [编辑器配置](https://editorconfig.org/) 文件添加到您的项目中，该文件向您的 IDE 传达某些项目级设置，例如每种文件类型的缩进大小。
 
 (code-quality-linting)=
-# Lint
+## Lint
 
 Linters 运行静态分析（分析您的代码而不运行它）以查找代码中的反模式和潜在问题。这些工具比自动格式化程序更深入，超越了表面语法。分析的深度因工具而异。
 
@@ -48,7 +48,7 @@ semgrep -l python -e "subprocess.Popen(..., shell=True, ...)"
 ```
 
 (code-quality-testing)=
-# 测试
+## 测试
 
 软件测试是一种标准技术，可以增强您对代码正确性的信心。您编写代码，然后编写代码来执行您编写的代码，并在代码未按预期工作时引发错误。
 
@@ -57,19 +57,19 @@ semgrep -l python -e "subprocess.Popen(..., shell=True, ...)"
 如果您的程序具有数据库或 Web API 等外部依赖项，那么在测试中_模拟_这些依赖项可能会有所帮助，而不是让您的代码在测试时与第三方依赖项进行交互。
 
 (code-quality-code-coverage)=
-## 代码覆盖率
+### 代码覆盖率
 
 代码覆盖率是一个衡量测试好坏的指标。代码覆盖率会查看运行测试时执行的代码行，因此您可以确保覆盖所有代码路径。代码覆盖率工具可以向您显示逐行覆盖率，以指导您编写测试。 [Codecov](https://app.codecov.io) 等服务提供了 Web 界面，用于跟踪和查看项目历史记录中的代码覆盖率。
 
 与任何指标一样，代码覆盖率并不完美；不要过度索引覆盖范围，专注于编写高质量的测试。
 
 (code-quality-pre-commit-hooks)=
-# 预提交钩子
+## 预提交钩子
 
 Git 预提交 [钩子](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) 通过 [pre-commit](https://pre-commit.com/) 框架变得更容易，在每次 Git 提交之前自动运行用户指定的代码。项目通常使用预提交钩子来运行格式化程序和 linter，有时还会在每次提交之前自动进行测试，以确保提交的代码与项目代码风格匹配并且不存在某些问题。
 
 (code-quality-continuous-integration)=
-# 持续集成
+## 持续集成
 
 [GitHub Actions](https://github.com/features/actions) 等持续集成 (CI) 服务可以在您每次推送代码时（或在每个拉取请求或按计划）运行脚本。开发人员通常使用 CI 服务来运行代码质量工具，包括格式化程序、linter 和测试。对于编译型语言，可以确保代码可以编译；对于静态类型语言，您可以确保它进行类型检查。每次推送新提交时运行 CI 可以捕获代码主版本中引入的错误；在拉取请求上运行可以捕获贡献者提交的问题；按计划运行可以捕获外部依赖项的问题（例如，开发人员意外地将重大更改发布为 {ref}`语义兼容 <shipping-code-releases--versioning>`）。
 
@@ -86,19 +86,19 @@ Git 预提交 [钩子](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks)
 了解 CI 服务、格式化程序、linter 和测试库细节的一个好方法是通过示例。在 GitHub 上查找高质量的开源项目——在编程语言、领域、规模和范围等方面与您的项目越相似越好——并研究他们的 `pyproject.toml`、`.github/workflows/`、`DEVELOPMENT.md` 和其他相关文件。
 
 (code-quality-continuous-deployment)=
-## 持续部署
+### 持续部署
 
 持续部署利用 CI 基础设施来实际_部署_更改。例如，Missing Semester 仓库使用持续部署到 GitHub Pages，以便每当我们 `git push` 更新讲义时，都会自动构建和部署该网站。您可以在 CI 中构建其他类型的 [产物](shipping-code.md)，例如应用程序的二进制文件或服务的 Docker 镜像。
 
 (code-quality-command-runners)=
-# 命令运行器
+## 命令运行器
 
 [just](https://github.com/casey/just) 等命令运行程序简化了在项目上下文中运行命令的任务。当您为项目构建代码质量基础架构时，您不希望让开发人员记住 `uv run ruff check --fix` 等命令。使用命令运行程序，这可以变成 `just lint`，并且您可以对开发人员可能想要为您的项目运行的所有不同工具进行类似的调用，例如 `just format`、`just typecheck` 等。
 
 某些特定于语言的项目或包管理器内置了对此类功能的支持，这意味着您不需要使用 `just` 等与语言无关的工具。例如，[npm](https://nodejs.org/en/learn/getting-started/an-introduction-to-the-npm-package-manager) (Node.js) 的 `package.json` 的 `scripts` 部分和 [Hatch](https://hatch.pypa.io/) (Python) 的 `pyproject.toml` 的 `tool.hatch.envs.*.scripts` 部分支持此功能。
 
 (code-quality-regular-expressions)=
-# 正则表达式
+## 正则表达式
 
 _正则表达式_，通常缩写为“regex”，是一种用于表示字符串集的语言。正则表达式模式通常用于各种上下文（例如命令行工具和 IDE）中的模式匹配。例如，[ag](https://github.com/ggreer/the_silver_searcher) 支持用于代码库范围搜索的正则表达式模式（例如，`ag "import .* as .*"` 将查找 Python 中的所有重命名导入），而 [go test](https://pkg.go.dev/cmd/go#hdr-Test_packages) 支持用于选择测试子集的 `-run [regexp]` 选项。此外，编程语言具有用于正则表达式匹配的内置支持或第三方库，因此您可以使用正则表达式来实现模式匹配、验证和解析等功能。
 
@@ -110,7 +110,7 @@ _正则表达式_，通常缩写为“regex”，是一种用于表示字符串�
 - `.+@.+` --- 匹配电子邮件地址、包含一些文本的字符串，然后是“@”，然后是更多文本。这仅执行最基本的验证并匹配诸如“nonsense@@@email”之类的字符串。匹配电子邮件地址且没有误报或否定 [存在](https://pdw.ex-parrot.com/Mail-RFC822-Address.html) 的正则表达式，但不切实际。
 
 (code-quality-regex-syntax)=
-## 正则表达式语法
+### 正则表达式语法
 
 您可以在 [本文档](https://docs.python.org/3/library/re.html#regular-expression-syntax)（或在线提供的许多其他资源之一）中找到正则表达式语法的综合指南。以下是一些基本构建块：
 
@@ -134,7 +134,7 @@ _正则表达式_，通常缩写为“regex”，是一种用于表示字符串�
 - `$` 匹配行尾
 
 (code-quality-capture-groups-and-references)=
-## 捕获组和引用
+### 捕获组和引用
 
 如果您使用正则表达式组 `(...)`，则可以引用匹配的子部分以进行提取或搜索和替换。例如，要从 YYYY-MM-DD 样式日期中仅提取月份，可以使用以下 Python 代码：
 
@@ -147,12 +147,12 @@ _正则表达式_，通常缩写为“regex”，是一种用于表示字符串�
 在文本编辑器中，您可以在替换模式中使用引用捕获组。不同 IDE 的语法可能有所不同。例如，在 VS Code 中，您可以使用 `$1`、`$2` 等变量，而在 Vim 中，您可以使用 `\1`、`\2` 等来引用组。
 
 (code-quality-limitations)=
-## 局限性
+### 局限性
 
 [正则语言](https://en.wikipedia.org/wiki/Regular_language)功能强大但有限；有些字符串无法表示为标准正则表达式（例如，编写一个与字符串集 {a^n b^n \| n ≥ 0} 匹配的正则表达式是 [不可能](https://en.wikipedia.org/wiki/Pumping_lemma_for_regular_languages)，该正则表达式是由多个“a”后跟相同数量的“b”组成的字符串集；更实际的是，像 HTML 这样的语言不是正则语言）。在实践中，现代正则表达式引擎支持诸如前瞻和反向引用之类的功能，这些功能将支持扩展到正则语言之外，并且它们实际上非常有用，但重要的是要知道它们的表达能力仍然有限。对于更复杂的语言，您可能需要使用一种功能更强大的解析器（例如，请参阅 [pyparsing](https://github.com/pyparsing/pyparsing)、[PEG](https://en.wikipedia.org/wiki/Parsing_expression_grammar) 解析器）。
 
 (code-quality-learning-regex)=
-## 学习正则表达式
+### 学习正则表达式
 
 我们建议学习基础知识（我们在本讲座中介绍的内容），然后根据需要查看正则表达式参考，而不是记住整个语言。
 
@@ -164,7 +164,7 @@ Write a Python-style regex pattern that matches the requested path from log line
 169.254.1.1 - - [09/Jan/2026:21:28:51 +0000] "GET /feed.xml HTTP/2.0" 200 2995 "-" "python-requests/2.32.3"
 ```
 
-## Exercises
+### Exercises
 
 ```{exercise} 配置格式、lint 与 pre-commit
 :label: exercise-quality-tooling
@@ -250,6 +250,6 @@ python -c 'import json,sys; print(json.load(sys.stdin)["name"])'
 parser 会正确处理空白、字段顺序、Unicode 和转义；regex 适合受控局部模式，不适合重建 JSON 语法。
 ````
 
-## 许可与署名
+### 许可与署名
 
 本页依据 MIT Missing Semester 2026 第九讲[官方 notes](https://missing.csail.mit.edu/2026/code-quality/)整理，原材料采用 [CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可。
