@@ -1,0 +1,66 @@
+/* Cards used by source/tutorial/agents.md to preserve the Bad/Good examples
+ * from the source article without relying on screenshots. */
+
+.agents-example-heading {
+  margin: 1.25rem 0 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.sd-card.agents-example-card {
+  height: 100%;
+  border-width: 1px;
+  border-left-width: 4px;
+  border-radius: 0.65rem;
+  box-shadow: none;
+}
+
+.sd-card.agents-example-card .sd-card-header {
+  border-bottom: 0;
+  background: transparent;
+  font-weight: 700;
+  padding-bottom: 0.2rem;
+}
+
+.sd-card.agents-example-card .sd-card-body {
+  padding-top: 0.35rem;
+}
+
+.sd-card.agents-example-bad {
+  border-color: rgba(220, 38, 38, 0.45);
+  border-left-color: rgb(220, 38, 38);
+  background: rgba(220, 38, 38, 0.055);
+}
+
+.sd-card.agents-example-good {
+  border-color: rgba(22, 163, 74, 0.45);
+  border-left-color: rgb(22, 163, 74);
+  background: rgba(22, 163, 74, 0.055);
+}
+
+.sd-card.agents-example-bad .sd-card-header::before {
+  content: "✕ ";
+}
+
+.sd-card.agents-example-good .sd-card-header::before {
+  content: "✓ ";
+}
+
+.agents-source-quote {
+  margin-top: 0.5rem;
+  padding: 0.65rem 0.8rem;
+  border-left: 3px solid var(--sy-c-border, #888);
+  background: rgba(127, 127, 127, 0.06);
+  font-size: 0.92rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .sd-card.agents-example-bad {
+    background: rgba(248, 113, 113, 0.08);
+  }
+
+  .sd-card.agents-example-good {
+    background: rgba(74, 222, 128, 0.08);
+  }
+}
