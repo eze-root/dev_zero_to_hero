@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh" data-accent-color="tomato" data-content_root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>AGENTS.md 最佳实践：为 GPT-6 Astra 重新思考 Skills 与 Prompts - Develop from Zero to Hero</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=44020203" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/source-sans@3.52.0/source-sans-3VF.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/course.css?v=9d09c678" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/admonition-fixes.css?v=ad940ea8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="AGENTS.md 最佳实践：为 GPT-6 Astra 重新思考 Skills 与 Prompts"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../index.html">
+      
+      
+      <strong>Develop from Zero to Hero</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="搜索" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials">
+  <a href="https://github.com/eze-root/dev_zero_to_hero" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="切换到亮色模式"
+data-aria-light="切换到暗色模式"
+data-aria-dark="切换到自动模式">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="1"><p class="caption" role="heading" aria-level="3"><span class="caption-text">2026 &#31179;&#22825;&#30340;&#35745;&#31639;&#26426;&#25945;&#32946;&#20013;&#32570;&#22833;&#30340;&#19968;&#35838;:</span></p>
+<ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../missing-semester/index.html">2026 &#31179;&#22825;&#30340;&#35745;&#31639;&#26426;&#25945;&#32946;&#20013;&#32570;&#22833;&#30340;&#19968;&#35838;</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../missing-semester/course-shell.html">&#31532;&#19968;&#35762;&#65306;&#35838;&#31243;&#27010;&#35272;&#19982; Shell &#20837;&#38376;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../missing-semester/command-line-environment.html">&#31532;&#20108;&#35762;&#65306;&#21629;&#20196;&#34892;&#29615;&#22659;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../missing-semester/development-environment.html">&#31532;&#19977;&#35762;&#65306;&#24320;&#21457;&#29615;&#22659;&#19982;&#24037;&#20855;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../missing-semester/debugging-profiling.html">&#31532;&#22235;&#35762;&#65306;&#35843;&#35797;&#19982;&#24615;&#33021;&#20998;&#26512;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../missing-semester/version-control.html">&#31532;&#20116;&#35762;&#65306;&#29256;&#26412;&#25511;&#21046;&#19982; Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../missing-semester/shipping-code.html">&#31532;&#20845;&#35762;&#65306;&#25171;&#21253;&#19982;&#20132;&#20184;&#20195;&#30721;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../missing-semester/agentic-coding.html">&#31532;&#19971;&#35762;&#65306;&#26234;&#33021;&#20307;&#32534;&#31243;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../missing-semester/beyond-code.html">&#31532;&#20843;&#35762;&#65306;&#20195;&#30721;&#20043;&#22806;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../missing-semester/code-quality.html">&#31532;&#20061;&#35762;&#65306;&#20195;&#30721;&#36136;&#37327;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../missing-semester/agents.html">AGENTS.md &#26368;&#20339;&#23454;&#36341;&#65306;&#20026; GPT-6 Astra &#37325;&#26032;&#24605;&#32771; Skills &#19982; Prompts</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">2024 &#22799;&#22825;&#30340; 7 &#22825;&#22521;&#35757;:</span></p>
+<ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../2024-summer/readme.html">2024 &#22799;&#22825;&#30340; 7 &#22825;&#22521;&#35757;</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day0.html">Day0 Markdown</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day1.html">Day1 Linux&#12289;VScode&#19982;Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day2.html">Day2 The Missing Semester of Your CS Education</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day3.html">Day3 Python &#24320;&#21457;&#29615;&#22659;&#25645;&#36733;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day4.html">Day4 SSH&#19982;Django</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2024-summer/2024-summer-day5.html">Day5 Docker&#19982;Scrapy&#29228;&#34411;&#39033;&#30446;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="os_mp_celery_scrapy.html">Scrapy + Celery + Multiprocessing</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Tutorial:</span></p>
+<ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="git.html">Git for Teams</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">&#26377;&#36259;&#30340;&#39033;&#30446;:</span></p>
+<ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../engineer/sphinx_design.html">Sphinx_design</a></li>
+</ul>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>该页内容</h3><ul>
+<li><a class="reference internal" href="#skills">&#26356;&#22909;&#30340; Skills</a><ul>
+<li><a class="reference internal" href="#id1">&#35753;&#25551;&#36848;&#23613;&#21487;&#33021;&#30701;&#65292;&#24182;&#26126;&#30830;&#35828;&#26126;&#36866;&#29992;&#36793;&#30028;</a></li>
+<li><a class="reference internal" href="#id2">&#20351;&#29992;&#28176;&#36827;&#24335;&#25259;&#38706;&#65292;&#32780;&#19981;&#26159;&#19968;&#27425;&#24615;&#22622;&#20837;&#20840;&#37096;&#19978;&#19979;&#25991;</a></li>
+<li><a class="reference internal" href="#id3">&#23569;&#20889;&#8220;&#36229;&#35814;&#32454;&#25805;&#20316;&#25163;&#20876;&#8221;</a></li>
+<li><a class="reference internal" href="#skill">&#32771;&#34385;&#19981;&#21516;&#27169;&#22411;&#20250;&#22914;&#20309;&#35835;&#21462;&#21516;&#19968;&#22871; Skill</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#agents-md">&#20445;&#25345; <code class="docutils literal notranslate">md</span></code> &#19982;&#24403;&#21069;&#27169;&#22411;&#33021;&#21147;&#21516;&#27493;</a><ul>
+<li><a class="reference internal" href="#id4">&#19981;&#35201;&#35201;&#27714;&#27169;&#22411;&#22312;&#27599;&#27425;&#23567;&#25913;&#21160;&#20043;&#21069;&#20808;&#35835;&#23436;&#25972;&#22871;&#25991;&#26723;</a></li>
+<li><a class="reference internal" href="#id5">&#19981;&#35201;&#26426;&#26800;&#22797;&#21046;&#26087;&#27169;&#22411;&#26102;&#20195;&#30340;&#8220;&#24517;&#39035;&#27979;&#35797;&#8221;&#35268;&#21017;</a></li>
+<li><a class="reference internal" href="#id6">&#23545;&#23433;&#20840;&#24037;&#20316;&#27969;&#65292;&#21487;&#20197;&#26126;&#30830;&#25480;&#26435;&#23427;&#32487;&#32493;&#20570;&#23436;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id7">&#20915;&#31574;&#36793;&#30028;</a></li>
+<li><a class="reference internal" href="#id8">&#25345;&#32493;&#24615;&#65306;&#25226;&#8220;&#23436;&#25104;&#8221;&#30340;&#23450;&#20041;&#35828;&#28165;&#26970;</a></li>
+<li><a class="reference internal" href="#id9">&#32467;&#35770;</a></li>
+</ul>
+</div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/eze-root/dev_zero_to_hero"
+  data-type="github" data-user="eze-root" data-repo="dev_zero_to_hero">
+  <span class="w-8 flex items-center justify-around shrink-0 text-3xl">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </span>
+  <span class="flex-grow px-2 break-all">
+    
+    
+      <span>dev_zero_to_hero</span>
+    
+    <span class="flex text-sm repo-stats-count">
+      <span class="flex items-center pr-3">
+        <iconify-icon icon="lucide:star"></iconify-icon>
+        <strong class="js-repo-stars ml-1">0</strong>
+      </span>
+      <span class="flex items-center">
+        <iconify-icon icon="lucide:git-fork"></iconify-icon>
+        <strong class="js-repo-forks ml-1">0</strong>
+      </span>
+    </span>
+  </span>
+</a><div class="edit-this-page">
+  <a href="https://github.com/eze-root/dev_zero_to_hero/blob/main/source/tutorial/agents.md">编辑此页面</a>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">Develop from Zero to Hero</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">AGENTS.md 最佳实践：为 GPT-6 Astra 重新思考 Skills 与 Prompts</strong>
+        <meta itemprop="position" content="2" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue dark-code" role="main">
+          <section class="tex2jax_ignore mathjax_ignore" id="agents-md-gpt-6-astra-skills-prompts">
+<h1><a class="reference external" href="http://AGENTS.md">AGENTS.md</a> 最佳实践：为 GPT-6 Astra 重新思考 Skills 与 Prompts<a class="headerlink" href="#agents-md-gpt-6-astra-skills-prompts" title="Link to this heading">¶</a></h1>
+<blockquote>
+<div><p>原文：<a class="reference external" href="https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra">Rethinking skills and prompts for GPT-6 Astra</a><br />
+发布日期：2026-09-11<br />
+作者：Eric Provencher<br />
+分类：Codex</p>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>本文依照 OpenAI Developer Blog 原文的结构与论点进行中文整理，尽量完整保留原文涉及的判断、反例、正例与实践建议。为便于中文阅读，个别示例采用等义转述，而不是机械逐句直译。原文始终是内容更新与勘误的权威来源。</p>
+</div>
+<p>原文的核心提醒是：<strong>重新审视 skill 描述、<code class="docutils literal notranslate"><span class="pre">AGENTS.md</span></code> 和具体任务 prompt，避免把模型上下文塞得过满。</strong></p>
+<p>编码智能体已经发展了很长一段路，而且最佳实践仍在快速变化。随着模型能力提高，过去需要大量手把手指导和脚手架才能做好的事情，现在往往已经不再需要那么多约束。</p>
+<p>如果过去一年一直在 Codex 这类编码智能体上工作，很可能已经在项目中逐渐积累了大量说明，用来把模型引导到更好的结果。每次模型升级时都值得重新检查这些假设；到了 GPT-6 Astra，这件事尤其重要。</p>
+<p>这些说明会以不同形式存在：skills、<code class="docutils literal notranslate"><span class="pre">AGENTS.md</span></code>，以及每一次具体任务的 prompt，都会共同影响模型最终如何完成工作。</p>
+<section id="skills">
+<h2>更好的 Skills<a class="headerlink" href="#skills" title="Link to this heading">¶</a></h2>
+<p>这些说明可以被组织成 skills。可以把 skill 理解为存放在 Markdown 文件中的一组 prompt；它还可以附带资源文件和预先打包好的脚本。一般来说，skill 最适合两类情况：一是围绕某个特定工作流提供指导，二是告诉模型如何正确使用某些应用或工具。</p>
+<p>现在很多项目会默认塞入大量 skills。每个 skill 都有名称和描述，这些信息会先进入模型上下文，以便模型判断何时应该调用它们。但实践中有两个常见问题：</p>
+<ul class="simple">
+<li><p>很多 skill description 写得过长；</p></li>
+<li><p>当 skills 数量太多时，Codex 为了把它们塞进上下文，会缩短这些描述。</p></li>
+</ul>
+<p>结果就是：模型真正看到的每个描述反而变少，更难判断当前任务究竟应该选择哪一个 skill。</p>
+<p>更糟糕的是，不同 skill 的描述有时会互相矛盾，或者过度强调“什么时候必须使用我”。这样会导致模型加载与当前任务并没有真正帮助的指令。</p>
+<p>一个常见的 skill 创建工作流是使用 <code class="docutils literal notranslate"><span class="pre">$skill-creator</span></code>。OpenAI 最近更新了这个 skill 的指导原则，目的就是缓解实践中已经观察到的这些失败模式。</p>
+<section id="id1">
+<h3>让描述尽可能短，并明确说明适用边界<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<p>skill description 应该尽可能简短，同时必须清楚表达：<strong>它到底在什么情况下才应该被使用。</strong></p>
+<p>一个不好的数据库 skill，会把触发条件写得非常宽，例如只要任务碰到数据库、查询、模型或持久化，就要求加载“数据库迁移”相关指导。这样模型可能在任何数据库任务里都把 migration skill 拉进来，即使它根本没有要处理迁移。</p>
+<p>更好的写法是把边界缩小到真正相关的任务，例如：只有在新增或修改数据库迁移，或者审查迁移上线过程时，才使用这个 skill。</p>
+<p>这里的关键不是把描述写得“更完整”，而是让它更准确地回答一个问题：<strong>什么时候需要我？</strong></p>
+</section>
+<section id="id2">
+<h3>使用渐进式披露，而不是一次性塞入全部上下文<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<p>一个真正好用的 skill，重要特征之一是 <strong>progressive disclosure（渐进式披露）</strong>。</p>
+<p>读取一个 skill 本身就会占用上下文，会让会话更快接近 compaction，也可能把与当前任务无关的指导带进来。因此，如果一个 skill 内部包含多种工作流，不要让根文档承担所有细节。</p>
+<p>更好的做法是：</p>
+<ul class="simple">
+<li><p>根文档只做一个最小化的 router；</p></li>
+<li><p>在根文档里告诉模型有哪些支持文档和脚本；</p></li>
+<li><p>只提供足够的信息，让模型知道接下来该去哪里看；</p></li>
+<li><p>不要强迫模型预先读取此刻用不到的内容。</p></li>
+</ul>
+<p>也就是说，让模型按需加载知识，而不是一开始就把所有东西铺满上下文。</p>
+</section>
+<section id="id3">
+<h3>少写“超详细操作手册”<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<p>过去很多 skills 会写成非常复杂的 itinerary 或 recipe：一步一步规定先做什么、再做什么、每一步必须怎么做。</p>
+<p>随着模型能力提升，这种写法的收益已经下降。模型现在更擅长理解细微差别和模糊任务，因此过去可能有帮助的过度具体说明，现在反而可能限制结果。</p>
+<p>不要因为旧模型曾经需要大量脚手架，就默认新模型也需要同样程度的手把手约束。</p>
+</section>
+<section id="skill">
+<h3>考虑不同模型会如何读取同一套 Skill<a class="headerlink" href="#skill" title="Link to this heading">¶</a></h3>
+<p>仓库里的 skills 不只服务于你自己的智能体，它们也会影响其他贡献者使用的智能体，而对方可能使用不同模型。</p>
+<p>某些对 GPT-5.6 Sol 或 GPT-5.6 Luna 很有帮助的指导，可能会把 GPT-6 Astra 约束得过死。因此，留下长期存在于仓库中的说明时，需要考虑：<strong>未来究竟会有哪些模型读取这些规则？</strong></p>
+</section>
+</section>
+<section id="agents-md">
+<h2>保持 <code class="docutils literal notranslate"><span class="pre">AGENTS.md</span></code> 与当前模型能力同步<a class="headerlink" href="#agents-md" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">AGENTS.md</span></code> 的特殊之处在于，只要模型在你的仓库里工作，这些规则就会持续生效。因此，应该经常重新审视里面的每一条指令，并问自己：<strong>它现在还真的有必要吗？</strong></p>
+<section id="id4">
+<h3>不要要求模型在每次小改动之前先读完整套文档<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<p>如果只是修一个拼写错误，却要求模型在每次编辑之前先阅读架构文档、数据库文档和部署文档，这显然过度了。</p>
+<p>GPT-6 Astra 已经能够自行判断当前任务需要阅读什么，不必在每一次改动前都被强制要求重新浏览整个项目。</p>
+<p>更好的做法是给出<strong>上下文化的文档指引</strong>。例如：</p>
+<ul class="simple">
+<li><p>涉及服务边界时参考 <code class="docutils literal notranslate"><span class="pre">architecture.md</span></code>；</p></li>
+<li><p>涉及 schema 变更时参考 <code class="docutils literal notranslate"><span class="pre">database.md</span></code>；</p></li>
+<li><p>准备部署时参考 <code class="docutils literal notranslate"><span class="pre">deployment.md</span></code>。</p></li>
+</ul>
+<p>也就是说，不要写“任何改动之前都必须把这些文件全部读完”，而应该告诉模型“什么问题对应什么文档”。</p>
+<p>当然，这种方式有一个前提：<strong>这些文档本身也必须保持更新。</strong></p>
+<p>如果强制模型在每次编辑前先读一堆文件，最直接的结果就是浪费上下文、拖慢工作速度。</p>
+</section>
+<section id="id5">
+<h3>不要机械复制旧模型时代的“必须测试”规则<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<p>以前的模型常常需要被明确提醒：运行测试、检查结果、确认自己做对了。</p>
+<p>GPT-6 Astra 通常会主动做这些事情，因此同样的旧规则现在可能造成重复测试或不必要的验证步骤。</p>
+<p>这并不是说测试不重要，而是应该重新判断：<strong>这条指令是在补模型能力缺口，还是已经变成冗余约束？</strong></p>
+</section>
+<section id="id6">
+<h3>对安全工作流，可以明确授权它继续做完<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<p>GPT-6 Astra 很细致，但相比某些旧模型，它在“一个任务到底应该做到多远”这件事上可能更谨慎。有时它需要一点明确许可，才会继续把任务彻底完成。</p>
+<p>对于你已经知道安全的固定工作流，可以在 <code class="docutils literal notranslate"><span class="pre">AGENTS.md</span></code> 中直接给它权限。例如，本地测试如果全部使用一次性 fixture，而且完全没有生产环境访问，那么可以明确告诉模型：</p>
+<blockquote>
+<div><p>本地测试只使用可丢弃的测试数据，并且无法访问生产环境。可以直接运行测试；如果本次改动导致失败，就修复并重新运行受影响的测试，不需要每一步都停下来请求批准。</p>
+</div></blockquote>
+<p>这种规则比笼统写“凡事先问我”更有效，因为它把<strong>安全边界</strong>和<strong>允许自主完成的范围</strong>同时说明白了。</p>
+</section>
+</section>
+<section id="id7">
+<h2>决策边界<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h2>
+<p>描述边界时要特别小心。</p>
+<p>如果旧模型过去曾经在未经许可的情况下替你做得太多，你可能会在规则里加入非常强的措辞，要求它每一步都必须先询问。这类约束有时确实有用。</p>
+<p>但 GPT-6 Astra 是 OpenAI 当前对齐程度最高的模型之一，对“什么事情在知道安全之前不应该做”有更好的判断。因此，应该按这种能力水平去设计规则，而不是继续沿用针对旧模型缺陷写下的所有防护语句。</p>
+<p>如果以前某些边界只是为了防止旧模型“走太远”，而现在你已经切换到 GPT-6 Astra，就值得重新审视这些措辞。Astra 可能会非常认真地服从这些限制，结果在你其实希望它继续推进的地方提前停下。</p>
+<p>换句话说，边界应该表达真实的决策需求，而不是历史遗留的模型恐惧。</p>
+</section>
+<section id="id8">
+<h2>持续性：把“完成”的定义说清楚<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h2>
+<p>如果已经习惯 GPT-5.6 Sol 接到一个请求后持续工作很长时间，那么 GPT-6 Astra 在“什么时候该停”这件事上可能显得更谨慎。</p>
+<p>它有时会完成第一个可用实现，然后返回让你检查，即使后面其实还有明显工作没有结束。</p>
+<p>解决办法是在任务开始前就定义清楚什么叫“完成”。</p>
+<p>如果任务真正的目标包括：</p>
+<ul class="simple">
+<li><p>把实现跑起来；</p></li>
+<li><p>检查运行结果；</p></li>
+<li><p>修复实际暴露出来的问题；</p></li>
+<li><p>再验证受影响部分；</p></li>
+</ul>
+<p>那么就把这些直接写进请求里。不要假设模型会自动把“写完第一版代码”和“完整完成任务”理解成同一件事。</p>
+<p>反过来，如果你的 prompt 要求“第一版实现之后先停下来让我 review”，模型自然会倾向更早结束。因此需要确认：这个 review checkpoint 真的是你必须做出的决策，还是只是以前留下来的工作习惯。</p>
+<p>如果希望模型在第一轮结果之外继续探索，也要明确两件事：</p>
+<ul class="simple">
+<li><p>还希望它继续探索什么；</p></li>
+<li><p>探索到什么边界就应该停止。</p></li>
+</ul>
+</section>
+<section id="id9">
+<h2>结论<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h2>
+<p>新模型发布，是一次清理旧规则的好机会。</p>
+<p>但不需要手工逐条审查所有内容。可以直接让 GPT-6 Astra 根据本文讨论的原则，审计项目中的 skills、<code class="docutils literal notranslate"><span class="pre">AGENTS.md</span></code> 和任务 prompt：找出过长、重复、互相冲突、过度限制、无条件加载上下文，或者来自旧模型时代但已经失去必要性的说明。</p>
+<p>清理完这些历史脚手架之后，再去尝试构建以前因为智能体能力不足而不敢做的东西。</p>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>回到顶部</span>
+</button><div class="navigation flex print:hidden"></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2024, ezelab</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+<a href="https://github.com/eze-root/dev_zero_to_hero" aria-label="GitHub">
+  <iconify-icon icon="simple-icons:github"></iconify-icon>
+</a></div>
+    </div>
+  </div>
+</footer>
+      <script src="../_static/documentation_options.js?v=a1b8b494"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "eze-root/dev_zero_to_hero");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="../_static/shibuya.js?v=cac61aee"></script></body>
+</html>
