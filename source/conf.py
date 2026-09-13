@@ -95,6 +95,7 @@ html_css_files = [
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css',
     'css/course.css',
     'css/admonition-fixes.css',
+    'css/agents.css',
 ]
 
 latex_engine = 'xelatex'
