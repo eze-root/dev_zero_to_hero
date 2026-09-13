@@ -33,14 +33,3 @@ agentic-coding
 beyond-code
 code-quality
 ```
-
-## 延伸阅读
-
-在 Missing Semester 的智能体编程内容之外，这里补充整理一篇 OpenAI 关于新一代编码智能体配置方式的实践文章，重点讨论 skills、`AGENTS.md`、任务 prompt、上下文控制与决策边界。
-
-```{toctree}
-:maxdepth: 1
-:titlesonly:
-
-agents
-```
