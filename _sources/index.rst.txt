@@ -36,6 +36,7 @@ Tutorial
    :caption: Tutorial:
 
    tutorial/git.md
+   tutorial/agents.md
 
 有趣的项目
 ----------
