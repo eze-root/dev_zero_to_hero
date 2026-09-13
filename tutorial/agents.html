@@ -2,7 +2,7 @@
 <html lang="zh" data-accent-color="tomato" data-content_root="../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>AGENTS.md 最佳实践：为 GPT-6 Astra 重新思考 Skills 与 Prompts - Develop from Zero to Hero</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="Sphinx_design" href="../engineer/sphinx_design.html" /><link rel="prev" title="Git for Teams" href="git.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>为 GPT-6 Astra 重新思考 Skills 与 Prompts - Develop from Zero to Hero</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="Sphinx_design" href="../engineer/sphinx_design.html" /><link rel="prev" title="Git for Teams" href="git.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
@@ -25,7 +25,7 @@
   --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
 }
 </style>
-    <meta property="og:type" content="website"/><meta property="og:title" content="AGENTS.md 最佳实践：为 GPT-6 Astra 重新思考 Skills 与 Prompts"/>
+    <meta property="og:type" content="website"/><meta property="og:title" content="为 GPT-6 Astra 重新思考 Skills 与 Prompts"/>
     <meta name="twitter:card" content="summary"/>
   </head>
 <body><div class="sy-head">
@@ -96,7 +96,7 @@ data-aria-dark="切换到自动模式">
 <p class="caption" role="heading" aria-level="3"><span class="caption-text">Tutorial:</span></p>
 <ul class="current">
 <li class="toctree-l1 _expand"><a class="reference internal" href="git.html">Git for Teams</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">AGENTS.md &#26368;&#20339;&#23454;&#36341;&#65306;&#20026; GPT-6 Astra &#37325;&#26032;&#24605;&#32771; Skills &#19982; Prompts</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">&#20026; GPT-6 Astra &#37325;&#26032;&#24605;&#32771; Skills &#19982; Prompts</a></li>
 </ul>
 <p class="caption" role="heading" aria-level="3"><span class="caption-text">&#26377;&#36259;&#30340;&#39033;&#30446;:</span></p>
 <ul>
@@ -113,21 +113,15 @@ data-aria-dark="切换到自动模式">
     </button>
     <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>该页内容</h3><ul>
 <li><a class="reference internal" href="#skills">&#26356;&#22909;&#30340; Skills</a><ul>
-<li><a class="reference internal" href="#id1">&#35753;&#25551;&#36848;&#23613;&#21487;&#33021;&#30701;&#65292;&#24182;&#26126;&#30830;&#35828;&#26126;&#36866;&#29992;&#36793;&#30028;</a></li>
-<li><a class="reference internal" href="#id2">&#20351;&#29992;&#28176;&#36827;&#24335;&#25259;&#38706;&#65292;&#32780;&#19981;&#26159;&#19968;&#27425;&#24615;&#22622;&#20837;&#20840;&#37096;&#19978;&#19979;&#25991;</a></li>
-<li><a class="reference internal" href="#id3">&#23569;&#20889;&#8220;&#36229;&#35814;&#32454;&#25805;&#20316;&#25163;&#20876;&#8221;</a></li>
-<li><a class="reference internal" href="#skill">&#32771;&#34385;&#19981;&#21516;&#27169;&#22411;&#20250;&#22914;&#20309;&#35835;&#21462;&#21516;&#19968;&#22871; Skill</a></li>
+<li><a class="reference internal" href="#id1">&#26126;&#30830;&#35828;&#26126;&#23427;&#36866;&#29992;&#20110;&#20160;&#20040;&#24773;&#20917;</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#agents-md">&#20445;&#25345; <code class="docutils literal notranslate">md</span></code> &#19982;&#24403;&#21069;&#27169;&#22411;&#33021;&#21147;&#21516;&#27493;</a><ul>
-<li><a class="reference internal" href="#id4">&#19981;&#35201;&#35201;&#27714;&#27169;&#22411;&#22312;&#27599;&#27425;&#23567;&#25913;&#21160;&#20043;&#21069;&#20808;&#35835;&#23436;&#25972;&#22871;&#25991;&#26723;</a></li>
-<li><a class="reference internal" href="#id5">&#19981;&#35201;&#26426;&#26800;&#22797;&#21046;&#26087;&#27169;&#22411;&#26102;&#20195;&#30340;&#8220;&#24517;&#39035;&#27979;&#35797;&#8221;&#35268;&#21017;</a></li>
-<li><a class="reference internal" href="#id6">&#23545;&#23433;&#20840;&#24037;&#20316;&#27969;&#65292;&#21487;&#20197;&#26126;&#30830;&#25480;&#26435;&#23427;&#32487;&#32493;&#20570;&#23436;</a></li>
+<li><a class="reference internal" href="#agents-md">&#20445;&#25345; <code class="docutils literal notranslate">md</span></code> &#26368;&#26032;</a><ul>
+<li><a class="reference internal" href="#id2">&#38405;&#35835;&#20219;&#21153;&#30495;&#27491;&#38656;&#35201;&#30340;&#20869;&#23481;</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id7">&#20915;&#31574;&#36793;&#30028;</a></li>
-<li><a class="reference internal" href="#id8">&#25345;&#32493;&#24615;&#65306;&#25226;&#8220;&#23436;&#25104;&#8221;&#30340;&#23450;&#20041;&#35828;&#28165;&#26970;</a></li>
-<li><a class="reference internal" href="#id9">&#32467;&#35770;</a></li>
+<li><a class="reference internal" href="#id3">&#20915;&#31574;&#36793;&#30028;</a></li>
+<li><a class="reference internal" href="#id4">&#25345;&#32493;&#24615;</a></li>
 </ul>
 </div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/eze-root/dev_zero_to_hero"
   data-type="github" data-user="eze-root" data-repo="dev_zero_to_hero">
@@ -168,7 +162,7 @@ data-aria-dark="切换到自动模式">
         <span>/</span>
         <meta itemprop="position" content="1" />
       </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <strong itemprop="name">AGENTS.md 最佳实践：为 GPT-6 Astra 重新思考 Skills 与 Prompts</strong>
+        <strong itemprop="name">为 GPT-6 Astra 重新思考 Skills 与 Prompts</strong>
         <meta itemprop="position" content="2" />
       </li></ol>
     <div class="xl:hidden ml-1">
@@ -181,131 +175,112 @@ data-aria-dark="切换到自动模式">
 </div><div class="flex flex-col break-words justify-between">
       <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
   <article class="yue dark-code" role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="agents-md-gpt-6-astra-skills-prompts">
-<h1><a class="reference external" href="http://AGENTS.md">AGENTS.md</a> 最佳实践：为 GPT-6 Astra 重新思考 Skills 与 Prompts<a class="headerlink" href="#agents-md-gpt-6-astra-skills-prompts" title="Link to this heading">¶</a></h1>
+          <section class="tex2jax_ignore mathjax_ignore" id="gpt-6-astra-skills-prompts">
+<h1>为 GPT-6 Astra 重新思考 Skills 与 Prompts<a class="headerlink" href="#gpt-6-astra-skills-prompts" title="Link to this heading">¶</a></h1>
 <blockquote>
 <div><p>原文：<a class="reference external" href="https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra">Rethinking skills and prompts for GPT-6 Astra</a><br />
 发布日期：2026-09-11<br />
-作者：Eric Provencher<br />
-分类：Codex</p>
+分类：Codex<br />
+作者：Eric Provencher</p>
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
-<p>本文依照 OpenAI Developer Blog 原文的结构与论点进行中文整理，尽量完整保留原文涉及的判断、反例、正例与实践建议。为便于中文阅读，个别示例采用等义转述，而不是机械逐句直译。原文始终是内容更新与勘误的权威来源。</p>
+<p>本文按 OpenAI Developer Blog 原文的结构和内容翻译。翻译尽可能忠于原文，不省略原文中的正文、示例、Bad / Good 对照和引用；除本说明外，不额外补充原文没有的观点。</p>
 </div>
-<p>原文的核心提醒是：<strong>重新审视 skill 描述、<code class="docutils literal notranslate"><span class="pre">AGENTS.md</span></code> 和具体任务 prompt，避免把模型上下文塞得过满。</strong></p>
-<p>编码智能体已经发展了很长一段路，而且最佳实践仍在快速变化。随着模型能力提高，过去需要大量手把手指导和脚手架才能做好的事情，现在往往已经不再需要那么多约束。</p>
-<p>如果过去一年一直在 Codex 这类编码智能体上工作，很可能已经在项目中逐渐积累了大量说明，用来把模型引导到更好的结果。每次模型升级时都值得重新检查这些假设；到了 GPT-6 Astra，这件事尤其重要。</p>
-<p>这些说明会以不同形式存在：skills、<code class="docutils literal notranslate"><span class="pre">AGENTS.md</span></code>，以及每一次具体任务的 prompt，都会共同影响模型最终如何完成工作。</p>
+<p><strong>重新审视 skill 描述、<code class="docutils literal notranslate"><span class="pre">AGENTS.md</span></code> 和任务 prompt，避免上下文过度膨胀。</strong></p>
+<p>编码智能体已经走过了很长一段路，最佳实践也在快速变化。随着模型能力增强，过去需要大量手把手指导和脚手架才能完成的事情，如今已经不再需要那么多这些东西。</p>
+<p>如果过去一年里你一直在项目中使用 Codex 这样的智能体，那么在努力引导模型取得良好结果的过程中，你很可能已经积累了大量指令。每次模型发布新版本时，都值得重新审视这些假设；而到了 GPT-6 Astra，这比以往任何时候都更加重要。</p>
+<p>这些指令可以有很多种形式：skills、<code class="docutils literal notranslate"><span class="pre">AGENTS.md</span></code>，以及你的任务 prompt，都会影响模型如何完成工作。</p>
 <section id="skills">
 <h2>更好的 Skills<a class="headerlink" href="#skills" title="Link to this heading">¶</a></h2>
-<p>这些说明可以被组织成 skills。可以把 skill 理解为存放在 Markdown 文件中的一组 prompt；它还可以附带资源文件和预先打包好的脚本。一般来说，skill 最适合两类情况：一是围绕某个特定工作流提供指导，二是告诉模型如何正确使用某些应用或工具。</p>
-<p>现在很多项目会默认塞入大量 skills。每个 skill 都有名称和描述，这些信息会先进入模型上下文，以便模型判断何时应该调用它们。但实践中有两个常见问题：</p>
-<ul class="simple">
-<li><p>很多 skill description 写得过长；</p></li>
-<li><p>当 skills 数量太多时，Codex 为了把它们塞进上下文，会缩短这些描述。</p></li>
-</ul>
-<p>结果就是：模型真正看到的每个描述反而变少，更难判断当前任务究竟应该选择哪一个 skill。</p>
-<p>更糟糕的是，不同 skill 的描述有时会互相矛盾，或者过度强调“什么时候必须使用我”。这样会导致模型加载与当前任务并没有真正帮助的指令。</p>
-<p>一个常见的 skill 创建工作流是使用 <code class="docutils literal notranslate"><span class="pre">$skill-creator</span></code>。OpenAI 最近更新了这个 skill 的指导原则，目的就是缓解实践中已经观察到的这些失败模式。</p>
+<p>这些指令可以采用 skills 的形式。skills 本质上是存储为 Markdown 文件的 prompt，也可以与资源文件和打包好的脚本放在一起。一般来说，它们最适合用于指导某个特定工作流，或者指导模型使用某些应用。</p>
+<p>现在，人们往往会默认在项目中打包很多 skills；每个 skill 都有一个名称和描述，这些内容会被加载到模型的上下文中，让模型知道什么时候应该使用它们。但是，很多描述都写得太长；而当你加入太多 skills 时，Codex 会开始缩短这些描述以便把它们放进上下文。最终，模型看到的每个描述都更少，也就更难判断应该选择哪个 skill。</p>
+<p>更糟糕的是，这些描述经常会互相矛盾，或者过度强调某个 skill 应该在什么情况下使用，从而导致模型加载一些实际上并不能帮助当前任务的指令。</p>
+<p>创建 skills 的一个常见工作流是使用 <code class="docutils literal notranslate"><span class="pre">$skill-creator</span></code> skill。我们最近更新了它的指导，以帮助缓解很多在实践中观察到的失败模式。</p>
+<p>首先，skill 描述应该尽可能简短，同时明确告诉模型什么时候应该使用它：</p>
 <section id="id1">
-<h3>让描述尽可能短，并明确说明适用边界<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
-<p>skill description 应该尽可能简短，同时必须清楚表达：<strong>它到底在什么情况下才应该被使用。</strong></p>
-<p>一个不好的数据库 skill，会把触发条件写得非常宽，例如只要任务碰到数据库、查询、模型或持久化，就要求加载“数据库迁移”相关指导。这样模型可能在任何数据库任务里都把 migration skill 拉进来，即使它根本没有要处理迁移。</p>
-<p>更好的写法是把边界缩小到真正相关的任务，例如：只有在新增或修改数据库迁移，或者审查迁移上线过程时，才使用这个 skill。</p>
-<p>这里的关键不是把描述写得“更完整”，而是让它更准确地回答一个问题：<strong>什么时候需要我？</strong></p>
-</section>
-<section id="id2">
-<h3>使用渐进式披露，而不是一次性塞入全部上下文<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
-<p>一个真正好用的 skill，重要特征之一是 <strong>progressive disclosure（渐进式披露）</strong>。</p>
-<p>读取一个 skill 本身就会占用上下文，会让会话更快接近 compaction，也可能把与当前任务无关的指导带进来。因此，如果一个 skill 内部包含多种工作流，不要让根文档承担所有细节。</p>
-<p>更好的做法是：</p>
-<ul class="simple">
-<li><p>根文档只做一个最小化的 router；</p></li>
-<li><p>在根文档里告诉模型有哪些支持文档和脚本；</p></li>
-<li><p>只提供足够的信息，让模型知道接下来该去哪里看；</p></li>
-<li><p>不要强迫模型预先读取此刻用不到的内容。</p></li>
-</ul>
-<p>也就是说，让模型按需加载知识，而不是一开始就把所有东西铺满上下文。</p>
-</section>
-<section id="id3">
-<h3>少写“超详细操作手册”<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
-<p>过去很多 skills 会写成非常复杂的 itinerary 或 recipe：一步一步规定先做什么、再做什么、每一步必须怎么做。</p>
-<p>随着模型能力提升，这种写法的收益已经下降。模型现在更擅长理解细微差别和模糊任务，因此过去可能有帮助的过度具体说明，现在反而可能限制结果。</p>
-<p>不要因为旧模型曾经需要大量脚手架，就默认新模型也需要同样程度的手把手约束。</p>
-</section>
-<section id="skill">
-<h3>考虑不同模型会如何读取同一套 Skill<a class="headerlink" href="#skill" title="Link to this heading">¶</a></h3>
-<p>仓库里的 skills 不只服务于你自己的智能体，它们也会影响其他贡献者使用的智能体，而对方可能使用不同模型。</p>
-<p>某些对 GPT-5.6 Sol 或 GPT-5.6 Luna 很有帮助的指导，可能会把 GPT-6 Astra 约束得过死。因此，留下长期存在于仓库中的说明时，需要考虑：<strong>未来究竟会有哪些模型读取这些规则？</strong></p>
+<h3>明确说明它适用于什么情况<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-2 sd-row-cols-lg-2 sd-g-2 sd-g-xs-2 sd-g-sm-2 sd-g-md-2 sd-g-lg-2 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm agents-example-card agents-example-bad docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Bad</div>
+<p class="sd-card-text"><strong>原文</strong></p>
+<p class="sd-card-text"><code class="docutils literal notranslate"><span class="pre">Create</span> <span class="pre">and</span> <span class="pre">validate</span> <span class="pre">Postgres</span> <span class="pre">schema</span> <span class="pre">migrations.</span> <span class="pre">Use</span> <span class="pre">when</span> <span class="pre">working</span> <span class="pre">with</span> <span class="pre">databases,</span> <span class="pre">queries,</span> <span class="pre">models,</span> <span class="pre">or</span> <span class="pre">persistence.</span></code></p>
+<p class="sd-card-text"><strong>译文</strong></p>
+<p class="sd-card-text">创建并验证 Postgres schema migration。用于涉及数据库、查询、模型或持久化的工作。</p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm agents-example-card agents-example-good docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Good</div>
+<p class="sd-card-text"><strong>原文</strong></p>
+<p class="sd-card-text"><code class="docutils literal notranslate"><span class="pre">Create</span> <span class="pre">and</span> <span class="pre">validate</span> <span class="pre">Postgres</span> <span class="pre">schema</span> <span class="pre">migrations.</span> <span class="pre">Use</span> <span class="pre">when</span> <span class="pre">adding</span> <span class="pre">or</span> <span class="pre">changing</span> <span class="pre">a</span> <span class="pre">migration,</span> <span class="pre">or</span> <span class="pre">reviewing</span> <span class="pre">its</span> <span class="pre">rollout.</span></code></p>
+<p class="sd-card-text"><strong>译文</strong></p>
+<p class="sd-card-text">创建并验证 Postgres schema migration。用于新增或修改 migration，或者审查它的 rollout 时。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>这里，较差的 skill 描述会促使模型在碰到任何与数据库有关的内容时都使用这个 skill，而不是只在真正需要处理 migration 时才使用它。</p>
+<p>其次，一个有用的 skill 的关键标志之一是 <strong>progressive disclosure（渐进式披露）</strong>。读取 skill 会占用上下文，让你更接近 compaction，同时也可能引入并不适用于当前任务的指导。对于包含多个工作流的 skill，应当让根文档成为一个最小化的 router，指向支持文档和脚本。只给模型足够的指导，让它知道应该去哪里查找，而不要强迫它阅读当前根本不需要的内容。</p>
+<p>第三，很多 skills 被写成了非常复杂的 itinerary 或 recipe。模型现在已经更擅长理解细微差别和模糊性，因此，过去可能有帮助的过度具体指导，如今反而可能妨碍结果。</p>
+<p>仓库中的 skills 也会指导其他贡献者的智能体，而他们可能使用不同的模型。对 Sol 或 Luna 有帮助的指导，可能会对 GPT-6 Astra 形成过度约束，因此要考虑你留下的这些指令最终会被哪些模型使用。</p>
 </section>
 </section>
 <section id="agents-md">
-<h2>保持 <code class="docutils literal notranslate"><span class="pre">AGENTS.md</span></code> 与当前模型能力同步<a class="headerlink" href="#agents-md" title="Link to this heading">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">AGENTS.md</span></code> 的特殊之处在于，只要模型在你的仓库里工作，这些规则就会持续生效。因此，应该经常重新审视里面的每一条指令，并问自己：<strong>它现在还真的有必要吗？</strong></p>
-<section id="id4">
-<h3>不要要求模型在每次小改动之前先读完整套文档<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
-<p>如果只是修一个拼写错误，却要求模型在每次编辑之前先阅读架构文档、数据库文档和部署文档，这显然过度了。</p>
-<p>GPT-6 Astra 已经能够自行判断当前任务需要阅读什么，不必在每一次改动前都被强制要求重新浏览整个项目。</p>
-<p>更好的做法是给出<strong>上下文化的文档指引</strong>。例如：</p>
-<ul class="simple">
-<li><p>涉及服务边界时参考 <code class="docutils literal notranslate"><span class="pre">architecture.md</span></code>；</p></li>
-<li><p>涉及 schema 变更时参考 <code class="docutils literal notranslate"><span class="pre">database.md</span></code>；</p></li>
-<li><p>准备部署时参考 <code class="docutils literal notranslate"><span class="pre">deployment.md</span></code>。</p></li>
-</ul>
-<p>也就是说，不要写“任何改动之前都必须把这些文件全部读完”，而应该告诉模型“什么问题对应什么文档”。</p>
-<p>当然，这种方式有一个前提：<strong>这些文档本身也必须保持更新。</strong></p>
-<p>如果强制模型在每次编辑前先读一堆文件，最直接的结果就是浪费上下文、拖慢工作速度。</p>
-</section>
-<section id="id5">
-<h3>不要机械复制旧模型时代的“必须测试”规则<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
-<p>以前的模型常常需要被明确提醒：运行测试、检查结果、确认自己做对了。</p>
-<p>GPT-6 Astra 通常会主动做这些事情，因此同样的旧规则现在可能造成重复测试或不必要的验证步骤。</p>
-<p>这并不是说测试不重要，而是应该重新判断：<strong>这条指令是在补模型能力缺口，还是已经变成冗余约束？</strong></p>
-</section>
-<section id="id6">
-<h3>对安全工作流，可以明确授权它继续做完<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
-<p>GPT-6 Astra 很细致，但相比某些旧模型，它在“一个任务到底应该做到多远”这件事上可能更谨慎。有时它需要一点明确许可，才会继续把任务彻底完成。</p>
-<p>对于你已经知道安全的固定工作流，可以在 <code class="docutils literal notranslate"><span class="pre">AGENTS.md</span></code> 中直接给它权限。例如，本地测试如果全部使用一次性 fixture，而且完全没有生产环境访问，那么可以明确告诉模型：</p>
+<h2>保持 <code class="docutils literal notranslate"><span class="pre">AGENTS.md</span></code> 最新<a class="headerlink" href="#agents-md" title="Link to this heading">¶</a></h2>
+<p>因为 <code class="docutils literal notranslate"><span class="pre">AGENTS.md</span></code> 会在模型每次进入你的仓库工作时生效，所以应该经常重新审视其中的每一条指令，并问自己：它现在是否仍然有必要。</p>
+<p>要求模型在每次编辑之前都先阅读一整套文档或完整的仓库地图，对于修复一个拼写错误来说显然太过头了。GPT-6 Astra 能够自己判断需要阅读什么，不需要在每次修改之前都被强制要求审查整个项目。</p>
+<section id="id2">
+<h3>阅读任务真正需要的内容<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-2 sd-row-cols-lg-2 sd-g-2 sd-g-xs-2 sd-g-sm-2 sd-g-md-2 sd-g-lg-2 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm agents-example-card agents-example-bad docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Bad</div>
+<p class="sd-card-text">每次编辑之前，都先阅读 <code class="docutils literal notranslate"><span class="pre">architecture.md</span></code>、<code class="docutils literal notranslate"><span class="pre">database.md</span></code> 和 <code class="docutils literal notranslate"><span class="pre">deployment.md</span></code>。</p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm agents-example-card agents-example-good docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Good</div>
+<p class="sd-card-text">处理服务边界时使用 <code class="docutils literal notranslate"><span class="pre">architecture.md</span></code>，处理 schema 变更时使用 <code class="docutils literal notranslate"><span class="pre">database.md</span></code>，准备部署时使用 <code class="docutils literal notranslate"><span class="pre">deployment.md</span></code>。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>在每次编辑之前都提示模型去读文件，是一种非常有效的“烧掉上下文并拖慢工作速度”的方式。不过，指向某些文档仍然可能有帮助，只要这种指引是与上下文相关的。同时也要确保这些文档本身保持更新。</p>
+<p>过去的模型需要被鼓励去运行测试并检查自己的工作。GPT-6 Astra 会自己做这些事情，因此同样的指令现在可能导致不必要的测试。</p>
+<p>GPT-6 Astra 很彻底，但对于一个任务究竟应该推进到什么程度，它可能会更加谨慎。有时需要稍微推动它一下，让它继续完成工作。你可以使用 <code class="docutils literal notranslate"><span class="pre">AGENTS.md</span></code>，针对某个你确定安全的具体工作流明确给予它权限，例如本地测试套件：</p>
 <blockquote>
-<div><p>本地测试只使用可丢弃的测试数据，并且无法访问生产环境。可以直接运行测试；如果本次改动导致失败，就修复并重新运行受影响的测试，不需要每一步都停下来请求批准。</p>
+<div><p>本地测试使用一次性 fixture，并且无法访问生产环境。直接运行测试；修复由请求中的改动导致的失败，并重新运行受影响的测试，不需要在每一步都请求批准。</p>
 </div></blockquote>
-<p>这种规则比笼统写“凡事先问我”更有效，因为它把<strong>安全边界</strong>和<strong>允许自主完成的范围</strong>同时说明白了。</p>
 </section>
 </section>
-<section id="id7">
-<h2>决策边界<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h2>
-<p>描述边界时要特别小心。</p>
-<p>如果旧模型过去曾经在未经许可的情况下替你做得太多，你可能会在规则里加入非常强的措辞，要求它每一步都必须先询问。这类约束有时确实有用。</p>
-<p>但 GPT-6 Astra 是 OpenAI 当前对齐程度最高的模型之一，对“什么事情在知道安全之前不应该做”有更好的判断。因此，应该按这种能力水平去设计规则，而不是继续沿用针对旧模型缺陷写下的所有防护语句。</p>
-<p>如果以前某些边界只是为了防止旧模型“走太远”，而现在你已经切换到 GPT-6 Astra，就值得重新审视这些措辞。Astra 可能会非常认真地服从这些限制，结果在你其实希望它继续推进的地方提前停下。</p>
-<p>换句话说，边界应该表达真实的决策需求，而不是历史遗留的模型恐惧。</p>
+<section id="id3">
+<h2>决策边界<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<p>要特别注意你如何描述边界。如果以前的模型曾经在未经许可的情况下替你执行操作，你可能已经加入了很强的措辞，要求它必须先询问。这可能有用；但 GPT-6 Astra 是我们对齐程度最高的模型，它有更好的判断力，在不知道某项操作是否安全时不会执行，因此你也应该按照这种能力水平来对待它。</p>
+<p>如果你之前设置某些边界，是为了防止其他模型走得太远，而现在准备切换到 GPT-6 Astra，那么可以考虑更新这些措辞：Astra 可能会把它们理解得过于严格，并在你其实愿意让它继续工作的地方停下来。</p>
 </section>
-<section id="id8">
-<h2>持续性：把“完成”的定义说清楚<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h2>
-<p>如果已经习惯 GPT-5.6 Sol 接到一个请求后持续工作很长时间，那么 GPT-6 Astra 在“什么时候该停”这件事上可能显得更谨慎。</p>
-<p>它有时会完成第一个可用实现，然后返回让你检查，即使后面其实还有明显工作没有结束。</p>
-<p>解决办法是在任务开始前就定义清楚什么叫“完成”。</p>
-<p>如果任务真正的目标包括：</p>
-<ul class="simple">
-<li><p>把实现跑起来；</p></li>
-<li><p>检查运行结果；</p></li>
-<li><p>修复实际暴露出来的问题；</p></li>
-<li><p>再验证受影响部分；</p></li>
-</ul>
-<p>那么就把这些直接写进请求里。不要假设模型会自动把“写完第一版代码”和“完整完成任务”理解成同一件事。</p>
-<p>反过来，如果你的 prompt 要求“第一版实现之后先停下来让我 review”，模型自然会倾向更早结束。因此需要确认：这个 review checkpoint 真的是你必须做出的决策，还是只是以前留下来的工作习惯。</p>
-<p>如果希望模型在第一轮结果之外继续探索，也要明确两件事：</p>
-<ul class="simple">
-<li><p>还希望它继续探索什么；</p></li>
-<li><p>探索到什么边界就应该停止。</p></li>
-</ul>
-</section>
-<section id="id9">
-<h2>结论<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h2>
-<p>新模型发布，是一次清理旧规则的好机会。</p>
-<p>但不需要手工逐条审查所有内容。可以直接让 GPT-6 Astra 根据本文讨论的原则，审计项目中的 skills、<code class="docutils literal notranslate"><span class="pre">AGENTS.md</span></code> 和任务 prompt：找出过长、重复、互相冲突、过度限制、无条件加载上下文，或者来自旧模型时代但已经失去必要性的说明。</p>
-<p>清理完这些历史脚手架之后，再去尝试构建以前因为智能体能力不足而不敢做的东西。</p>
+<section id="id4">
+<h2>持续性<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
+<p>如果你已经习惯 GPT-5.6 Sol 接到一个请求后持续工作很长时间，那么 GPT-6 Astra 对于什么时候应该停止可能会显得更加谨慎。它可能完成第一版实现之后就回来让你 review，即使其实还有工作没有完成。</p>
+<p>这时，在开始之前定义什么叫“完成”会很有帮助。你可能需要明确推动 Astra 一直继续到任务彻底完成。如果任务包括让实现真正运行起来、检查结果，并修复失败的部分，就把这些要求写进请求里。要求它在第一版实现完成后停下来等待 review，会把模型拉向一个更早的停止点，因此要确认这是否真的是一个需要你做决定的节点。</p>
+<p>如果你希望它在第一遍之外继续探索，就说明你希望它探索什么，以及它应该在哪里停止。</p>
+<p>新模型发布是一次清理旧东西的好机会，但你不需要手工审查所有内容：可以让 GPT-6 Astra 根据本文讨论的内容做一次 audit，然后去构建一些你以前不会尝试去做的东西！</p>
 </section>
 </section>
 
